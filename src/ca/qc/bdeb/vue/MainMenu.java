@@ -11,17 +11,11 @@ import org.newdawn.slick.state.*;
  *
  * @author Samuel
  */
-//C'est la que tu dois faire de test d'affichage amé ^^
+//C'est la que tu dois faire de test d'affichage Amé ^^
 public class MainMenu extends BasicGameState {
 
     int state;
-    Animation a;
-    static int width = 640;
-    static int height = 480;
-    static boolean fullscreen = false;
-    static boolean showFPS = true;
-    static String title = "game test";
-    static int fpslimit = 40;
+
 
     public MainMenu(int state) {
 	this.state = state;
@@ -34,8 +28,11 @@ public class MainMenu extends BasicGameState {
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+        Image img = new Image ("little_baby.jpg");
 	g.fillRect(100, 100, 100, 100);
 	g.fillRect(200, 200, 200, 200);
+        
+         img.draw(100,100);
     }
 
     @Override

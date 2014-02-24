@@ -11,15 +11,15 @@ import org.newdawn.slick.state.*;
 
 public class Main extends StateBasedGame {
 
-    Animation a;
     final public static int menu = 0;
     final public static int engineScreen = 1;
-    static int width = 640;
-    static int height = 480;
+    
+    static int width = 800;
+    static int height = 600;
     static boolean fullscreen = false;
     static boolean showFPS = true;
     static String title = "game test";
-    static int fpslimit = 40;
+    static int fpslimit = 60;
 
     public Main(String title) {
 	super(title);
