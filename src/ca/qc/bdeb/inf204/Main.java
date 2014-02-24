@@ -5,11 +5,19 @@
 
 package ca.qc.bdeb.inf204;
 
+import ca.qc.bdeb.views.EngineScreen;
+import ca.qc.bdeb.views.MainMenu;
 import org.newdawn.slick.*;
+import org.newdawn.slick.state.StateBasedGame;
 
-public class Main extends BasicGame{
+public class Main extends StateBasedGame{
+    
+    Animation a;
+    
+    final public static int menu = 0;
+    final public static int engineScreen = 1;
 
-     static int width = 640;
+    static int width = 640;
     static int height = 480;
    
     static boolean fullscreen = false;
@@ -19,22 +27,8 @@ public class Main extends BasicGame{
    
     public Main(String title) {
         super(title);
-    }
- 
-    @Override
-    public void init(GameContainer gc) throws SlickException {
-       
-    }
- 
-    @Override
-    public void update(GameContainer gc, int delta) throws SlickException {
-       
-    }
- 
-    @Override
-    public void render(GameContainer gc, Graphics g) throws SlickException {
-       g.fillRect(100, 100, 100, 100);
-       g.fillRect(200, 200, 200, 200);
+	this.addState(new MainMenu(menu));
+	this.addState(new EngineScreen(engineScreen));
     }
    
     public static void main(String[] args) throws SlickException {
@@ -44,5 +38,10 @@ public class Main extends BasicGame{
         app.setTargetFrameRate(fpslimit);
         app.setShowFPS(showFPS);
         app.start();
+    }
+
+    @Override
+    public void initStatesList(GameContainer gc) throws SlickException {
+	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
