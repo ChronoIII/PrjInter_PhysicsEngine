@@ -5,9 +5,11 @@
 
 package ca.qc.bdeb.inf204;
 
+import ca.qc.bdeb.controler.Controleur;
 import org.newdawn.slick.*;
 
 public class Main extends BasicGame{
+    Controleur cont = new Controleur();
 
      static int width = 640;
     static int height = 480;
