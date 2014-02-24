@@ -9,5 +9,28 @@ package ca.qc.bdeb.module;
  * @author Kururin
  */
 public class Ennemie {
- public Ennemie(){}   
+
+    private String imageEnnemie;
+    private int vieEnnemie;
+    private int positionEnnemie;
+
+    public int getVieEnnemie() {
+        return vieEnnemie;
+    }
+
+    public void setVieEnnemie(int vieEnnemie) {
+        this.vieEnnemie = vieEnnemie;
+    }
+
+    public int getPositionEnnemie() {
+        return positionEnnemie;
+    }
+
+    public void setPositionEnnemie(int positionEnnemie) {
+        this.positionEnnemie = positionEnnemie;
+    }
+    private boolean estVivant;
+
+    public Ennemie() {
+    }
 }

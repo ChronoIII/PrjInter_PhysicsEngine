@@ -9,5 +9,6 @@ package ca.qc.bdeb.module;
  * @author Kururin
  */
 public class Force extends Vecteur {
+    private int gravite;
     public Force(){}
 }

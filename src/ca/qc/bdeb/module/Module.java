@@ -9,5 +9,6 @@ package ca.qc.bdeb.module;
  * @author Samuel
  */
 public class Module {
+    private Vecteur vect = new Vecteur();
     public Module(){}
 }
