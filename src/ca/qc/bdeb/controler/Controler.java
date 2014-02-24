@@ -19,10 +19,10 @@ public class Controler {
     //salut sam
     // test 13h32 sam
     //amelie
-<<<<<<< HEAD
+
     //alalo
-=======
+
     // ok la c'est le dernier testo pepito
     
->>>>>>> 15f0fb0eb2c34329b12e6fb2a84866d705a259e5
+//allo amelie
 }
