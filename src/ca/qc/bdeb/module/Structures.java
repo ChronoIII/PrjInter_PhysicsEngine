@@ -4,12 +4,16 @@
  */
 package ca.qc.bdeb.module;
 
+import org.newdawn.slick.*;
+
 /**
  *
  * @author Kururin
  */
 public class Structures {
-
+    
+//    comprendre SlickException....
+    private Image face = new Image("litte_baby.jpg");
     private int poid;
     private int position;
 
@@ -32,6 +36,6 @@ public class Structures {
     private boolean enVie;
     private String imageBois;
 
-    public Structures() {
+    public Structures() throws SlickException {
     }
 }

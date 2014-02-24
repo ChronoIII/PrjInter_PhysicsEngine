@@ -8,8 +8,9 @@ package ca.qc.bdeb.inf204;
 import ca.qc.bdeb.controler.Controleur;
 import org.newdawn.slick.*;
 
-public class Main extends BasicGame{
-    Controleur cont = new Controleur();
+public class Main extends BasicGame {
+//    Controleur cont = new Controleur();
+ 
 
      static int width = 640;
     static int height = 480;
@@ -35,6 +36,8 @@ public class Main extends BasicGame{
  
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException {
+//        Image img = new Image ("little_baby.jpg");
+//        img.draw(100,100);
        g.fillRect(100, 100, 100, 100);
        g.fillRect(200, 200, 200, 200);
     }
