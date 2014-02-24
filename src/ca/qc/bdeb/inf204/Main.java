@@ -12,7 +12,7 @@ public class Main extends BasicGame{
      static int width = 640;
     static int height = 480;
    
-    static boolean fullscreen = true;
+    static boolean fullscreen = false;
     static boolean showFPS = true;
     static String title = "game test";
     static int fpslimit = 40;
@@ -33,7 +33,8 @@ public class Main extends BasicGame{
  
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException {
-       
+       g.fillRect(100, 100, 100, 100);
+       g.fillRect(200, 200, 200, 200);
     }
    
     public static void main(String[] args) throws SlickException {
