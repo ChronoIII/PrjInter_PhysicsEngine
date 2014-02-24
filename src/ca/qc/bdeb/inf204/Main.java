@@ -4,7 +4,7 @@
  */
 package ca.qc.bdeb.inf204;
 
-import ca.qc.bdeb.views.MainMenu;
+import ca.qc.bdeb.vue.MainMenu;
 import ca.qc.bdeb.vue.EngineScreen;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;

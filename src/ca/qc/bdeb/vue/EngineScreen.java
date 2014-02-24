@@ -17,19 +17,20 @@ import org.newdawn.slick.state.StateBasedGame;
  * @author Samuel
  */
 public class EngineScreen extends BasicGameState{
-
+    
+    int state;
+    
     public EngineScreen(int state) {
-
+	this.state = state;
     }
 
     @Override
     public int getID() {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	return state;
     }
 
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
