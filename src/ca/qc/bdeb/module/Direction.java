@@ -6,9 +6,9 @@ package ca.qc.bdeb.module;
 
 /**
  *
- * @author Samuel
+ * @author Kururin
  */
-public class Module {
-    private Vecteur vect = new Vecteur();
-    public Module(){}
+public class Direction extends Vecteur {
+    public Direction(){}
+    
 }

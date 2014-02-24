@@ -5,17 +5,26 @@
 
 package ca.qc.bdeb.inf204;
 
+<<<<<<< HEAD
 import ca.qc.bdeb.views.EngineScreen;
 import ca.qc.bdeb.views.MainMenu;
+=======
+import ca.qc.bdeb.controler.Controleur;
+>>>>>>> 3429911b92220f898b05e72380d74447d8c76e73
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
 
+<<<<<<< HEAD
 public class Main extends StateBasedGame{
     
     Animation a;
     
     final public static int menu = 0;
     final public static int engineScreen = 1;
+=======
+public class Main extends BasicGame{
+    Controleur cont = new Controleur();
+>>>>>>> 3429911b92220f898b05e72380d74447d8c76e73
 
     static int width = 640;
     static int height = 480;
