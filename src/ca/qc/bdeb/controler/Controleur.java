@@ -5,12 +5,13 @@
 package ca.qc.bdeb.controler;
 
 import ca.qc.bdeb.module.Module;
+import org.newdawn.slick.SlickException;
 
 public class Controleur {
 
     private Module mod = new Module();
 
-    public Controleur() {
+    public Controleur() throws SlickException {
     }
 
     public void mouvementProjectile() {
@@ -18,6 +19,9 @@ public class Controleur {
     }
 
     public void mouvementEnnemie() {
-        mod.impactEnnemie();
+        mod.trajectoireEnnemie();
+    }
+     public void mouvementStructure() {
+        mod.trajectoireStructures();
     }
 }
