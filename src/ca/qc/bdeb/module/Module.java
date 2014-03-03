@@ -12,8 +12,26 @@ import java.util.ArrayList;
  * @author Samuel
  */
 public class Module {
+
     private Vecteur vect = new Vecteur();
     private Projectiles proj = new Projectiles();
     private ArrayList listeProjectiles = new ArrayList();
-    public Module(){}
+    private boolean impactSurEnnemie = false;
+
+    public Module() {
+    }
+
+    public void trajectoireProjectiles() {
+        
+//        formules de Zi Long
+//        si collision impactSurEnnemie = true
+    }
+
+    public void impactEnnemie() {
+
+        if (impactSurEnnemie = true) {
+//            alors déplacement de l'ennemie
+        }
+        
+    }
 }

@@ -12,4 +12,12 @@ public class Controleur {
 
     public Controleur() {
     }
+
+    public void mouvementProjectile() {
+        mod.trajectoireProjectiles();
+    }
+
+    public void mouvementEnnemie() {
+        mod.impactEnnemie();
+    }
 }

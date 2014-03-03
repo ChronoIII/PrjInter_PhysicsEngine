@@ -4,11 +4,16 @@
  */
 package ca.qc.bdeb.vue;
 
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
 /**
  *
  * @author Kururin
  */
 public class Projectiles {
+
+    private Image face = new Image("litte_baby.jpg");
     private String imageProj;
     private int vieProj;
 
@@ -28,5 +33,7 @@ public class Projectiles {
         this.enVie = enVie;
     }
     boolean enVie;
-    public Projectiles(){}
+
+    public Projectiles() throws SlickException {
+    }
 }
