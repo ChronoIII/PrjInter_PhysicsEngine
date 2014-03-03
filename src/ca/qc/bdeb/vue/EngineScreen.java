@@ -4,9 +4,18 @@
  */
 package ca.qc.bdeb.vue;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
+=======
+
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.state.BasicGameState;
+import org.newdawn.slick.state.StateBasedGame;
+>>>>>>> 9607e834798b2118887cf595f8986f2e2176e8d5
 
 /**
  *
