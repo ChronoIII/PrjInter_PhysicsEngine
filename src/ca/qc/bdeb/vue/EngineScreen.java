@@ -4,42 +4,42 @@
  */
 package ca.qc.bdeb.vue;
 
-import ca.qc.bdeb.module.Ennemie;
-
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.BasicGameState;
-import org.newdawn.slick.state.StateBasedGame;
+import java.util.ArrayList;
+import org.newdawn.slick.*;
+import org.newdawn.slick.state.*;
 
 /**
  *
  * @author Samuel
  */
-public class EngineScreen extends BasicGameState{
-    
+public class EngineScreen extends BasicGameState {
+
     int state;
-    
-    public EngineScreen(int state) {
+    Image a;
+    int x = 0;
+    int y = 0;
+
+    public EngineScreen(int state) throws SlickException {
 	this.state = state;
+	
+    }
+
+    public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
+//	a = new Image("little_baby.jpg");
+	
+    }
+
+    public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+//	a.draw(x++, y++);
+    }
+
+    public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+	
     }
 
     @Override
     public int getID() {
 	return state;
     }
-
-    @Override
-    public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-    }
-
-    @Override
-    public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
-	throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+ 
 }

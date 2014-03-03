@@ -21,7 +21,7 @@ public class Main extends StateBasedGame {
     static String title = "game test";
     static int fpslimit = 60;
 
-    public Main(String title) {
+    public Main(String title) throws SlickException {
 	super(title);
 	this.addState(new MainMenu(menu));
 	this.addState(new EngineScreen(engineScreen));
@@ -40,6 +40,6 @@ public class Main extends StateBasedGame {
     public void initStatesList(GameContainer gc) throws SlickException {
 	this.getState(menu).init(gc, this);
 	this.getState(engineScreen).init(gc, this);
-	this.enterState(menu);
+	this.enterState(engineScreen);
     }
 }
