@@ -4,42 +4,30 @@
  */
 package ca.qc.bdeb.inf204;
 
+import ca.qc.bdeb.controler.Controleur;
+import ca.qc.bdeb.module.Module;
 import ca.qc.bdeb.vue.MainMenu;
 import ca.qc.bdeb.vue.EngineScreen;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
-public class Main extends StateBasedGame {
+public class Main {
 
-    final public static int menu = 0;
-    final public static int engineScreen = 1;
-    
+    //Screen propriétées
     static int width = 800;
     static int height = 600;
     static boolean fullscreen = false;
     static boolean showFPS = true;
-    static String title = "game test";
     static int fpslimit = 60;
-
-    public Main(String title) throws SlickException {
-	super(title);
-	this.addState(new MainMenu(menu));
-	this.addState(new EngineScreen(engineScreen));
-    }
+    static String title = "game test";
 
     public static void main(String[] args) throws SlickException {
-	AppGameContainer app = new AppGameContainer(new Main(title));
+	AppGameContainer app = new AppGameContainer(new Vue(title));
 	app.setDisplayMode(width, height, fullscreen);
 	app.setSmoothDeltas(true);
 	app.setTargetFrameRate(fpslimit);
 	app.setShowFPS(showFPS);
 	app.start();
-    }
-
-    @Override
-    public void initStatesList(GameContainer gc) throws SlickException {
-	this.getState(menu).init(gc, this);
-	this.getState(engineScreen).init(gc, this);
-	this.enterState(engineScreen);
+	new Controleur();
     }
 }
