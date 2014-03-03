@@ -2,14 +2,17 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ca.qc.bdeb.module;
+package ca.qc.bdeb.vue;
+
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
 
 /**
  *
  * @author Kururin
  */
 public class Ennemie {
-
+ private Image face = new Image("litte_baby.jpg");
     private String imageEnnemie;
     private int vieEnnemie;
     private int positionEnnemie;
@@ -31,6 +34,6 @@ public class Ennemie {
     }
     private boolean estVivant;
 
-    public Ennemie() {
+    public Ennemie() throws SlickException {
     }
 }

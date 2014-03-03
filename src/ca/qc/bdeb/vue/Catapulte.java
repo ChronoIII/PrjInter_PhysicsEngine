@@ -4,12 +4,16 @@
  */
 package ca.qc.bdeb.vue;
 
+import org.newdawn.slick.Image;
+import org.newdawn.slick.SlickException;
+
 /**
  *
  * @author Kururin
  */
 public class Catapulte {
-    
+
+    private Image face = new Image("litte_baby.jpg");
     private String imageCata;
     private int energie;
 
@@ -30,5 +34,7 @@ public class Catapulte {
     }
     private int angle;
     private boolean estTirer;
-    public Catapulte(){}
+
+    public Catapulte() throws SlickException {
+    }
 }
