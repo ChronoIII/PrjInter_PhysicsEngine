@@ -4,7 +4,6 @@
  */
 package ca.qc.bdeb.vue;
 
-import ca.qc.bdeb.module.Ennemie;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
