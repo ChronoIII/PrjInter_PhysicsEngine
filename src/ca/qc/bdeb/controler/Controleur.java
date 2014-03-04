@@ -4,9 +4,7 @@
  */
 package ca.qc.bdeb.controler;
 
-import ca.qc.bdeb.vue.Vue;
 import ca.qc.bdeb.module.Module;
-import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
 public class Controleur {
@@ -15,16 +13,22 @@ public class Controleur {
 
     public Controleur() throws SlickException {
 	module = new Module(this);
+	
     }
 
-//    public void mouvementProjectile() {
-//        module.trajectoireProjectiles();
-//    }
-//
-//    public void mouvementEnnemie() {
-//        module.trajectoireEnnemie();
-//    }
-//     public void mouvementStructure() {
-//        module.trajectoireStructures();
-//    }
+    //    public void mouvementProjectile() {
+    //        module.trajectoireProjectiles();
+    //    }
+    //
+    //    public void mouvementEnnemie() {
+    //        module.trajectoireEnnemie();
+    //    }
+    //     public void mouvementStructure() {
+    //        module.trajectoireStructures();
+    //    }
+    public Module getModule() {
+	return module;
+    }
+    
+    
 }

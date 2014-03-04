@@ -21,16 +21,20 @@ public class Main {
     static boolean showFPS = true;
     static int fpslimit = 60;
     static String title = "game test";
+    
+    static Controleur controleur;
 
     public static void main(String[] args) throws SlickException {
-	AppGameContainer app = new AppGameContainer(new Vue(title));
+	
+	//intitalisation du controleur
+	controleur = new Controleur();
+	
+	//Créé la fenètre
+	AppGameContainer app = new AppGameContainer(new Vue(title, controleur));
 	app.setDisplayMode(width, height, fullscreen);
 	app.setSmoothDeltas(true);
 	app.setTargetFrameRate(fpslimit);
 	app.setShowFPS(showFPS);
 	app.start();
-	
-	//intitalisation du controleur
-	new Controleur();
     }
 }

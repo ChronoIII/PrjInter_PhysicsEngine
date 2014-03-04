@@ -18,9 +18,9 @@ public class MainMenu extends BasicGameState {
     int state;
     private Controleur controleur;
 
-    public MainMenu(int state) throws SlickException {
+    public MainMenu(int state, Controleur controleur) throws SlickException {
 	this.state = state;
-	controleur = new Controleur();
+	this.controleur = controleur;;
     }
 
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
@@ -33,7 +33,6 @@ public class MainMenu extends BasicGameState {
         Image img = new Image ("little_baby.jpg");
 	g.fillRect(100, 100, 100, 100);
 	g.fillRect(200, 200, 200, 200);
-        
          img.draw(100,100);
     }
 

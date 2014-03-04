@@ -4,7 +4,8 @@
  */
 package ca.qc.bdeb.vue;
 
-import java.util.ArrayList;
+import ca.qc.bdeb.controler.Controleur;
+import ca.qc.bdeb.module.Module;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
@@ -15,26 +16,32 @@ import org.newdawn.slick.state.*;
 public class EngineScreen extends BasicGameState {
 
     int state;
-    Image a;
-    int x = 0;
-    int y = 0;
+    Module modele;
+    Controleur controleur;
+    int a;
 
-    public EngineScreen(int state) throws SlickException {
+    public EngineScreen(int state, Controleur controleur, Module modele) throws SlickException {
 	this.state = state;
+	this.controleur = controleur;
+	this.modele = modele;
 	
     }
 
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 //	a = new Image("little_baby.jpg");
+	modele.ajouterProjectiles(100, 100);
 	
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+	
 //	a.draw(x++, y++);
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-	
+	for(Projectiles i : modele.getListeProjectiles()){
+	    i.getImage().draw(i.getX(), i.getY());
+	}
     }
 
     @Override

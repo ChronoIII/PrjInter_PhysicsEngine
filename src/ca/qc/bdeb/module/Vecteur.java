@@ -9,32 +9,41 @@ package ca.qc.bdeb.module;
  * @author Kururin
  */
 public class Vecteur {
+
     private Force force = new Force();
+    //composantes
+    private int x;
+    private int y;
+    
+    private int module;
+    private int direction;//en degrée
 
     public Force getForce() {
-        return force;
+	return force;
     }
 
     public void setForce(Force force) {
-        this.force = force;
+	this.force = force;
     }
 
     public Vitesse getVit() {
-        return vit;
+	return vit;
     }
 
     public void setVit(Vitesse vit) {
-        this.vit = vit;
+	this.vit = vit;
     }
 
     public Direction getDir() {
-        return dir;
+	return dir;
     }
 
     public void setDir(Direction dir) {
-        this.dir = dir;
+	this.dir = dir;
     }
     private Vitesse vit = new Vitesse();
     private Direction dir = new Direction();
-    public Vecteur(){}
+
+    public Vecteur() {
+    }
 }

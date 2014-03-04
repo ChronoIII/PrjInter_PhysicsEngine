@@ -4,6 +4,7 @@
  */
 package ca.qc.bdeb.vue;
 
+import ca.qc.bdeb.module.Vecteur;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -15,15 +16,7 @@ public class Catapulte {
 
     private Image face = new Image("litte_baby.jpg");
     private String imageCata;
-    private int energie;
-
-    public int getEnergie() {
-        return energie;
-    }
-
-    public void setEnergie(int energie) {
-        this.energie = energie;
-    }
+    private Vecteur force;
 
     public int getAngle() {
         return angle;
