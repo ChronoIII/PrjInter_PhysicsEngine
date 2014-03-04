@@ -4,6 +4,7 @@
  */
 package ca.qc.bdeb.vue;
 
+import ca.qc.bdeb.controler.Controleur;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
@@ -15,10 +16,11 @@ import org.newdawn.slick.state.*;
 public class MainMenu extends BasicGameState {
 
     int state;
+    private Controleur con;
 
-
-    public MainMenu(int state) {
+    public MainMenu(int state) throws SlickException {
 	this.state = state;
+	con = new Controleur();
     }
 
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {

@@ -4,24 +4,27 @@
  */
 package ca.qc.bdeb.controler;
 
+import ca.qc.bdeb.inf204.Vue;
 import ca.qc.bdeb.module.Module;
+import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
 public class Controleur {
 
-    private Module mod = new Module();
+    private Module module;
 
     public Controleur() throws SlickException {
+	module = new Module();
     }
 
-    public void mouvementProjectile() {
-        mod.trajectoireProjectiles();
-    }
-
-    public void mouvementEnnemie() {
-        mod.trajectoireEnnemie();
-    }
-     public void mouvementStructure() {
-        mod.trajectoireStructures();
-    }
+//    public void mouvementProjectile() {
+//        module.trajectoireProjectiles();
+//    }
+//
+//    public void mouvementEnnemie() {
+//        module.trajectoireEnnemie();
+//    }
+//     public void mouvementStructure() {
+//        module.trajectoireStructures();
+//    }
 }
