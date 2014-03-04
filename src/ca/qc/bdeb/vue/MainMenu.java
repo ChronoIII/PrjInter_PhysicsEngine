@@ -16,11 +16,11 @@ import org.newdawn.slick.state.*;
 public class MainMenu extends BasicGameState {
 
     int state;
-    private Controleur con;
+    private Controleur controleur;
 
     public MainMenu(int state) throws SlickException {
 	this.state = state;
-	con = new Controleur();
+	controleur = new Controleur();
     }
 
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {

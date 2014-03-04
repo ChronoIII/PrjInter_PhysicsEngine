@@ -4,7 +4,7 @@
  */
 package ca.qc.bdeb.module;
 
-import ca.qc.bdeb.vue.Projectiles;
+import ca.qc.bdeb.controler.Controleur;
 import java.util.ArrayList;
 import org.newdawn.slick.SlickException;
 
@@ -19,8 +19,10 @@ public class Module {
     private ArrayList listeProjectiles = new ArrayList();
     private boolean impactSurEnnemie = false;
     private boolean impactSurStructure = false;
+    private Controleur controleur;
 
-    public Module() throws SlickException {
+    public Module(Controleur controleur) throws SlickException {
+	this.controleur = controleur;
     }
 
 //    public void trajectoireProjectiles() {

@@ -4,6 +4,7 @@
  */
 package ca.qc.bdeb.inf204;
 
+import ca.qc.bdeb.vue.Vue;
 import ca.qc.bdeb.controler.Controleur;
 import ca.qc.bdeb.module.Module;
 import ca.qc.bdeb.vue.MainMenu;
@@ -28,6 +29,8 @@ public class Main {
 	app.setTargetFrameRate(fpslimit);
 	app.setShowFPS(showFPS);
 	app.start();
+	
+	//intitalisation du controleur
 	new Controleur();
     }
 }

@@ -4,7 +4,7 @@
  */
 package ca.qc.bdeb.controler;
 
-import ca.qc.bdeb.inf204.Vue;
+import ca.qc.bdeb.vue.Vue;
 import ca.qc.bdeb.module.Module;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
@@ -14,7 +14,7 @@ public class Controleur {
     private Module module;
 
     public Controleur() throws SlickException {
-	module = new Module();
+	module = new Module(this);
     }
 
 //    public void mouvementProjectile() {
