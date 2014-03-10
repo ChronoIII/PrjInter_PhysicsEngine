@@ -15,7 +15,7 @@ import org.newdawn.slick.SlickException;
  */
 public class Projectiles {
 
-    private String imageProj = "res/litte_baby.jpg";
+    private String imageProj = "Sans titre.png";
     private int vieProj;
     private int x;
     private int y;

@@ -21,16 +21,17 @@ public class EngineScreen extends BasicGameState {
     Controleur controleur;
     private ArrayList<Image> listImageProjectiles;
     private Image catapule;
+//    Image a;
 
     public EngineScreen(int state, Controleur controleur) throws SlickException {
 	this.state = state;
 	this.controleur = controleur;
 	this.modele = modele;
-	
+	listImageProjectiles = new ArrayList<Image>();
     }
 
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-	listImageProjectiles = new ArrayList<Image>();
+//	a = new Image("Sans Titre.png");
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
@@ -41,6 +42,7 @@ public class EngineScreen extends BasicGameState {
 	for (int i = 0; i < listImageProjectiles.size(); i++) {
 	    listImageProjectiles.get(i).draw(controleur.positionProjectileX(i), controleur.positionProjectileY(i));
 	}
+//	a.draw(100, 100);
     }
 
     @Override
