@@ -4,8 +4,9 @@
  */
 package ca.qc.bdeb.vue;
 
+import ca.qc.bdeb.controler.Controleur;
+import ca.qc.bdeb.module.Module;
 import ca.qc.bdeb.module.Vecteur;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 /**
@@ -14,18 +15,23 @@ import org.newdawn.slick.SlickException;
  */
 public class Projectiles {
 
-    private Image face = new Image("litte_baby.jpg");
-    private String imageProj;
+    private String imageProj = "res/litte_baby.jpg";
     private int vieProj;
     private int x;
     private int y;
     private Vecteur direction;
+    private Controleur controleur;
+    private Module modele;
     
-     public Projectiles(int x, int y) throws SlickException {
+    public Projectiles(int x, int y, Controleur controleur) throws SlickException {
 	 this.x = x;
 	 this.y = y;
+	 this.controleur = controleur;
+	 
+	 controleur.addProjectile(imageProj);
     }
-
+     
+     //getter and setter
     public int getVieProj() {
         return vieProj;
     }
@@ -42,10 +48,6 @@ public class Projectiles {
         this.enVie = enVie;
     }
     boolean enVie;
-    
-    public Image getImage(){
-	return face;
-    }
 
     public int getX() {
 	return x;

@@ -6,6 +6,7 @@ package ca.qc.bdeb.vue;
 
 import ca.qc.bdeb.controler.Controleur;
 import ca.qc.bdeb.module.Module;
+import java.util.ArrayList;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
@@ -18,9 +19,10 @@ public class EngineScreen extends BasicGameState {
     int state;
     Module modele;
     Controleur controleur;
-    int a;
+    private ArrayList<Image> listImageProjectiles;
+    private Image catapule;
 
-    public EngineScreen(int state, Controleur controleur, Module modele) throws SlickException {
+    public EngineScreen(int state, Controleur controleur) throws SlickException {
 	this.state = state;
 	this.controleur = controleur;
 	this.modele = modele;
@@ -28,25 +30,26 @@ public class EngineScreen extends BasicGameState {
     }
 
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-//	a = new Image("little_baby.jpg");
-	modele.ajouterProjectiles(100, 100);
-	
+	listImageProjectiles = new ArrayList<Image>();
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-	
-//	a.draw(x++, y++);
+
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-	for(Projectiles i : modele.getListeProjectiles()){
-	    i.getImage().draw(i.getX(), i.getY());
+	for (int i = 0; i < listImageProjectiles.size(); i++) {
+	    listImageProjectiles.get(i).draw(controleur.positionProjectileX(i), controleur.positionProjectileY(i));
 	}
     }
 
     @Override
     public int getID() {
 	return state;
+    }
+    
+    public ArrayList<Image> getListImageProjectiles(){
+	return listImageProjectiles;
     }
  
 }
