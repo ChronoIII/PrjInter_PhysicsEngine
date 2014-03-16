@@ -26,7 +26,7 @@ public class EngineScreen extends BasicGameState {
     Image a;
     Image b;
 
-    public EngineScreen(int state, Controleur controleur, Module modele) throws SlickException {
+    public EngineScreen(int state, Controleur controleur) throws SlickException {
 	this.state = state;
 	this.controleur = controleur;
 	this.modele = modele;
@@ -35,16 +35,24 @@ public class EngineScreen extends BasicGameState {
 
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 	listImageProjectiles = new ArrayList<Image>();
+	controleur.addProjectile(x, y);
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 	Input a = gc.getInput();
-	if (controleur.listProjectiles().size() != listImageProjectiles.size()) {
-	    System.out.println("1");
-	    addProjectileImage(controleur.listProjectiles().get(controleur.listProjectiles().size() - 1).getNomImg());
+	
+	if(controleur.getNouvelleItemAffichable() != null){
+	    System.out.println("11");
+	     addImage(controleur.getNouvelleItemAffichable().getNomImg());
+	     controleur.setNouvelleItemAffichable(null);
 	}
+//	if (controleur.listProjectiles().size() != listImageProjectiles.size()) {
+//	    addImage(controleur.listProjectiles().get(controleur.listProjectiles().size() - 1).getNomImg());
+//	}
 	if(a.isKeyPressed(Input.KEY_SPACE)){
 	    controleur.addProjectile(x, y);
+	    x = x + 10;
+	    y = y + 10;
 	}
     }
 
@@ -63,7 +71,7 @@ public class EngineScreen extends BasicGameState {
 	return listImageProjectiles;
     }
 
-    public void addProjectileImage(String nomImg) throws SlickException {
+    public void addImage(String nomImg) throws SlickException {
 	listImageProjectiles.add(new Image(nomImg));
     }
 }

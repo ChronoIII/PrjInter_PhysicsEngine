@@ -13,7 +13,7 @@ import org.newdawn.slick.SlickException;
  *
  * @author Kururin
  */
-public class Projectiles {
+public class Projectiles implements Affichable{
 
     private String nomImg = "little_baby.jpg";
     private int vieProj;
@@ -27,6 +27,8 @@ public class Projectiles {
 	 this.x = x;
 	 this.y = y;
 	 this.controleur = controleur;
+	 
+	 controleur.setNouvelleItemAffichable(this);
     }
      
      //getter and setter

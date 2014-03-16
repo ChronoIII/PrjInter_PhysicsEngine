@@ -33,7 +33,6 @@ public class Module {
 	
 	listProjectiles = new ArrayList<Projectiles>();
 	
-	controleur.addProjectile(100, 100);
     }
 
     //setters and getters

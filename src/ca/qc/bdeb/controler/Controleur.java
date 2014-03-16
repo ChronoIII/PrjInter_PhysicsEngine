@@ -5,11 +5,11 @@
 package ca.qc.bdeb.controler;
 
 import ca.qc.bdeb.module.Module;
+import ca.qc.bdeb.vue.Affichable;
 import ca.qc.bdeb.vue.EngineScreen;
 import ca.qc.bdeb.vue.MainMenu;
 import ca.qc.bdeb.vue.Projectiles;
 import java.util.ArrayList;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 public class Controleur {
@@ -20,11 +20,12 @@ public class Controleur {
     private Module module;
     private MainMenu mainMenu;
     private EngineScreen engineScreenMenu;
+    private Affichable nouvelleItemAffichable = null;
     
 
     public Controleur() throws SlickException {
 	module = new Module(this);
-	engineScreenMenu = new EngineScreen(engineScreen, this, module);
+	engineScreenMenu = new EngineScreen(engineScreen, this);
 	mainMenu = new MainMenu(menu, this);
     }
     
@@ -42,6 +43,10 @@ public class Controleur {
     
     public ArrayList<Projectiles> listProjectiles() {
 	return module.getListProjectiles();
+    }
+    
+    public void afficher(Affichable nouvelleItemAffichable){
+	this.nouvelleItemAffichable = nouvelleItemAffichable;
     }
     
 //    setters and getters
@@ -65,4 +70,13 @@ public class Controleur {
     public int getEngineScreen() {
 	return engineScreen;
     }
+
+    public Affichable getNouvelleItemAffichable() {
+	return nouvelleItemAffichable;
+    }
+
+    public void setNouvelleItemAffichable(Affichable nouvelleItemAffichable) {
+	this.nouvelleItemAffichable = nouvelleItemAffichable;
+    }
+    
 }
