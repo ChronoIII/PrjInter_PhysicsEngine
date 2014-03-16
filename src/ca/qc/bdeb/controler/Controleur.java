@@ -23,13 +23,13 @@ public class Controleur {
     
 
     public Controleur() throws SlickException {
-	mainMenu = new MainMenu(menu, this);
-	engineScreenMenu = new EngineScreen(engineScreen, this);
 	module = new Module(this);
+	engineScreenMenu = new EngineScreen(engineScreen, this, module);
+	mainMenu = new MainMenu(menu, this);
     }
     
-    public void addProjectile(String imgName) throws SlickException{
-	engineScreenMenu.getListImageProjectiles().add(new Image(imgName));
+    public void addProjectile(int x, int y) throws SlickException{
+	module.getListProjectiles().add(new Projectiles(x, y, this));
     }
     
     public int positionProjectileX(int i){
@@ -38,6 +38,10 @@ public class Controleur {
     
     public int positionProjectileY(int i){
 	return module.getListProjectiles().get(i).getY();
+    }
+    
+    public ArrayList<Projectiles> listProjectiles() {
+	return module.getListProjectiles();
     }
     
 //    setters and getters

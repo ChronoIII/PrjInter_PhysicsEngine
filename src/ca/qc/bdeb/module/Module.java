@@ -19,6 +19,7 @@ public class Module {
 //    private Vecteur vect = new Vecteur();
 //    private Projectiles proj = new Projectiles();
     private ArrayList<Projectiles> listProjectiles;
+    private int nbProjectiles = 0;
     private Catapulte carapulte;
 	    
     private boolean impactSurEnnemie = false;
@@ -32,11 +33,7 @@ public class Module {
 	
 	listProjectiles = new ArrayList<Projectiles>();
 	
-	addProjectile(100, 100);
-    }
-    
-    public void addProjectile(int x, int y) throws SlickException{
-	listProjectiles.add(new Projectiles(x, y, controleur));
+	controleur.addProjectile(100, 100);
     }
 
     //setters and getters
@@ -47,4 +44,13 @@ public class Module {
     public void setListProjectiles(ArrayList<Projectiles> listeProjectiles) {
 	this.listProjectiles = listeProjectiles;
     }
+
+    public int getNbProjectiles() {
+	return nbProjectiles;
+    }
+
+    public void setNbProjectiles(int nbProjectiles) {
+	this.nbProjectiles = nbProjectiles;
+    }
+    
 }

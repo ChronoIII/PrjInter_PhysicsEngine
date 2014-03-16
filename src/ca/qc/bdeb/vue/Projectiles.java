@@ -15,7 +15,7 @@ import org.newdawn.slick.SlickException;
  */
 public class Projectiles {
 
-    private String imageProj = "Sans titre.png";
+    private String nomImg = "little_baby.jpg";
     private int vieProj;
     private int x;
     private int y;
@@ -27,8 +27,6 @@ public class Projectiles {
 	 this.x = x;
 	 this.y = y;
 	 this.controleur = controleur;
-	 
-	 controleur.addProjectile(imageProj);
     }
      
      //getter and setter
@@ -55,6 +53,10 @@ public class Projectiles {
 
     public int getY() {
 	return y;
+    }
+
+    public String getNomImg() {
+	return nomImg;
     }
     
 }

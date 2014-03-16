@@ -21,37 +21,49 @@ public class EngineScreen extends BasicGameState {
     Controleur controleur;
     private ArrayList<Image> listImageProjectiles;
     private Image catapule;
-//    Image a;
+    int x = 10;
+    int y = 10;
+    Image a;
+    Image b;
 
-    public EngineScreen(int state, Controleur controleur) throws SlickException {
+    public EngineScreen(int state, Controleur controleur, Module modele) throws SlickException {
 	this.state = state;
 	this.controleur = controleur;
 	this.modele = modele;
-	listImageProjectiles = new ArrayList<Image>();
+
     }
 
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-//	a = new Image("Sans Titre.png");
+	listImageProjectiles = new ArrayList<Image>();
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-
+	Input a = gc.getInput();
+	if (controleur.listProjectiles().size() != listImageProjectiles.size()) {
+	    System.out.println("1");
+	    addProjectileImage(controleur.listProjectiles().get(controleur.listProjectiles().size() - 1).getNomImg());
+	}
+	if(a.isKeyPressed(Input.KEY_SPACE)){
+	    controleur.addProjectile(x, y);
+	}
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 	for (int i = 0; i < listImageProjectiles.size(); i++) {
 	    listImageProjectiles.get(i).draw(controleur.positionProjectileX(i), controleur.positionProjectileY(i));
 	}
-//	a.draw(100, 100);
     }
 
     @Override
     public int getID() {
 	return state;
     }
-    
-    public ArrayList<Image> getListImageProjectiles(){
+
+    public ArrayList<Image> getListImageProjectiles() {
 	return listImageProjectiles;
     }
- 
+
+    public void addProjectileImage(String nomImg) throws SlickException {
+	listImageProjectiles.add(new Image(nomImg));
+    }
 }
