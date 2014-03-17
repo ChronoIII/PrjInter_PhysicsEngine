@@ -15,13 +15,12 @@ import org.newdawn.slick.SlickException;
  */
 public class Projectiles implements Affichable{
 
-    private String nomImg = "little_baby.jpg";
+    private String nomImg = "bird.png";
     private int vieProj;
     private int x;
     private int y;
     private Vecteur direction;
     private Controleur controleur;
-    private Module modele;
     
     public Projectiles(int x, int y, Controleur controleur) throws SlickException {
 	 this.x = x;
@@ -29,6 +28,10 @@ public class Projectiles implements Affichable{
 	 this.controleur = controleur;
 	 
 	 controleur.setNouvelleItemAffichable(this);
+    }
+    
+    public void detruir(){
+	controleur.enleverProjectile(this);
     }
      
      //getter and setter

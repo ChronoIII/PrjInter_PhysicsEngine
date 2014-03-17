@@ -11,5 +11,7 @@ package ca.qc.bdeb.vue;
 public interface Affichable {
     
     public String getNomImg();
+    public int getX();
+    public int getY();
     
 }

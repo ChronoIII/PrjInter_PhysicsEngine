@@ -19,9 +19,10 @@ public class EngineScreen extends BasicGameState {
     int state;
     Module modele;
     Controleur controleur;
-    private ArrayList<Image> listImages;
+    private ArrayList<Image> listImagesProjectiles;
+    private ArrayList<Image> listImagesStructures;
     private Image catapule;
-    private Ennemie c;
+    private Image bg;
     int x = 10;
     int y = 10;
     Image r;
@@ -35,7 +36,9 @@ public class EngineScreen extends BasicGameState {
     }
 
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-	listImages = new ArrayList<Image>();
+	listImagesProjectiles = new ArrayList<Image>();
+	listImagesStructures = new ArrayList<Image>();
+	bg = new Image("bg.jpg");
 //	controleur.addProjectile(x, y);
 //	c = new Ennemie(controleur);
     }
@@ -44,39 +47,40 @@ public class EngineScreen extends BasicGameState {
 	Input a = gc.getInput();
 
 	if (controleur.getNouvelleItemAffichable() != null) {
-	    addImage(controleur.getNouvelleItemAffichable().getNomImg());
+	    switch (controleur.getNouvelleItemAffichable().getNomImg()) {
+		case "bird.png":
+		    addImageProjectiles(controleur.getNouvelleItemAffichable().getNomImg());
+		    break;
+		case "Sans titre.png":
+		    addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
+		    break;
+	    }
 	    controleur.setNouvelleItemAffichable(null);
 	}
 //	if (controleur.listProjectiles().size() != listImageProjectiles.size()) {
 //	    addImage(controleur.listProjectiles().get(controleur.listProjectiles().size() - 1).getNomImg());
 //	}
 	if (a.isKeyPressed(Input.KEY_SPACE)) {
-	    System.out.println("space");
 	    controleur.addProjectile(x, y);
 	    x = x + 10;
 	    y = y + 10;
 	}
 	if (a.isKeyPressed(Input.KEY_1)) {
-	    System.out.println("1");
-	    c = new Ennemie(controleur);
+	    controleur.listProjectiles().get(0).detruir();
 	}
+
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-	int indexProjectile = 0;
-	int indexEnnemie = 0;
-	for (int i = 0; i < listImages.size(); i++) {
-	    if(listImages.get(i).getName() == "little_baby.jpg"){
-		System.out.println(" entre dans projectile");
-	    listImages.get(i).draw(controleur.positionProjectileX(indexProjectile), controleur.positionProjectileY(indexProjectile));
-	    indexProjectile++;
-	    }
-	    if(listImages.get(i).getName() == "Sans titre.png"){
-		System.out.println(" entre dans lautre");
-	    listImages.get(i).draw(x, y);
-	    indexEnnemie++;
-	    }
+	bg.draw();
+	for (int i = 0; i < listImagesProjectiles.size(); i++) {
+	    listImagesProjectiles.get(i).draw(controleur.positionProjectileX(i), controleur.positionProjectileY(i));
 	}
+	for (int i = 0; i < listImagesStructures.size(); i++) {
+	    listImagesStructures.get(i).draw(x, y);
+	}
+
+	
     }
 
     @Override
@@ -84,13 +88,31 @@ public class EngineScreen extends BasicGameState {
 	return state;
     }
 
-    public ArrayList<Image> getListImageProjectiles() {
-	return listImages;
-    }
-
-    public void addImage(String nomImg) throws SlickException {
+    public void addImageProjectiles(String nomImg) throws SlickException {
 	Image img = new Image(nomImg);
 	img.setName(nomImg);
-	listImages.add(img);
+	listImagesProjectiles.add(img);
+    }
+
+    public void addImageStructures(String nomImg) throws SlickException {
+	Image img = new Image(nomImg);
+	img.setName(nomImg);
+	listImagesStructures.add(img);
+    }
+
+    public ArrayList<Image> getListImagesProjectiles() {
+	return listImagesProjectiles;
+    }
+
+    public void setListImagesProjectiles(ArrayList<Image> listImagesProjectiles) {
+	this.listImagesProjectiles = listImagesProjectiles;
+    }
+
+    public ArrayList<Image> getListImagesStructures() {
+	return listImagesStructures;
+    }
+
+    public void setListImagesStructures(ArrayList<Image> listImagesStructures) {
+	this.listImagesStructures = listImagesStructures;
     }
 }

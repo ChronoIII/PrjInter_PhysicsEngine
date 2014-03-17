@@ -49,6 +49,11 @@ public class Controleur {
 	this.nouvelleItemAffichable = nouvelleItemAffichable;
     }
     
+    public void enleverProjectile(Projectiles projectile){
+	module.getListProjectiles().remove(projectile);
+	engineScreenMenu.getListImagesProjectiles().remove(0);
+    }
+    
 //    setters and getters
     
     public Module getModule() {
