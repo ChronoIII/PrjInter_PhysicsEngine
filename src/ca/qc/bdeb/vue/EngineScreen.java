@@ -7,6 +7,7 @@ package ca.qc.bdeb.vue;
 import ca.qc.bdeb.controler.Controleur;
 import ca.qc.bdeb.module.Module;
 import java.util.ArrayList;
+import net.java.games.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
@@ -60,14 +61,16 @@ public class EngineScreen extends BasicGameState {
 	if (a.isKeyPressed(Input.KEY_SPACE)) {
 	    controleur.addProjectile(0,0);
 	}
+	
 	if (a.isKeyPressed(Input.KEY_1)) {
 	    controleur.listProjectiles().get(0).detruir();
 	}
 
 	// On met à jour à chaque seconde
-	t = t + 0.1;
-
+	
 	for (int i = 0; i < listImagesProjectiles.size(); i++) {
+	    t = t + 0.1;
+
 	    if (controleur.getYf() < -1 || controleur.getYf() > 851) {
 		if (controleur.getYf() < -1) {
 		    controleur.setYo(0);
@@ -107,11 +110,11 @@ public class EngineScreen extends BasicGameState {
 
 
 
-	    if (controleur.getYf() > -50 && controleur.getXf() < 1200) {
+	    if (controleur.getYf() > -50 && controleur.getXf() < 800) {
 		
 		controleur.mouvement2D(t);
-		controleur.listProjectiles().get(0).setY((int) Math.round(controleur.getXf()));
-		controleur.listProjectiles().get(0).setY((int) Math.round(790 - controleur.getYf()));
+		controleur.listProjectiles().get(0).setX((int) Math.round(controleur.getXf()));
+		controleur.listProjectiles().get(0).setY((int) Math.round(540 - controleur.getYf()));
 
 	    }
 	}
