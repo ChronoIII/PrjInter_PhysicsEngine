@@ -13,7 +13,7 @@ import org.newdawn.slick.SlickException;
  *
  * @author Kururin
  */
-public class Projectiles implements Affichable{
+public class Projectiles implements Affichable {
 
     private String nomImg = "bird.png";
     private int vieProj;
@@ -21,39 +21,50 @@ public class Projectiles implements Affichable{
     private int y;
     private Vecteur direction;
     private Controleur controleur;
-    
+
     public Projectiles(int x, int y, Controleur controleur) throws SlickException {
-	 this.x = x;
-	 this.y = y;
-	 this.controleur = controleur;
-	 
-	 controleur.setNouvelleItemAffichable(this);
+	this.x = x;
+	this.y = y;
+	this.controleur = controleur;
+
+	
+
+	controleur.setNouvelleItemAffichable(this);
     }
-    
-    public void detruir(){
+
+    public void detruir() {
 	controleur.enleverProjectile(this);
     }
-     
-     //getter and setter
+   
+
+    //getter and setter
     public int getVieProj() {
-        return vieProj;
+	return vieProj;
     }
 
     public void setVieProj(int vieProj) {
-        this.vieProj = vieProj;
+	this.vieProj = vieProj;
     }
 
     public boolean isEnVie() {
-        return enVie;
+	return enVie;
     }
 
     public void setEnVie(boolean enVie) {
-        this.enVie = enVie;
+	this.enVie = enVie;
     }
     boolean enVie;
 
     public int getX() {
 	return x;
+    }
+
+    public void setX(int x) {
+	this.x = x;
+    }
+
+    public void setY(int y) {
+	this.y = y;
     }
 
     public int getY() {
@@ -63,5 +74,4 @@ public class Projectiles implements Affichable{
     public String getNomImg() {
 	return nomImg;
     }
-    
 }

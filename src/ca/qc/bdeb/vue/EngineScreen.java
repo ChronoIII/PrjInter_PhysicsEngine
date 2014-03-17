@@ -23,10 +23,7 @@ public class EngineScreen extends BasicGameState {
     private ArrayList<Image> listImagesStructures;
     private Image catapule;
     private Image bg;
-    int x = 10;
-    int y = 10;
-    Image r;
-    Image b;
+    double t = 0;
 
     public EngineScreen(int state, Controleur controleur) throws SlickException {
 	this.state = state;
@@ -61,13 +58,72 @@ public class EngineScreen extends BasicGameState {
 //	    addImage(controleur.listProjectiles().get(controleur.listProjectiles().size() - 1).getNomImg());
 //	}
 	if (a.isKeyPressed(Input.KEY_SPACE)) {
-	    controleur.addProjectile(x, y);
-	    x = x + 10;
-	    y = y + 10;
+	    controleur.addProjectile(0,0);
 	}
 	if (a.isKeyPressed(Input.KEY_1)) {
 	    controleur.listProjectiles().get(0).detruir();
 	}
+
+	// On met à jour à chaque seconde
+	t = t + 0.1;
+
+	for (int i = 0; i < listImagesProjectiles.size(); i++) {
+	    if (controleur.getYf() < -1 || controleur.getYf() > 851) {
+		if (controleur.getYf() < -1) {
+		    controleur.setYo(0);
+		} else {
+		    controleur.setYo(850);
+		}
+		controleur.setXo(controleur.getXf());
+		controleur.setHaut(!controleur.isHaut());
+
+
+		controleur.setV(controleur.getV() * 0.82);
+//         JOptionPane.showMessageDialog(null, pan.getV());
+		t = 0;
+
+	    }
+
+
+
+	    if (controleur.getXf() < 0 || controleur.getXf() > 1150) {
+		System.out.println(controleur.getXf());
+		if (controleur.getXf() > 1150) {
+		    controleur.setXo(1149);
+		} else {
+		    controleur.setXo(1);
+		}
+
+		controleur.setYo(controleur.getYf());
+		controleur.setDroite(!controleur.isDroite());
+
+		controleur.setV(controleur.getV() * 0.82);
+//         JOptionPane.showMessageDialog(null, pan.getV());
+		t = 0;
+
+
+	    }
+
+
+
+
+	    if (controleur.getYf() > -50 && controleur.getXf() < 1200) {
+		
+		controleur.mouvement2D(t);
+		controleur.listProjectiles().get(0).setY((int) Math.round(controleur.getXf()));
+		controleur.listProjectiles().get(0).setY((int) Math.round(790 - controleur.getYf()));
+
+	    }
+	}
+	System.out.println(t);
+//                else{t=0;
+//                pan.setYo(0);
+//                pan.setV(pan.getV());
+//                pan.setAngle(pan.getAngle());
+//                pan.setXo(0);
+//                pan.setXf(0);
+//                pan.setYf(0);
+//                }
 
     }
 
@@ -77,10 +133,9 @@ public class EngineScreen extends BasicGameState {
 	    listImagesProjectiles.get(i).draw(controleur.positionProjectileX(i), controleur.positionProjectileY(i));
 	}
 	for (int i = 0; i < listImagesStructures.size(); i++) {
-	    listImagesStructures.get(i).draw(x, y);
 	}
 
-	
+
     }
 
     @Override

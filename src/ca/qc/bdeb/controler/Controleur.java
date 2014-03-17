@@ -27,6 +27,9 @@ public class Controleur {
 	module = new Module(this);
 	engineScreenMenu = new EngineScreen(engineScreen, this);
 	mainMenu = new MainMenu(menu, this);
+	
+	v = 75;//vitesse initiale 
+	angle = 60;//angle initial en degré
     }
     
     public void addProjectile(int x, int y) throws SlickException{
@@ -52,6 +55,37 @@ public class Controleur {
     public void enleverProjectile(Projectiles projectile){
 	module.getListProjectiles().remove(projectile);
 	engineScreenMenu.getListImagesProjectiles().remove(0);
+    }
+    
+     double v, angle, anglerad, vxi, vyi, yo, xo, y1, y2, yf, xf;
+    boolean droite = true;
+    boolean haut = true;
+
+    public void mouvement2D(double t) {
+
+
+	anglerad = angle * Math.PI / 180;//conversion en rad
+
+	if (haut) {
+	    vyi = v * Math.sin(anglerad);//vitesse en y
+	} else {
+	    vyi = v * Math.sin(anglerad - Math.PI);
+	}//vitesse en y
+
+
+
+	if (droite) {
+	    vxi = v * Math.cos(anglerad);//vitesse en x
+	} else {
+	    vxi = v * Math.cos(anglerad - Math.PI);//vitesse en x
+	}
+
+
+
+
+
+	yf = yo + vyi * t + (-9.8 * Math.pow(t, 2) / 2); //position de y pour chaque valeur de t
+	xf = xo + vxi * t;//position en x pour chaque valeur de t
     }
     
 //    setters and getters
@@ -84,4 +118,100 @@ public class Controleur {
 	this.nouvelleItemAffichable = nouvelleItemAffichable;
     }
     
+    public boolean isHaut() {
+	return haut;
+    }
+
+    public void setHaut(boolean haut) {
+	this.haut = haut;
+    }
+
+    public boolean isDroite() {
+	return droite;
+    }
+
+    public void setDroite(boolean droite) {
+	this.droite = droite;
+    }
+
+    public double getYf() {
+	return yf;
+    }
+
+    public void setYf(double yf) {
+	this.yf = yf;
+    }
+
+
+    public double getV() {
+	return v;
+    }
+
+    public void setV(double v) {
+	this.v = v;
+    }
+
+    public double getAngle() {
+	return angle;
+    }
+
+    public void setAngle(double angle) {
+	this.angle = angle;
+    }
+
+    public double getVxi() {
+	return vxi;
+    }
+
+    public void setVxi(double vxi) {
+	this.vxi = vxi;
+    }
+
+    public double getVyi() {
+	return vyi;
+    }
+
+    public void setVyi(double vyi) {
+	this.vyi = vyi;
+    }
+
+    public double getYo() {
+	return yo;
+    }
+
+    public void setYo(double yo) {
+	this.yo = yo;
+    }
+
+    public double getXo() {
+	return xo;
+    }
+
+    public void setXo(double xo) {
+	this.xo = xo;
+    }
+
+    public double getY1() {
+	return y1;
+    }
+
+    public void setY1(double y1) {
+	this.y1 = y1;
+    }
+
+    public double getY2() {
+	return y2;
+    }
+
+    public void setY2(double y2) {
+	this.y2 = y2;
+    }
+
+    public double getXf() {
+	return xf;
+    }
+
+    public void setXf(double xf) {
+	this.xf = xf;
+    }
 }
