@@ -19,14 +19,17 @@ public class Projectiles implements Affichable {
     private double x, y;
     private Controleur controleur;
     private double tempsProjectile = 0;
+    double v, angle, anglerad, vxi, vyi, yo, xo, y1, y2;
+    boolean droite = true;
+    boolean haut = true;
 
-    public Projectiles(int x, int y, Controleur controleur) throws SlickException {
+    public Projectiles(int x, int y, double v, double angle, Controleur controleur) throws SlickException {
 	this.x = x;
 	this.y = y;
 	this.controleur = controleur;
 
-	v = 75;//vitesse initiale 
-	angle = 60;//angle initial en degré
+	this.v = v;//vitesse initiale 
+	this.angle = angle;//angle initial en degré
 
 	controleur.setNouvelleItemAffichable(this);
     }
@@ -34,9 +37,6 @@ public class Projectiles implements Affichable {
     public void detruir() {
 	controleur.enleverProjectile(this);
     }
-    double v, angle, anglerad, vxi, vyi, yo, xo, y1, y2;
-    boolean droite = true;
-    boolean haut = true;
 
     public void mouvement2D() {
 
@@ -54,7 +54,7 @@ public class Projectiles implements Affichable {
 	    vxi = v * Math.cos(anglerad - Math.PI);//vitesse en x
 	}
 
-	y = 390 - (yo + vyi * tempsProjectile + (-9.8 * Math.pow(tempsProjectile, 2) / 2)); //position de y pour chaque valeur de t
+	y = 500 - (yo + vyi * tempsProjectile + (-9.8 * Math.pow(tempsProjectile, 2) / 2)); //position de y pour chaque valeur de t
 	x = (xo + vxi * tempsProjectile);//position en x pour chaque valeur de t
     }
 

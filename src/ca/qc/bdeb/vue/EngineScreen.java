@@ -60,7 +60,7 @@ public class EngineScreen extends BasicGameState {
 //	}
 
 	if (a.isKeyPressed(Input.KEY_SPACE)) {
-	    controleur.addProjectile(0, 500);
+	    controleur.addProjectile(0, 0, 0, 0);
 	}
 
 	if (a.isKeyPressed(Input.KEY_1)) {
@@ -78,33 +78,34 @@ public class EngineScreen extends BasicGameState {
 
 
 	    //condition sol et plafond
-	    if (controleur.listProjectiles().get(i).getY() < -1 || controleur.listProjectiles().get(i).getY() > 351) {
+	    if (controleur.listProjectiles().get(i).getY() < -1 || controleur.listProjectiles().get(i).getY() > 500) {
 		if (controleur.listProjectiles().get(i).getY() < -1) {
-		    controleur.listProjectiles().get(i).setXo(0);
+		    controleur.listProjectiles().get(i).setYo(499);
 		} else {
-		    controleur.listProjectiles().get(i).setYo(350);
+		    controleur.listProjectiles().get(i).setYo(0);
 		}
 		controleur.listProjectiles().get(i).setXo(controleur.listProjectiles().get(i).getX());
+		
 		controleur.listProjectiles().get(i).setHaut(!controleur.listProjectiles().get(i).isHaut());
-
 
 		controleur.listProjectiles().get(i).setV(controleur.listProjectiles().get(i).getV() * 0.82);
 //         JOptionPane.showMessageDialog(null, pan.getV());
 		controleur.listProjectiles().get(i).setTempsProjectile(0);
-		System.out.println(0);
+//		System.out.println(0);
 	    }
 
 
 	    //confition mur
-	    if (controleur.listProjectiles().get(i).getX() < 0 || controleur.listProjectiles().get(i).getX() > 650) {
+	    if (controleur.listProjectiles().get(i).getX() < -1 || controleur.listProjectiles().get(i).getX() > 700) {
 		System.out.println(controleur.listProjectiles().get(i).getX());
-		if (controleur.listProjectiles().get(i).getX() > 650) {
-		    controleur.listProjectiles().get(i).setXo(649);
+		if (controleur.listProjectiles().get(i).getX() > 700) {
+		    controleur.listProjectiles().get(i).setXo(699);
 		} else {
-		    controleur.listProjectiles().get(i).setXo(1);
+		    controleur.listProjectiles().get(i).setXo(0);
 		}
 
-		controleur.listProjectiles().get(i).setYo(controleur.listProjectiles().get(i).getY());
+		controleur.listProjectiles().get(i).setYo( 500 - controleur.listProjectiles().get(i).getY());
+		
 		controleur.listProjectiles().get(i).setDroite(!controleur.listProjectiles().get(i).isDroite());
 
 		controleur.listProjectiles().get(i).setV(controleur.listProjectiles().get(i).getV() * 0.82);

@@ -31,8 +31,8 @@ public class Controleur {
 //	angle = 60;//angle initial en degré
     }
     
-    public void addProjectile(int x, int y) throws SlickException {
-	module.getListProjectiles().add(new Projectiles(x, y, this));
+    public void addProjectile(int x, int y, double v, double angle) throws SlickException {
+	module.getListProjectiles().add(new Projectiles(x,(500 - y), v, angle, this));
     }
     
     public double positionProjectileX(int i) {
