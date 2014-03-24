@@ -15,7 +15,8 @@ import org.newdawn.slick.SlickException;
 public class Controleur {
     
     private int menu = 0;
-    private int engineScreen = 1;
+    private int engineScreen = 1; 
+    //engineScreen = 1???
 
     private Module module;
     private MainMenu mainMenu;
