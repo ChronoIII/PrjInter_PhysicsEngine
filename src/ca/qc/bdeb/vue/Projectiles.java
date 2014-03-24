@@ -18,7 +18,7 @@ public class Projectiles implements Affichable {
     private int vieProj;
     private double x, y;
     private Controleur controleur;
-    private double tempsProjectile;
+    private double tempsProjectile = 0;
 
     public Projectiles(int x, int y, Controleur controleur) throws SlickException {
 	this.x = x;
@@ -48,20 +48,14 @@ public class Projectiles implements Affichable {
 	    vyi = v * Math.sin(anglerad - Math.PI);
 	}//vitesse en y
 
-
-
 	if (droite) {
 	    vxi = v * Math.cos(anglerad);//vitesse en x
 	} else {
 	    vxi = v * Math.cos(anglerad - Math.PI);//vitesse en x
 	}
 
-
-
-
-
-	y = yo + vyi * tempsProjectile + (-9.8 * Math.pow(tempsProjectile, 2) / 2); //position de y pour chaque valeur de t
-	x = 540 - (xo + vxi * tempsProjectile);//position en x pour chaque valeur de t
+	y = 390 - (yo + vyi * tempsProjectile + (-9.8 * Math.pow(tempsProjectile, 2) / 2)); //position de y pour chaque valeur de t
+	x = (xo + vxi * tempsProjectile);//position en x pour chaque valeur de t
     }
 
     //getter and setter
