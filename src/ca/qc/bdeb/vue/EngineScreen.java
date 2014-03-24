@@ -68,9 +68,15 @@ public class EngineScreen extends BasicGameState {
 
 	// On met à jour à chaque seconde
 <<<<<<< HEAD
+<<<<<<< HEAD
 	t = t + 0.1;
 	for (int i = 0; i < listImagesProjectiles.size(); i++) {
 	    
+=======
+	 t = t + 0.1;
+	for (int i = 0; i < listImagesProjectiles.size(); i++) {
+	   
+>>>>>>> 70533e482b4c9daacbc4c2d6edf9438e5de05476
 =======
 	 t = t + 0.1;
 	for (int i = 0; i < listImagesProjectiles.size(); i++) {
