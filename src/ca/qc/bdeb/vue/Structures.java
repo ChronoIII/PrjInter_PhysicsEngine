@@ -10,32 +10,36 @@ import org.newdawn.slick.*;
  *
  * @author Kururin
  */
-public class Structures {
-    
+public class Structures implements Affichable {
+
 //    comprendre SlickException....
-    private Image face = new Image("litte_baby.jpg");
+    private String nomImg = "Sans titre.png";
+    private int x;
+    private int y;
     private int poid;
-    private int position;
+    private int vie;
+    private boolean enVie;
 
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
+    public Structures() throws SlickException {
     }
 
     public int getVie() {
-        return vie;
+	return vie;
     }
 
     public void setVie(int vie) {
-        this.vie = vie;
+	this.vie = vie;
     }
-    private int vie;
-    private boolean enVie;
-    private String imageBois;
 
-    public Structures() throws SlickException {
+    public int getX() {
+	return x;
+    }
+
+    public int getY() {
+	return y;
+    }
+
+    public String getNomImg() {
+	return nomImg;
     }
 }

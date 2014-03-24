@@ -4,6 +4,7 @@
  */
 package ca.qc.bdeb.vue;
 
+import ca.qc.bdeb.controler.Controleur;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
@@ -11,29 +12,45 @@ import org.newdawn.slick.SlickException;
  *
  * @author Kururin
  */
-public class Ennemie {
- private Image face = new Image("litte_baby.jpg");
+public class Ennemie implements Affichable {
+
+    private String nomImg = "Sans titre.png";
+    private int x;
+    private int y;
     private String imageEnnemie;
     private int vieEnnemie;
     private int positionEnnemie;
 
     public int getVieEnnemie() {
-        return vieEnnemie;
+	return vieEnnemie;
     }
 
     public void setVieEnnemie(int vieEnnemie) {
-        this.vieEnnemie = vieEnnemie;
+	this.vieEnnemie = vieEnnemie;
     }
 
     public int getPositionEnnemie() {
-        return positionEnnemie;
+	return positionEnnemie;
     }
 
     public void setPositionEnnemie(int positionEnnemie) {
-        this.positionEnnemie = positionEnnemie;
+	this.positionEnnemie = positionEnnemie;
     }
     private boolean estVivant;
 
-    public Ennemie() throws SlickException {
+    public Ennemie(Controleur controleur) throws SlickException {
+	controleur.setNouvelleItemAffichable(this);
+    }
+
+    public int getX() {
+	return x;
+    }
+
+    public int getY() {
+	return y;
+    }
+
+    public String getNomImg() {
+	return nomImg;
     }
 }

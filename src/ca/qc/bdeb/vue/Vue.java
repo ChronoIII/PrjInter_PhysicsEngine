@@ -7,8 +7,7 @@ package ca.qc.bdeb.vue;
 
 
 import ca.qc.bdeb.controler.Controleur;
-import ca.qc.bdeb.vue.EngineScreen;
-import ca.qc.bdeb.vue.MainMenu;
+import java.awt.Menu;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
@@ -18,24 +17,22 @@ import org.newdawn.slick.state.*;
  */
 public class Vue extends StateBasedGame {
 
-    final public static int menu = 0;
-    final public static int engineScreen = 1;
-    Controleur controleur;
+    private Controleur controleur;
     
     public Vue(String title, Controleur controleur) throws SlickException {
 	super(title);
 	
 	this.controleur = controleur;
 	
-	this.addState(new MainMenu(menu, controleur));
-	this.addState(new EngineScreen(engineScreen, controleur, controleur.getModule()));
+	this.addState(controleur.getMainMenu());
+	this.addState(controleur.getEngineScreenMenu());
 	
     }
 
     @Override
     public void initStatesList(GameContainer gc) throws SlickException {
-	this.getState(menu).init(gc, this);
-	this.getState(engineScreen).init(gc, this);
-	this.enterState(engineScreen);
+	this.getState(controleur.getMenu()).init(gc, this);
+	this.getState(controleur.getEngineScreen()).init(gc, this);
+	this.enterState(controleur.getEngineScreen());
     }
 }

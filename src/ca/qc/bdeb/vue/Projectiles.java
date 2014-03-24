@@ -4,55 +4,74 @@
  */
 package ca.qc.bdeb.vue;
 
+import ca.qc.bdeb.controler.Controleur;
+import ca.qc.bdeb.module.Module;
 import ca.qc.bdeb.module.Vecteur;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 /**
  *
  * @author Kururin
  */
-public class Projectiles {
+public class Projectiles implements Affichable {
 
-    private Image face = new Image("litte_baby.jpg");
-    private String imageProj;
+    private String nomImg = "bird.png";
     private int vieProj;
     private int x;
     private int y;
     private Vecteur direction;
-    
-     public Projectiles(int x, int y) throws SlickException {
-	 this.x = x;
-	 this.y = y;
+    private Controleur controleur;
+
+    public Projectiles(int x, int y, Controleur controleur) throws SlickException {
+	this.x = x;
+	this.y = y;
+	this.controleur = controleur;
+
+	
+
+	controleur.setNouvelleItemAffichable(this);
     }
 
+    public void detruir() {
+	controleur.enleverProjectile(this);
+    }
+   
+
+    //getter and setter
     public int getVieProj() {
-        return vieProj;
+	return vieProj;
     }
 
     public void setVieProj(int vieProj) {
-        this.vieProj = vieProj;
+	this.vieProj = vieProj;
     }
 
     public boolean isEnVie() {
-        return enVie;
+	return enVie;
     }
 
     public void setEnVie(boolean enVie) {
-        this.enVie = enVie;
+	this.enVie = enVie;
     }
     boolean enVie;
-    
-    public Image getImage(){
-	return face;
-    }
 
     public int getX() {
 	return x;
     }
 
+    public void setX(int x) {
+	this.x = x;
+    }
+
+    public void setY(int y) {
+	this.y = y;
+    }
+
     public int getY() {
 	return y;
     }
-    
+
+    public String getNomImg() {
+	return nomImg;
+    }
 }
