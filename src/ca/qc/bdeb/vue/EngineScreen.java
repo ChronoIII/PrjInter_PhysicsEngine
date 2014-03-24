@@ -27,99 +27,105 @@ public class EngineScreen extends BasicGameState {
     double t = 0;
 
     public EngineScreen(int state, Controleur controleur) throws SlickException {
-	this.state = state;
-	this.controleur = controleur;
-	this.modele = modele;
+        this.state = state;
+        this.controleur = controleur;
+        this.modele = modele;
 
     }
 
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-	listImagesProjectiles = new ArrayList<Image>();
-	listImagesStructures = new ArrayList<Image>();
-	bg = new Image("bg.jpg");
+        listImagesProjectiles = new ArrayList<Image>();
+        listImagesStructures = new ArrayList<Image>();
+        bg = new Image("bg.jpg");
 //	controleur.addProjectile(x, y);
 //	c = new Ennemie(controleur);
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-	Input a = gc.getInput();
+        Input a = gc.getInput();
 
-	if (controleur.getNouvelleItemAffichable() != null) {
-	    switch (controleur.getNouvelleItemAffichable().getNomImg()) {
-		case "bird.png":
-		    addImageProjectiles(controleur.getNouvelleItemAffichable().getNomImg());
-		    break;
-		case "Sans titre.png":
-		    addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
-		    break;
-	    }
-	    controleur.setNouvelleItemAffichable(null);
-	}
+        if (controleur.getNouvelleItemAffichable() != null) {
+            switch (controleur.getNouvelleItemAffichable().getNomImg()) {
+                case "bird.png":
+                    addImageProjectiles(controleur.getNouvelleItemAffichable().getNomImg());
+                    break;
+                case "Sans titre.png":
+                    addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
+                    break;
+            }
+            controleur.setNouvelleItemAffichable(null);
+        }
 //	if (controleur.listProjectiles().size() != listImageProjectiles.size()) {
 //	    addImage(controleur.listProjectiles().get(controleur.listProjectiles().size() - 1).getNomImg());
 //	}
-	if (a.isKeyPressed(Input.KEY_SPACE)) {
-	    controleur.addProjectile(0,0);
-	}
-	
-	if (a.isKeyPressed(Input.KEY_1)) {
-	    controleur.listProjectiles().get(0).detruir();
-	}
+        if (a.isKeyPressed(Input.KEY_SPACE)) {
+            controleur.addProjectile(0, 0);
+        }
 
-	// On met à jour à chaque seconde
+        if (a.isKeyPressed(Input.KEY_1)) {
+            
+            if (!controleur.listProjectiles().isEmpty()) {
 
-	 t = t + 0.1;
-	for (int i = 0; i < listImagesProjectiles.size(); i++) {
-	   
+                controleur.listProjectiles().get(0).detruir();
+            }
+            if (controleur.listProjectiles().isEmpty()) {
+            }
+        }
 
-	    if (controleur.getYf() < -1 || controleur.getYf() > 851) {
-		if (controleur.getYf() < -1) {
-		    controleur.setYo(0);
-		} else {
-		    controleur.setYo(850);
-		}
-		controleur.setXo(controleur.getXf());
-		controleur.setHaut(!controleur.isHaut());
+        // On met à jour à chaque seconde
+
+        t = t + 0.1;
+        for (int i = 0; i < listImagesProjectiles.size(); i++) {
 
 
-		controleur.setV(controleur.getV() * 0.82);
+            if (controleur.getYf() < -1 || controleur.getYf() > 851) {
+                if (controleur.getYf() < -1) {
+                    controleur.setYo(0);
+                } else {
+                    controleur.setYo(850);
+                }
+                controleur.setXo(controleur.getXf());
+                controleur.setHaut(!controleur.isHaut());
+
+
+                controleur.setV(controleur.getV() * 0.82);
 //         JOptionPane.showMessageDialog(null, pan.getV());
-		t = 0;
+                t = 0;
 
-	    }
+            }
 
 
 
-	    if (controleur.getXf() < 0 || controleur.getXf() > 1150) {
-		System.out.println(controleur.getXf());
-		if (controleur.getXf() > 1150) {
-		    controleur.setXo(1149);
-		} else {
-		    controleur.setXo(1);
-		}
+            if (controleur.getXf() < 0 || controleur.getXf() > 1150) {
+                System.out.println(controleur.getXf());
+                if (controleur.getXf() > 1150) {
+                    controleur.setXo(1149);
+                } else {
+                    controleur.setXo(1);
+                }
 
-		controleur.setYo(controleur.getYf());
-		controleur.setDroite(!controleur.isDroite());
+                controleur.setYo(controleur.getYf());
+                controleur.setDroite(!controleur.isDroite());
 
-		controleur.setV(controleur.getV() * 0.82);
+                controleur.setV(controleur.getV() * 0.82);
 //         JOptionPane.showMessageDialog(null, pan.getV());
-		t = 0;
+                t = 0;
 
 
-	    }
+            }
 
 
 
 
-	    if (controleur.getYf() > -50 && controleur.getXf() < 800) {
-		
-		controleur.mouvement2D(t);
-		controleur.listProjectiles().get(0).setX((int) Math.round(controleur.getXf()));
-		controleur.listProjectiles().get(0).setY((int) Math.round(540 - controleur.getYf()));
+            if (controleur.getYf() > -50 && controleur.getXf() < 800) {
 
-	    }
-	}
-	System.out.println(t);
+                controleur.mouvement2D(t);
+                controleur.listProjectiles().get(0).setX((int) Math.round(controleur.getXf()));
+                controleur.listProjectiles().get(0).setY((int) Math.round(540 - controleur.getYf()));
+
+            }
+        }
+//	System.out.println(t);
 //                else{t=0;
 //                pan.setYo(0);
 //                pan.setV(pan.getV());
@@ -132,46 +138,46 @@ public class EngineScreen extends BasicGameState {
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-	bg.draw();
-	for (int i = 0; i < listImagesProjectiles.size(); i++) {
-	    listImagesProjectiles.get(i).draw((int)(controleur.positionProjectileX(i)), (int)(controleur.positionProjectileY(i)));
-	}
-	for (int i = 0; i < listImagesStructures.size(); i++) {
-	}
+        bg.draw();
+        for (int i = 0; i < listImagesProjectiles.size(); i++) {
+            listImagesProjectiles.get(i).draw((int) (controleur.positionProjectileX(i)), (int) (controleur.positionProjectileY(i)));
+        }
+        for (int i = 0; i < listImagesStructures.size(); i++) {
+        }
 
 
     }
 
     @Override
     public int getID() {
-	return state;
+        return state;
     }
 
     public void addImageProjectiles(String nomImg) throws SlickException {
-	Image img = new Image(nomImg);
-	img.setName(nomImg);
-	listImagesProjectiles.add(img);
+        Image img = new Image(nomImg);
+        img.setName(nomImg);
+        listImagesProjectiles.add(img);
     }
 
     public void addImageStructures(String nomImg) throws SlickException {
-	Image img = new Image(nomImg);
-	img.setName(nomImg);
-	listImagesStructures.add(img);
+        Image img = new Image(nomImg);
+        img.setName(nomImg);
+        listImagesStructures.add(img);
     }
 
     public ArrayList<Image> getListImagesProjectiles() {
-	return listImagesProjectiles;
+        return listImagesProjectiles;
     }
 
     public void setListImagesProjectiles(ArrayList<Image> listImagesProjectiles) {
-	this.listImagesProjectiles = listImagesProjectiles;
+        this.listImagesProjectiles = listImagesProjectiles;
     }
 
     public ArrayList<Image> getListImagesStructures() {
-	return listImagesStructures;
+        return listImagesStructures;
     }
 
     public void setListImagesStructures(ArrayList<Image> listImagesStructures) {
-	this.listImagesStructures = listImagesStructures;
+        this.listImagesStructures = listImagesStructures;
     }
 }
