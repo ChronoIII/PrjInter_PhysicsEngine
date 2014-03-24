@@ -59,61 +59,58 @@ public class EngineScreen extends BasicGameState {
 //	    addImage(controleur.listProjectiles().get(controleur.listProjectiles().size() - 1).getNomImg());
 //	}
 	if (a.isKeyPressed(Input.KEY_SPACE)) {
-	    controleur.addProjectile(0,0);
+	    controleur.addProjectile(0, 0);
 	}
-	
+
 	if (a.isKeyPressed(Input.KEY_1)) {
 	    controleur.listProjectiles().get(0).detruir();
 	}
 
 	// On met à jour à chaque seconde
 
-	 t = t + 0.1;
 	for (int i = 0; i < listImagesProjectiles.size(); i++) {
-	   
 
-	    if (controleur.getYf() < -1 || controleur.getYf() > 851) {
-		if (controleur.getYf() < -1) {
-		    controleur.setYo(0);
+
+	    //condition sol et plafond
+	    if (controleur.listProjectiles().get(i).getY() < -1 || controleur.listProjectiles().get(i).getY() > 851) {
+		if (controleur.listProjectiles().get(i).getY() < -1) {
+		    controleur.listProjectiles().get(i).setXo(0);
 		} else {
-		    controleur.setYo(850);
+		    controleur.listProjectiles().get(i).setYo(850);
 		}
-		controleur.setXo(controleur.getXf());
-		controleur.setHaut(!controleur.isHaut());
+		controleur.listProjectiles().get(i).setXo(controleur.listProjectiles().get(i).getX());
+		controleur.listProjectiles().get(i).setHaut(!controleur.listProjectiles().get(i).isHaut());
 
 
-		controleur.setV(controleur.getV() * 0.82);
+		controleur.listProjectiles().get(i).setV(controleur.listProjectiles().get(i).getV() * 0.82);
 //         JOptionPane.showMessageDialog(null, pan.getV());
-		t = 0;
+		controleur.listProjectiles().get(i).setTempsProjectile(0);
+	    }
 
+
+	    //confition mur
+	    if (controleur.listProjectiles().get(i).getX() < 0 || controleur.listProjectiles().get(i).getX() > 1150) {
+		System.out.println(controleur.listProjectiles().get(i).getX());
+		if (controleur.listProjectiles().get(i).getX() > 1150) {
+		    controleur.listProjectiles().get(i).setXo(1149);
+		} else {
+		    controleur.listProjectiles().get(i).setXo(1);
+		}
+
+		controleur.listProjectiles().get(i).setYo(controleur.listProjectiles().get(i).getY());
+		controleur.listProjectiles().get(i).setDroite(!controleur.listProjectiles().get(i).isDroite());
+
+		controleur.listProjectiles().get(i).setV(controleur.listProjectiles().get(i).getV() * 0.82);
+//         JOptionPane.showMessageDialog(null, pan.getV());
+		controleur.listProjectiles().get(i).setTempsProjectile(0);
 	    }
 
 
 
-	    if (controleur.getXf() < 0 || controleur.getXf() > 1150) {
-		System.out.println(controleur.getXf());
-		if (controleur.getXf() > 1150) {
-		    controleur.setXo(1149);
-		} else {
-		    controleur.setXo(1);
-		}
 
-		controleur.setYo(controleur.getYf());
-		controleur.setDroite(!controleur.isDroite());
+	    if (controleur.listProjectiles().get(i).getY() > -50 && controleur.listProjectiles().get(i).getX() < 800) {
 
-		controleur.setV(controleur.getV() * 0.82);
-//         JOptionPane.showMessageDialog(null, pan.getV());
-		t = 0;
-
-
-	    }
-
-
-
-
-	    if (controleur.getYf() > -50 && controleur.getXf() < 800) {
-		
-		controleur.mouvement2D(t);
+		controleur.listProjectiles().get(i).mouvement2D();
 		controleur.listProjectiles().get(0).setX((int) Math.round(controleur.getXf()));
 		controleur.listProjectiles().get(0).setY((int) Math.round(540 - controleur.getYf()));
 
@@ -134,7 +131,7 @@ public class EngineScreen extends BasicGameState {
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 	bg.draw();
 	for (int i = 0; i < listImagesProjectiles.size(); i++) {
-	    listImagesProjectiles.get(i).draw((int)(controleur.positionProjectileX(i)), (int)(controleur.positionProjectileY(i)));
+	    listImagesProjectiles.get(i).draw((int) (controleur.positionProjectileX(i)), (int) (controleur.positionProjectileY(i)));
 	}
 	for (int i = 0; i < listImagesStructures.size(); i++) {
 	}

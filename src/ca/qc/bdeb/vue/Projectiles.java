@@ -18,13 +18,15 @@ public class Projectiles implements Affichable {
     private int vieProj;
     private double x, y;
     private Controleur controleur;
+    private double tempsProjectile;
 
     public Projectiles(int x, int y, Controleur controleur) throws SlickException {
 	this.x = x;
 	this.y = y;
 	this.controleur = controleur;
 
-	
+	v = 75;//vitesse initiale 
+	angle = 60;//angle initial en degré
 
 	controleur.setNouvelleItemAffichable(this);
     }
@@ -37,7 +39,7 @@ public class Projectiles implements Affichable {
     boolean droite = true;
     boolean haut = true;
     
-    public void mouvement2D(double t) {
+    public void mouvement2D() {
 
 	anglerad = angle * Math.PI / 180;//conversion en rad
 
@@ -59,27 +61,11 @@ public class Projectiles implements Affichable {
 
 
 
-	y = yo + vyi * t + (-9.8 * Math.pow(t, 2) / 2); //position de y pour chaque valeur de t
-	x = xo + vxi * t;//position en x pour chaque valeur de t
+	y = yo + vyi * tempsProjectile + (-9.8 * Math.pow(tempsProjectile, 2) / 2); //position de y pour chaque valeur de t
+	x = 540 -(xo + vxi * tempsProjectile);//position en x pour chaque valeur de t
     }
 
     //getter and setter
-    public int getVieProj() {
-	return vieProj;
-    }
-
-    public void setVieProj(int vieProj) {
-	this.vieProj = vieProj;
-    }
-
-    public boolean isEnVie() {
-	return enVie;
-    }
-
-    public void setEnVie(boolean enVie) {
-	this.enVie = enVie;
-    }
-    boolean enVie;
 
     public void setX(int x) {
 	this.x = x;
@@ -96,7 +82,86 @@ public class Projectiles implements Affichable {
     public double getY() {
 	return y;
     }
-    
+
+    public double getVxi() {
+	return vxi;
+    }
+
+    public void setVxi(double vxi) {
+	this.vxi = vxi;
+    }
+
+    public double getVyi() {
+	return vyi;
+    }
+
+    public void setVyi(double vyi) {
+	this.vyi = vyi;
+    }
+
+    public double getYo() {
+	return yo;
+    }
+
+    public void setYo(double yo) {
+	this.yo = yo;
+    }
+
+    public double getXo() {
+	return xo;
+    }
+
+    public void setXo(double xo) {
+	this.xo = xo;
+    }
+
+    public double getY1() {
+	return y1;
+    }
+
+    public void setY1(double y1) {
+	this.y1 = y1;
+    }
+
+    public double getY2() {
+	return y2;
+    }
+
+    public void setY2(double y2) {
+	this.y2 = y2;
+    }
+
+    public double getTempsProjectile() {
+	return tempsProjectile;
+    }
+
+    public void setTempsProjectile(double tempsProjectile) {
+	this.tempsProjectile = tempsProjectile;
+    }
+
+    public boolean isDroite() {
+	return droite;
+    }
+
+    public void setDroite(boolean droite) {
+	this.droite = droite;
+    }
+
+    public boolean isHaut() {
+	return haut;
+    }
+
+    public void setHaut(boolean haut) {
+	this.haut = haut;
+    }
+
+    public double getV() {
+	return v;
+    }
+
+    public void setV(double v) {
+	this.v = v;
+    }
     
 
     public String getNomImg() {
