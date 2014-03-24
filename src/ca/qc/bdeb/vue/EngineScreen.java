@@ -67,21 +67,10 @@ public class EngineScreen extends BasicGameState {
 	}
 
 	// On met à jour à chaque seconde
-<<<<<<< HEAD
-<<<<<<< HEAD
-	t = t + 0.1;
-	for (int i = 0; i < listImagesProjectiles.size(); i++) {
-	    
-=======
+
 	 t = t + 0.1;
 	for (int i = 0; i < listImagesProjectiles.size(); i++) {
 	   
->>>>>>> 70533e482b4c9daacbc4c2d6edf9438e5de05476
-=======
-	 t = t + 0.1;
-	for (int i = 0; i < listImagesProjectiles.size(); i++) {
-	   
->>>>>>> 70533e482b4c9daacbc4c2d6edf9438e5de05476
 
 	    if (controleur.getYf() < -1 || controleur.getYf() > 851) {
 		if (controleur.getYf() < -1) {
@@ -145,7 +134,7 @@ public class EngineScreen extends BasicGameState {
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 	bg.draw();
 	for (int i = 0; i < listImagesProjectiles.size(); i++) {
-	    listImagesProjectiles.get(i).draw(controleur.positionProjectileX(i), controleur.positionProjectileY(i));
+	    listImagesProjectiles.get(i).draw((int)(controleur.positionProjectileX(i)), (int)(controleur.positionProjectileY(i)));
 	}
 	for (int i = 0; i < listImagesStructures.size(); i++) {
 	}

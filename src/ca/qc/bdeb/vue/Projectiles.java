@@ -6,7 +6,6 @@ package ca.qc.bdeb.vue;
 
 import ca.qc.bdeb.controler.Controleur;
 import ca.qc.bdeb.module.Module;
-import ca.qc.bdeb.module.Vecteur;
 import org.newdawn.slick.SlickException;
 
 /**
@@ -18,7 +17,6 @@ public class Projectiles implements Affichable {
     private String nomImg = "bird.png";
     private int vieProj;
     private double x, y;
-    private Vecteur direction;
     private Controleur controleur;
 
     public Projectiles(int x, int y, Controleur controleur) throws SlickException {

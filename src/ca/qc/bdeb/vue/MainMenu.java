@@ -33,22 +33,9 @@ public class MainMenu extends BasicGameState {
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-<<<<<<< HEAD
-<<<<<<< HEAD
 	g.fillRect(100, 100, 100, 100);
 	g.fillRect(200, 200, 200, 200);
          img.draw(100,100);
-=======
-=======
->>>>>>> 70533e482b4c9daacbc4c2d6edf9438e5de05476
-//        Image img = new Image ("little_baby.jpg");
-//	g.fillRect(100, 100, 100, 100);
-//	g.fillRect(200, 200, 200, 200);
-//         img.draw(100,100);
-<<<<<<< HEAD
->>>>>>> 70533e482b4c9daacbc4c2d6edf9438e5de05476
-=======
->>>>>>> 70533e482b4c9daacbc4c2d6edf9438e5de05476
     }
 
     @Override

@@ -5,7 +5,6 @@
 package ca.qc.bdeb.module;
 
 import ca.qc.bdeb.controler.Controleur;
-import ca.qc.bdeb.vue.Catapulte;
 import ca.qc.bdeb.vue.Projectiles;
 import java.util.ArrayList;
 import org.newdawn.slick.SlickException;
@@ -20,7 +19,6 @@ public class Module {
 //    private Projectiles proj = new Projectiles();
     private ArrayList<Projectiles> listProjectiles;
     private int nbProjectiles = 0;
-    private Catapulte carapulte;
 	    
     private boolean impactSurEnnemie = false;
     private boolean impactSurStructure = false;

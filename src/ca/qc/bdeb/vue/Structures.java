@@ -31,11 +31,11 @@ public class Structures implements Affichable {
 	this.vie = vie;
     }
 
-    public int getX() {
+    public double getX() {
 	return x;
     }
 
-    public int getY() {
+    public double getY() {
 	return y;
     }
 
