@@ -34,11 +34,10 @@ public class Projectiles implements Affichable {
     public void detruir() {
 	controleur.enleverProjectile(this);
     }
-    
     double v, angle, anglerad, vxi, vyi, yo, xo, y1, y2;
     boolean droite = true;
     boolean haut = true;
-    
+
     public void mouvement2D() {
 
 	anglerad = angle * Math.PI / 180;//conversion en rad
@@ -62,11 +61,10 @@ public class Projectiles implements Affichable {
 
 
 	y = yo + vyi * tempsProjectile + (-9.8 * Math.pow(tempsProjectile, 2) / 2); //position de y pour chaque valeur de t
-	x = 540 -(xo + vxi * tempsProjectile);//position en x pour chaque valeur de t
+	x = 540 - (xo + vxi * tempsProjectile);//position en x pour chaque valeur de t
     }
 
     //getter and setter
-
     public void setX(int x) {
 	this.x = x;
     }
@@ -162,7 +160,6 @@ public class Projectiles implements Affichable {
     public void setV(double v) {
 	this.v = v;
     }
-    
 
     public String getNomImg() {
 	return nomImg;

@@ -58,14 +58,20 @@ public class EngineScreen extends BasicGameState {
 //	if (controleur.listProjectiles().size() != listImageProjectiles.size()) {
 //	    addImage(controleur.listProjectiles().get(controleur.listProjectiles().size() - 1).getNomImg());
 //	}
+
 	if (a.isKeyPressed(Input.KEY_SPACE)) {
 	    controleur.addProjectile(0, 0);
 	}
 
 	if (a.isKeyPressed(Input.KEY_1)) {
-	    controleur.listProjectiles().get(0).detruir();
-	}
 
+	    if (!controleur.listProjectiles().isEmpty()) {
+
+		controleur.listProjectiles().get(0).detruir();
+	    }
+	    if (controleur.listProjectiles().isEmpty()) {
+	    }
+	}
 	// On met à jour à chaque seconde
 
 	for (int i = 0; i < listImagesProjectiles.size(); i++) {
@@ -105,30 +111,13 @@ public class EngineScreen extends BasicGameState {
 		controleur.listProjectiles().get(i).setTempsProjectile(0);
 	    }
 
-
-
-
 	    if (controleur.listProjectiles().get(i).getY() > -50 && controleur.listProjectiles().get(i).getX() < 800) {
-
-		controleur.listProjectiles().get(i).mouvement2D();
-		controleur.listProjectiles().get(0).setX((int) Math.round(controleur.getXf()));
-		controleur.listProjectiles().get(0).setY((int) Math.round(540 - controleur.getYf()));
-
 	    }
 	}
-	System.out.println(t);
-//                else{t=0;
-//                pan.setYo(0);
-//                pan.setV(pan.getV());
-//                pan.setAngle(pan.getAngle());
-//                pan.setXo(0);
-//                pan.setXf(0);
-//                pan.setYf(0);
-//                }
-
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+
 	bg.draw();
 	for (int i = 0; i < listImagesProjectiles.size(); i++) {
 	    listImagesProjectiles.get(i).draw((int) (controleur.positionProjectileX(i)), (int) (controleur.positionProjectileY(i)));
