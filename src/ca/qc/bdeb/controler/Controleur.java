@@ -36,11 +36,11 @@ public class Controleur {
 	module.getListProjectiles().add(new Projectiles(x, y, this));
     }
     
-    public int positionProjectileX(int i){
+    public double positionProjectileX(int i){
 	return module.getListProjectiles().get(i).getX();
     }
     
-    public int positionProjectileY(int i){
+    public double positionProjectileY(int i){
 	return module.getListProjectiles().get(i).getY();
     }
     
@@ -62,7 +62,6 @@ public class Controleur {
     boolean haut = true;
 
     public void mouvement2D(double t) {
-
 
 	anglerad = angle * Math.PI / 180;//conversion en rad
 

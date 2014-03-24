@@ -67,9 +67,9 @@ public class EngineScreen extends BasicGameState {
 	}
 
 	// On met à jour à chaque seconde
-	
+	t = t + 0.1;
 	for (int i = 0; i < listImagesProjectiles.size(); i++) {
-	    t = t + 0.1;
+	    
 
 	    if (controleur.getYf() < -1 || controleur.getYf() > 851) {
 		if (controleur.getYf() < -1) {
