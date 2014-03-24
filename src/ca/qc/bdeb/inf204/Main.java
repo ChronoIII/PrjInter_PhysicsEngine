@@ -16,11 +16,11 @@ public class Main {
 
     //Screen propriétées
     static int width = 800;
-    static int height = 600;
+    static int height = 600;      
     static boolean fullscreen = false;
     static boolean showFPS = true;
     static int fpslimit = 60;
-    static String title = "game test";
+    static String title = "game test"; 
     
     static Controleur controleur;
 
