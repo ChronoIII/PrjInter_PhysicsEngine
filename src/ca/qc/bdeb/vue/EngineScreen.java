@@ -7,7 +7,7 @@ package ca.qc.bdeb.vue;
 import ca.qc.bdeb.controler.Controleur;
 import ca.qc.bdeb.module.Module;
 import java.util.ArrayList;
-import net.java.games.input.Mouse;
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
@@ -77,11 +77,11 @@ public class EngineScreen extends BasicGameState {
 	    angle += ca; 
 	}
 	if(a.isKeyPressed(Input.KEY_SPACE)){
-	    controleur.addProjectile(0, 0, f, angle);
+	    controleur.addProjectile(0, 0, f, 90);
 	    f = 0;
 	    angle = 0;
 	}
-
+	
 	if (a.isKeyPressed(Input.KEY_1)) {
 
 	    if (!controleur.listProjectiles().isEmpty()) {
@@ -149,6 +149,7 @@ public class EngineScreen extends BasicGameState {
 	g.drawOval(150, 13, 50, 50);
 	g.drawString("force: "+f, 300, 100);
 	g.drawString("angle: "+angle, 300, 150);
+	g.drawString(""+Mouse.getX()+", "+Mouse.getY(), 300, 200);
     }
 
     @Override
