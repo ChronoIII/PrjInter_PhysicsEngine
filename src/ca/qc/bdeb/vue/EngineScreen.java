@@ -59,7 +59,8 @@ public class EngineScreen extends BasicGameState {
 //	    addImage(controleur.listProjectiles().get(controleur.listProjectiles().size() - 1).getNomImg());
 //	}
 
-	if (a.isKeyPressed(Input.KEY_SPACE)) {
+
+	if (a.isMousePressed(0)) {
 	    controleur.addProjectile(0, 0, 0, 0);
 	}
 
