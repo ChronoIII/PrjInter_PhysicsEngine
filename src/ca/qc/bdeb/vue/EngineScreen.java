@@ -120,15 +120,12 @@ public class EngineScreen extends BasicGameState {
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-
 	bg.draw();
 	for (int i = 0; i < listImagesProjectiles.size(); i++) {
 	    listImagesProjectiles.get(i).draw((int) (controleur.positionProjectileX(i)), (int) (controleur.positionProjectileY(i)));
 	}
 	for (int i = 0; i < listImagesStructures.size(); i++) {
 	}
-
-
     }
 
     @Override

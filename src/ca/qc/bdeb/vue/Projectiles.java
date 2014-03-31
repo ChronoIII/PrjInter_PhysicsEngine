@@ -39,28 +39,45 @@ public class Projectiles implements Affichable {
 	controleur.enleverProjectile(this);
     }
 
-    public void mouvement2D() {
-
-	anglerad = angle * Math.PI / 180;//conversion en rad
-
-	if (haut) {
-	    vyi = v * Math.sin(anglerad);//vitesse en y
-	} else {
-	    vyi = v * Math.sin(anglerad - Math.PI);
-	}//vitesse en y
-
-	if (droite) {
-	    vxi = v * Math.cos(anglerad);//vitesse en x
-	} else {
-	    vxi = v * Math.cos(anglerad - Math.PI);//vitesse en x
-	}
-
-	y = 500 - (yo + vyi * tempsProjectile + (-9.8 * Math.pow(tempsProjectile, 2) / 2)); //position de y pour chaque valeur de t
-	x = (xo + vxi * tempsProjectile);//position en x pour chaque valeur de t
-    }
+//    public void mouvement2D() {
+//
+//	anglerad = angle * Math.PI / 180;//conversion en rad
+//
+//	if (haut) {
+//	    vyi = v * Math.sin(anglerad);//vitesse en y
+//	} else {
+//	    vyi = v * Math.sin(anglerad - Math.PI);
+//	}//vitesse en y
+//
+//	if (droite) {
+//	    vxi = v * Math.cos(anglerad);//vitesse en x
+//	} else {
+//	    vxi = v * Math.cos(anglerad - Math.PI);//vitesse en x
+//	}
+//
+//	y = 500 - (yo + vyi * tempsProjectile + (-9.8 * Math.pow(tempsProjectile, 2) / 2)); //position de y pour chaque valeur de t
+//	x = (xo + vxi * tempsProjectile);//position en x pour chaque valeur de t
+//    }
 
     //getter and setter
-    public void setX(int x) {
+    
+    public double getAngle() {
+	return angle;
+    }
+
+    public void setAngle(double angle) {
+	this.angle = angle;
+    }
+
+    public double getAnglerad() {
+	return anglerad;
+    }
+
+    public void setAnglerad(double anglerad) {
+	this.anglerad = anglerad;
+    }
+    
+    public void setX(double x) {
 	this.x = x;
     }
 
