@@ -7,12 +7,13 @@ package ca.qc.bdeb.vue;
 import ca.qc.bdeb.controler.Controleur;
 import ca.qc.bdeb.module.Module;
 import java.util.ArrayList;
-<<<<<<< HEAD
+
+
 import java.util.Random;
-import net.java.games.input.Mouse;
-=======
+
+
 import org.lwjgl.input.Mouse;
->>>>>>> f5c53fbf3033780fd35e5258779b3e2118840902
+
 import org.newdawn.slick.*;
 import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.gui.AbstractComponent;
@@ -34,17 +35,11 @@ public class EngineScreen extends BasicGameState {
     private Image catapule;
     private Image bg;
     double t = 0;
-<<<<<<< HEAD
-    Random rand = new Random();
-    //----------------//
     TextField textfield;
-
-=======
     double f = 0;
     double c = 1;
     double ca = 1;
     double angle = 0;
->>>>>>> f5c53fbf3033780fd35e5258779b3e2118840902
 
     public EngineScreen(int state, Controleur controleur) throws SlickException {
         this.state = state;
@@ -92,39 +87,30 @@ public class EngineScreen extends BasicGameState {
 //	if (controleur.listProjectiles().size() != listImageProjectiles.size()) {
 //	    addImage(controleur.listProjectiles().get(controleur.listProjectiles().size() - 1).getNomImg());
 //	}
-       
 
-<<<<<<< HEAD
 
+
+        if (a.isKeyDown(Input.KEY_F)) {
+            if (f > 600 || f < 0) {
+                c *= -1;
+            }
+            f += c;
+        }
+
+        if (a.isKeyDown(Input.KEY_A)) {
+            if (angle > 90 || angle < 0) {
+                ca *= -1;
+            }
+            angle += ca;
+        }
         if (a.isKeyPressed(Input.KEY_SPACE)) {
-            int vit = rand.nextInt(40) + 60;
-            int angle = rand.nextInt(60) + 30;
-            controleur.addProjectile(0, 0, vit, angle);
+            controleur.addProjectile(0, 0, f, 90);
+            f = 0;
+            angle = 0;
         }
 
         if (a.isKeyPressed(Input.KEY_1)) {
-=======
-	if (a.isKeyDown(Input.KEY_F)) {
-	    if(f > 600 || f < 0 ){
-		c *= -1;
-	    }
-	    f += c; 
-	}
-	
-	if (a.isKeyDown(Input.KEY_A)) {
-	    if(angle > 90 || angle < 0 ){
-		ca *= -1;
-	    }
-	    angle += ca; 
-	}
-	if(a.isKeyPressed(Input.KEY_SPACE)){
-	    controleur.addProjectile(0, 0, f, 90);
-	    f = 0;
-	    angle = 0;
-	}
-	
-	if (a.isKeyPressed(Input.KEY_1)) {
->>>>>>> f5c53fbf3033780fd35e5258779b3e2118840902
+
 
             if (!controleur.listProjectiles().isEmpty()) {
 
@@ -181,7 +167,6 @@ public class EngineScreen extends BasicGameState {
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-<<<<<<< HEAD
 
         bg.draw();
         for (int i = 0; i < listImagesProjectiles.size(); i++) {
@@ -189,21 +174,12 @@ public class EngineScreen extends BasicGameState {
         }
         for (int i = 0; i < listImagesStructures.size(); i++) {
         }
+        g.drawOval(90, 10, 50, 50);
+        g.drawOval(150, 13, 50, 50);
+        g.drawString("force: " + f, 300, 100);
+        g.drawString("angle: " + angle, 300, 150);
+        g.drawString("" + Mouse.getX() + ", " + Mouse.getY(), 300, 200);
         textfield.render(gc, g);
-
-=======
-	bg.draw();
-	for (int i = 0; i < listImagesProjectiles.size(); i++) {
-	    listImagesProjectiles.get(i).draw((int) (controleur.positionProjectileX(i)), (int) (controleur.positionProjectileY(i)));
-	}
-	for (int i = 0; i < listImagesStructures.size(); i++) {
-	}
-	g.drawOval(90, 10, 50, 50);
-	g.drawOval(150, 13, 50, 50);
-	g.drawString("force: "+f, 300, 100);
-	g.drawString("angle: "+angle, 300, 150);
-	g.drawString(""+Mouse.getX()+", "+Mouse.getY(), 300, 200);
->>>>>>> f5c53fbf3033780fd35e5258779b3e2118840902
     }
 
     @Override
