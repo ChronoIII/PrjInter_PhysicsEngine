@@ -25,6 +25,10 @@ public class EngineScreen extends BasicGameState {
     private Image catapule;
     private Image bg;
     double t = 0;
+    double f = 0;
+    double c = 1;
+    double ca = 1;
+    double angle = 0;
 
     public EngineScreen(int state, Controleur controleur) throws SlickException {
 	this.state = state;
@@ -59,8 +63,23 @@ public class EngineScreen extends BasicGameState {
 //	    addImage(controleur.listProjectiles().get(controleur.listProjectiles().size() - 1).getNomImg());
 //	}
 
-	if (a.isKeyPressed(Input.KEY_SPACE)) {
-	    controleur.addProjectile(0, 0, 100, 45);
+	if (a.isKeyDown(Input.KEY_F)) {
+	    if(f > 600 || f < 0 ){
+		c *= -1;
+	    }
+	    f += c; 
+	}
+	
+	if (a.isKeyDown(Input.KEY_A)) {
+	    if(angle > 90 || angle < 0 ){
+		ca *= -1;
+	    }
+	    angle += ca; 
+	}
+	if(a.isKeyPressed(Input.KEY_SPACE)){
+	    controleur.addProjectile(0, 0, f, angle);
+	    f = 0;
+	    angle = 0;
 	}
 
 	if (a.isKeyPressed(Input.KEY_1)) {
@@ -126,8 +145,10 @@ public class EngineScreen extends BasicGameState {
 	}
 	for (int i = 0; i < listImagesStructures.size(); i++) {
 	}
-	g.drawRect(10, 80, 90, 30);
-	g.drawRect(100, 60, 90, 140);
+	g.drawOval(90, 10, 50, 50);
+	g.drawOval(150, 13, 50, 50);
+	g.drawString("force: "+f, 300, 100);
+	g.drawString("angle: "+angle, 300, 150);
     }
 
     @Override
