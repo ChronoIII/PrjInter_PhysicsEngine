@@ -19,7 +19,8 @@ public class Projectiles implements Affichable {
     private double x, y;
     private Controleur controleur;
     private double tempsProjectile = 0;
-    double v, angle, anglerad, vxi, vyi, yo, xo, y1, y2;
+    double v, angle, anglerad;
+    double vxi, vyi, yo, xo;
     boolean droite = true;
     boolean haut = true;
 
@@ -107,21 +108,21 @@ public class Projectiles implements Affichable {
 	this.xo = xo;
     }
 
-    public double getY1() {
-	return y1;
-    }
-
-    public void setY1(double y1) {
-	this.y1 = y1;
-    }
-
-    public double getY2() {
-	return y2;
-    }
-
-    public void setY2(double y2) {
-	this.y2 = y2;
-    }
+//    public double getY1() {
+//	return y1;
+//    }
+//
+//    public void setY1(double y1) {
+//	this.y1 = y1;
+//    }
+//
+//    public double getY2() {
+//	return y2;
+//    }
+//
+//    public void setY2(double y2) {
+//	this.y2 = y2;
+//    }
 
     public double getTempsProjectile() {
 	return tempsProjectile;
