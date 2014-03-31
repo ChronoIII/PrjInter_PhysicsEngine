@@ -60,7 +60,7 @@ public class EngineScreen extends BasicGameState {
 //	}
 
 	if (a.isKeyPressed(Input.KEY_SPACE)) {
-	    controleur.addProjectile(0, 0, 0, 0);
+	    controleur.addProjectile(0, 0, 100, 45);
 	}
 
 	if (a.isKeyPressed(Input.KEY_1)) {
@@ -126,6 +126,8 @@ public class EngineScreen extends BasicGameState {
 	}
 	for (int i = 0; i < listImagesStructures.size(); i++) {
 	}
+	g.drawRect(10, 80, 90, 30);
+	g.drawRect(100, 60, 90, 140);
     }
 
     @Override

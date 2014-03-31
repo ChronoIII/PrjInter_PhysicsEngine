@@ -58,7 +58,7 @@ public class Controleur {
     
     public void bougerProjectile() {
 	for (int i = 0; i < module.getListProjectiles().size(); i++) {
-	    listProjectiles().get(i).mouvement2D();
+	    module.mouvement2D(listProjectiles().get(i));
 	}
     }
     
