@@ -52,7 +52,7 @@ public class EngineScreen extends BasicGameState {
         Input a = gc.getInput();
         listImagesProjectiles = new ArrayList<Image>();
         listImagesStructures = new ArrayList<Image>();
-        bg = new Image("bg.jpg");
+        bg = new Image("prototype.jpg");
 //	controleur.addProjectile(x, y);
 //	c = new Ennemie(controleur);
 
@@ -104,7 +104,7 @@ public class EngineScreen extends BasicGameState {
             angle += ca;
         }
         if (a.isKeyPressed(Input.KEY_SPACE)) {
-            controleur.addProjectile(0, 0, f, 90);
+            controleur.addProjectile(0, 0, f, angle);
             f = 0;
             angle = 0;
         }
@@ -143,10 +143,10 @@ public class EngineScreen extends BasicGameState {
 
 
             //confition mur
-            if (controleur.listProjectiles().get(i).getX() < -1 || controleur.listProjectiles().get(i).getX() > 700) {
+            if (controleur.listProjectiles().get(i).getX() < -1 || controleur.listProjectiles().get(i).getX() > 1100) {
                 System.out.println(controleur.listProjectiles().get(i).getX());
-                if (controleur.listProjectiles().get(i).getX() > 700) {
-                    controleur.listProjectiles().get(i).setXo(699);
+                if (controleur.listProjectiles().get(i).getX() > 1100) {
+                    controleur.listProjectiles().get(i).setXo(1099);
                 } else {
                     controleur.listProjectiles().get(i).setXo(0);
                 }
@@ -160,7 +160,7 @@ public class EngineScreen extends BasicGameState {
                 controleur.listProjectiles().get(i).setTempsProjectile(0);
             }
 
-            if (controleur.listProjectiles().get(i).getY() > -50 && controleur.listProjectiles().get(i).getX() < 800) {
+            if (controleur.listProjectiles().get(i).getY() > -50 && controleur.listProjectiles().get(i).getX() < 1200) {
                 controleur.bougerProjectile();
             }
         }
