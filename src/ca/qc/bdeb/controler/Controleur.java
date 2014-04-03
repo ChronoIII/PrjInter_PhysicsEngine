@@ -81,18 +81,13 @@ public class Controleur {
 //	    vyi = v * Math.sin(anglerad - Math.PI);
 //	}//vitesse en y
 //
-//	
-//	
+
 //	if (droite) {
 //	    vxi = v * Math.cos(anglerad);//vitesse en x
 //	} else {
 //	    vxi = v * Math.cos(anglerad - Math.PI);//vitesse en x
 //	}
-//	
-//	
-//	
-//	
-//	
+
 //	yf = yo + vyi * t + (-9.8 * Math.pow(t, 2) / 2); //position de y pour chaque valeur de t
 //	xf = xo + vxi * t;//position en x pour chaque valeur de t
 //    }
