@@ -41,6 +41,7 @@ public class EngineScreen extends BasicGameState {
     double ca = 1;
     double angle = 0;
 
+
     public EngineScreen(int state, Controleur controleur) throws SlickException {
         this.state = state;
         this.controleur = controleur;
@@ -52,7 +53,8 @@ public class EngineScreen extends BasicGameState {
         Input a = gc.getInput();
         listImagesProjectiles = new ArrayList<Image>();
         listImagesStructures = new ArrayList<Image>();
-        bg = new Image("prototype.jpg");
+        bg = new Image("blackscreen.jpg");
+       
 //	controleur.addProjectile(x, y);
 //	c = new Ennemie(controleur);
 
@@ -63,16 +65,12 @@ public class EngineScreen extends BasicGameState {
         textfield.setBackgroundColor(Color.white);
         textfield.setTextColor(Color.black);
 
-
-
-
-
-
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
         Input a = gc.getInput();
-
+      
+//        else{buttonPlay=new Image("button.png");}
         if (controleur.getNouvelleItemAffichable() != null) {
             switch (controleur.getNouvelleItemAffichable().getNomImg()) {
                 case "bird.png":
@@ -169,6 +167,7 @@ public class EngineScreen extends BasicGameState {
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 
         bg.draw();
+        
         for (int i = 0; i < listImagesProjectiles.size(); i++) {
             listImagesProjectiles.get(i).draw((int) (controleur.positionProjectileX(i)), (int) (controleur.positionProjectileY(i)));
         }
