@@ -36,6 +36,7 @@ public class Vue extends StateBasedGame {
 //	this.enterState(controleur.getEngineScreen());
         this.getState(controleur.getMenu()).init(gc, this);
         this.enterState(controleur.getMenu());
+        
        
     }
 }

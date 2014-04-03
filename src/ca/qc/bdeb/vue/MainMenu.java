@@ -23,6 +23,7 @@ public class MainMenu extends BasicGameState {
     private Image buttonCreate;
     private Image buttonSettings;
     private Image introPhoto;
+    private Music introMusic;
 
     public MainMenu(int state, Controleur controleur) throws SlickException {
         this.state = state;
@@ -36,21 +37,28 @@ public class MainMenu extends BasicGameState {
         buttonPlay = new Image("buttonsp.jpg");
         buttonCreate = new Image("buttons.jpg");
         buttonSettings = new Image("buttons.jpg");
+        introMusic = new Music("ymIntro.wav");
+        introMusic.loop();
+        introMusic.setVolume(0.25f);
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
         Input a = gc.getInput();
+        
         int posX = Mouse.getX();
         int posY = Mouse.getY();
         if ((posX > 795 && posX < 1168) && (posY > 182 && posY < 225)) {
             if (gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                 buttonPlay = new Image("buttons - Copy.jpg");
                 System.out.println("got clicked buddy!");
+                introMusic.stop();
                 sbg.enterState(1);
             } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                 buttonPlay = new Image("buttonsp.jpg");
+               
             }
         }
+
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {

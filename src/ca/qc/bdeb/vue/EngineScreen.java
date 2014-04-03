@@ -40,6 +40,7 @@ public class EngineScreen extends BasicGameState {
     double c = 1;
     double ca = 1;
     double angle = 0;
+    private Music musiqueJeuPlay;
 
 
     public EngineScreen(int state, Controleur controleur) throws SlickException {
@@ -55,6 +56,9 @@ public class EngineScreen extends BasicGameState {
         listImagesStructures = new ArrayList<Image>();
         bg = new Image("blackscreen.jpg");
        
+
+
+
 //	controleur.addProjectile(x, y);
 //	c = new Ennemie(controleur);
 
@@ -69,7 +73,8 @@ public class EngineScreen extends BasicGameState {
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
         Input a = gc.getInput();
-      
+        
+
 //        else{buttonPlay=new Image("button.png");}
         if (controleur.getNouvelleItemAffichable() != null) {
             switch (controleur.getNouvelleItemAffichable().getNomImg()) {
@@ -117,6 +122,12 @@ public class EngineScreen extends BasicGameState {
             if (controleur.listProjectiles().isEmpty()) {
             }
         }
+        if (a.isKeyDown(Input.KEY_M)) {
+           
+            sbg.enterState(0);
+           
+        }
+
         // On met à jour à chaque seconde
         controleur.avancerTemps();
         for (int i = 0; i < listImagesProjectiles.size(); i++) {
@@ -167,7 +178,7 @@ public class EngineScreen extends BasicGameState {
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 
         bg.draw();
-        
+
         for (int i = 0; i < listImagesProjectiles.size(); i++) {
             listImagesProjectiles.get(i).draw((int) (controleur.positionProjectileX(i)), (int) (controleur.positionProjectileY(i)));
         }
