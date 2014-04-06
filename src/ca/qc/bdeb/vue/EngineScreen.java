@@ -40,6 +40,8 @@ public class EngineScreen extends BasicGameState {
     double c = 1;
     double ca = 1;
     double angle = 0;
+    private Music musiqueJeuPlay;
+
 
     public EngineScreen(int state, Controleur controleur) throws SlickException {
         this.state = state;
@@ -52,7 +54,11 @@ public class EngineScreen extends BasicGameState {
         Input a = gc.getInput();
         listImagesProjectiles = new ArrayList<Image>();
         listImagesStructures = new ArrayList<Image>();
-        bg = new Image("bg.jpg");
+        bg = new Image("blackscreen.jpg");
+       
+
+
+
 //	controleur.addProjectile(x, y);
 //	c = new Ennemie(controleur);
 
@@ -63,16 +69,13 @@ public class EngineScreen extends BasicGameState {
         textfield.setBackgroundColor(Color.white);
         textfield.setTextColor(Color.black);
 
-
-
-
-
-
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
         Input a = gc.getInput();
+        
 
+//        else{buttonPlay=new Image("button.png");}
         if (controleur.getNouvelleItemAffichable() != null) {
             switch (controleur.getNouvelleItemAffichable().getNomImg()) {
                 case "bird.png":
@@ -119,6 +122,12 @@ public class EngineScreen extends BasicGameState {
             if (controleur.listProjectiles().isEmpty()) {
             }
         }
+        if (a.isKeyDown(Input.KEY_M)) {
+           
+            sbg.enterState(0);
+           
+        }
+
         // On met à jour à chaque seconde
         controleur.avancerTemps();
         for (int i = 0; i < listImagesProjectiles.size(); i++) {
@@ -143,10 +152,10 @@ public class EngineScreen extends BasicGameState {
 
 
             //confition mur
-            if (controleur.listProjectiles().get(i).getX() < -1 || controleur.listProjectiles().get(i).getX() > 700) {
+            if (controleur.listProjectiles().get(i).getX() < -1 || controleur.listProjectiles().get(i).getX() > 1100) {
                 System.out.println(controleur.listProjectiles().get(i).getX());
-                if (controleur.listProjectiles().get(i).getX() > 700) {
-                    controleur.listProjectiles().get(i).setXo(699);
+                if (controleur.listProjectiles().get(i).getX() > 1100) {
+                    controleur.listProjectiles().get(i).setXo(1099);
                 } else {
                     controleur.listProjectiles().get(i).setXo(0);
                 }
@@ -160,7 +169,7 @@ public class EngineScreen extends BasicGameState {
                 controleur.listProjectiles().get(i).setTempsProjectile(0);
             }
 
-            if (controleur.listProjectiles().get(i).getY() > -50 && controleur.listProjectiles().get(i).getX() < 800) {
+            if (controleur.listProjectiles().get(i).getY() > -50 && controleur.listProjectiles().get(i).getX() < 1200) {
                 controleur.bougerProjectile();
             }
         }
@@ -169,6 +178,7 @@ public class EngineScreen extends BasicGameState {
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 
         bg.draw();
+
         for (int i = 0; i < listImagesProjectiles.size(); i++) {
             listImagesProjectiles.get(i).draw((int) (controleur.positionProjectileX(i)), (int) (controleur.positionProjectileY(i)));
         }

@@ -15,8 +15,8 @@ import org.newdawn.slick.state.*;
 public class Main {
 
     //Screen propriétées
-    static int width = 800;
-    static int height = 600;      
+    static int width = 1200;
+    static int height = 675;      
     static boolean fullscreen = false;
     static boolean showFPS = true;
     static int fpslimit = 60;

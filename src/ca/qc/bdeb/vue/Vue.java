@@ -31,8 +31,12 @@ public class Vue extends StateBasedGame {
 
     @Override
     public void initStatesList(GameContainer gc) throws SlickException {
-	this.getState(controleur.getMenu()).init(gc, this);
+	
 	this.getState(controleur.getEngineScreen()).init(gc, this);
-	this.enterState(controleur.getEngineScreen());
+//	this.enterState(controleur.getEngineScreen());
+        this.getState(controleur.getMenu()).init(gc, this);
+        this.enterState(controleur.getMenu());
+        
+       
     }
 }
