@@ -104,7 +104,7 @@ public class EngineScreen extends BasicGameState {
             angle += ca;
         }
         if (a.isKeyPressed(Input.KEY_SPACE)) {
-            controleur.addProjectile(0, 0, f, 90);
+            controleur.addProjectile(0, 0, f, angle);
             f = 0;
             angle = 0;
         }
