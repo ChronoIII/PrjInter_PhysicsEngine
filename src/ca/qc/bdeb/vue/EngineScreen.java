@@ -51,6 +51,10 @@ public class EngineScreen extends BasicGameState {
     private Image buttonLoad;
     private Image buttonPlay;
     private Image buttonPause;
+    private Image buttonExit;
+    private Image roue;
+    private Image canon;
+    private float lol = 90;
 
     public EngineScreen(int state, Controleur controleur) throws SlickException {
         this.state = state;
@@ -63,19 +67,23 @@ public class EngineScreen extends BasicGameState {
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         Input a = gc.getInput();
         projsheet = new SpriteSheet("animation.png", 93, 75);
-        projtest = new Animation(projsheet, 500);
+        projtest = new Animation(projsheet, 250);
         listImagesProjectiles = new ArrayList<Image>();
         listImagesStructures = new ArrayList<Image>();
         bg = new Image("background.jpg");
 
-        buttonInventaire = new Image("little_baby.jpg");
-        buttonInventaire2 = new Image("little_baby.jpg");
-        buttonSettings = new Image("little_baby.jpg");
-        buttonSave = new Image("little_baby.jpg");
-        buttonLoad = new Image("little_baby.jpg");
-        buttonPlay = new Image("little_baby.jpg");
-        buttonPause = new Image("little_baby.jpg");
+        buttonInventaire = new Image("inventory.png");
+        buttonInventaire2 = new Image("inventory2.png");
+        buttonSettings = new Image("settings2.png");
+        buttonSave = new Image("save.png");
+        buttonLoad = new Image("load.png");
+        buttonPlay = new Image("play.png");
+        buttonPause = new Image("pause.png");
+        buttonExit = new Image("exit.png");
 
+        roue = new Image("wheel.png");
+        canon = new Image("canon.png");
+//        canon.rotate(280);
 //        musiqueJeuPlay = new Music("gamemusic.wav");
 
 //        musiqueJeuPlay.loop();
@@ -94,7 +102,8 @@ public class EngineScreen extends BasicGameState {
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
         Input a = gc.getInput();
-
+        int posX = Mouse.getX();
+        int posY = Mouse.getY();
 
 //        else{buttonPlay=new Image("button.png");}
         if (controleur.getNouvelleItemAffichable() != null) {
@@ -112,7 +121,17 @@ public class EngineScreen extends BasicGameState {
 //	    addImage(controleur.listProjectiles().get(controleur.listProjectiles().size() - 1).getNomImg());
 //	}
 
+        if ((posX > 1110 && posX < 1110+76) && (posY > 670-63 && posY <670 )) {
+            if (gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+//                buttonPlay = new Image("buttons - Copy.jpg");
+                System.out.println("got clicked buddy!");
+//                introMusic.stop();
+                sbg.enterState(0);
+            } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+//                buttonPlay = new Image("buttonsp.jpg");
 
+            }
+        }
 
         if (a.isKeyDown(Input.KEY_F)) {
             if (f > 600 || f < 0) {
@@ -200,6 +219,7 @@ public class EngineScreen extends BasicGameState {
 
         bg.draw();
 
+
         for (int i = 0; i < listImagesProjectiles.size(); i++) {
             listImagesProjectiles.get(i).draw((int) (controleur.positionProjectileX(i)), (int) (controleur.positionProjectileY(i)));
         }
@@ -212,6 +232,16 @@ public class EngineScreen extends BasicGameState {
         g.drawString("" + Mouse.getX() + ", " + Mouse.getY(), 300, 200);
         textfield.render(gc, g);
         projtest.draw(100, 100);
+        buttonInventaire.draw(10, 600);
+        buttonPlay.draw(100, 600);
+        buttonExit.draw(1110, 5);
+        buttonSettings.draw(1110, 600);
+        buttonLoad.draw((1110 - 90), 600);
+        buttonSave.draw((1110 - 180), 600);
+
+        canon.draw(85, 490);
+
+        roue.draw(70, 506);
     }
 
     @Override
