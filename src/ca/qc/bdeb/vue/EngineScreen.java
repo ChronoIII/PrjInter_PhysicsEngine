@@ -41,39 +41,60 @@ public class EngineScreen extends BasicGameState {
     double ca = 1;
     double angle = 0;
     private Music musiqueJeuPlay;
-
+    private Animation projtest;
+    private SpriteSheet projsheet;
+    //------buttons----//
+    private Image buttonInventaire;
+    private Image buttonInventaire2;
+    private Image buttonSettings;
+    private Image buttonSave;
+    private Image buttonLoad;
+    private Image buttonPlay;
+    private Image buttonPause;
 
     public EngineScreen(int state, Controleur controleur) throws SlickException {
         this.state = state;
         this.controleur = controleur;
         this.modele = modele;
 
+
     }
 
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         Input a = gc.getInput();
+        projsheet = new SpriteSheet("animation.png", 93, 75);
+        projtest = new Animation(projsheet, 500);
         listImagesProjectiles = new ArrayList<Image>();
         listImagesStructures = new ArrayList<Image>();
-        bg = new Image("blackscreen.jpg");
-       
+        bg = new Image("background.jpg");
 
+        buttonInventaire = new Image("little_baby.jpg");
+        buttonInventaire2 = new Image("little_baby.jpg");
+        buttonSettings = new Image("little_baby.jpg");
+        buttonSave = new Image("little_baby.jpg");
+        buttonLoad = new Image("little_baby.jpg");
+        buttonPlay = new Image("little_baby.jpg");
+        buttonPause = new Image("little_baby.jpg");
 
+//        musiqueJeuPlay = new Music("gamemusic.wav");
 
+//        musiqueJeuPlay.loop();
 //	controleur.addProjectile(x, y);
 //	c = new Ennemie(controleur);
 
 
 
-        textfield = new TextField(gc, gc.getDefaultFont(), 500, 500, 200, 20);
+        textfield = new TextField(gc, gc.getDefaultFont(), 5, 11, 200, 30);
         textfield.setBorderColor(Color.black);
         textfield.setBackgroundColor(Color.white);
         textfield.setTextColor(Color.black);
+        textfield.setText("Score:");
 
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
         Input a = gc.getInput();
-        
+
 
 //        else{buttonPlay=new Image("button.png");}
         if (controleur.getNouvelleItemAffichable() != null) {
@@ -123,9 +144,9 @@ public class EngineScreen extends BasicGameState {
             }
         }
         if (a.isKeyDown(Input.KEY_M)) {
-           
+
             sbg.enterState(0);
-           
+
         }
 
         // On met à jour à chaque seconde
@@ -190,6 +211,7 @@ public class EngineScreen extends BasicGameState {
         g.drawString("angle: " + angle, 300, 150);
         g.drawString("" + Mouse.getX() + ", " + Mouse.getY(), 300, 200);
         textfield.render(gc, g);
+        projtest.draw(100, 100);
     }
 
     @Override
