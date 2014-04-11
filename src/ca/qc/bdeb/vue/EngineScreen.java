@@ -67,28 +67,14 @@ public class EngineScreen extends BasicGameState {
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-	Input a = gc.getInput();
+	// On met à jour à chaque seconde
+	controleur.avancerTemps();
+	
+	
+	Input Key = gc.getInput();
 
-
-//        else{buttonPlay=new Image("button.png");}
-	if (controleur.getNouvelleItemAffichable() != null) {
-	    switch (controleur.getNouvelleItemAffichable().getNomImg()) {
-		case "bird.png":
-		    addImageProjectiles(controleur.getNouvelleItemAffichable().getNomImg());
-		    break;
-		case "Sans titre.png":
-		    addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
-		    break;
-	    }
-	    controleur.setNouvelleItemAffichable(null);
-	}
-//	if (controleur.listProjectiles().size() != listImageProjectiles.size()) {
-//	    addImage(controleur.listProjectiles().get(controleur.listProjectiles().size() - 1).getNomImg());
-//	}
-
-
-
-	if (a.isKeyDown(Input.KEY_SPACE)) {
+	//key input
+	if (Key.isKeyDown(Input.KEY_SPACE)) {
 	    if (f > 600 || f < 0) {
 		c *= -1;
 	    }
@@ -101,14 +87,14 @@ public class EngineScreen extends BasicGameState {
 	    }
 	}
 
-	if (a.isKeyDown(Input.KEY_A)) {
+	if (Key.isKeyDown(Input.KEY_A)) {
 	    if (angle > 90 || angle < 0) {
 		ca *= -1;
 	    }
 	    angle += ca;
 	}
 
-	if (a.isKeyPressed(Input.KEY_1)) {
+	if (Key.isKeyPressed(Input.KEY_1)) {
 
 
 	    if (!controleur.listProjectiles().isEmpty()) {
@@ -118,15 +104,28 @@ public class EngineScreen extends BasicGameState {
 	    if (controleur.listProjectiles().isEmpty()) {
 	    }
 	}
-	if (a.isKeyDown(Input.KEY_M)) {
+	if (Key.isKeyDown(Input.KEY_M)) {
 
 	    sbg.enterState(0);
 	}
+	
+	//fin key input
+	
+	//nouvelle image
+	if (controleur.getNouvelleItemAffichable() != null) {
+	    switch (controleur.getNouvelleItemAffichable().getNomImg()) {
+		case "bird.png":
+		    addImageProjectiles(controleur.getNouvelleItemAffichable().getNomImg());
+		    break;
+		case "Sans titre.png":
+		    addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
+		    break;
+	    }
+	    controleur.setNouvelleItemAffichable(null);
+	}
 
-	// On met à jour à chaque seconde
-	controleur.avancerTemps();
+	//mouvement
 	for (int i = 0; i < listImagesProjectiles.size(); i++) {
-
 
 	    //condition sol et plafond
 	    if (controleur.listProjectiles().get(i).getY() < -1 || controleur.listProjectiles().get(i).getY() > 500) {
@@ -140,9 +139,8 @@ public class EngineScreen extends BasicGameState {
 		controleur.listProjectiles().get(i).setHaut(!controleur.listProjectiles().get(i).isHaut());
 
 		controleur.listProjectiles().get(i).setV(controleur.listProjectiles().get(i).getV() * 0.82);
-//         JOptionPane.showMessageDialog(null, pan.getV());
+		
 		controleur.listProjectiles().get(i).setTempsProjectile(0);
-//		System.out.println(0);
 	    }
 
 
@@ -160,7 +158,7 @@ public class EngineScreen extends BasicGameState {
 		controleur.listProjectiles().get(i).setDroite(!controleur.listProjectiles().get(i).isDroite());
 
 		controleur.listProjectiles().get(i).setV(controleur.listProjectiles().get(i).getV() * 0.82);
-//         JOptionPane.showMessageDialog(null, pan.getV());
+		
 		controleur.listProjectiles().get(i).setTempsProjectile(0);
 	    }
 
@@ -168,6 +166,7 @@ public class EngineScreen extends BasicGameState {
 		controleur.bougerProjectile();
 	    }
 	}
+	//fin mouvement
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
@@ -178,7 +177,12 @@ public class EngineScreen extends BasicGameState {
 	    listImagesProjectiles.get(i).draw((int) (controleur.positionProjectileX(i)), (int) (controleur.positionProjectileY(i)));
 	}
 	for (int i = 0; i < listImagesStructures.size(); i++) {
+	    listImagesStructures.get(i).draw((int) (controleur.positionStructureX(i)), (int) (controleur.positionStructureY(i)));
 	}
+
+
+
+
 	g.drawOval(90, 10, 50, 50);
 	g.drawOval(150, 13, 50, 50);
 	g.drawString("force: " + f, 300, 100);
