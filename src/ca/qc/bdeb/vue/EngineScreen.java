@@ -88,7 +88,7 @@ public class EngineScreen extends BasicGameState {
 
 
 
-	if (a.isKeyDown(Input.KEY_F)) {
+	if (a.isKeyDown(Input.KEY_SPACE)) {
 	    if (f > 600 || f < 0) {
 		c *= -1;
 	    }
@@ -106,11 +106,6 @@ public class EngineScreen extends BasicGameState {
 		ca *= -1;
 	    }
 	    angle += ca;
-	}
-	if (a.isKeyPressed(Input.KEY_SPACE)) {
-	    controleur.addProjectile(0, 0, f, angle);
-	    f = 0;
-	    angle = 0;
 	}
 
 	if (a.isKeyPressed(Input.KEY_1)) {
