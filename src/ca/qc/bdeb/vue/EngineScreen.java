@@ -81,9 +81,10 @@ public class EngineScreen extends BasicGameState {
 	    f += c;
 	} else {
 	    if (f != 0) {
+		angle = Math.toDegrees(Math.atan(Math.toRadians((double) 100 + Mouse.getY()/Mouse.getX())));
+		System.out.println(""+angle );
 		controleur.addProjectile(0, 0, f, angle);
 		f = 0;
-		angle = 0;
 	    }
 	}
 
@@ -181,8 +182,8 @@ public class EngineScreen extends BasicGameState {
 	}
 
 
-
-
+//	g.setColor(Color.white);
+//	g.fillRect(0, 500, 800, 200);
 	g.drawOval(90, 10, 50, 50);
 	g.drawOval(150, 13, 50, 50);
 	g.drawString("force: " + f, 300, 100);
