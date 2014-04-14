@@ -26,6 +26,8 @@ public class Projectiles implements Affichable {
     public Projectiles(int x, int y, double v, double angle, Controleur controleur) throws SlickException {
 	this.x = x;
 	this.y = y;
+	this.xo = x;
+	this.yo = y;
 	this.controleur = controleur;
 
 	this.v = v;//vitesse initiale 
