@@ -5,8 +5,8 @@
 package ca.qc.bdeb.module;
 
 import ca.qc.bdeb.controler.Controleur;
-import ca.qc.bdeb.vue.Affichable;
 import ca.qc.bdeb.vue.Projectiles;
+import ca.qc.bdeb.vue.Structures;
 import java.util.ArrayList;
 import org.newdawn.slick.SlickException;
 
@@ -19,6 +19,7 @@ public class Module {
 //    private Vecteur vect = new Vecteur();
 //    private Projectiles proj = new Projectiles();
     private ArrayList<Projectiles> listProjectiles;
+    private ArrayList<Structures> listStructures;
 	    
     private boolean impactSurEnnemie = false;
     private boolean impactSurStructure = false;
@@ -32,6 +33,7 @@ public class Module {
 	this.controleur = controleur;
 	
 	listProjectiles = new ArrayList<Projectiles>();
+	listStructures = new ArrayList<Structures>();
     }
     
     public void mouvement2D(Projectiles projectile) {
@@ -62,4 +64,13 @@ public class Module {
     public void setListProjectiles(ArrayList<Projectiles> listeProjectiles) {
 	this.listProjectiles = listeProjectiles;
     }
+
+    public ArrayList<Structures> getListStructures() {
+	return listStructures;
+    }
+
+    public void setListStructures(ArrayList<Structures> listStructures) {
+	this.listStructures = listStructures;
+    }
+    
 }

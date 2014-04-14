@@ -61,8 +61,6 @@ public class MainMenu extends BasicGameState {
 
             }
         }
-
-
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {

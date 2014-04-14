@@ -15,7 +15,6 @@ import org.newdawn.slick.SlickException;
 public class Projectiles implements Affichable {
 
     private String nomImg = "bird.png";
-    private int vieProj;
     private double x, y;
     private Controleur controleur;
     private double tempsProjectile = 0;
@@ -38,26 +37,6 @@ public class Projectiles implements Affichable {
     public void detruir() {
 	controleur.enleverProjectile(this);
     }
-
-//    public void mouvement2D() {
-//
-//	anglerad = angle * Math.PI / 180;//conversion en rad
-//
-//	if (haut) {
-//	    vyi = v * Math.sin(anglerad);//vitesse en y
-//	} else {
-//	    vyi = v * Math.sin(anglerad - Math.PI);
-//	}//vitesse en y
-//
-//	if (droite) {
-//	    vxi = v * Math.cos(anglerad);//vitesse en x
-//	} else {
-//	    vxi = v * Math.cos(anglerad - Math.PI);//vitesse en x
-//	}
-//
-//	y = 500 - (yo + vyi * tempsProjectile + (-9.8 * Math.pow(tempsProjectile, 2) / 2)); //position de y pour chaque valeur de t
-//	x = (xo + vxi * tempsProjectile);//position en x pour chaque valeur de t
-//    }
 
     //getter and setter
     
@@ -124,22 +103,6 @@ public class Projectiles implements Affichable {
     public void setXo(double xo) {
 	this.xo = xo;
     }
-
-//    public double getY1() {
-//	return y1;
-//    }
-//
-//    public void setY1(double y1) {
-//	this.y1 = y1;
-//    }
-//
-//    public double getY2() {
-//	return y2;
-//    }
-//
-//    public void setY2(double y2) {
-//	this.y2 = y2;
-//    }
 
     public double getTempsProjectile() {
 	return tempsProjectile;

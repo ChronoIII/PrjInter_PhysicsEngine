@@ -4,6 +4,7 @@
  */
 package ca.qc.bdeb.vue;
 
+import ca.qc.bdeb.controler.Controleur;
 import org.newdawn.slick.*;
 
 /**
@@ -14,21 +15,19 @@ public class Structures implements Affichable {
 
 //    comprendre SlickException....
     private String nomImg = "Sans titre.png";
-    private int x;
-    private int y;
-    private int poid;
-    private int vie;
-    private boolean enVie;
+    private double x, y;
+    private Controleur controleur;
 
-    public Structures() throws SlickException {
+    public Structures(int x, int y, Controleur controleur) throws SlickException {
+	this.x = x;
+	this.y = y;
+	this.controleur = controleur;
+
+	controleur.setNouvelleItemAffichable(this);
     }
 
-    public int getVie() {
-	return vie;
-    }
-
-    public void setVie(int vie) {
-	this.vie = vie;
+    public void detruir() {
+	controleur.enleverStructure(this);
     }
 
     public double getX() {
@@ -41,5 +40,9 @@ public class Structures implements Affichable {
 
     public String getNomImg() {
 	return nomImg;
+    }
+   
+    public void setX(double x) {
+	this.x = x;
     }
 }
