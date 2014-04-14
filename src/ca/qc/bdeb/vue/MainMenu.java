@@ -54,7 +54,7 @@ public class MainMenu extends BasicGameState {
             if (gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                 buttonPlay = new Image("buttons - Copy.jpg");
                 System.out.println("got clicked buddy!");
-                introMusic.stop();
+//                introMusic.stop();
                 sbg.enterState(1);
             } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                 buttonPlay = new Image("buttonsp.jpg");
