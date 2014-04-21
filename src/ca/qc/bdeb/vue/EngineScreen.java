@@ -24,7 +24,6 @@ import org.newdawn.slick.gui.TextField;
 public class EngineScreen extends BasicGameState {
 
     int state;
-    Module modele;
     Controleur controleur;
     private ArrayList<Image> listImagesProjectiles;
     private ArrayList<Image> listImagesStructures;
@@ -55,9 +54,6 @@ public class EngineScreen extends BasicGameState {
     public EngineScreen(int state, Controleur controleur) throws SlickException {
 	this.state = state;
 	this.controleur = controleur;
-	this.modele = modele;
-
-
     }
 
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
@@ -164,31 +160,9 @@ public class EngineScreen extends BasicGameState {
 	}
 
 	//mouvement///////////////////////////////////////////////////////////////////////////////
-	controleur.bougerProjectile();
-
-	for (int i = 0; i < controleur.listProjectiles().size(); i++) {
-
-	    if (controleur.listProjectiles().get(i).getPosition().getX() > 1200) {
-		controleur.listProjectiles().get(i).getPosition().setX(1200);
-		modele.rebond(controleur.listProjectiles().get(i), 'b');
-
-	    }
-	    if (controleur.listProjectiles().get(i).getPosition().getX() < 0) {
-		controleur.listProjectiles().get(i).getPosition().setX(0);
-		modele.rebond(controleur.listProjectiles().get(i), 'b');
-
-	    }
-	    if (controleur.listProjectiles().get(i).getPosition().getY() > (675 - 188)) {
-		controleur.listProjectiles().get(i).getPosition().setY((675 - 88));
-		modele.rebond(controleur.listProjectiles().get(i), 'a');
-
-	    }
-	    if (controleur.listProjectiles().get(i).getPosition().getY() < 75) {
-		controleur.listProjectiles().get(i).getPosition().setY(75);
-		modele.rebond(controleur.listProjectiles().get(i), 'a');
-
-	    }
-	}
+	controleur.bougerProjectiles();
+	
+	controleur.rebondProjectiles();
 
 //	for (int i = 0; i < listImagesProjectiles.size(); i++) {
 //

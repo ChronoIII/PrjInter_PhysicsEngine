@@ -50,7 +50,7 @@ public class Projectiles implements Affichable {
     }
 
     public void detruir() {
-	controleur.enleverProjectile(this);
+	controleur.enleverProjectiles(this);
     }
 
     //getter and setter

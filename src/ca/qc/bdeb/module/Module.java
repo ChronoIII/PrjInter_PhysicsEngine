@@ -52,6 +52,7 @@ public class Module {
 //	projectile.setX(projectile.getXo() + projectile.getVxi() * projectile.getTempsProjectile());//position en x pour chaque valeur de t
 //    }
     public void rebond(Projectiles projectile, char a) {
+	System.out.println(" allo");
 	if (a == 'a') {
 	    projectile.getVitesse().setY(-projectile.getVitesse().getY() * projectile.getFacRebond());
 	    projectile.getVitesse().setX(projectile.getVitesse().getX() * projectile.getFacRebond());
