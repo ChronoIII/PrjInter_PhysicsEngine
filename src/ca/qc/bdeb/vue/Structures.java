@@ -11,8 +11,8 @@ import org.newdawn.slick.*;
  *
  * @author Kururin
  */
-public class Structures implements Affichable {
-
+public class Structures {
+//implements Affichable 
 //    comprendre SlickException....
     private String nomImg = "Sans titre.png";
     private double x, y;
@@ -23,7 +23,7 @@ public class Structures implements Affichable {
 	this.y = y;
 	this.controleur = controleur;
 
-	controleur.setNouvelleItemAffichable(this);
+//	controleur.setNouvelleItemAffichable(this);
     }
 
     public void detruir() {

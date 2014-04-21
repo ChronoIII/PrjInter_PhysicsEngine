@@ -62,24 +62,24 @@ public class EngineScreen extends BasicGameState {
 
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 
-        Input a = gc.getInput();
-        projsheet = new SpriteSheet("animation.png", 93, 75);
-        projtest = new Animation(projsheet, 250);
-        listImagesProjectiles = new ArrayList<Image>();
-        listImagesStructures = new ArrayList<Image>();
-        bg = new Image("background.jpg");
+	Input a = gc.getInput();
+	projsheet = new SpriteSheet("animation.png", 93, 75);
+	projtest = new Animation(projsheet, 250);
+	listImagesProjectiles = new ArrayList<Image>();
+	listImagesStructures = new ArrayList<Image>();
+	bg = new Image("background.jpg");
 
-        buttonInventaire = new Image("inventory.png");
-        buttonInventaire2 = new Image("inventory2.png");
-        buttonSettings = new Image("settings2.png");
-        buttonSave = new Image("save.png");
-        buttonLoad = new Image("load.png");
-        buttonPlay = new Image("play.png");
-        buttonPause = new Image("pause.png");
-        buttonExit = new Image("exit.png");
-	
-        roue = new Image("wheel.png");
-        canon = new Image("canon.png");
+	buttonInventaire = new Image("inventory.png");
+	buttonInventaire2 = new Image("inventory2.png");
+	buttonSettings = new Image("settings2.png");
+	buttonSave = new Image("save.png");
+	buttonLoad = new Image("load.png");
+	buttonPlay = new Image("play.png");
+	buttonPause = new Image("pause.png");
+	buttonExit = new Image("exit.png");
+
+	roue = new Image("wheel.png");
+	canon = new Image("canon.png");
 	canon.rotate(Mouse.getX());
 //        canon.rotate(280);
 //        musiqueJeuPlay = new Music("gamemusic.wav");
@@ -96,32 +96,32 @@ public class EngineScreen extends BasicGameState {
 
 
 
-        textfield = new TextField(gc, gc.getDefaultFont(), 5, 11, 200, 30);
-        textfield.setBorderColor(Color.black);
-        textfield.setBackgroundColor(Color.white);
-        textfield.setTextColor(Color.black);
-        textfield.setText("Score:");
+	textfield = new TextField(gc, gc.getDefaultFont(), 5, 11, 200, 30);
+	textfield.setBorderColor(Color.black);
+	textfield.setBackgroundColor(Color.white);
+	textfield.setTextColor(Color.black);
+	textfield.setText("Score:");
 
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 	// On met à jour à chaque seconde
-	controleur.avancerTemps();
-	
-	
+//	controleur.avancerTemps();
+
+
 	Input Key = gc.getInput();
 
-	//key input
+	//key input////////////////////////////////////////////////////////////////////////////
 	if (Key.isKeyDown(Input.KEY_SPACE)) {
 	    if (f > 600 || f < 0) {
 		c *= -1;
 	    }
-	    f += 3*c;
+	    f += 3 * c;
 	} else {
 	    if (f != 0) {
-		angle = Math.toDegrees((Math.atan((double)Mouse.getY()/Mouse.getX())));
-		System.out.println(""+angle );
-		controleur.addProjectile(0, 0, f, angle);
+		angle = Math.toDegrees((Math.atan((double) Mouse.getY() / Mouse.getX())));
+		System.out.println("" + angle);
+		controleur.addProjectile(0, 0, f/3, angle);
 		f = 0;
 	    }
 	}
@@ -147,9 +147,9 @@ public class EngineScreen extends BasicGameState {
 
 	    sbg.enterState(0);
 	}
-	
-	//fin key input
-	
+
+	//fin key input///////////////////////////////////////////////////////////////////////
+
 	//nouvelle image
 	if (controleur.getNouvelleItemAffichable() != null) {
 	    switch (controleur.getNouvelleItemAffichable().getNomImg()) {
@@ -163,84 +163,109 @@ public class EngineScreen extends BasicGameState {
 	    controleur.setNouvelleItemAffichable(null);
 	}
 
-	//mouvement
-	for (int i = 0; i < listImagesProjectiles.size(); i++) {
+	//mouvement///////////////////////////////////////////////////////////////////////////////
+	controleur.bougerProjectile();
 
-	    //condition sol et plafond
-	    if (controleur.listProjectiles().get(i).getY() < -1 || controleur.listProjectiles().get(i).getY() > 500) {
-		if (controleur.listProjectiles().get(i).getY() < -1 ) {
-		    controleur.listProjectiles().get(i).setYo(499);
-		} else {
-		    controleur.listProjectiles().get(i).setYo(0);
-		}
-		controleur.listProjectiles().get(i).setXo(controleur.listProjectiles().get(i).getX());
+	for (int i = 0; i < controleur.listProjectiles().size(); i++) {
 
-		controleur.listProjectiles().get(i).setHaut(!controleur.listProjectiles().get(i).isHaut());
+	    if (controleur.listProjectiles().get(i).getPosition().getX() > 1200) {
+		controleur.listProjectiles().get(i).getPosition().setX(1200);
+		modele.rebond(controleur.listProjectiles().get(i), 'b');
 
-		controleur.listProjectiles().get(i).setV(controleur.listProjectiles().get(i).getV() * 0.82);
-		
-		controleur.listProjectiles().get(i).setTempsProjectile(0);
 	    }
+	    if (controleur.listProjectiles().get(i).getPosition().getX() < 0) {
+		controleur.listProjectiles().get(i).getPosition().setX(0);
+		modele.rebond(controleur.listProjectiles().get(i), 'b');
 
-
-	    //confition mur
-	    if (controleur.listProjectiles().get(i).getX() < -1 || controleur.listProjectiles().get(i).getX() > 1100) {
-		System.out.println(controleur.listProjectiles().get(i).getX());
-		if (controleur.listProjectiles().get(i).getX() > 1100) {
-		    controleur.listProjectiles().get(i).setXo(1099);
-		} else {
-		    controleur.listProjectiles().get(i).setXo(0);
-		}
-
-		controleur.listProjectiles().get(i).setYo(500 - controleur.listProjectiles().get(i).getY());
-
-		controleur.listProjectiles().get(i).setDroite(!controleur.listProjectiles().get(i).isDroite());
-
-		controleur.listProjectiles().get(i).setV(controleur.listProjectiles().get(i).getV() * 0.82);
-		
-		controleur.listProjectiles().get(i).setTempsProjectile(0);
 	    }
+	    if (controleur.listProjectiles().get(i).getPosition().getY() > (675 - 188)) {
+		controleur.listProjectiles().get(i).getPosition().setY((675 - 88));
+		modele.rebond(controleur.listProjectiles().get(i), 'a');
 
-	    if (controleur.listProjectiles().get(i).getY() > -50 && controleur.listProjectiles().get(i).getX() < 1200) {
-		controleur.bougerProjectile();
+	    }
+	    if (controleur.listProjectiles().get(i).getPosition().getY() < 75) {
+		controleur.listProjectiles().get(i).getPosition().setY(75);
+		modele.rebond(controleur.listProjectiles().get(i), 'a');
+
 	    }
 	}
-	//fin mouvement
-	canon.setRotation((float)Math.toDegrees((Math.atan((double)Mouse.getX()/Mouse.getY())))+270);
+
+//	for (int i = 0; i < listImagesProjectiles.size(); i++) {
+//
+//	    //condition sol et plafond
+//	    if (controleur.listProjectiles().get(i).getY() < -1 || controleur.listProjectiles().get(i).getY() > 500) {
+//		if (controleur.listProjectiles().get(i).getY() < -1 ) {
+//		    controleur.listProjectiles().get(i).setYo(499);
+//		} else {
+//		    controleur.listProjectiles().get(i).setYo(0);
+//		}
+//		controleur.listProjectiles().get(i).setXo(controleur.listProjectiles().get(i).getX());
+//
+//		controleur.listProjectiles().get(i).setHaut(!controleur.listProjectiles().get(i).isHaut());
+//
+//		controleur.listProjectiles().get(i).setV(controleur.listProjectiles().get(i).getV() * 0.82);
+//		
+//		controleur.listProjectiles().get(i).setTempsProjectile(0);
+//	    }
+//
+//
+//	    //confition mur
+//	    if (controleur.listProjectiles().get(i).getX() < -1 || controleur.listProjectiles().get(i).getX() > 1100) {
+//		System.out.println(controleur.listProjectiles().get(i).getX());
+//		if (controleur.listProjectiles().get(i).getX() > 1100) {
+//		    controleur.listProjectiles().get(i).setXo(1099);
+//		} else {
+//		    controleur.listProjectiles().get(i).setXo(0);
+//		}
+//
+//		controleur.listProjectiles().get(i).setYo(500 - controleur.listProjectiles().get(i).getY());
+//
+//		controleur.listProjectiles().get(i).setDroite(!controleur.listProjectiles().get(i).isDroite());
+//
+//		controleur.listProjectiles().get(i).setV(controleur.listProjectiles().get(i).getV() * 0.82);
+//		
+//		controleur.listProjectiles().get(i).setTempsProjectile(0);
+//	    }
+//
+//	    if (controleur.listProjectiles().get(i).getY() > -50 && controleur.listProjectiles().get(i).getX() < 1200) {
+//		controleur.bougerProjectile();
+//	    }
+//	}
+
+
+	//fin mouvement//////////////////////////////////////////////////////////////////////////////////////////
+	canon.setRotation((float) Math.toDegrees((Math.atan((double) Mouse.getX() / Mouse.getY()))) + 270);
     }
-    public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-        bg.draw();
 
-
-        for (int i = 0; i < listImagesProjectiles.size(); i++) {
-            listImagesProjectiles.get(i).draw((int) (controleur.positionProjectileX(i)), (int) (controleur.positionProjectileY(i)));
-        }
-        for (int i = 0; i < listImagesStructures.size(); i++) {
-        }
-        g.drawOval(90, 10, 50, 50);
-        g.drawOval(150, 13, 50, 50);
-	g.setColor(Color.black);
-        g.drawString("force: " + f, 300, 100);
-        g.drawString("angle: " + angle, 300, 150);
-        g.drawString("" + Mouse.getX() + ", " + Mouse.getY(), 300, 200);
-        textfield.render(gc, g);
-        projtest.draw(100, 100);
-        buttonInventaire.draw(10, 600);
-        buttonPlay.draw(100, 600);
-        buttonExit.draw(1110, 5);
-        buttonSettings.draw(1110, 600);
-        buttonLoad.draw((1110 - 90), 600);
-        buttonSave.draw((1110 - 180), 600);
-
-        canon.draw(85 - 195, 490);
-        
-        roue.draw(70, 506);
-
-    }
-
-    @Override
     public int getID() {
 	return state;
+    }
+
+    public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+	bg.draw();
+
+
+	for (int i = 0; i < listImagesProjectiles.size(); i++) {
+	    listImagesProjectiles.get(i).draw((int) (controleur.positionProjectileX(i)), (int) (controleur.positionProjectileY(i)));
+	}
+	for (int i = 0; i < listImagesStructures.size(); i++) {
+	}
+	g.setColor(Color.black);
+	g.drawString("force: " + f, 300, 100);
+	g.drawString("angle: " + angle, 300, 150);
+	g.drawString("" + Mouse.getX() + ", " + Mouse.getY(), 300, 200);
+	textfield.render(gc, g);
+	projtest.draw(100, 100);
+	buttonInventaire.draw(10, 600);
+	buttonPlay.draw(100, 600);
+	buttonExit.draw(1110, 5);
+	buttonSettings.draw(1110, 600);
+	buttonLoad.draw((1110 - 90), 600);
+	buttonSave.draw((1110 - 180), 600);
+
+	canon.draw(85 - 195, 490);
+
+//        roue.draw(70, 506);
     }
 
     public void addImageProjectiles(String nomImg) throws SlickException {

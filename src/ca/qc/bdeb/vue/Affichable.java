@@ -11,7 +11,7 @@ package ca.qc.bdeb.vue;
 public interface Affichable {
     
     public String getNomImg();
-    public double getX();
-    public double getY();
+    public Vecteur getPosition();
+    public void setPosition(Vecteur position);
     
 }
