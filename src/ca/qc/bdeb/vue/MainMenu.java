@@ -47,18 +47,14 @@ public class MainMenu extends BasicGameState {
         introMusic.setVolume(0.25f);
         int posX = Mouse.getX();
         int posY = Mouse.getY();
-//        if (a.isKeyDown(Input.KEY_ESCAPE)) {
-//            System.exit(1);
-//        }
+	
         if ((posX > 795 && posX < 1168) && (posY > 182 && posY < 225)) {
             if (gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                 buttonPlay = new Image("buttons - Copy.jpg");
-                System.out.println("got clicked buddy!");
                 introMusic.stop();
                 sbg.enterState(1);
             } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                 buttonPlay = new Image("buttonsp.jpg");
-
             }
         }
     }

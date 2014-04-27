@@ -31,9 +31,7 @@ public class EngineScreen extends BasicGameState {
     private Image bg;
     double t = 0;
     TextField textfield;
-    double f = 0;
-    double c = 1;
-    double ca = 1;
+    double force = 0;
     double angle = 0;
     private Music musiqueJeuPlay;
     private Animation projtest;
@@ -103,30 +101,34 @@ public class EngineScreen extends BasicGameState {
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 	// On met à jour à chaque seconde
 //	controleur.avancerTemps();
-
-
 	Input Key = gc.getInput();
+	int posX = Mouse.getX();
+        int posY = Mouse.getY();
+	
+	//Bouton///////////////////////////////////////////////////////////////////////////////
+	//inventaire
+	 if ((posX > 10 && posX < 85) && (posY > 75 && posY < 10)) {
+            if (gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+		buttonInventaire = new Image("inventory.png");
+		System.out.println("allo");
+            } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+		buttonInventaire = new Image("inventory.png");
+		System.out.println("allo");
+            }
+        }
+	
+	//Bouton///////////////////////////////////////////////////////////////////////////////
 
 	//key input////////////////////////////////////////////////////////////////////////////
 	if (Key.isKeyDown(Input.KEY_SPACE)) {
-	    if (f > 600 || f < 0) {
-		c *= -1;
-	    }
-	    f += 3 * c;
+	    force += 3;
 	} else {
-	    if (f != 0) {
-		angle = Math.toDegrees((Math.atan((double) Mouse.getY() / Mouse.getX())));
+	    if (force != 0) {
+		angle = Math.toDegrees((Math.atan((double) posY / posX)));
 		System.out.println("" + angle);
-		controleur.addProjectile(0, 0, f/3, angle);
-		f = 0;
+		controleur.addProjectile(0, 0, force/3, angle);
+		force = 0;
 	    }
-	}
-
-	if (Key.isKeyDown(Input.KEY_A)) {
-	    if (angle > 90 || angle < 0) {
-		ca *= -1;
-	    }
-	    angle += ca;
 	}
 
 	if (Key.isKeyPressed(Input.KEY_1)) {
@@ -161,54 +163,10 @@ public class EngineScreen extends BasicGameState {
 
 	//mouvement///////////////////////////////////////////////////////////////////////////////
 	controleur.bougerProjectiles();
-	
 	controleur.rebondProjectiles();
-
-//	for (int i = 0; i < listImagesProjectiles.size(); i++) {
-//
-//	    //condition sol et plafond
-//	    if (controleur.listProjectiles().get(i).getY() < -1 || controleur.listProjectiles().get(i).getY() > 500) {
-//		if (controleur.listProjectiles().get(i).getY() < -1 ) {
-//		    controleur.listProjectiles().get(i).setYo(499);
-//		} else {
-//		    controleur.listProjectiles().get(i).setYo(0);
-//		}
-//		controleur.listProjectiles().get(i).setXo(controleur.listProjectiles().get(i).getX());
-//
-//		controleur.listProjectiles().get(i).setHaut(!controleur.listProjectiles().get(i).isHaut());
-//
-//		controleur.listProjectiles().get(i).setV(controleur.listProjectiles().get(i).getV() * 0.82);
-//		
-//		controleur.listProjectiles().get(i).setTempsProjectile(0);
-//	    }
-//
-//
-//	    //confition mur
-//	    if (controleur.listProjectiles().get(i).getX() < -1 || controleur.listProjectiles().get(i).getX() > 1100) {
-//		System.out.println(controleur.listProjectiles().get(i).getX());
-//		if (controleur.listProjectiles().get(i).getX() > 1100) {
-//		    controleur.listProjectiles().get(i).setXo(1099);
-//		} else {
-//		    controleur.listProjectiles().get(i).setXo(0);
-//		}
-//
-//		controleur.listProjectiles().get(i).setYo(500 - controleur.listProjectiles().get(i).getY());
-//
-//		controleur.listProjectiles().get(i).setDroite(!controleur.listProjectiles().get(i).isDroite());
-//
-//		controleur.listProjectiles().get(i).setV(controleur.listProjectiles().get(i).getV() * 0.82);
-//		
-//		controleur.listProjectiles().get(i).setTempsProjectile(0);
-//	    }
-//
-//	    if (controleur.listProjectiles().get(i).getY() > -50 && controleur.listProjectiles().get(i).getX() < 1200) {
-//		controleur.bougerProjectile();
-//	    }
-//	}
-
-
 	//fin mouvement//////////////////////////////////////////////////////////////////////////////////////////
-	canon.setRotation((float) Math.toDegrees((Math.atan((double) Mouse.getX() / Mouse.getY()))) + 270);
+	
+	canon.setRotation((float) Math.toDegrees((Math.atan((double) posX / posY))) + 270);
     }
 
     public int getID() {
@@ -225,7 +183,7 @@ public class EngineScreen extends BasicGameState {
 	for (int i = 0; i < listImagesStructures.size(); i++) {
 	}
 	g.setColor(Color.black);
-	g.drawString("force: " + f, 300, 100);
+	g.drawString("force: " + force, 300, 100);
 	g.drawString("angle: " + angle, 300, 150);
 	g.drawString("" + Mouse.getX() + ", " + Mouse.getY(), 300, 200);
 	textfield.render(gc, g);
