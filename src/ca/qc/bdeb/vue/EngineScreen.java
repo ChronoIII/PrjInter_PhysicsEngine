@@ -131,7 +131,7 @@ public class EngineScreen extends BasicGameState {
 
 	if (Key.isKeyPressed(Input.KEY_1)) {
 
-
+            System.out.println("destroy");
 	    if (!controleur.listProjectiles().isEmpty()) {
 
 		controleur.listProjectiles().get(0).detruir();
@@ -237,9 +237,9 @@ public class EngineScreen extends BasicGameState {
 	buttonLoad.draw((1110 - 90), 600);
 	buttonSave.draw((1110 - 180), 600);
 
-	canon.draw(85 - 195, 490);
+	canon.draw(85 - 195, 500);
 
-//        roue.draw(70, 506);
+        roue.draw(35, 506);
     }
 
     public void addImageProjectiles(String nomImg) throws SlickException {
