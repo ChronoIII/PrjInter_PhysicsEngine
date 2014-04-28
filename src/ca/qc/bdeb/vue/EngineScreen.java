@@ -47,9 +47,12 @@ public class EngineScreen extends BasicGameState {
     private Image buttonExit;
     private Image roue;
     private Image canon;
+    private Image inventaireExit;
     private float lol = 90;
 //    true = false, false = play
     private boolean modePausePlay;
+    private boolean inventaire;
+    private Color colorAlpha = new Color(1f, 1f, 1f, 0.75f);
 
     public EngineScreen(int state, Controleur controleur) throws SlickException {
         this.state = state;
@@ -61,6 +64,7 @@ public class EngineScreen extends BasicGameState {
 
         Input a = gc.getInput();
         modePausePlay = true;
+        inventaire = false;
         projsheet = new SpriteSheet("animation2.png", 68, 54);
         projtest = new Animation(projsheet, 250);
 
@@ -76,7 +80,7 @@ public class EngineScreen extends BasicGameState {
         buttonPlay = new Image("play.png");
         buttonPause = new Image("pause.png");
         buttonExit = new Image("exit.png");
-
+        inventaireExit = new Image("exitinventaire.png");
         roue = new Image("wheel.png");
         canon = new Image("canon.png");
         canon.rotate(Mouse.getX());
@@ -117,6 +121,9 @@ public class EngineScreen extends BasicGameState {
             if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                 buttonInventaire = new Image("inventory.png");
                 System.out.println("Inventaire clicker");
+                inventaire = true;
+
+
             } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                 buttonInventaire = new Image("inventory.png");
 
@@ -141,23 +148,23 @@ public class EngineScreen extends BasicGameState {
                     modePausePlay = true;
                 }
 
-               
-            } 
+
+            }
         }
 //        save
         if ((posX > 1020 && posX < 1100) && (posY > 10 && posY < 75)) {
             if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                 System.out.println("save button");
-        
-            } 
+
+            }
         }
 
 //load
-         if ((posX > 1109 && posX < 1190) && (posY > 10 && posY < 75)) {
+        if ((posX > 1109 && posX < 1190) && (posY > 10 && posY < 75)) {
             if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                 System.out.println("load button");
-        
-            } 
+
+            }
         }
         //Bouton///////////////////////////////////////////////////////////////////////////////
 
@@ -223,10 +230,10 @@ public class EngineScreen extends BasicGameState {
             listAnimationProjectiles.get(i).draw((int) (controleur.positionProjectileX(i)), (int) (controleur.positionProjectileY(i)));
         }
         for (int i = 0; i < listImagesStructures.size(); i++) {
-	    listImagesStructures.get(i).draw((int) (controleur.positionStructureX(i)), (int) (controleur.positionStructureY(i)));
+            listImagesStructures.get(i).draw((int) (controleur.positionStructureX(i)), (int) (controleur.positionStructureY(i)));
         }
-	
-	
+
+
         g.setColor(Color.black);
         g.drawString("force: " + force, 300, 100);
         g.drawString("angle: " + angle, 300, 150);
@@ -236,13 +243,19 @@ public class EngineScreen extends BasicGameState {
         buttonInventaire.draw(10, 600);
         buttonPlay.draw(100, 600);
         buttonExit.draw(1110, 5);
-       
+
         buttonLoad.draw((1110), 600);
         buttonSave.draw((1110 - 90), 600);
 
         canon.draw(85 - 195, 500);
 
         roue.draw(35, 506);
+        if (inventaire) {
+            
+            g.setColor(colorAlpha);
+            g.fillRoundRect(0, 50, 475, 570, 30);
+inventaireExit.draw(435,55);
+        }
 
     }
 
