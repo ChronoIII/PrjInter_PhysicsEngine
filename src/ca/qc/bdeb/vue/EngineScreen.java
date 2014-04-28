@@ -223,7 +223,10 @@ public class EngineScreen extends BasicGameState {
             listAnimationProjectiles.get(i).draw((int) (controleur.positionProjectileX(i)), (int) (controleur.positionProjectileY(i)));
         }
         for (int i = 0; i < listImagesStructures.size(); i++) {
+	    listImagesStructures.get(i).draw((int) (controleur.positionStructureX(i)), (int) (controleur.positionStructureY(i)));
         }
+	
+	
         g.setColor(Color.black);
         g.drawString("force: " + force, 300, 100);
         g.drawString("angle: " + angle, 300, 150);
