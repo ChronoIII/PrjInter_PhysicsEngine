@@ -33,8 +33,8 @@ public class Controleur {
     }
 
     //Projectiles
-    public void addProjectile(int x, int y, double v, double angle) throws SlickException {
-	module.getListProjectiles().add(new Projectiles((x + 120), (y + 475), v, angle, 0.8, this));
+    public void addProjectile(int x, int y, double v, double angle, double facRebond) throws SlickException {
+	module.getListProjectiles().add(new Projectiles((x + 120), (y + 475), v, angle, facRebond, this));
     }
 
     public double positionProjectileX(int i) {

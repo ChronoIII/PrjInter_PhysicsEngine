@@ -126,7 +126,7 @@ public class EngineScreen extends BasicGameState {
 	    if (force != 0) {
 		angle = Math.toDegrees((Math.atan((double) posY / posX)));
 		System.out.println("" + angle);
-		controleur.addProjectile(0, 0, force/3, angle);
+		controleur.addProjectile(0, 0, force/3, angle , 0.8);
 		force = 0;
 	    }
 	}
@@ -197,7 +197,7 @@ public class EngineScreen extends BasicGameState {
 
 	canon.draw(85 - 195, 490);
 
-//        roue.draw(70, 506);
+        roue.draw(70, 506);
     }
 
     public void addImageProjectiles(String nomImg) throws SlickException {
