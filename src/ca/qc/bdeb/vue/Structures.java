@@ -22,7 +22,7 @@ public class Structures implements Affichable {
 	position.setY(posY);
 	this.controleur = controleur;
 
-//	controleur.setNouvelleItemAffichable(this);
+	controleur.setNouvelleItemAffichable(this);
     }
 
     public void detruir() {
