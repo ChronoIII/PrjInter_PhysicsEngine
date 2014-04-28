@@ -50,6 +50,7 @@ public class Projectiles implements Affichable {
     }
 
     public void detruir() {
+      
 	controleur.enleverProjectiles(this);
     }
 
