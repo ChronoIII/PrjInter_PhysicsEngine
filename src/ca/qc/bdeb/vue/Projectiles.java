@@ -6,7 +6,9 @@ package ca.qc.bdeb.vue;
 
 import ca.qc.bdeb.controler.Controleur;
 import ca.qc.bdeb.module.Module;
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.SpriteSheet;
 
 /**
  *
@@ -14,22 +16,23 @@ import org.newdawn.slick.SlickException;
  */
 public class Projectiles implements Affichable {
 
-    private String nomImg = "bird.png";
+    private String nomImg = "animation2.png";
     private Controleur controleur;
+    //-----
     
+    //----
     private double gravity = 9.8;
     private double masse = 1;
     private double facRebond;
     private Vecteur vitesse = new Vecteur();
     private Vecteur position = new Vecteur();
-    
+
 //    private double x, y;
 //    private double tempsProjectile = 0;
 //    double v, angle, anglerad;
 //    double vxi, vyi, yo, xo;
 //    boolean droite = true;
 //    boolean haut = true;
-
     public Projectiles(double posX, double posY, double vitesseIni, double angle, double facRebond, Controleur controleur) throws SlickException {
 //	this.x = x;
 //	this.y = y;
@@ -39,29 +42,26 @@ public class Projectiles implements Affichable {
 //
 //	this.v = v;//vitesse initiale 
 //	this.angle = angle;//angle initial en degré
-	
-	this.facRebond = facRebond;
-	position.setX(posX);
-	position.setY(posY);
-	vitesse.setX(vitesseIni * Math.cos(Math.toRadians(angle)));
-	vitesse.setY(vitesseIni * Math.sin(Math.toRadians(angle)));
 
-	controleur.setNouvelleItemAffichable(this);
+        this.facRebond = facRebond;
+        position.setX(posX);
+        position.setY(posY);
+        vitesse.setX(vitesseIni * Math.cos(Math.toRadians(angle)));
+        vitesse.setY(vitesseIni * Math.sin(Math.toRadians(angle)));
+
+        controleur.setNouvelleItemAffichable(this);
     }
 
     public void detruir() {
-      
-	controleur.enleverProjectiles(this);
+
+        controleur.enleverProjectiles(this);
     }
 
     //getter and setter
-    
-     public String getNomImg() {
-	return nomImg;
+    public String getNomImg() {
+        return nomImg;
     }
-    
 //    }
-
     //    public double getAngle() {
     //	return angle;
     //    }
@@ -156,44 +156,43 @@ public class Projectiles implements Affichable {
     //
     //    public void setV(double v) {
     //	this.v = v;
-     
     public double getGravity() {
-	return gravity;
+        return gravity;
     }
 
     public void setGravity(double gravity) {
-	this.gravity = gravity;
+        this.gravity = gravity;
     }
 
     public double getMasse() {
-	return masse;
+        return masse;
     }
 
     public void setMasse(double masse) {
-	this.masse = masse;
+        this.masse = masse;
     }
 
     public double getFacRebond() {
-	return facRebond;
+        return facRebond;
     }
 
     public void setFacRebond(double facRebond) {
-	this.facRebond = facRebond;
+        this.facRebond = facRebond;
     }
 
     public Vecteur getVitesse() {
-	return vitesse;
+        return vitesse;
     }
 
     public void setVitesse(Vecteur vitesse) {
-	this.vitesse = vitesse;
+        this.vitesse = vitesse;
     }
 
     public Vecteur getPosition() {
-	return position;
+        return position;
     }
 
     public void setPosition(Vecteur position) {
-	this.position = position;
+        this.position = position;
     }
 }

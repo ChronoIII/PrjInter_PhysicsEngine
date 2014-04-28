@@ -51,7 +51,7 @@ public class Controleur {
 
     public void enleverProjectiles(Projectiles projectile) {
 	module.getListProjectiles().remove(projectile);
-	engineScreenMenu.getListImagesProjectiles().remove(0);
+	engineScreenMenu.getListAnimationProjectiles().remove(0);
     }
     
     public void rebondProjectiles(){
