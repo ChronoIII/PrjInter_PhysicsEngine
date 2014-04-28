@@ -16,12 +16,9 @@ import org.newdawn.slick.SlickException;
  */
 public class Module {
 
-//    private Vecteur vect = new Vecteur();
-//    private Projectiles proj = new Projectiles();
     private ArrayList<Projectiles> listProjectiles;
     private ArrayList<Structures> listStructures;
-//    private boolean impactSurEnnemie = false;
-//    private boolean impactSurStructure = false;
+
     private double gravite = -9.8;
     private Controleur controleur;
 
@@ -32,27 +29,7 @@ public class Module {
 	listStructures = new ArrayList<Structures>();
     }
 
-//    public void mouvement2D(Projectiles projectile) {
-//
-//	projectile.setAnglerad(projectile.getAngle() * Math.PI / 180);//conversion en rad
-//
-//	if (projectile.isHaut()) {
-//	    projectile.setVyi(projectile.getV() * Math.sin(projectile.getAnglerad())); //vitesse en y
-//	} else {
-//	    projectile.setVyi(projectile.getV()* Math.sin(projectile.getAnglerad() - Math.PI)); 
-//	}//vitesse en y
-//
-//	if (projectile.isDroite()) {
-//	    projectile.setVxi(projectile.getV() * Math.cos(projectile.getAnglerad()));//vitesse en x
-//	} else {
-//	    projectile.setVxi(projectile.getV() * Math.cos(projectile.getAnglerad() - Math.PI));//vitesse en x
-//	}
-//
-//	projectile.setY( 500 - (projectile.getYo() + projectile.getVyi() * projectile.getTempsProjectile() + (gravite * Math.pow(projectile.getTempsProjectile(), 2) / 2))); //position de y pour chaque valeur de t
-//	projectile.setX(projectile.getXo() + projectile.getVxi() * projectile.getTempsProjectile());//position en x pour chaque valeur de t
-//    }
     public void rebond(Projectiles projectile, char a) {
-	System.out.println(" allo");
 	if (a == 'a') {
 	    projectile.getVitesse().setY(-projectile.getVitesse().getY() * projectile.getFacRebond());
 	    projectile.getVitesse().setX(projectile.getVitesse().getX() * projectile.getFacRebond());
@@ -63,13 +40,10 @@ public class Module {
 		projectile.getVitesse().setY(0);
 		System.out.println("yo");
 	    }
-	    System.out.println("VitesseYYY= " + projectile.getVitesse().getY());
 
 	}
 	if (a == 'b') {
 	    projectile.getVitesse().setX(-projectile.getVitesse().getX());
-
-	    System.out.println("VitesseXXX= " + projectile.getVitesse().getX());
 	}
     }
 
