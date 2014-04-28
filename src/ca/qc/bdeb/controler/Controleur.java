@@ -96,11 +96,11 @@ public class Controleur {
     }
 
     public double positionStructureX(int i) {
-	return module.getListStructures().get(i).getX();
+	return module.getListStructures().get(i).getPosition().getX();
     }
 
     public double positionStructureY(int i) {
-	return module.getListStructures().get(i).getY();
+	return module.getListStructures().get(i).getPosition().getY();
     }
 
     public ArrayList<Structures> listStructures() {

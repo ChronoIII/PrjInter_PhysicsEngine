@@ -11,16 +11,15 @@ import org.newdawn.slick.*;
  *
  * @author Kururin
  */
-public class Structures {
-//implements Affichable 
+public class Structures implements Affichable {
 //    comprendre SlickException....
     private String nomImg = "Sans titre.png";
-    private double x, y;
     private Controleur controleur;
+    private Vecteur position = new Vecteur();
 
-    public Structures(int x, int y, Controleur controleur) throws SlickException {
-	this.x = x;
-	this.y = y;
+    public Structures(int posX, int posY, Controleur controleur) throws SlickException {
+	position.setX(posX);
+	position.setY(posY);
 	this.controleur = controleur;
 
 //	controleur.setNouvelleItemAffichable(this);
@@ -30,19 +29,15 @@ public class Structures {
 	controleur.enleverStructure(this);
     }
 
-    public double getX() {
-	return x;
-    }
-
-    public double getY() {
-	return y;
-    }
-
     public String getNomImg() {
 	return nomImg;
     }
-   
-    public void setX(double x) {
-	this.x = x;
+    
+    public Vecteur getPosition() {
+	return position;
+    }
+
+    public void setPosition(Vecteur position) {
+	this.position = position;
     }
 }
