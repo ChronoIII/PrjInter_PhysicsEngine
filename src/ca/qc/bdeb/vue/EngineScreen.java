@@ -26,9 +26,7 @@ public class EngineScreen extends BasicGameState {
     int state;
     Controleur controleur;
     private ArrayList<Image> listImagesStructures;
-     private ArrayList<Animation> listAnimationProjectiles;
-
-   
+    private ArrayList<Animation> listAnimationProjectiles;
     private Image catapule;
     private Image bg;
     double t = 0;
@@ -50,6 +48,8 @@ public class EngineScreen extends BasicGameState {
     private Image roue;
     private Image canon;
     private float lol = 90;
+//    true = false, false = play
+    private boolean modePausePlay;
 
     public EngineScreen(int state, Controleur controleur) throws SlickException {
         this.state = state;
@@ -60,11 +60,12 @@ public class EngineScreen extends BasicGameState {
 
 
         Input a = gc.getInput();
+        modePausePlay = true;
         projsheet = new SpriteSheet("animation2.png", 68, 54);
         projtest = new Animation(projsheet, 250);
-        
-         listAnimationProjectiles = new ArrayList<Animation>();
-                listImagesStructures = new ArrayList<Image>();
+
+        listAnimationProjectiles = new ArrayList<Animation>();
+        listImagesStructures = new ArrayList<Image>();
         bg = new Image("background.jpg");
 
         buttonInventaire = new Image("inventory.png");
@@ -112,25 +113,52 @@ public class EngineScreen extends BasicGameState {
 
         //Bouton///////////////////////////////////////////////////////////////////////////////
         //inventaire
-        if ((posX > 10 && posX < 85) && (posY > 75 && posY < 10)) {
-            if (gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+        if ((posX > 10 && posX < 85) && (posY > 10 && posY < 75)) {
+            if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                 buttonInventaire = new Image("inventory.png");
-                System.out.println("allo");
+                System.out.println("Inventaire clicker");
             } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                 buttonInventaire = new Image("inventory.png");
-                System.out.println("allo");
+
             }
         }
-
+        //exit
         if ((posX > 1110 && posX < 1186) && (posY > 607 && posY < 670)) {
-            if (gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-                buttonPlay = new Image("buttons - Copy.jpg");
+            if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                 System.out.println("got clicked buddy! lets go back!");
                 sbg.enterState(0);
             } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
             }
         }
+        //play
+        if ((posX > 100 && posX < 175) && (posY > 10 && posY < 75)) {
+            if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                if (modePausePlay) {
+                    buttonPlay = new Image("pause.png");
+                    modePausePlay = false;
+                } else {
+                    buttonPlay = new Image("play.png");
+                    modePausePlay = true;
+                }
 
+               
+            } 
+        }
+//        save
+        if ((posX > 1020 && posX < 1100) && (posY > 10 && posY < 75)) {
+            if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                System.out.println("save button");
+        
+            } 
+        }
+
+//load
+         if ((posX > 1109 && posX < 1190) && (posY > 10 && posY < 75)) {
+            if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                System.out.println("load button");
+        
+            } 
+        }
         //Bouton///////////////////////////////////////////////////////////////////////////////
 
         //key input////////////////////////////////////////////////////////////////////////////
@@ -205,9 +233,9 @@ public class EngineScreen extends BasicGameState {
         buttonInventaire.draw(10, 600);
         buttonPlay.draw(100, 600);
         buttonExit.draw(1110, 5);
-        buttonSettings.draw(1110, 600);
-        buttonLoad.draw((1110 - 90), 600);
-        buttonSave.draw((1110 - 180), 600);
+       
+        buttonLoad.draw((1110), 600);
+        buttonSave.draw((1110 - 90), 600);
 
         canon.draw(85 - 195, 500);
 
@@ -215,9 +243,8 @@ public class EngineScreen extends BasicGameState {
 
     }
 
-   
     public void addAnimationProjectiles(String nomImg) throws SlickException {
-    
+
         SpriteSheet projsheet = new SpriteSheet(nomImg, 68, 54);
         Animation projtest = new Animation(projsheet, 50);
         listAnimationProjectiles.add(projtest);
@@ -229,13 +256,14 @@ public class EngineScreen extends BasicGameState {
         listImagesStructures.add(img);
     }
 
- public ArrayList<Animation> getListAnimationProjectiles() {
+    public ArrayList<Animation> getListAnimationProjectiles() {
         return listAnimationProjectiles;
     }
 
     public void setListAnimationProjectiles(ArrayList<Animation> listAnimationProjectiles) {
         this.listAnimationProjectiles = listAnimationProjectiles;
     }
+
     public ArrayList<Image> getListImagesStructures() {
         return listImagesStructures;
     }
