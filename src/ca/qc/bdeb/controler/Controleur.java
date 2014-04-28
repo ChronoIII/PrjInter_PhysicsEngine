@@ -31,28 +31,64 @@ public class Controleur {
 //	v = 75;//vitesse initiale 
 //	angle = 60;//angle initial en degré
     }
-    
+
     //Projectiles
     public void addProjectile(int x, int y, double v, double angle) throws SlickException {
-	module.getListProjectiles().add(new Projectiles((x), (y), v, angle, this));
+	module.getListProjectiles().add(new Projectiles((x + 120), (y + 475), v, angle, 0.8, this));
     }
 
     public double positionProjectileX(int i) {
-	return module.getListProjectiles().get(i).getX();
+	return module.getListProjectiles().get(i).getPosition().getX();
     }
 
     public double positionProjectileY(int i) {
-	return module.getListProjectiles().get(i).getY();
+	return module.getListProjectiles().get(i).getPosition().getY();
     }
 
     public ArrayList<Projectiles> listProjectiles() {
 	return module.getListProjectiles();
     }
 
-    public void enleverProjectile(Projectiles projectile) {
+    public void enleverProjectiles(Projectiles projectile) {
 	module.getListProjectiles().remove(projectile);
 	engineScreenMenu.getListImagesProjectiles().remove(0);
     }
+    
+    public void rebondProjectiles(){
+	for (int i = 0; i < module.getListProjectiles().size(); i++) {
+
+	    if (module.getListProjectiles().get(i).getPosition().getX() > (1200 - 100)) {
+		module.getListProjectiles().get(i).getPosition().setX(1200 - 100);
+		module.rebond(module.getListProjectiles().get(i), 'b');
+
+	    }
+	    if (module.getListProjectiles().get(i).getPosition().getX() < 0) {
+		module.getListProjectiles().get(i).getPosition().setX(0);
+		module.rebond(module.getListProjectiles().get(i), 'b');
+
+	    }
+	    if (module.getListProjectiles().get(i).getPosition().getY() > (675 - 188)) {
+		module.getListProjectiles().get(i).getPosition().setY((675 - 188));
+		module.rebond(module.getListProjectiles().get(i), 'a');
+
+	    }
+	    if (module.getListProjectiles().get(i).getPosition().getY() < 75) {
+		module.getListProjectiles().get(i).getPosition().setY(75);
+		module.rebond(module.getListProjectiles().get(i), 'a');
+
+	    }
+	}
+    }
+    
+    public void bougerProjectiles() {
+	for (int i = 0; i < module.getListProjectiles().size(); i++) {
+//	    module.mouvement2D(listProjectiles().get(i));
+	    module.getListProjectiles().get(i).getPosition().setX(module.getListProjectiles().get(i).getPosition().getX() + module.getListProjectiles().get(i).getVitesse().getX());
+	    module.getListProjectiles().get(i).getPosition().setY(module.getListProjectiles().get(i).getPosition().getY() - module.getListProjectiles().get(i).getVitesse().getY());
+	    module.getListProjectiles().get(i).getVitesse().setY(module.getListProjectiles().get(i).getVitesse().getY() - (module.getListProjectiles().get(i).getGravity() / 100));
+	}
+    }
+    //fin
 
     //Structures
     public void addStructure(int x, int y) throws SlickException {
@@ -75,22 +111,17 @@ public class Controleur {
 	module.getListStructures().remove(structure);
 	engineScreenMenu.getListImagesStructures().remove(0);
     }
+    //fin
 
     public void afficher(Affichable nouvelleItemAffichable) {
 	this.nouvelleItemAffichable = nouvelleItemAffichable;
     }
 
-    public void bougerProjectile() {
-	for (int i = 0; i < module.getListProjectiles().size(); i++) {
-	    module.mouvement2D(listProjectiles().get(i));
-	}
-    }
-
-    public void avancerTemps() {
-	for (int i = 0; i < module.getListProjectiles().size(); i++) {
-	    listProjectiles().get(i).setTempsProjectile(listProjectiles().get(i).getTempsProjectile() + 0.1);
-	}
-    }
+//    public void avancerTemps() {
+//	for (int i = 0; i < module.getListProjectiles().size(); i++) {
+//	    listProjectiles().get(i).setTempsProjectile(listProjectiles().get(i).getTempsProjectile() + 0.1);
+//	}
+//    }
 
 //    setters and getters
     public Module getModule() {
