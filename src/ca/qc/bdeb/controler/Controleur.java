@@ -57,8 +57,8 @@ public class Controleur {
     public void rebondProjectiles(){
 	for (int i = 0; i < module.getListProjectiles().size(); i++) {
 
-	    if (module.getListProjectiles().get(i).getPosition().getX() > (1200 - 100)) {
-		module.getListProjectiles().get(i).getPosition().setX(1200 - 100);
+	    if (module.getListProjectiles().get(i).getPosition().getX() > (1200 - 67)) {
+		module.getListProjectiles().get(i).getPosition().setX(1200 - 67);
 		module.rebond(module.getListProjectiles().get(i), 'b');
 
 	    }
@@ -67,8 +67,8 @@ public class Controleur {
 		module.rebond(module.getListProjectiles().get(i), 'b');
 
 	    }
-	    if (module.getListProjectiles().get(i).getPosition().getY() > (675 - 188)) {
-		module.getListProjectiles().get(i).getPosition().setY((675 - 188));
+	    if (module.getListProjectiles().get(i).getPosition().getY() > (675 - 142)) {
+		module.getListProjectiles().get(i).getPosition().setY((675 - 142));
 		module.rebond(module.getListProjectiles().get(i), 'a');
 
 	    }

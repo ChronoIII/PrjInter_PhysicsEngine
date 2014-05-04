@@ -251,10 +251,10 @@ public class EngineScreen extends BasicGameState {
 
         roue.draw(35, 506);
         if (inventaire) {
-            
+
             g.setColor(colorAlpha);
             g.fillRoundRect(0, 50, 475, 570, 30);
-inventaireExit.draw(435,55);
+            inventaireExit.draw(435, 55);
         }
 
     }
