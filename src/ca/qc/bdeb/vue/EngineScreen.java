@@ -52,7 +52,7 @@ public class EngineScreen extends BasicGameState {
 //    true = false, false = play
     private boolean modePausePlay;
     private boolean inventaire;
-    private Color colorAlpha = new Color(1f, 1f, 1f, 0.75f);
+    private Color colorAlpha = new Color(0.84f, 0.84f, 0.84f, 0.85f);
     private boolean focusMenu = false;
 
     public EngineScreen(int state, Controleur controleur) throws SlickException {
@@ -113,7 +113,7 @@ public class EngineScreen extends BasicGameState {
 
         if ((Mouse.getX() < 1200 && Mouse.getY() > 600 && Mouse.getY() < 675) || (Mouse.getX() < 1200 && Mouse.getY() > 0 && Mouse.getY() < 88)) {
             focusMenu = true;
-            System.out.println("lol");
+//            System.out.println("lol");
         } else {
             focusMenu = false;
         }
@@ -121,20 +121,22 @@ public class EngineScreen extends BasicGameState {
         //Bouton///////////////////////////////////////////////////////////////////////////////
         //inventaire
         if (!inventaire) {
+        
             if ((posX > 10 && posX < 85) && (posY > 10 && posY < 75)) {
                 if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                     buttonInventaire = new Image("inventory2.png");
-                    System.out.println("Inventaire clicker");
+                    System.out.println("Inventaire clicker123213213");
                     inventaire = true;
 
 
                 } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                     buttonInventaire = new Image("inventory.png");
-                }
+                }}
                 //exit
                 if ((posX > 1110 && posX < 1186) && (posY > 607 && posY < 670)) {
                     if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                         System.out.println("got clicked buddy! lets go back!");
+                        
                         sbg.enterState(0);
                     } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                     }
@@ -145,6 +147,7 @@ public class EngineScreen extends BasicGameState {
                         if (modePausePlay) {
                             buttonPlay = new Image("pause.png");
                             modePausePlay = false;
+                           
                         } else {
                             buttonPlay = new Image("play.png");
                             modePausePlay = true;
@@ -170,7 +173,7 @@ public class EngineScreen extends BasicGameState {
                         controleur.chargerFichier();
                     }
                 }
-            }
+            
             //fin Bouton///////////////////////////////////////////////////////////////////////////////
 
             //key input////////////////////////////////////////////////////////////////////////////
@@ -241,7 +244,7 @@ public class EngineScreen extends BasicGameState {
 
             //Canon rotation
             if(!inventaire){
-            if (!focusMenu) {
+                if (!focusMenu) {
                 canon.setRotation((float) Math.toDegrees((Math.atan((double) posX / posY))) + 270);
 
             }}
@@ -279,13 +282,15 @@ public class EngineScreen extends BasicGameState {
         buttonLoad.draw((1110), 600);
         buttonSave.draw((1110 - 90), 600);
 
-        canon.draw(85 - 195, 500);
+        canon.draw(85 - 195, 500+7);
 
-        roue.draw(35, 506);
+        roue.draw(35, 506+7);
         if (inventaire) {
 
             g.setColor(colorAlpha);
-            g.fillRoundRect(0, 50, 475, 570, 30);
+            g.fillRoundRect(0, 80, 475, 505, 30);
+            
+            
             inventaireExit.draw(435, 55);
             if ((posX > 438 && posX < 483) && (posY > 573 && posY < 619)) {
                 if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {

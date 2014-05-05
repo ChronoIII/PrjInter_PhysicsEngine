@@ -69,19 +69,16 @@ public class MainMenu extends BasicGameState {
             //play
             if ((posX > 795 && posX < 1168) && (posY > 182 && posY < 225)) {
                 if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-
-                    introMusic.stop();
-                    sbg.enterState(1);
-                } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                 }
             }
             //create
 
             if ((posX > 795 && posX < 1168) && (posY > 121 && posY < 166)) {
                 if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-
                     System.out.println("CREATE");
-                } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+                    introMusic.stop();
+                    sbg.enterState(1);
+                    
                 }
             }
             //credits
@@ -95,17 +92,17 @@ public class MainMenu extends BasicGameState {
 
 
             }
-        
-        if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 
-            rire.play();
-            System.out.println("I laughed");
+            if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+
+                rire.play();
+                System.out.println("I laughed");
+            }
         }
-}
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-   int posX = Mouse.getX();
+        int posX = Mouse.getX();
         int posY = Mouse.getY();
 
         introPhoto.draw();
@@ -125,9 +122,9 @@ public class MainMenu extends BasicGameState {
             g.setColor(colorAlpha);
             g.fillRoundRect(0, 50, 475, 570, 30);
             inventaireExit.draw(435, 55);
- 
-            if ((posX > 438 && posX < 483) && (posY > 573 && posY < 619)){
-                
+
+            if ((posX > 438 && posX < 483) && (posY > 573 && posY < 619)) {
+
                 if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 
                     System.out.println("Inventaire clicker pour fermer");
