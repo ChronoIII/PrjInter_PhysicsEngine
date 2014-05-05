@@ -16,7 +16,7 @@ import org.newdawn.slick.SpriteSheet;
  */
 public class Projectiles implements Affichable {
 
-    private String nomImg = "animation2.png";
+    private String nomImg = "spiritesheet.png";
     private Controleur controleur;
     
     

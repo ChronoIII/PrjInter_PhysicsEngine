@@ -24,9 +24,9 @@ public class Controleur {
     private Affichable nouvelleItemAffichable = null;
 
     public Controleur() throws SlickException {
-	module = new Module(this);
-	engineScreenMenu = new EngineScreen(engineScreen, this);
-	mainMenu = new MainMenu(menu, this);
+        module = new Module(this);
+        engineScreenMenu = new EngineScreen(engineScreen, this);
+        mainMenu = new MainMenu(menu, this);
 
 //	v = 75;//vitesse initiale 
 //	angle = 60;//angle initial en degré
@@ -34,25 +34,26 @@ public class Controleur {
 
     //Projectiles
     public void addProjectile(int x, int y, double v, double angle, double facRebond) throws SlickException {
-	module.getListProjectiles().add(new Projectiles((x + 120), (y + 475), v, angle, facRebond, this));
+        module.getListProjectiles().add(new Projectiles((x + 200), (y + 400), v, angle, facRebond, this));
     }
 
     public double positionProjectileX(int i) {
-	return module.getListProjectiles().get(i).getPosition().getX();
+        return module.getListProjectiles().get(i).getPosition().getX();
     }
 
     public double positionProjectileY(int i) {
-	return module.getListProjectiles().get(i).getPosition().getY();
+        return module.getListProjectiles().get(i).getPosition().getY();
     }
 
     public ArrayList<Projectiles> listProjectiles() {
-	return module.getListProjectiles();
+        return module.getListProjectiles();
     }
 
     public void enleverProjectiles(Projectiles projectile) {
-	module.getListProjectiles().remove(projectile);
-	engineScreenMenu.getListAnimationProjectiles().remove(0);
+        module.getListProjectiles().remove(projectile);
+        engineScreenMenu.getListAnimationProjectiles().remove(0);
     }
+<<<<<<< HEAD
 
     public void rebondProjectilesMur() {
 	for (int i = 0; i < module.getListProjectiles().size(); i++) {
@@ -60,26 +61,43 @@ public class Controleur {
 	    if ((module.getListProjectiles().get(i).getPosition().getX() + module.getListProjectiles().get(i).getBound().getX()) > (1200)) {
 		module.getListProjectiles().get(i).getPosition().setX(1200 - module.getListProjectiles().get(i).getBound().getX());
 		module.rebond(module.getListProjectiles().get(i), 'b');
+=======
 
-	    }
-	    if (module.getListProjectiles().get(i).getPosition().getX() < 0) {
-		module.getListProjectiles().get(i).getPosition().setX(0);
-		module.rebond(module.getListProjectiles().get(i), 'b');
+    public void rebondProjectiles() {
+        for (int i = 0; i < module.getListProjectiles().size(); i++) {
+>>>>>>> d39deac0764886089592f4bced7f61d69ac8c17a
 
+            if (module.getListProjectiles().get(i).getPosition().getX() > (1200 - 67)) {
+                module.getListProjectiles().get(i).getPosition().setX(1200 - 67);
+                module.rebond(module.getListProjectiles().get(i), 'b');
+
+<<<<<<< HEAD
 	    }
 	    if ((module.getListProjectiles().get(i).getPosition().getY() + module.getListProjectiles().get(i).getBound().getY()) > (590)) {
 		module.getListProjectiles().get(i).getPosition().setY((590 - module.getListProjectiles().get(i).getBound().getY()));
 		module.rebond(module.getListProjectiles().get(i), 'a');
+=======
+            }
+            if (module.getListProjectiles().get(i).getPosition().getX() < 0) {
+                module.getListProjectiles().get(i).getPosition().setX(0);
+                module.rebond(module.getListProjectiles().get(i), 'b');
+>>>>>>> d39deac0764886089592f4bced7f61d69ac8c17a
 
-	    }
-	    if (module.getListProjectiles().get(i).getPosition().getY() < 75) {
-		module.getListProjectiles().get(i).getPosition().setY(75);
-		module.rebond(module.getListProjectiles().get(i), 'a');
+            }
+            if (module.getListProjectiles().get(i).getPosition().getY() > (675 - 142)) {
+                module.getListProjectiles().get(i).getPosition().setY((675 - 142));
+                module.rebond(module.getListProjectiles().get(i), 'a');
 
-	    }
-	}
+            }
+            if (module.getListProjectiles().get(i).getPosition().getY() < 75) {
+                module.getListProjectiles().get(i).getPosition().setY(75);
+                module.rebond(module.getListProjectiles().get(i), 'a');
+
+            }
+        }
     }
 
+<<<<<<< HEAD
     public void rebondProjectilesStructure() {
 	for (int i = 0; i < module.getListProjectiles().size(); i++) {
 	    for (int j = 0; j < module.getListStructures().size(); j++) {
@@ -107,41 +125,43 @@ public class Controleur {
 	}
     }
 
+=======
+>>>>>>> d39deac0764886089592f4bced7f61d69ac8c17a
     public void bougerProjectiles() {
-	for (int i = 0; i < module.getListProjectiles().size(); i++) {
+        for (int i = 0; i < module.getListProjectiles().size(); i++) {
 //	    module.mouvement2D(listProjectiles().get(i));
-	    module.getListProjectiles().get(i).getPosition().setX(module.getListProjectiles().get(i).getPosition().getX() + module.getListProjectiles().get(i).getVitesse().getX());
-	    module.getListProjectiles().get(i).getPosition().setY(module.getListProjectiles().get(i).getPosition().getY() - module.getListProjectiles().get(i).getVitesse().getY());
-	    module.getListProjectiles().get(i).getVitesse().setY(module.getListProjectiles().get(i).getVitesse().getY() - (module.getListProjectiles().get(i).getGravity() / 100));
-	}
+            module.getListProjectiles().get(i).getPosition().setX(module.getListProjectiles().get(i).getPosition().getX() + module.getListProjectiles().get(i).getVitesse().getX());
+            module.getListProjectiles().get(i).getPosition().setY(module.getListProjectiles().get(i).getPosition().getY() - module.getListProjectiles().get(i).getVitesse().getY());
+            module.getListProjectiles().get(i).getVitesse().setY(module.getListProjectiles().get(i).getVitesse().getY() - (module.getListProjectiles().get(i).getGravity() / 100));
+        }
     }
     //fin
 
     //Structures
     public void addStructure(int x, int y) throws SlickException {
-	module.getListStructures().add(new Structures(x, y, this));
+        module.getListStructures().add(new Structures(x, y, this));
     }
 
     public double positionStructureX(int i) {
-	return module.getListStructures().get(i).getPosition().getX();
+        return module.getListStructures().get(i).getPosition().getX();
     }
 
     public double positionStructureY(int i) {
-	return module.getListStructures().get(i).getPosition().getY();
+        return module.getListStructures().get(i).getPosition().getY();
     }
 
     public ArrayList<Structures> listStructures() {
-	return module.getListStructures();
+        return module.getListStructures();
     }
 
     public void enleverStructure(Structures structure) {
-	module.getListStructures().remove(structure);
-	engineScreenMenu.getListImagesStructures().remove(0);
+        module.getListStructures().remove(structure);
+        engineScreenMenu.getListImagesStructures().remove(0);
     }
     //fin
 
     public void afficher(Affichable nouvelleItemAffichable) {
-	this.nouvelleItemAffichable = nouvelleItemAffichable;
+        this.nouvelleItemAffichable = nouvelleItemAffichable;
     }
 
 //    public void avancerTemps() {
@@ -151,30 +171,40 @@ public class Controleur {
 //    }
 //    setters and getters
     public Module getModule() {
-	return module;
+        return module;
     }
 
     public EngineScreen getEngineScreenMenu() {
-	return engineScreenMenu;
+        return engineScreenMenu;
     }
 
     public MainMenu getMainMenu() {
-	return mainMenu;
+        return mainMenu;
     }
 
     public int getMenu() {
-	return menu;
+        return menu;
     }
 
     public int getEngineScreen() {
-	return engineScreen;
+        return engineScreen;
     }
 
     public Affichable getNouvelleItemAffichable() {
-	return nouvelleItemAffichable;
+        return nouvelleItemAffichable;
     }
 
     public void setNouvelleItemAffichable(Affichable nouvelleItemAffichable) {
-	this.nouvelleItemAffichable = nouvelleItemAffichable;
+        this.nouvelleItemAffichable = nouvelleItemAffichable;
+    }
+
+    public void sauvegarderFichier(int nbreProjectile) {
+
+        module.sauvegarde(nbreProjectile);
+    }
+
+    public void chargerFichier() {
+        
+        module.charger();
     }
 }

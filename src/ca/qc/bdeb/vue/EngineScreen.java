@@ -26,9 +26,7 @@ public class EngineScreen extends BasicGameState {
     int state;
     Controleur controleur;
     private ArrayList<Image> listImagesStructures;
-     private ArrayList<Animation> listAnimationProjectiles;
-
-   
+    private ArrayList<Animation> listAnimationProjectiles;
     private Image catapule;
     private Image bg;
     double t = 0;
@@ -49,7 +47,13 @@ public class EngineScreen extends BasicGameState {
     private Image buttonExit;
     private Image roue;
     private Image canon;
+    private Image inventaireExit;
     private float lol = 90;
+//    true = false, false = play
+    private boolean modePausePlay;
+    private boolean inventaire;
+    private Color colorAlpha = new Color(1f, 1f, 1f, 0.75f);
+    private boolean focusMenu = false;
 
     public EngineScreen(int state, Controleur controleur) throws SlickException {
         this.state = state;
@@ -60,11 +64,13 @@ public class EngineScreen extends BasicGameState {
 
 
         Input a = gc.getInput();
-        projsheet = new SpriteSheet("animation2.png", 68, 54);
+        modePausePlay = true;
+        inventaire = false;
+        projsheet = new SpriteSheet("spiritesheet.png", 80, 59);
         projtest = new Animation(projsheet, 250);
-        
-         listAnimationProjectiles = new ArrayList<Animation>();
-                listImagesStructures = new ArrayList<Image>();
+
+        listAnimationProjectiles = new ArrayList<Animation>();
+        listImagesStructures = new ArrayList<Image>();
         bg = new Image("background.jpg");
 
         buttonInventaire = new Image("inventory.png");
@@ -75,7 +81,7 @@ public class EngineScreen extends BasicGameState {
         buttonPlay = new Image("play.png");
         buttonPause = new Image("pause.png");
         buttonExit = new Image("exit.png");
-
+        inventaireExit = new Image("exitinventaire.png");
         roue = new Image("wheel.png");
         canon = new Image("canon.png");
         canon.rotate(Mouse.getX());
@@ -83,11 +89,6 @@ public class EngineScreen extends BasicGameState {
 //        musiqueJeuPlay = new Music("gamemusic.wav");
 
 //        musiqueJeuPlay.loop();
-
-
-
-
-
 
 //	controleur.addProjectile(x, y);
 //	c = new Ennemie(controleur);
@@ -110,29 +111,27 @@ public class EngineScreen extends BasicGameState {
         int posX = Mouse.getX();
         int posY = Mouse.getY();
 
+        if ((Mouse.getX() < 1200 && Mouse.getY() > 600 && Mouse.getY() < 675) || (Mouse.getX() < 1200 && Mouse.getY() > 0 && Mouse.getY() < 88)) {
+            focusMenu = true;
+            System.out.println("lol");
+        } else {
+            focusMenu = false;
+        }
+
         //Bouton///////////////////////////////////////////////////////////////////////////////
         //inventaire
-        if ((posX > 10 && posX < 85) && (posY > 75 && posY < 10)) {
-            if (gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-                buttonInventaire = new Image("inventory.png");
-                System.out.println("allo");
-            } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-                buttonInventaire = new Image("inventory.png");
-                System.out.println("allo");
-            }
-        }
+        if (!inventaire) {
+            if ((posX > 10 && posX < 85) && (posY > 10 && posY < 75)) {
+                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                    buttonInventaire = new Image("inventory2.png");
+                    System.out.println("Inventaire clicker");
+                    inventaire = true;
 
-        if ((posX > 1110 && posX < 1186) && (posY > 607 && posY < 670)) {
-            if (gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-                buttonPlay = new Image("buttons - Copy.jpg");
-                System.out.println("got clicked buddy! lets go back!");
-                sbg.enterState(0);
-            } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-            }
-        }
 
-        //Bouton///////////////////////////////////////////////////////////////////////////////
+                } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+                    buttonInventaire = new Image("inventory.png");
 
+<<<<<<< HEAD
         //key input////////////////////////////////////////////////////////////////////////////
         if (Key.isKeyDown(Input.KEY_SPACE)) {
 	    if(force < 40){
@@ -144,24 +143,96 @@ public class EngineScreen extends BasicGameState {
                 System.out.println("" + angle);
                 controleur.addProjectile(0, 0, force / 3, angle, 0.8);
                 force = 0;
+=======
+                }
+>>>>>>> d39deac0764886089592f4bced7f61d69ac8c17a
             }
-        }
-
-        if (Key.isKeyPressed(Input.KEY_1)) {
-
-
-            if (!controleur.listProjectiles().isEmpty()) {
-
-                controleur.listProjectiles().get(0).detruir();
+            //exit
+            if ((posX > 1110 && posX < 1186) && (posY > 607 && posY < 670)) {
+                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                    System.out.println("got clicked buddy! lets go back!");
+                    sbg.enterState(0);
+                } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+                }
             }
-            if (controleur.listProjectiles().isEmpty()) {
+            //play
+            if ((posX > 100 && posX < 175) && (posY > 10 && posY < 75)) {
+                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                    if (modePausePlay) {
+                        buttonPlay = new Image("pause.png");
+                        modePausePlay = false;
+                    } else {
+                        buttonPlay = new Image("play.png");
+                        modePausePlay = true;
+                    }
+
+
+                }
             }
-        }
-        if (Key.isKeyDown(Input.KEY_M)) {
+//        save
+            if ((posX > 1020 && posX < 1100) && (posY > 10 && posY < 75)) {
+                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                    System.out.println("save button");
 
-            sbg.enterState(0);
-        }
+                    controleur.sauvegarderFichier(controleur.listProjectiles().size());
 
+                }
+            }
+
+//load
+            if ((posX > 1109 && posX < 1190) && (posY > 10 && posY < 75)) {
+                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                    System.out.println("load button");
+                    controleur.chargerFichier();
+                }
+            }
+            //Bouton///////////////////////////////////////////////////////////////////////////////
+
+            //key input////////////////////////////////////////////////////////////////////////////
+            if (!focusMenu) {
+                if (Key.isKeyDown(Input.KEY_SPACE)) {
+                    force += 3;
+                } else {
+                    if (force != 0) {
+                        angle = Math.toDegrees((Math.atan((double) posY / posX)));
+                        System.out.println("" + angle);
+                        controleur.addProjectile(0, 0, force / 3, angle, 0.8);
+                        force = 0;
+                    }
+                }
+
+                if (Key.isKeyPressed(Input.KEY_1)) {
+
+
+                    if (!controleur.listProjectiles().isEmpty()) {
+
+                        controleur.listProjectiles().get(0).detruir();
+                    }
+                    if (controleur.listProjectiles().isEmpty()) {
+                    }
+                }
+                if (Key.isKeyDown(Input.KEY_M)) {
+
+                    sbg.enterState(0);
+                }
+
+                //fin key input///////////////////////////////////////////////////////////////////////
+
+                //nouvelle image
+                if (controleur.getNouvelleItemAffichable() != null) {
+                    switch (controleur.getNouvelleItemAffichable().getNomImg()) {
+                        case "spiritesheet.png":
+                            addAnimationProjectiles(controleur.getNouvelleItemAffichable().getNomImg());
+                            break;
+                        case "Sans titre.png":
+                            addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
+                            break;
+                    }
+                    controleur.setNouvelleItemAffichable(null);
+                }
+            }
+
+<<<<<<< HEAD
         //fin key input///////////////////////////////////////////////////////////////////////
 
         //nouvelle image
@@ -173,9 +244,17 @@ public class EngineScreen extends BasicGameState {
                 case "inventory.png":
                     addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
                     break;
+=======
+            //mouvement///////////////////////////////////////////////////////////////////////////////
+            controleur.bougerProjectiles();
+            controleur.rebondProjectiles();
+            //fin mouvement//////////////////////////////////////////////////////////////////////////////////////////
+            if (!focusMenu) {
+                canon.setRotation((float) Math.toDegrees((Math.atan((double) posX / posY))) + 270);
+>>>>>>> d39deac0764886089592f4bced7f61d69ac8c17a
             }
-            controleur.setNouvelleItemAffichable(null);
         }
+<<<<<<< HEAD
 
         //mouvement///////////////////////////////////////////////////////////////////////////////
         controleur.bougerProjectiles();
@@ -183,6 +262,8 @@ public class EngineScreen extends BasicGameState {
         //fin mouvement//////////////////////////////////////////////////////////////////////////////////////////
 
         canon.setRotation((float) Math.toDegrees((Math.atan((double) posX / posY))) + 270);
+=======
+>>>>>>> d39deac0764886089592f4bced7f61d69ac8c17a
     }
 
     public int getID() {
@@ -191,40 +272,65 @@ public class EngineScreen extends BasicGameState {
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
         bg.draw();
-
+        int posX = Mouse.getX();
+        int posY = Mouse.getY();
 
         for (int i = 0; i < listAnimationProjectiles.size(); i++) {
             listAnimationProjectiles.get(i).draw((int) (controleur.positionProjectileX(i)), (int) (controleur.positionProjectileY(i)));
         }
         for (int i = 0; i < listImagesStructures.size(); i++) {
-	    listImagesStructures.get(i).draw((int) (controleur.positionStructureX(i)), (int) (controleur.positionStructureY(i)));
+            listImagesStructures.get(i).draw((int) (controleur.positionStructureX(i)), (int) (controleur.positionStructureY(i)));
         }
-	
-	
+
+
         g.setColor(Color.black);
         g.drawString("force: " + force, 300, 100);
         g.drawString("angle: " + angle, 300, 150);
         g.drawString("" + Mouse.getX() + ", " + Mouse.getY(), 300, 200);
         textfield.render(gc, g);
-        projtest.draw(100, 100);
+//        projtest.draw(100, 100); //bat test
         buttonInventaire.draw(10, 600);
         buttonPlay.draw(100, 600);
         buttonExit.draw(1110, 5);
-        buttonSettings.draw(1110, 600);
-        buttonLoad.draw((1110 - 90), 600);
-        buttonSave.draw((1110 - 180), 600);
+
+        buttonLoad.draw((1110), 600);
+        buttonSave.draw((1110 - 90), 600);
 
         canon.draw(85 - 195, 500);
 
         roue.draw(35, 506);
+        if (inventaire) {
 
+            g.setColor(colorAlpha);
+            g.fillRoundRect(0, 50, 475, 570, 30);
+            inventaireExit.draw(435, 55);
+            if ((posX > 438 && posX < 483) && (posY > 573 && posY < 619)) {
+                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                    buttonInventaire = new Image("inventory.png");
+                    System.out.println("close inventory");
+
+                    inventaire = false;
+
+                }
+            }
+
+            if ((posX > 10 && posX < 85) && (posY > 10 && posY < 75)) {
+                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                    buttonInventaire = new Image("inventory.png");
+                    System.out.println("Inventaire clicker pour fermer");
+                    inventaire = false;
+
+
+                }
+            }
+        }
+        
     }
 
-   
     public void addAnimationProjectiles(String nomImg) throws SlickException {
-    
-        SpriteSheet projsheet = new SpriteSheet(nomImg, 68, 54);
-        Animation projtest = new Animation(projsheet, 50);
+
+        SpriteSheet projsheet = new SpriteSheet(nomImg, 80, 59);
+        Animation projtest = new Animation(projsheet, 60);
         listAnimationProjectiles.add(projtest);
     }
 
@@ -234,13 +340,14 @@ public class EngineScreen extends BasicGameState {
         listImagesStructures.add(img);
     }
 
- public ArrayList<Animation> getListAnimationProjectiles() {
+    public ArrayList<Animation> getListAnimationProjectiles() {
         return listAnimationProjectiles;
     }
 
     public void setListAnimationProjectiles(ArrayList<Animation> listAnimationProjectiles) {
         this.listAnimationProjectiles = listAnimationProjectiles;
     }
+
     public ArrayList<Image> getListImagesStructures() {
         return listImagesStructures;
     }
