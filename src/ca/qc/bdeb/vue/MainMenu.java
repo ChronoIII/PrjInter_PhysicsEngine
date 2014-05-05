@@ -99,7 +99,7 @@ public class MainMenu extends BasicGameState {
                     System.out.println("the end");
                     
 
-                    System.exit(0);
+                    System.exit(1);
                 } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                 }
             }
