@@ -27,6 +27,9 @@ public class MainMenu extends BasicGameState {
     private boolean isClicked;
     private Image iris;
     private Sound rire;
+    private boolean focusCredit = false;
+    private Color colorAlpha = new Color(1f, 1f, 1f, 0.75f);
+    private Image inventaireExit;
 
     public MainMenu(int state, Controleur controleur) throws SlickException {
         this.state = state;
@@ -44,8 +47,9 @@ public class MainMenu extends BasicGameState {
         introMusic = new Music("intro.wav");
         introMusic.loop();
         isClicked = true;
-        rire = new Sound ("rire.mp3");
-      
+        rire = new Sound("rire.wav");
+        inventaireExit = new Image("exitinventaire.png");
+
 
     }
 
@@ -60,59 +64,81 @@ public class MainMenu extends BasicGameState {
         } else {
             buttonPlay = new Image("buttons - Copy.jpg");
         }
+        if (!focusCredit) {
 //boutons
-        //play
-        if ((posX > 795 && posX < 1168) && (posY > 182 && posY < 225)) {
-            if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                
-                introMusic.stop();
-                sbg.enterState(1);
-            } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-               
+            //play
+            if ((posX > 795 && posX < 1168) && (posY > 182 && posY < 225)) {
+                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+
+                    introMusic.stop();
+                    sbg.enterState(1);
+                } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+                }
             }
-        }
-        //create
+            //create
+
+            if ((posX > 795 && posX < 1168) && (posY > 121 && posY < 166)) {
+                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+
+                    System.out.println("CREATE");
+                } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+                }
+            }
+            //credits
+            if ((posX > 795 && posX < 1168) && (posY > 61 && posY < 105)) {
+                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+
+                    System.out.println("CREDITS");
+                    focusCredit = true;
+                } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+                }
+
+
+            }
         
-         if ((posX > 795 && posX < 1168) && (posY > 121 && posY < 166)) {
-            if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                
-                System.out.println("CREATE");
-            } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-               
-            }
+        if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+
+            rire.play();
+            System.out.println("I laughed");
         }
-         //credits
-           if ((posX > 795 && posX < 1168) && (posY > 61 && posY < 105)) {
-            if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                
-                System.out.println("CREDITS");
-            } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-               
-            }
-            
-          
-        }
-           if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                
-               rire.play();
-            }
-           
+}
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-       
+   int posX = Mouse.getX();
+        int posY = Mouse.getY();
+
         introPhoto.draw();
         buttonPlay.draw(795, 450);
         buttonCreate.draw(795, 510);
         buttonCredits.draw(795, 570);
-        iris.draw(297+Mouse.getX()*13/1200,220-Mouse.getY()*8/675);
+        iris.draw(297 + Mouse.getX() * 13 / 1200, 220 - Mouse.getY() * 8 / 675);
 //        Image img = new Image ("little_baby.jpg");
 //	g.fillRect(100, 100, 100, 100);
 //	g.fillRect(200, 200, 200, 200);
 //         img.draw(100,100);
         g.setColor(Color.pink);
         g.drawString("" + Mouse.getX() + ", " + Mouse.getY(), 90, 80);
-        
+
+        if (focusCredit) {
+
+            g.setColor(colorAlpha);
+            g.fillRoundRect(0, 50, 475, 570, 30);
+            inventaireExit.draw(435, 55);
+ 
+            if ((posX > 438 && posX < 483) && (posY > 573 && posY < 619)){
+                
+                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+
+                    System.out.println("Inventaire clicker pour fermer");
+                    focusCredit = false;
+
+
+                }
+            }
+
+        }
+
     }
 
     @Override
