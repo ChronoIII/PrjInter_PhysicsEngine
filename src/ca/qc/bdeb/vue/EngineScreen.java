@@ -80,7 +80,7 @@ public class EngineScreen extends BasicGameState {
         buttonLoad = new Image("load.png");
         buttonPlay = new Image("play.png");
         buttonPause = new Image("pause.png");
-        buttonExit = new Image("exit.png");
+        buttonExit = new Image("back.png");
         inventaireExit = new Image("exitinventaire.png");
         roue = new Image("wheel.png");
         canon = new Image("canon.png");
@@ -189,8 +189,10 @@ public class EngineScreen extends BasicGameState {
                     if (force != 0) {
                         angle = Math.toDegrees((Math.atan((double) posY / posX)));
                         System.out.println("" + angle);
-                        controleur.addProjectile(0, 0, force / 3, angle, 0.8);
+                        controleur.addProjectile((int)(200*Math.acos(angle))+50, (int)(200*Math.asin(angle))-50, force / 3, angle, 0.8);
                         force = 0;
+                    
+                    
                     }
                 }
 
