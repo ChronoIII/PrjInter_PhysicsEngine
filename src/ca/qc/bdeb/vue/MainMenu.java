@@ -51,7 +51,7 @@ public class MainMenu extends BasicGameState {
         isClicked = true;
         rire = new Sound("rire.wav");
         inventaireExit = new Image("exitinventaire.png");
-        exitGame=new Image("exit.png");
+        exitGame = new Image("exit.png");
 
 
     }
@@ -72,16 +72,19 @@ public class MainMenu extends BasicGameState {
             //play
             if ((posX > 795 && posX < 1168) && (posY > 182 && posY < 225)) {
                 if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                    rire.play();
                 }
             }
             //create
 
             if ((posX > 795 && posX < 1168) && (posY > 121 && posY < 166)) {
                 if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+
                     System.out.println("CREATE");
+                    rire.play();
                     introMusic.stop();
                     sbg.enterState(1);
-                    
+
                 }
             }
             //credits
@@ -89,26 +92,29 @@ public class MainMenu extends BasicGameState {
                 if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 
                     System.out.println("CREDITS");
+                    rire.play();
                     focusCredit = true;
                 } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                 }
 
 
             }
-             if ((posX > 1110 && posX < 1186) && (posY > 607 && posY < 670)) {
+            if ((posX > 1110 && posX < 1186) && (posY > 607 && posY < 670)) {
                 if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                     System.out.println("the end");
-                    
-		    Main.exit();
+
+
+                    Main.exit();
+
                 } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                 }
             }
 
-            if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-
-                rire.play();
-                System.out.println("I laughed");
-            }
+//            if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+//
+//                
+//                System.out.println("I laughed");
+//            }
         }
     }
 
