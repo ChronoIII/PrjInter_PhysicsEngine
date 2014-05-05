@@ -5,6 +5,7 @@
 package ca.qc.bdeb.vue;
 
 import ca.qc.bdeb.controler.Controleur;
+import ca.qc.bdeb.inf204.Main;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
@@ -98,8 +99,12 @@ public class MainMenu extends BasicGameState {
                 if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                     System.out.println("the end");
                     
+<<<<<<< HEAD
 
                     System.exit(1);
+=======
+		    Main.exit();
+>>>>>>> 79de08d21b336bed421091fcfc32099789f1742c
                 } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                 }
             }

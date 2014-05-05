@@ -23,6 +23,7 @@ public class Main {
     static int fpslimit = 60;
     static String title = "no name";
     static Controleur controleur;
+    static JFrame frame;
 
     public static void main(String[] args) throws SlickException {
 
@@ -30,7 +31,7 @@ public class Main {
 	controleur = new Controleur();
 
 	//Créé la fenètre
-	JFrame frame = new JFrame();
+	frame = new JFrame();
 	CanvasGameContainer app2 = new CanvasGameContainer(new Vue(title, controleur));
 	AppGameContainer app = new AppGameContainer(new Vue(title, controleur));
 	
@@ -50,5 +51,11 @@ public class Main {
 	app.setShowFPS(showFPS);
 	app.setIcon("icon.png");
 	app2.start();
+	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    
+    public static void exit(){
+	frame.dispose();
+	System.exit(0);
     }
 }
