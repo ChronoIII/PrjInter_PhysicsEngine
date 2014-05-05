@@ -135,7 +135,9 @@ public class EngineScreen extends BasicGameState {
 
         //key input////////////////////////////////////////////////////////////////////////////
         if (Key.isKeyDown(Input.KEY_SPACE)) {
+	    if(force < 40){
             force += 3;
+	    }
         } else {
             if (force != 0) {
                 angle = Math.toDegrees((Math.atan((double) posY / posX)));
@@ -168,7 +170,7 @@ public class EngineScreen extends BasicGameState {
                 case "animation2.png":
                     addAnimationProjectiles(controleur.getNouvelleItemAffichable().getNomImg());
                     break;
-                case "Sans titre.png":
+                case "inventory.png":
                     addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
                     break;
             }
@@ -177,7 +179,7 @@ public class EngineScreen extends BasicGameState {
 
         //mouvement///////////////////////////////////////////////////////////////////////////////
         controleur.bougerProjectiles();
-        controleur.rebondProjectiles();
+        controleur.rebondProjectilesMur();
         //fin mouvement//////////////////////////////////////////////////////////////////////////////////////////
 
         canon.setRotation((float) Math.toDegrees((Math.atan((double) posX / posY))) + 270);

@@ -46,6 +46,10 @@ public class Module {
 	    projectile.getVitesse().setX(-projectile.getVitesse().getX());
 	}
     }
+    
+    public int testDirection(Projectiles proj, Structures struc){
+	return 5;
+    }
 
     //setters and getters
     public ArrayList<Projectiles> getListProjectiles() {

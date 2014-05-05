@@ -53,12 +53,12 @@ public class Controleur {
 	module.getListProjectiles().remove(projectile);
 	engineScreenMenu.getListAnimationProjectiles().remove(0);
     }
-    
-    public void rebondProjectiles(){
+
+    public void rebondProjectilesMur() {
 	for (int i = 0; i < module.getListProjectiles().size(); i++) {
 
-	    if (module.getListProjectiles().get(i).getPosition().getX() > (1200 - 100)) {
-		module.getListProjectiles().get(i).getPosition().setX(1200 - 100);
+	    if ((module.getListProjectiles().get(i).getPosition().getX() + module.getListProjectiles().get(i).getBound().getX()) > (1200)) {
+		module.getListProjectiles().get(i).getPosition().setX(1200 - module.getListProjectiles().get(i).getBound().getX());
 		module.rebond(module.getListProjectiles().get(i), 'b');
 
 	    }
@@ -67,8 +67,8 @@ public class Controleur {
 		module.rebond(module.getListProjectiles().get(i), 'b');
 
 	    }
-	    if (module.getListProjectiles().get(i).getPosition().getY() > (675 - 188)) {
-		module.getListProjectiles().get(i).getPosition().setY((675 - 188));
+	    if ((module.getListProjectiles().get(i).getPosition().getY() + module.getListProjectiles().get(i).getBound().getY()) > (590)) {
+		module.getListProjectiles().get(i).getPosition().setY((590 - module.getListProjectiles().get(i).getBound().getY()));
 		module.rebond(module.getListProjectiles().get(i), 'a');
 
 	    }
@@ -79,7 +79,34 @@ public class Controleur {
 	    }
 	}
     }
-    
+
+    public void rebondProjectilesStructure() {
+	for (int i = 0; i < module.getListProjectiles().size(); i++) {
+	    for (int j = 0; j < module.getListStructures().size(); j++) {
+		if ((module.getListProjectiles().get(i).getPosition().getX() + module.getListProjectiles().get(i).getBound().getX()) > 200) {
+		    module.getListProjectiles().get(i).getPosition().setX(1200 - 100);
+		    module.rebond(module.getListProjectiles().get(i), 'b');
+
+		}
+		if (module.getListProjectiles().get(i).getPosition().getX() < 0) {
+		    module.getListProjectiles().get(i).getPosition().setX(0);
+		    module.rebond(module.getListProjectiles().get(i), 'b');
+
+		}
+		if ((module.getListProjectiles().get(i).getPosition().getY() + module.getListProjectiles().get(i).getBound().getY()) > (590)) {
+		    module.getListProjectiles().get(i).getPosition().setY((675 - 188));
+		    module.rebond(module.getListProjectiles().get(i), 'a');
+
+		}
+		if (module.getListProjectiles().get(i).getPosition().getY() < 75) {
+		    module.getListProjectiles().get(i).getPosition().setY(75);
+		    module.rebond(module.getListProjectiles().get(i), 'a');
+
+		}
+	    }
+	}
+    }
+
     public void bougerProjectiles() {
 	for (int i = 0; i < module.getListProjectiles().size(); i++) {
 //	    module.mouvement2D(listProjectiles().get(i));
@@ -122,7 +149,6 @@ public class Controleur {
 //	    listProjectiles().get(i).setTempsProjectile(listProjectiles().get(i).getTempsProjectile() + 0.1);
 //	}
 //    }
-
 //    setters and getters
     public Module getModule() {
 	return module;
