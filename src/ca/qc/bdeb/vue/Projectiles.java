@@ -26,12 +26,10 @@ public class Projectiles implements Affichable {
     private Vecteur bound;
     private Vecteur vitesse = new Vecteur();
     private Vecteur position = new Vecteur();
-    private double angle;
 
 
     public Projectiles(double posX, double posY, double vitesseIni, double angle, double facRebond, Controleur controleur) throws SlickException {
 	
-	this.angle = angle;
 	this.facRebond = facRebond;
 	position.setX(posX);
 	position.setY(posY);
@@ -48,14 +46,6 @@ public class Projectiles implements Affichable {
     }
 
     //getter and setter
-    public double getAngle() {
-	return angle;
-    }
-
-    public void setAngle(double angle) {
-	this.angle = angle;
-    }
-    
     
     public Vecteur getBound() {
 	return bound;
