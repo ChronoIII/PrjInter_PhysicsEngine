@@ -263,6 +263,7 @@ public class EngineScreen extends BasicGameState {
 
         for (int i = 0; i < listAnimationProjectiles.size(); i++) {
             listAnimationProjectiles.get(i).draw((int) (controleur.positionProjectileX(i)), (int) (controleur.positionProjectileY(i)));
+//	    listAnimationProjectiles.get(i).getCurrentFrame().setRotation((float) (controleur.orientationProjectil(controleur.listProjectiles().get(i))));
         }
         for (int i = 0; i < listImagesStructures.size(); i++) {
             listImagesStructures.get(i).draw((int) (controleur.positionStructureX(i)), (int) (controleur.positionStructureY(i)));
@@ -271,7 +272,7 @@ public class EngineScreen extends BasicGameState {
 
         g.setColor(Color.black);
         g.drawString("force: " + force, 300, 100);
-        g.drawString("angle: " + angle, 300, 150);
+        g.drawString("angle: " + Math.toDegrees((Math.atan((double) posY / posX))), 300, 150);
         g.drawString("" + Mouse.getX() + ", " + Mouse.getY(), 300, 200);
         textfield.render(gc, g);
 //        projtest.draw(100, 100); //bat test
