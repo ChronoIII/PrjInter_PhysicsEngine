@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ca.qc.bdeb.controler;
 
 import ca.qc.bdeb.module.Module;
@@ -15,26 +12,30 @@ import org.newdawn.slick.SlickException;
 
 public class Controleur {
 
+    //State
     private int menu = 0;
     private int engineScreen = 1;
-    //engineScreen = 1???
     private Module module;
+    //Screens
     private MainMenu mainMenu;
     private EngineScreen engineScreenMenu;
     private Affichable nouvelleItemAffichable = null;
 
     public Controleur() throws SlickException {
 	module = new Module(this);
+
 	engineScreenMenu = new EngineScreen(engineScreen, this);
 	mainMenu = new MainMenu(menu, this);
-
-//	v = 75;//vitesse initiale 
-//	angle = 60;//angle initial en degré
     }
 
     //Projectiles
     public void addProjectile(int x, int y, double v, double angle, double facRebond) throws SlickException {
 	module.getListProjectiles().add(new Projectiles((x + 40), (y + 500), v, angle, facRebond, this));
+    }
+
+    public void enleverProjectiles(Projectiles projectile) {
+	module.getListProjectiles().remove(projectile);
+	engineScreenMenu.getListAnimationProjectiles().remove(0);
     }
 
     public double positionProjectileX(int i) {
@@ -47,11 +48,6 @@ public class Controleur {
 
     public ArrayList<Projectiles> listProjectiles() {
 	return module.getListProjectiles();
-    }
-
-    public void enleverProjectiles(Projectiles projectile) {
-	module.getListProjectiles().remove(projectile);
-	engineScreenMenu.getListAnimationProjectiles().remove(0);
     }
 
     public void rebondProjectilesMur() {
@@ -82,7 +78,6 @@ public class Controleur {
 
     public void bougerProjectiles() {
 	for (int i = 0; i < module.getListProjectiles().size(); i++) {
-//	    module.mouvement2D(listProjectiles().get(i));
 	    module.getListProjectiles().get(i).getPosition().setX(module.getListProjectiles().get(i).getPosition().getX() + module.getListProjectiles().get(i).getVitesse().getX());
 	    module.getListProjectiles().get(i).getPosition().setY(module.getListProjectiles().get(i).getPosition().getY() - module.getListProjectiles().get(i).getVitesse().getY());
 	    module.getListProjectiles().get(i).getVitesse().setY(module.getListProjectiles().get(i).getVitesse().getY() - (module.getListProjectiles().get(i).getGravity() / 100));
@@ -97,21 +92,15 @@ public class Controleur {
 	}
 	return Math.toDegrees(angle);
     }
-    //fin
-
-    public void sauvegarderFichier(int nbreProjectile) {
-
-	module.sauvegarde(nbreProjectile);
-    }
-
-    public void chargerFichier() {
-
-	module.charger();
-    }
 
     //Structures
     public void addStructure(int x, int y) throws SlickException {
 	module.getListStructures().add(new Structures(x, y, this));
+    }
+
+    public void enleverStructure(Structures structure) {
+	module.getListStructures().remove(structure);
+	engineScreenMenu.getListImagesStructures().remove(0);
     }
 
     public double positionStructureX(int i) {
@@ -126,22 +115,23 @@ public class Controleur {
 	return module.getListStructures();
     }
 
-    public void enleverStructure(Structures structure) {
-	module.getListStructures().remove(structure);
-	engineScreenMenu.getListImagesStructures().remove(0);
-    }
-    //fin
-
+    //Mettre un objet affichable dans la variable
     public void afficher(Affichable nouvelleItemAffichable) {
 	this.nouvelleItemAffichable = nouvelleItemAffichable;
     }
 
-//    public void avancerTemps() {
-//	for (int i = 0; i < module.getListProjectiles().size(); i++) {
-//	    listProjectiles().get(i).setTempsProjectile(listProjectiles().get(i).getTempsProjectile() + 0.1);
-//	}
-//    }
-//    setters and getters
+    //Sauvegarde
+    public void sauvegarderFichier(int nbreProjectile) {
+
+	module.sauvegarde(nbreProjectile);
+    }
+
+    public void chargerFichier() {
+
+	module.charger();
+    }
+
+    //getters and setters
     public Module getModule() {
 	return module;
     }

@@ -32,6 +32,7 @@ public class Structures implements Affichable {
 	controleur.enleverStructure(this);
     }
 
+    //getters and setters
     public String getNomImg() {
 	return nomImg;
     }
