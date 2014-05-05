@@ -30,6 +30,7 @@ public class MainMenu extends BasicGameState {
     private boolean focusCredit = false;
     private Color colorAlpha = new Color(1f, 1f, 1f, 0.75f);
     private Image inventaireExit;
+    private Image exitGame;
 
     public MainMenu(int state, Controleur controleur) throws SlickException {
         this.state = state;
@@ -49,6 +50,7 @@ public class MainMenu extends BasicGameState {
         isClicked = true;
         rire = new Sound("rire.wav");
         inventaireExit = new Image("exitinventaire.png");
+        exitGame=new Image("exit.png");
 
 
     }
@@ -92,6 +94,15 @@ public class MainMenu extends BasicGameState {
 
 
             }
+             if ((posX > 1110 && posX < 1186) && (posY > 607 && posY < 670)) {
+                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                    System.out.println("the end");
+                    
+
+                    System.exit(0);
+                } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+                }
+            }
 
             if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 
@@ -109,6 +120,7 @@ public class MainMenu extends BasicGameState {
         buttonPlay.draw(795, 450);
         buttonCreate.draw(795, 510);
         buttonCredits.draw(795, 570);
+        exitGame.draw(1110, 5);
         iris.draw(297 + Mouse.getX() * 13 / 1200, 220 - Mouse.getY() * 8 / 675);
 //        Image img = new Image ("little_baby.jpg");
 //	g.fillRect(100, 100, 100, 100);
