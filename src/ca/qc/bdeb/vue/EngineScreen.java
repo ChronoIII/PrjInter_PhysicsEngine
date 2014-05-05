@@ -286,7 +286,7 @@ public class EngineScreen extends BasicGameState {
                 }
             }
         }
-
+        
     }
 
     public void addAnimationProjectiles(String nomImg) throws SlickException {

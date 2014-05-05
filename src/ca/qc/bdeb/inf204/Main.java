@@ -20,7 +20,7 @@ public class Main {
     static boolean fullscreen = false;
     static boolean showFPS = true;
     static int fpslimit = 60;
-    static String title = "game test"; 
+    static String title = "no name"; 
     
     static Controleur controleur;
 
@@ -35,6 +35,7 @@ public class Main {
 	app.setSmoothDeltas(true);
 	app.setTargetFrameRate(fpslimit);
 	app.setShowFPS(showFPS);
+        app.setIcon("icon.png");
 	app.start();
     }
 }

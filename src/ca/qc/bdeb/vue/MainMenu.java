@@ -25,6 +25,8 @@ public class MainMenu extends BasicGameState {
     private Image introPhoto;
     private Music introMusic;
     private boolean isClicked;
+    private Image iris;
+    private Sound rire;
 
     public MainMenu(int state, Controleur controleur) throws SlickException {
         this.state = state;
@@ -38,9 +40,11 @@ public class MainMenu extends BasicGameState {
         buttonPlay = new Image("buttonPlay.jpg");
         buttonCreate = new Image("buttonCreate.jpg");
         buttonCredits = new Image("buttonCredits.jpg");
+        iris = new Image("eyeball.png");
         introMusic = new Music("intro.wav");
         introMusic.loop();
         isClicked = true;
+        rire = new Sound ("rire.mp3");
       
 
     }
@@ -85,20 +89,30 @@ public class MainMenu extends BasicGameState {
             } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                
             }
+            
+          
         }
+           if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                
+               rire.play();
+            }
+           
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+       
         introPhoto.draw();
         buttonPlay.draw(795, 450);
         buttonCreate.draw(795, 510);
         buttonCredits.draw(795, 570);
+        iris.draw(297+Mouse.getX()*13/1200,220-Mouse.getY()*8/675);
 //        Image img = new Image ("little_baby.jpg");
 //	g.fillRect(100, 100, 100, 100);
 //	g.fillRect(200, 200, 200, 200);
 //         img.draw(100,100);
         g.setColor(Color.pink);
         g.drawString("" + Mouse.getX() + ", " + Mouse.getY(), 90, 80);
+        
     }
 
     @Override
