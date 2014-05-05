@@ -130,63 +130,48 @@ public class EngineScreen extends BasicGameState {
 
                 } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                     buttonInventaire = new Image("inventory.png");
-
-<<<<<<< HEAD
-        //key input////////////////////////////////////////////////////////////////////////////
-        if (Key.isKeyDown(Input.KEY_SPACE)) {
-	    if(force < 40){
-            force += 3;
-	    }
-        } else {
-            if (force != 0) {
-                angle = Math.toDegrees((Math.atan((double) posY / posX)));
-                System.out.println("" + angle);
-                controleur.addProjectile(0, 0, force / 3, angle, 0.8);
-                force = 0;
-=======
                 }
->>>>>>> d39deac0764886089592f4bced7f61d69ac8c17a
-            }
-            //exit
-            if ((posX > 1110 && posX < 1186) && (posY > 607 && posY < 670)) {
-                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                    System.out.println("got clicked buddy! lets go back!");
-                    sbg.enterState(0);
-                } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-                }
-            }
-            //play
-            if ((posX > 100 && posX < 175) && (posY > 10 && posY < 75)) {
-                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                    if (modePausePlay) {
-                        buttonPlay = new Image("pause.png");
-                        modePausePlay = false;
-                    } else {
-                        buttonPlay = new Image("play.png");
-                        modePausePlay = true;
+                //exit
+                if ((posX > 1110 && posX < 1186) && (posY > 607 && posY < 670)) {
+                    if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                        System.out.println("got clicked buddy! lets go back!");
+                        sbg.enterState(0);
+                    } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                     }
-
-
                 }
-            }
+                //play
+                if ((posX > 100 && posX < 175) && (posY > 10 && posY < 75)) {
+                    if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                        if (modePausePlay) {
+                            buttonPlay = new Image("pause.png");
+                            modePausePlay = false;
+                        } else {
+                            buttonPlay = new Image("play.png");
+                            modePausePlay = true;
+                        }
+
+
+                    }
+                }
 //        save
-            if ((posX > 1020 && posX < 1100) && (posY > 10 && posY < 75)) {
-                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                    System.out.println("save button");
+                if ((posX > 1020 && posX < 1100) && (posY > 10 && posY < 75)) {
+                    if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                        System.out.println("save button");
 
-                    controleur.sauvegarderFichier(controleur.listProjectiles().size());
+                        controleur.sauvegarderFichier(controleur.listProjectiles().size());
 
+                    }
                 }
-            }
 
 //load
-            if ((posX > 1109 && posX < 1190) && (posY > 10 && posY < 75)) {
-                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                    System.out.println("load button");
-                    controleur.chargerFichier();
+                if ((posX > 1109 && posX < 1190) && (posY > 10 && posY < 75)) {
+                    if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                        System.out.println("load button");
+                        controleur.chargerFichier();
+                    }
                 }
             }
-            //Bouton///////////////////////////////////////////////////////////////////////////////
+            //fin Bouton///////////////////////////////////////////////////////////////////////////////
 
             //key input////////////////////////////////////////////////////////////////////////////
             if (!focusMenu) {
@@ -230,40 +215,38 @@ public class EngineScreen extends BasicGameState {
                     }
                     controleur.setNouvelleItemAffichable(null);
                 }
-            }
 
-<<<<<<< HEAD
-        //fin key input///////////////////////////////////////////////////////////////////////
 
-        //nouvelle image
-        if (controleur.getNouvelleItemAffichable() != null) {
-            switch (controleur.getNouvelleItemAffichable().getNomImg()) {
-                case "animation2.png":
-                    addAnimationProjectiles(controleur.getNouvelleItemAffichable().getNomImg());
-                    break;
-                case "inventory.png":
-                    addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
-                    break;
-=======
+
+
+                //nouvelle image
+                if (controleur.getNouvelleItemAffichable() != null) {
+                    switch (controleur.getNouvelleItemAffichable().getNomImg()) {
+                        case "animation2.png":
+                            addAnimationProjectiles(controleur.getNouvelleItemAffichable().getNomImg());
+                            break;
+                        case "inventory.png":
+                            addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
+                            break;
+                    }
+                }
+            }}
+
             //mouvement///////////////////////////////////////////////////////////////////////////////
+
             controleur.bougerProjectiles();
-            controleur.rebondProjectiles();
+            controleur.rebondProjectilesMur();
+
             //fin mouvement//////////////////////////////////////////////////////////////////////////////////////////
+
+            //Canon rotation
+            if(!inventaire){
             if (!focusMenu) {
                 canon.setRotation((float) Math.toDegrees((Math.atan((double) posX / posY))) + 270);
->>>>>>> d39deac0764886089592f4bced7f61d69ac8c17a
-            }
-        }
-<<<<<<< HEAD
 
-        //mouvement///////////////////////////////////////////////////////////////////////////////
-        controleur.bougerProjectiles();
-        controleur.rebondProjectilesMur();
-        //fin mouvement//////////////////////////////////////////////////////////////////////////////////////////
+            }}
 
-        canon.setRotation((float) Math.toDegrees((Math.atan((double) posX / posY))) + 270);
-=======
->>>>>>> d39deac0764886089592f4bced7f61d69ac8c17a
+        
     }
 
     public int getID() {
@@ -324,7 +307,7 @@ public class EngineScreen extends BasicGameState {
                 }
             }
         }
-        
+
     }
 
     public void addAnimationProjectiles(String nomImg) throws SlickException {

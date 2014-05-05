@@ -53,7 +53,6 @@ public class Controleur {
         module.getListProjectiles().remove(projectile);
         engineScreenMenu.getListAnimationProjectiles().remove(0);
     }
-<<<<<<< HEAD
 
     public void rebondProjectilesMur() {
 	for (int i = 0; i < module.getListProjectiles().size(); i++) {
@@ -61,34 +60,19 @@ public class Controleur {
 	    if ((module.getListProjectiles().get(i).getPosition().getX() + module.getListProjectiles().get(i).getBound().getX()) > (1200)) {
 		module.getListProjectiles().get(i).getPosition().setX(1200 - module.getListProjectiles().get(i).getBound().getX());
 		module.rebond(module.getListProjectiles().get(i), 'b');
-=======
-
-    public void rebondProjectiles() {
-        for (int i = 0; i < module.getListProjectiles().size(); i++) {
->>>>>>> d39deac0764886089592f4bced7f61d69ac8c17a
-
-            if (module.getListProjectiles().get(i).getPosition().getX() > (1200 - 67)) {
-                module.getListProjectiles().get(i).getPosition().setX(1200 - 67);
-                module.rebond(module.getListProjectiles().get(i), 'b');
-
-<<<<<<< HEAD
 	    }
+            
 	    if ((module.getListProjectiles().get(i).getPosition().getY() + module.getListProjectiles().get(i).getBound().getY()) > (590)) {
 		module.getListProjectiles().get(i).getPosition().setY((590 - module.getListProjectiles().get(i).getBound().getY()));
 		module.rebond(module.getListProjectiles().get(i), 'a');
-=======
+
             }
             if (module.getListProjectiles().get(i).getPosition().getX() < 0) {
                 module.getListProjectiles().get(i).getPosition().setX(0);
                 module.rebond(module.getListProjectiles().get(i), 'b');
->>>>>>> d39deac0764886089592f4bced7f61d69ac8c17a
 
             }
-            if (module.getListProjectiles().get(i).getPosition().getY() > (675 - 142)) {
-                module.getListProjectiles().get(i).getPosition().setY((675 - 142));
-                module.rebond(module.getListProjectiles().get(i), 'a');
-
-            }
+         
             if (module.getListProjectiles().get(i).getPosition().getY() < 75) {
                 module.getListProjectiles().get(i).getPosition().setY(75);
                 module.rebond(module.getListProjectiles().get(i), 'a');
@@ -97,36 +81,7 @@ public class Controleur {
         }
     }
 
-<<<<<<< HEAD
-    public void rebondProjectilesStructure() {
-	for (int i = 0; i < module.getListProjectiles().size(); i++) {
-	    for (int j = 0; j < module.getListStructures().size(); j++) {
-		if ((module.getListProjectiles().get(i).getPosition().getX() + module.getListProjectiles().get(i).getBound().getX()) > 200) {
-		    module.getListProjectiles().get(i).getPosition().setX(1200 - 100);
-		    module.rebond(module.getListProjectiles().get(i), 'b');
 
-		}
-		if (module.getListProjectiles().get(i).getPosition().getX() < 0) {
-		    module.getListProjectiles().get(i).getPosition().setX(0);
-		    module.rebond(module.getListProjectiles().get(i), 'b');
-
-		}
-		if ((module.getListProjectiles().get(i).getPosition().getY() + module.getListProjectiles().get(i).getBound().getY()) > (590)) {
-		    module.getListProjectiles().get(i).getPosition().setY((675 - 188));
-		    module.rebond(module.getListProjectiles().get(i), 'a');
-
-		}
-		if (module.getListProjectiles().get(i).getPosition().getY() < 75) {
-		    module.getListProjectiles().get(i).getPosition().setY(75);
-		    module.rebond(module.getListProjectiles().get(i), 'a');
-
-		}
-	    }
-	}
-    }
-
-=======
->>>>>>> d39deac0764886089592f4bced7f61d69ac8c17a
     public void bougerProjectiles() {
         for (int i = 0; i < module.getListProjectiles().size(); i++) {
 //	    module.mouvement2D(listProjectiles().get(i));
@@ -136,6 +91,16 @@ public class Controleur {
         }
     }
     //fin
+    
+    public void sauvegarderFichier(int nbreProjectile) {
+
+        module.sauvegarde(nbreProjectile);
+    }
+
+    public void chargerFichier() {
+        
+        module.charger();
+    }
 
     //Structures
     public void addStructure(int x, int y) throws SlickException {
@@ -198,13 +163,5 @@ public class Controleur {
         this.nouvelleItemAffichable = nouvelleItemAffichable;
     }
 
-    public void sauvegarderFichier(int nbreProjectile) {
-
-        module.sauvegarde(nbreProjectile);
-    }
-
-    public void chargerFichier() {
-        
-        module.charger();
-    }
+    
 }
