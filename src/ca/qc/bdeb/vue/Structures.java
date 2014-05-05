@@ -13,8 +13,11 @@ import org.newdawn.slick.*;
  */
 public class Structures implements Affichable {
 //    comprendre SlickException....
-    private String nomImg = "Sans titre.png";
+    private String nomImg = "inventory.png";
     private Controleur controleur;
+    
+    
+    private Vecteur bound = new Vecteur(76, 63);
     private Vecteur position = new Vecteur();
 
     public Structures(int posX, int posY, Controleur controleur) throws SlickException {
@@ -31,6 +34,14 @@ public class Structures implements Affichable {
 
     public String getNomImg() {
 	return nomImg;
+    }
+
+    public Vecteur getBound() {
+	return bound;
+    }
+
+    public void setBound(Vecteur bound) {
+	this.bound = bound;
     }
     
     public Vecteur getPosition() {

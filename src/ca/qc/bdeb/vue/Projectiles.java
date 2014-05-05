@@ -19,6 +19,7 @@ public class Projectiles implements Affichable {
     private String nomImg = "spiritesheet.png";
     private Controleur controleur;
     
+    
     private double gravity = 9.8;
     private double masse = 1;
     private double facRebond;
@@ -34,6 +35,7 @@ public class Projectiles implements Affichable {
 	position.setY(posY);
 	vitesse.setX(vitesseIni * Math.cos(Math.toRadians(angle)));
 	vitesse.setY(vitesseIni * Math.sin(Math.toRadians(angle)));
+	bound = new Vecteur(68, 54);
 
 	controleur.setNouvelleItemAffichable(this);
     }
@@ -44,6 +46,14 @@ public class Projectiles implements Affichable {
     }
 
     //getter and setter
+    public Vecteur getBound() {
+	return bound;
+    }
+
+    public void setBound(Vecteur bound) {
+	this.bound = bound;
+    }
+    
     public String getNomImg() {
         return nomImg;
     }

@@ -131,7 +131,21 @@ public class EngineScreen extends BasicGameState {
                 } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                     buttonInventaire = new Image("inventory.png");
 
+<<<<<<< HEAD
+        //key input////////////////////////////////////////////////////////////////////////////
+        if (Key.isKeyDown(Input.KEY_SPACE)) {
+	    if(force < 40){
+            force += 3;
+	    }
+        } else {
+            if (force != 0) {
+                angle = Math.toDegrees((Math.atan((double) posY / posX)));
+                System.out.println("" + angle);
+                controleur.addProjectile(0, 0, force / 3, angle, 0.8);
+                force = 0;
+=======
                 }
+>>>>>>> d39deac0764886089592f4bced7f61d69ac8c17a
             }
             //exit
             if ((posX > 1110 && posX < 1186) && (posY > 607 && posY < 670)) {
@@ -218,14 +232,38 @@ public class EngineScreen extends BasicGameState {
                 }
             }
 
+<<<<<<< HEAD
+        //fin key input///////////////////////////////////////////////////////////////////////
+
+        //nouvelle image
+        if (controleur.getNouvelleItemAffichable() != null) {
+            switch (controleur.getNouvelleItemAffichable().getNomImg()) {
+                case "animation2.png":
+                    addAnimationProjectiles(controleur.getNouvelleItemAffichable().getNomImg());
+                    break;
+                case "inventory.png":
+                    addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
+                    break;
+=======
             //mouvement///////////////////////////////////////////////////////////////////////////////
             controleur.bougerProjectiles();
             controleur.rebondProjectiles();
             //fin mouvement//////////////////////////////////////////////////////////////////////////////////////////
             if (!focusMenu) {
                 canon.setRotation((float) Math.toDegrees((Math.atan((double) posX / posY))) + 270);
+>>>>>>> d39deac0764886089592f4bced7f61d69ac8c17a
             }
         }
+<<<<<<< HEAD
+
+        //mouvement///////////////////////////////////////////////////////////////////////////////
+        controleur.bougerProjectiles();
+        controleur.rebondProjectilesMur();
+        //fin mouvement//////////////////////////////////////////////////////////////////////////////////////////
+
+        canon.setRotation((float) Math.toDegrees((Math.atan((double) posX / posY))) + 270);
+=======
+>>>>>>> d39deac0764886089592f4bced7f61d69ac8c17a
     }
 
     public int getID() {
