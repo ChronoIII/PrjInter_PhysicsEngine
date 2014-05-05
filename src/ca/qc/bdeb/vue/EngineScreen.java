@@ -65,7 +65,7 @@ public class EngineScreen extends BasicGameState {
         Input a = gc.getInput();
         modePausePlay = true;
         inventaire = false;
-        projsheet = new SpriteSheet("animation2.png", 68, 54);
+        projsheet = new SpriteSheet("spiritesheet.png", 80, 59);
         projtest = new Animation(projsheet, 250);
 
         listAnimationProjectiles = new ArrayList<Animation>();
@@ -156,6 +156,8 @@ public class EngineScreen extends BasicGameState {
             if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                 System.out.println("save button");
 
+                controleur.sauvegarderFichier();
+
             }
         }
 
@@ -163,7 +165,7 @@ public class EngineScreen extends BasicGameState {
         if ((posX > 1109 && posX < 1190) && (posY > 10 && posY < 75)) {
             if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                 System.out.println("load button");
-
+                controleur.chargerFichier();
             }
         }
         //Bouton///////////////////////////////////////////////////////////////////////////////
@@ -200,7 +202,7 @@ public class EngineScreen extends BasicGameState {
         //nouvelle image
         if (controleur.getNouvelleItemAffichable() != null) {
             switch (controleur.getNouvelleItemAffichable().getNomImg()) {
-                case "animation2.png":
+                case "spiritesheet.png":
                     addAnimationProjectiles(controleur.getNouvelleItemAffichable().getNomImg());
                     break;
                 case "Sans titre.png":
@@ -261,8 +263,8 @@ public class EngineScreen extends BasicGameState {
 
     public void addAnimationProjectiles(String nomImg) throws SlickException {
 
-        SpriteSheet projsheet = new SpriteSheet(nomImg, 68, 54);
-        Animation projtest = new Animation(projsheet, 50);
+        SpriteSheet projsheet = new SpriteSheet(nomImg, 80, 59);
+        Animation projtest = new Animation(projsheet, 60);
         listAnimationProjectiles.add(projtest);
     }
 
