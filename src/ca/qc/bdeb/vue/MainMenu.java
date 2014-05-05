@@ -98,7 +98,7 @@ public class MainMenu extends BasicGameState {
 //	g.fillRect(200, 200, 200, 200);
 //         img.draw(100,100);
         g.setColor(Color.pink);
-        g.drawString("" + Mouse.getX() + ", " + Mouse.getY(), 300, 200);
+        g.drawString("" + Mouse.getX() + ", " + Mouse.getY(), 90, 80);
     }
 
     @Override

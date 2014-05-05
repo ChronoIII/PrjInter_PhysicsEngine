@@ -151,9 +151,9 @@ public class Controleur {
         this.nouvelleItemAffichable = nouvelleItemAffichable;
     }
 
-    public void sauvegarderFichier() {
+    public void sauvegarderFichier(int nbreProjectile) {
 
-        module.sauvegarde();
+        module.sauvegarde(nbreProjectile);
     }
 
     public void chargerFichier() {

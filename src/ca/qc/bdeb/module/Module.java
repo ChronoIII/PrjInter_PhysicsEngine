@@ -63,7 +63,7 @@ public class Module {
         this.listStructures = listStructures;
     }
 
-    public void sauvegarde() {
+    public void sauvegarde(int nbreProjectiles) {
     }
     
     public void charger() {
