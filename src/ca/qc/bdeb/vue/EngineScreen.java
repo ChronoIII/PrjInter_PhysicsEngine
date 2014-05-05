@@ -226,7 +226,8 @@ public class EngineScreen extends BasicGameState {
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
         bg.draw();
-
+int posX = Mouse.getX();
+        int posY = Mouse.getY();
 
         for (int i = 0; i < listAnimationProjectiles.size(); i++) {
             listAnimationProjectiles.get(i).draw((int) (controleur.positionProjectileX(i)), (int) (controleur.positionProjectileY(i)));
@@ -241,7 +242,7 @@ public class EngineScreen extends BasicGameState {
         g.drawString("angle: " + angle, 300, 150);
         g.drawString("" + Mouse.getX() + ", " + Mouse.getY(), 300, 200);
         textfield.render(gc, g);
-        projtest.draw(100, 100);
+//        projtest.draw(100, 100); //bat test
         buttonInventaire.draw(10, 600);
         buttonPlay.draw(100, 600);
         buttonExit.draw(1110, 5);
@@ -257,6 +258,14 @@ public class EngineScreen extends BasicGameState {
             g.setColor(colorAlpha);
             g.fillRoundRect(0, 50, 475, 570, 30);
             inventaireExit.draw(435, 55);
+            if ((posX > 438 && posX < 483) && (posY > 573 && posY < 619)) {
+            if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                System.out.println("close inventory");
+
+           inventaire = false;
+
+            }
+        }
         }
 
     }

@@ -34,7 +34,7 @@ public class MainMenu extends BasicGameState {
 
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
         img = new Image("little_baby.jpg");
-        introPhoto = new Image("limbo (2).jpg");
+        introPhoto = new Image("realbg.jpg");
         buttonPlay = new Image("buttonPlay.jpg");
         buttonCreate = new Image("buttonCreate.jpg");
         buttonCredits = new Image("buttonCredits.jpg");
