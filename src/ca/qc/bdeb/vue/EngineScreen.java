@@ -183,7 +183,6 @@ public class EngineScreen extends BasicGameState {
 		    //lorsque l'on relache, le projectiles fait feu
 		    if (force != 0) {
 			angle = Math.toDegrees((Math.atan((double) posY / posX)));
-			System.out.println("" + angle);
 			controleur.addProjectile((int) (200 * Math.acos(angle)) + 50, (int) (200 * Math.asin(angle)) - 50, force / 3, angle, 0.8);
 			force = 0;
 
@@ -192,7 +191,7 @@ public class EngineScreen extends BasicGameState {
 		}
 		//**
 
-		//nouvelle image
+		//Création de nouvelles images, regard s'il y a un objet affichable
 		if (controleur.getNouvelleItemAffichable() != null) {
 		    switch (controleur.getNouvelleItemAffichable().getNomImg()) {
 			case "spiritesheet.png":
@@ -220,67 +219,73 @@ public class EngineScreen extends BasicGameState {
 	}
     }
 
-    public int getID() {
-	return state;
-    }
-
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-	bg.draw();
+	
+	//Position de la souris
 	int posX = Mouse.getX();
 	int posY = Mouse.getY();
-
+	
+	//background
+	bg.draw();
+	
+	//positions et mouvements des projectiles
 	for (int i = 0; i < listAnimationProjectiles.size(); i++) {
 	    listAnimationProjectiles.get(i).draw((int) (controleur.positionProjectileX(i)), (int) (controleur.positionProjectileY(i)));
 //	    listAnimationProjectiles.get(i).getCurrentFrame().setRotation((float) (controleur.orientationProjectil(controleur.listProjectiles().get(i))));
 	}
+	//positions et mouvements des structures
 	for (int i = 0; i < listImagesStructures.size(); i++) {
 	    listImagesStructures.get(i).draw((int) (controleur.positionStructureX(i)), (int) (controleur.positionStructureY(i)));
 	}
 
-
+	//Stats sur force, angle et les positions du curseur
 	g.setColor(Color.black);
 	g.drawString("force: " + force, 300, 100);
 	g.drawString("angle: " + Math.toDegrees((Math.atan((double) posY / posX))), 300, 150);
 	g.drawString("" + Mouse.getX() + ", " + Mouse.getY(), 300, 200);
-//        projtest.draw(100, 100); //bat test
+	
+	//boutons
 	buttonInventaire.draw(10, 600);
 	buttonPlay.draw(100, 600);
 	buttonExit.draw(1110, 5);
-
 	buttonLoad.draw((1110), 600);
 	buttonSave.draw((1110 - 90), 600);
 
+	//canon
 	canon.draw(85 - 195, 500 + 7);
-
 	roue.draw(35, 506 + 7);
+	
+	//lorsque l'inventaire est ouvert
 	if (inventaire) {
 
+	    //dessiner le menu de l'inventaire et le bouton exit
 	    g.setColor(colorAlpha);
 	    g.fillRoundRect(0, 80, 475, 505, 30);
-
-
 	    inventaireExit.draw(435, 55);
+	    
+	    //exit inventaire des 2 manières
 	    if ((posX > 438 && posX < 483) && (posY > 573 && posY < 619)) {
+		
 		if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+		    
 		    buttonInventaire = new Image("inventory.png");
-		    System.out.println("close inventory");
-
 		    inventaire = false;
-
 		}
 	    }
-
 	    if ((posX > 10 && posX < 85) && (posY > 10 && posY < 75)) {
+		
 		if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+		    
 		    buttonInventaire = new Image("inventory.png");
-		    System.out.println("Inventaire clicker pour fermer");
 		    inventaire = false;
-
-
 		}
 	    }
 	}
 
+    }
+    
+     public int getID() {
+	return state;
     }
 
     public void addAnimationProjectiles(String nomImg) throws SlickException {
@@ -291,11 +296,13 @@ public class EngineScreen extends BasicGameState {
     }
 
     public void addImageStructures(String nomImg) throws SlickException {
+	
 	Image img = new Image(nomImg);
 	img.setName(nomImg);
 	listImagesStructures.add(img);
     }
-
+    
+    //getters and setters
     public ArrayList<Animation> getListAnimationProjectiles() {
 	return listAnimationProjectiles;
     }
