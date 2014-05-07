@@ -255,7 +255,7 @@ public class EngineScreen extends BasicGameState {
             if ((posX > 35 && posX < 185) && (posY > 460 && posY < 510)) {
                 if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                     System.out.println("struc pris");
-                    controleur.addStructure(0, 0);
+                    controleur.addStructure(35, 165);
                 }
             }
 
