@@ -28,6 +28,8 @@ public class MainMenu extends BasicGameState {
     private boolean isClicked;
     private Image iris;
     private Sound rire;
+    private Sound detruire;
+    private Sound jouons;
     private boolean focusCredit = false;
     private Color colorAlpha = new Color(1f, 1f, 1f, 0.75f);
     private Image inventaireExit;
@@ -47,9 +49,11 @@ public class MainMenu extends BasicGameState {
         buttonCredits = new Image("buttonCredits.jpg");
         iris = new Image("eyeball.png");
         introMusic = new Music("intro.wav");
-        introMusic.loop();
+
         isClicked = true;
         rire = new Sound("rire.wav");
+        jouons = new Sound("letsplay.wav");
+        detruire = new Sound("destroy.wav");
         inventaireExit = new Image("exitinventaire.png");
         exitGame = new Image("exit.png");
 
@@ -59,6 +63,13 @@ public class MainMenu extends BasicGameState {
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
         Input a = gc.getInput();
         introMusic.setVolume(0.25f);
+
+        if (!introMusic.playing()) {
+
+            introMusic.play();
+              introMusic.loop();
+        }
+      
         int posX = Mouse.getX();
         int posY = Mouse.getY();
         if (isClicked) {
@@ -72,7 +83,7 @@ public class MainMenu extends BasicGameState {
             //play
             if ((posX > 795 && posX < 1168) && (posY > 182 && posY < 225)) {
                 if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                    rire.play();
+                    jouons.play();
                 }
             }
             //create
@@ -81,8 +92,11 @@ public class MainMenu extends BasicGameState {
                 if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 
                     System.out.println("CREATE");
-                    rire.play();
-                    introMusic.stop();
+                    detruire.play();
+                    if (introMusic.playing()) {
+
+                        introMusic.stop();
+                    }
                     sbg.enterState(1);
 
                 }
