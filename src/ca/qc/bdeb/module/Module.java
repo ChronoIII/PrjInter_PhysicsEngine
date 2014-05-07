@@ -25,6 +25,7 @@ public class Module {
     //constante de graviter
     private double gravite = -9.8;
     private Controleur controleur;
+    
 
     public Module(Controleur controleur) throws SlickException {
 

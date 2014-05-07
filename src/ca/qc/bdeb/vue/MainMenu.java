@@ -67,9 +67,9 @@ public class MainMenu extends BasicGameState {
         if (!introMusic.playing()) {
 
             introMusic.play();
-              introMusic.loop();
+            introMusic.loop();
         }
-      
+
         int posX = Mouse.getX();
         int posY = Mouse.getY();
         if (isClicked) {
@@ -79,7 +79,7 @@ public class MainMenu extends BasicGameState {
             buttonPlay = new Image("buttons - Copy.jpg");
         }
         if (!focusCredit) {
-	    //boutons
+            //boutons
             //play
             if ((posX > 795 && posX < 1168) && (posY > 182 && posY < 225)) {
                 if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
@@ -92,11 +92,10 @@ public class MainMenu extends BasicGameState {
                 if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 
                     System.out.println("CREATE");
-                    detruire.play();
-                    if (introMusic.playing()) {
 
-                        introMusic.stop();
-                    }
+                    introMusic.stop();
+                    detruire.play();
+                    gc.sleep(2500);
                     sbg.enterState(1);
 
                 }
@@ -106,6 +105,7 @@ public class MainMenu extends BasicGameState {
                 if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 
                     System.out.println("CREDITS");
+
                     rire.play();
                     focusCredit = true;
                 } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
@@ -115,6 +115,9 @@ public class MainMenu extends BasicGameState {
             }
             if ((posX > 1110 && posX < 1186) && (posY > 607 && posY < 670)) {
                 if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                    introMusic.stop();
+                    rire.play();
+                    gc.sleep(1500);
                     System.out.println("the end");
                     Main.exit();
                 } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
@@ -139,14 +142,15 @@ public class MainMenu extends BasicGameState {
         if (focusCredit) {
 
             g.setColor(colorAlpha);
-            g.fillRoundRect(0, 50, 475, 570, 30);
-            inventaireExit.draw(435, 55);
+            g.fillRoundRect(271, 75, 600, 570, 30);
+            inventaireExit.draw(435 + 271 + 125, 55);
 
-            if ((posX > 438 && posX < 483) && (posY > 573 && posY < 619)) {
+
+            if ((posX > 833 && posX < 880) && (posY > 573 && posY < 619)) {
 
                 if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 
-                    System.out.println("Inventaire clicker pour fermer");
+                    System.out.println("credits X clicker pour fermer");
                     focusCredit = false;
 
 
