@@ -131,6 +131,7 @@ public class EngineScreen extends BasicGameState {
             force = 0;
             canon.setRotation(-35);
 
+<<<<<<< HEAD
         }
 
         //inventaire(Etat de jeu), lorsque l'on n'est pas dans l'inventaire 
@@ -292,6 +293,127 @@ public class EngineScreen extends BasicGameState {
         //Mouvement
         controleur.bougerProjectiles();
         controleur.rebondProjectilesMur();
+=======
+	}
+
+	//inventaire(Etat de jeu), lorsque l'on n'est pas dans l'inventaire 
+	if (!inventaire) {
+
+	    if (!modePausePlay) {
+		//**Boutons
+		//inventaire 2, lors que l'inventaire est déployé
+		if ((posX > 10 && posX < 85) && (posY > 10 && posY < 75)) {
+		    if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+			buttonInventaire = new Image("inventory2.png");
+			inventaire = true;
+
+		    } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+			buttonInventaire = new Image("inventory.png");
+		    }
+		}
+	    }
+
+	    //exit
+	    if ((posX > 1110 && posX < 1186) && (posY > 607 && posY < 670)) {
+		if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+		    System.out.println("got clicked buddy! lets go back!");
+
+		    for (int i = 0; i < controleur.listProjectiles().size() + i; i++) {
+			controleur.enleverProjectiles(controleur.listProjectiles().get(0));
+		    }
+		    if (musiqueJeuPlay.playing()) {
+			
+			musiqueJeuPlay.stop();
+		    }
+		    sbg.enterState(0);
+		} else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+		}
+	    }
+
+	    //play
+	    if ((posX > 100 && posX < 175) && (posY > 10 && posY < 75)) {
+		if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+		    if (modePausePlay) {
+			
+			buttonPlay = new Image("play.png");
+			modePausePlay = false;
+		    } else {
+			buttonPlay = new Image("pause.png");
+			
+			modePausePlay = true;
+		    }
+		}
+	    }
+	    if (!modePausePlay) {
+		//save
+		if ((posX > 1020 && posX < 1100) && (posY > 10 && posY < 75)) {
+		    if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+			System.out.println("save button");
+
+			controleur.sauvegarderFichier(controleur.listProjectiles().size());
+
+		    }
+		}
+
+		//load
+		if ((posX > 1109 && posX < 1190) && (posY > 10 && posY < 75)) {
+		    if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+			System.out.println("load button");
+			controleur.chargerFichier();
+		    }
+		}
+	    }
+
+	    //**key input
+	    //si le curseur n'est pas sur les bars noirs
+	    if (!focusMenu) {
+		if (modePausePlay) {
+		    //touche pour lancer
+		    if (Key.isKeyDown(Input.KEY_SPACE) || gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+			if (force < -1 || force > 100) {
+			    coteDeLaForce *= -1;
+			}
+			force += 2 * coteDeLaForce;
+		    } else {
+			//lorsque l'on relache, le projectiles fait feu
+			if (force != 0) {
+			    angle = Math.toDegrees((Math.atan((double) posY / posX)));
+			    controleur.addProjectile((int) (170 * Math.cos(Math.toRadians(angle))), (int) (170 * Math.sin(Math.toRadians(angle))), force / 5, angle, 0.8);
+			    force = 0;
+			}
+		    }
+		}
+	    }
+	    //**
+	    
+	    //Création de nouvelles images, regard s'il y a un objet affichable
+	    if (controleur.getNouvelleItemAffichable() != null) {
+		switch (controleur.getNouvelleItemAffichable().getNomImg()) {
+		    case "spiritesheet.png":
+			addAnimationProjectiles(controleur.getNouvelleItemAffichable().getNomImg());
+			break;
+		    case "Sans titre.png":
+			addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
+			break;
+		}
+		controleur.setNouvelleItemAffichable(null);
+	    }
+
+	    //Canon rotation
+	    if (!inventaire) {
+		if (!focusMenu) {
+		    if (modePausePlay) {
+			canon.setRotation((float) Math.toDegrees((Math.atan((double) posX / posY))) + 270);
+		    }
+
+		}
+	    }
+	}
+
+	//Mouvement
+	controleur.bougerProjectiles();
+	controleur.rebondProjectilesMurLoop();
+>>>>>>> f3c3e27437ad1cec7d5d4260ea10e811a2f8708c
 
         //reverse
         for (int i = 0; i < listAnimationProjectiles.size(); i++) {

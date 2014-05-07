@@ -49,29 +49,32 @@ public class Controleur {
 	return module.getListProjectiles();
     }
 
-    public void rebondProjectilesMur() {
+    public void rebondProjectilesMur(Projectiles proj) {
+
+	    if ((proj.getPosition().getX() + proj.getBound().getX()) > module.getWidth()) {
+		proj.getPosition().setX(module.getWidth() - proj.getBound().getX());
+		module.rebond(proj, 'x');
+	    }
+
+	    if ((proj.getPosition().getY() + proj.getBound().getY()) > (module.getHeight() - 85)) {
+		proj.getPosition().setY((module.getHeight() - 85) - proj.getBound().getY());
+		module.rebond(proj, 'y');
+	    }
+	    if (proj.getPosition().getX() < 0) {
+		proj.getPosition().setX(0);
+		module.rebond(proj, 'x');
+	    }
+
+	    if (proj.getPosition().getY() < 75) {
+		proj.getPosition().setY(75);
+		module.rebond(proj, 'y');
+	    }
+    }
+
+    public void rebondProjectilesMurLoop() {
 	for (int i = 0; i < module.getListProjectiles().size(); i++) {
-
-	    if ((module.getListProjectiles().get(i).getPosition().getX() + module.getListProjectiles().get(i).getBound().getX()) > module.getWidth()) {
-		module.getListProjectiles().get(i).getPosition().setX(module.getWidth() - module.getListProjectiles().get(i).getBound().getX());
-		module.rebond(module.getListProjectiles().get(i), 'x');
-	    }
-
-	    if ((module.getListProjectiles().get(i).getPosition().getY() + module.getListProjectiles().get(i).getBound().getY()) > (module.getHeight() - 85)) {
-		module.getListProjectiles().get(i).getPosition().setY((module.getHeight() - 85) - module.getListProjectiles().get(i).getBound().getY());
-		module.rebond(module.getListProjectiles().get(i), 'y');
-
-	    }
-	    if (module.getListProjectiles().get(i).getPosition().getX() < 0) {
-		module.getListProjectiles().get(i).getPosition().setX(0);
-		module.rebond(module.getListProjectiles().get(i), 'x');
-
-	    }
-
-	    if (module.getListProjectiles().get(i).getPosition().getY() < 75) {
-		module.getListProjectiles().get(i).getPosition().setY(75);
-		module.rebond(module.getListProjectiles().get(i), 'y');
-	    }
+	    
+	    rebondProjectilesMur(module.getListProjectiles().get(i));
 	}
     }
 
@@ -112,6 +115,40 @@ public class Controleur {
 
     public ArrayList<Structures> listStructures() {
 	return module.getListStructures();
+    }
+
+    public void rebondProjectilesStructures(Projectiles proj, Structures struc) {
+	
+		if (proj.getPosition().getX() > struc.getPosition().getX() && proj.getPosition().getX() < (struc.getPosition().getX() + struc.getBound().getX()) && proj.getPosition().getY() < struc.getPosition().getY()) {
+		    if (proj.getVitesse().getX() < 0) {
+			if (Math.abs((struc.getPosition().getX() + struc.getBound().getX()) - proj.getPosition().getX()) > Math.abs(struc.getPosition().getY() - proj.getPosition().getY())) {
+			    proj.getPosition().setY(struc.getPosition().getY());
+			    module.rebond(proj, 'y');
+
+			} else {
+			    proj.getPosition().setX((struc.getPosition().getX() + struc.getBound().getX()));
+			    module.rebond(proj, 'x');
+			}
+
+		    } else {
+			if (Math.abs(struc.getPosition().getX() - proj.getPosition().getX()) > Math.abs(struc.getPosition().getY() - proj.getPosition().getY())) {
+			    proj.getPosition().setY(struc.getPosition().getY());
+			    module.rebond(proj, 'y');
+			} else {
+			    proj.getPosition().setX(struc.getPosition().getX());
+			    module.rebond(proj, 'x');
+			}
+		    }
+		}
+    }
+
+    public void rebondProjectilesStructuresLoop() {
+	for (int j = 0; j < module.getListStructures().size(); j++) {
+	    for (int i = 0; i < module.getListProjectiles().size(); i++) {
+
+		rebondProjectilesStructures(module.getListProjectiles().get(i), module.getListStructures().get(j));
+	    }
+	}
     }
 
     //Mettre un objet affichable dans la variable
