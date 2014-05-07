@@ -6,12 +6,8 @@ package ca.qc.bdeb.inf204;
 
 import ca.qc.bdeb.vue.Vue;
 import ca.qc.bdeb.controler.Controleur;
-import ca.qc.bdeb.module.Module;
-import ca.qc.bdeb.vue.MainMenu;
-import ca.qc.bdeb.vue.EngineScreen;
 import javax.swing.JFrame;
 import org.newdawn.slick.*;
-import org.newdawn.slick.state.*;
 
 public class Main {
 
@@ -19,7 +15,7 @@ public class Main {
     static int width = 1200;
     static int height = 675;
     static boolean fullscreen = false;
-    static boolean showFPS = true;
+    static boolean showFPS = false;
     static int fpslimit = 60;
     static String title = "no name";
     static Controleur controleur;

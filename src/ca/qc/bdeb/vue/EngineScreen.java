@@ -188,7 +188,7 @@ public class EngineScreen extends BasicGameState {
                     if (force < -1 || force > 100) {
                         coteDeLaForce *= -1;
                     }
-                    force += 1 * coteDeLaForce;
+                    force += 2 * coteDeLaForce;
                 } else {
                     //lorsque l'on relache, le projectiles fait feu
                     if (force != 0) {
@@ -234,7 +234,6 @@ public class EngineScreen extends BasicGameState {
 		    listAnimationProjectiles.remove(i);
 		    addAnimationProjectiles(i, controleur.listProjectiles().get(i).getNomImgReverse());
 		}
-		System.out.println("allo");
 	    } else if (listAnimationProjectiles.get(i).getCurrentFrame().getName() == "spiritesheetreverse.png") {
 		listAnimationProjectiles.remove(i);
 		addAnimationProjectiles(i, controleur.listProjectiles().get(i).getNomImg());

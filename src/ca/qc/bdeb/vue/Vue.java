@@ -5,7 +5,6 @@
 package ca.qc.bdeb.vue;
 
 import ca.qc.bdeb.controler.Controleur;
-import java.awt.Menu;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 

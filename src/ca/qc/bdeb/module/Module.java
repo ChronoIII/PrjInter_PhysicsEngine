@@ -51,7 +51,6 @@ public class Module {
 	if (orientation == 'x') {
 	    projectile.getVitesse().setX(-projectile.getVitesse().getX());
 	    projectile.setReverse(!projectile.isReverse());
-	    System.out.println(""+projectile.isReverse());
 	}
     }
 
