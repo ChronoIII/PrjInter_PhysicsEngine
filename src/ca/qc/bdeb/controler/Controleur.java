@@ -1,4 +1,3 @@
-
 package ca.qc.bdeb.controler;
 
 import ca.qc.bdeb.module.Module;
@@ -30,7 +29,7 @@ public class Controleur {
 
     //Projectiles
     public void addProjectile(int x, int y, double v, double angle, double facRebond) throws SlickException {
-	module.getListProjectiles().add(new Projectiles((x + 40), (500-y ), v, angle, facRebond, this));
+	module.getListProjectiles().add(new Projectiles((x + 40), (500 - y), v, angle, facRebond, this));
     }
 
     public void enleverProjectiles(Projectiles projectile) {
