@@ -73,7 +73,6 @@ public class MainMenu extends BasicGameState {
         int posX = Mouse.getX();
         int posY = Mouse.getY();
         if (isClicked) {
-
             buttonPlay = new Image("buttonPlay.jpg");
         } else {
             buttonPlay = new Image("buttons - Copy.jpg");

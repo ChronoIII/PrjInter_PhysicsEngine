@@ -29,6 +29,7 @@ public class Projectiles implements Affichable {
     private Vecteur vitesse = new Vecteur();
     private Vecteur position = new Vecteur();
     private boolean reverse = false;
+    private float temps;
 
     public Projectiles(double posX, double posY, double vitesseIni, double angle, double facRebond, Controleur controleur) throws SlickException {
 
@@ -48,6 +49,14 @@ public class Projectiles implements Affichable {
     }
 
     //getter and setter
+    public float getTemps() {
+	return temps;
+    }
+
+    public void setTemps(float temps) {
+	this.temps = temps;
+    }
+    
     public boolean isReverse() {
 	return reverse;
     }
