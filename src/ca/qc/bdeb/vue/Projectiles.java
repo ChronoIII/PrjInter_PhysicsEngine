@@ -16,20 +16,22 @@ import org.newdawn.slick.SpriteSheet;
  */
 public class Projectiles implements Affichable {
 
+    //nnomde l'animation
     private String nomImg = "spiritesheet.png";
+    private String nomImgReverse = "spiritesheetreverse.png";
+    //controleur
     private Controleur controleur;
-    
-    
+    //propriétées
     private double gravity = 9.8;
     private double masse = 1;
     private double facRebond;
     private Vecteur bound;
     private Vecteur vitesse = new Vecteur();
     private Vecteur position = new Vecteur();
-
+    private boolean reverse = false;
 
     public Projectiles(double posX, double posY, double vitesseIni, double angle, double facRebond, Controleur controleur) throws SlickException {
-	
+
 	this.facRebond = facRebond;
 	position.setX(posX);
 	position.setY(posY);
@@ -42,10 +44,17 @@ public class Projectiles implements Affichable {
 
     public void detruir() {
 
-        controleur.enleverProjectiles(this);
+	controleur.enleverProjectiles(this);
     }
 
     //getter and setter
+    public boolean isReverse() {
+	return reverse;
+    }
+
+    public void setReverse(boolean reverse) {
+	this.reverse = reverse;
+    }
     
     public Vecteur getBound() {
 	return bound;
@@ -54,48 +63,52 @@ public class Projectiles implements Affichable {
     public void setBound(Vecteur bound) {
 	this.bound = bound;
     }
-    
+
     public String getNomImg() {
-        return nomImg;
+	return nomImg;
+    }
+
+    public String getNomImgReverse() {
+	return nomImgReverse;
     }
 
     public double getGravity() {
-        return gravity;
+	return gravity;
     }
 
     public void setGravity(double gravity) {
-        this.gravity = gravity;
+	this.gravity = gravity;
     }
 
     public double getMasse() {
-        return masse;
+	return masse;
     }
 
     public void setMasse(double masse) {
-        this.masse = masse;
+	this.masse = masse;
     }
 
     public double getFacRebond() {
-        return facRebond;
+	return facRebond;
     }
 
     public void setFacRebond(double facRebond) {
-        this.facRebond = facRebond;
+	this.facRebond = facRebond;
     }
 
     public Vecteur getVitesse() {
-        return vitesse;
+	return vitesse;
     }
 
     public void setVitesse(Vecteur vitesse) {
-        this.vitesse = vitesse;
+	this.vitesse = vitesse;
     }
 
     public Vecteur getPosition() {
-        return position;
+	return position;
     }
 
     public void setPosition(Vecteur position) {
-        this.position = position;
+	this.position = position;
     }
 }

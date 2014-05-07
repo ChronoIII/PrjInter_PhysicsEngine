@@ -53,25 +53,25 @@ public class Controleur {
     public void rebondProjectilesMur() {
 	for (int i = 0; i < module.getListProjectiles().size(); i++) {
 
-	    if ((module.getListProjectiles().get(i).getPosition().getX() + module.getListProjectiles().get(i).getBound().getX()) > (1200)) {
-		module.getListProjectiles().get(i).getPosition().setX(1200 - module.getListProjectiles().get(i).getBound().getX());
-		module.rebond(module.getListProjectiles().get(i), 'b');
+	    if ((module.getListProjectiles().get(i).getPosition().getX() + module.getListProjectiles().get(i).getBound().getX()) > module.getWidth()) {
+		module.getListProjectiles().get(i).getPosition().setX(module.getWidth() - module.getListProjectiles().get(i).getBound().getX());
+		module.rebond(module.getListProjectiles().get(i), 'x');
 	    }
 
-	    if ((module.getListProjectiles().get(i).getPosition().getY() + module.getListProjectiles().get(i).getBound().getY()) > (590)) {
-		module.getListProjectiles().get(i).getPosition().setY((590 - module.getListProjectiles().get(i).getBound().getY()));
-		module.rebond(module.getListProjectiles().get(i), 'a');
+	    if ((module.getListProjectiles().get(i).getPosition().getY() + module.getListProjectiles().get(i).getBound().getY()) > (module.getHeight() - 85)) {
+		module.getListProjectiles().get(i).getPosition().setY((module.getHeight() - 85) - module.getListProjectiles().get(i).getBound().getY());
+		module.rebond(module.getListProjectiles().get(i), 'y');
 
 	    }
 	    if (module.getListProjectiles().get(i).getPosition().getX() < 0) {
 		module.getListProjectiles().get(i).getPosition().setX(0);
-		module.rebond(module.getListProjectiles().get(i), 'b');
+		module.rebond(module.getListProjectiles().get(i), 'x');
 
 	    }
 
 	    if (module.getListProjectiles().get(i).getPosition().getY() < 75) {
 		module.getListProjectiles().get(i).getPosition().setY(75);
-		module.rebond(module.getListProjectiles().get(i), 'a');
+		module.rebond(module.getListProjectiles().get(i), 'y');
 	    }
 	}
     }

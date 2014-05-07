@@ -68,7 +68,7 @@ public class MainMenu extends BasicGameState {
             buttonPlay = new Image("buttons - Copy.jpg");
         }
         if (!focusCredit) {
-//boutons
+	    //boutons
             //play
             if ((posX > 795 && posX < 1168) && (posY > 182 && posY < 225)) {
                 if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
@@ -102,19 +102,10 @@ public class MainMenu extends BasicGameState {
             if ((posX > 1110 && posX < 1186) && (posY > 607 && posY < 670)) {
                 if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                     System.out.println("the end");
-
-
                     Main.exit();
-
                 } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
                 }
             }
-
-//            if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-//
-//                
-//                System.out.println("I laughed");
-//            }
         }
     }
 
@@ -128,10 +119,6 @@ public class MainMenu extends BasicGameState {
         buttonCredits.draw(795, 570);
         exitGame.draw(1110, 5);
         iris.draw(297 + Mouse.getX() * 13 / 1200, 220 - Mouse.getY() * 8 / 675);
-//        Image img = new Image ("little_baby.jpg");
-//	g.fillRect(100, 100, 100, 100);
-//	g.fillRect(200, 200, 200, 200);
-//         img.draw(100,100);
         g.setColor(Color.pink);
         g.drawString("" + Mouse.getX() + ", " + Mouse.getY(), 90, 80);
 

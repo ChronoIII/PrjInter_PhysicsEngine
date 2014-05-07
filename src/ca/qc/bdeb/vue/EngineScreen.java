@@ -27,11 +27,11 @@ public class EngineScreen extends BasicGameState {
     //Données temp commune
     double force = 0;
     double angle = 0;
+    int coteDeLaForce = 1;
     //**Image
     private Image bg;
     //projectile
-    private SpriteSheet projsheet;
-    private Animation projtest;
+    private Animation projAnimation;
     //canon
     private Image roue;
     private Image canon;
@@ -65,10 +65,6 @@ public class EngineScreen extends BasicGameState {
 	//Initialisarions des états
 	modePausePlay = true;
 	inventaire = false;
-
-	//Initialisarions des animations projectiles
-	projsheet = new SpriteSheet("spiritesheet.png", 80, 59);
-	projtest = new Animation(projsheet, 250);
 
 	//Initialisarions des listes
 	listAnimationProjectiles = new ArrayList<Animation>();
@@ -178,15 +174,16 @@ public class EngineScreen extends BasicGameState {
 	    if (!focusMenu) {
 		//touche pour lancer
 		if (Key.isKeyDown(Input.KEY_SPACE)) {
-		    force += 3;
+		    if (force < -1 || force > 100) {
+			coteDeLaForce *= -1;
+		    }
+		    force += 1 * coteDeLaForce;
 		} else {
 		    //lorsque l'on relache, le projectiles fait feu
 		    if (force != 0) {
 			angle = Math.toDegrees((Math.atan((double) posY / posX)));
 			controleur.addProjectile((int) (200 * Math.acos(angle)) + 50, (int) (200 * Math.asin(angle)) - 50, force / 3, angle, 0.8);
 			force = 0;
-
-
 		    }
 		}
 		//**
@@ -204,10 +201,6 @@ public class EngineScreen extends BasicGameState {
 		    controleur.setNouvelleItemAffichable(null);
 		}
 
-		//Mouvement
-		controleur.bougerProjectiles();
-		controleur.rebondProjectilesMur();
-
 		//Canon rotation
 		if (!inventaire) {
 		    if (!focusMenu) {
@@ -217,17 +210,33 @@ public class EngineScreen extends BasicGameState {
 		}
 	    }
 	}
+	
+	//Mouvement
+	controleur.bougerProjectiles();
+	controleur.rebondProjectilesMur();
+	
+	//reverse
+	for (int i = 0; i < listAnimationProjectiles.size(); i++) {
+	    if(controleur.listProjectiles().get(i).isReverse() && listAnimationProjectiles.get(i).getCurrentFrame().getName() == "spiritesheet.png"){
+		listAnimationProjectiles.remove(i);
+		addAnimationProjectiles(i, controleur.listProjectiles().get(i).getNomImgReverse());
+		System.out.println("allo");
+	    } else if (listAnimationProjectiles.get(i).getCurrentFrame().getName() == "spiritesheetreverse.png"){
+		listAnimationProjectiles.remove(i);
+		addAnimationProjectiles(i, controleur.listProjectiles().get(i).getNomImg());
+	    }
+	}
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-	
+
 	//Position de la souris
 	int posX = Mouse.getX();
 	int posY = Mouse.getY();
-	
+
 	//background
 	bg.draw();
-	
+
 	//positions et mouvements des projectiles
 	for (int i = 0; i < listAnimationProjectiles.size(); i++) {
 	    listAnimationProjectiles.get(i).draw((int) (controleur.positionProjectileX(i)), (int) (controleur.positionProjectileY(i)));
@@ -243,7 +252,7 @@ public class EngineScreen extends BasicGameState {
 	g.drawString("force: " + force, 300, 100);
 	g.drawString("angle: " + Math.toDegrees((Math.atan((double) posY / posX))), 300, 150);
 	g.drawString("" + Mouse.getX() + ", " + Mouse.getY(), 300, 200);
-	
+
 	//boutons
 	buttonInventaire.draw(10, 600);
 	buttonPlay.draw(100, 600);
@@ -254,7 +263,10 @@ public class EngineScreen extends BasicGameState {
 	//canon
 	canon.draw(85 - 195, 500 + 7);
 	roue.draw(35, 506 + 7);
-	
+
+	//barre de force
+	g.fillRect(100, 250, (int) force, 20);
+
 	//lorsque l'inventaire est ouvert
 	if (inventaire) {
 
@@ -262,20 +274,20 @@ public class EngineScreen extends BasicGameState {
 	    g.setColor(colorAlpha);
 	    g.fillRoundRect(0, 80, 475, 505, 30);
 	    inventaireExit.draw(435, 55);
-	    
+
 	    //exit inventaire des 2 manières
 	    if ((posX > 438 && posX < 483) && (posY > 573 && posY < 619)) {
-		
+
 		if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-		    
+
 		    buttonInventaire = new Image("inventory.png");
 		    inventaire = false;
 		}
 	    }
 	    if ((posX > 10 && posX < 85) && (posY > 10 && posY < 75)) {
-		
+
 		if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-		    
+
 		    buttonInventaire = new Image("inventory.png");
 		    inventaire = false;
 		}
@@ -283,25 +295,32 @@ public class EngineScreen extends BasicGameState {
 	}
 
     }
-    
-     public int getID() {
+
+    public int getID() {
 	return state;
     }
 
     public void addAnimationProjectiles(String nomImg) throws SlickException {
 
-	SpriteSheet projsheet = new SpriteSheet(nomImg, 80, 59);
-	Animation projtest = new Animation(projsheet, 60);
-	listAnimationProjectiles.add(projtest);
+	projAnimation = new Animation(new SpriteSheet(nomImg, 80, 59), 60);
+	projAnimation.getCurrentFrame().setName(nomImg);
+	listAnimationProjectiles.add(projAnimation);
+    }
+    
+    public void addAnimationProjectiles(int i,String nomImg) throws SlickException {
+
+	projAnimation = new Animation(new SpriteSheet(nomImg, 80, 59), 60);
+	projAnimation.getCurrentFrame().setName(nomImg);
+	listAnimationProjectiles.add(i, projAnimation);
     }
 
     public void addImageStructures(String nomImg) throws SlickException {
-	
+
 	Image img = new Image(nomImg);
 	img.setName(nomImg);
 	listImagesStructures.add(img);
     }
-    
+
     //getters and setters
     public ArrayList<Animation> getListAnimationProjectiles() {
 	return listAnimationProjectiles;
