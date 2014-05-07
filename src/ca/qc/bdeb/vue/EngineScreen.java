@@ -210,18 +210,20 @@ public class EngineScreen extends BasicGameState {
 		}
 	    }
 	}
-	
+
 	//Mouvement
 	controleur.bougerProjectiles();
 	controleur.rebondProjectilesMur();
-	
+
 	//reverse
 	for (int i = 0; i < listAnimationProjectiles.size(); i++) {
-	    if(controleur.listProjectiles().get(i).isReverse() && listAnimationProjectiles.get(i).getCurrentFrame().getName() == "spiritesheet.png"){
-		listAnimationProjectiles.remove(i);
-		addAnimationProjectiles(i, controleur.listProjectiles().get(i).getNomImgReverse());
+	    if (controleur.listProjectiles().get(i).isReverse()) {
+		if ( listAnimationProjectiles.get(i).getCurrentFrame().getName() == "spiritesheet.png") {
+		    listAnimationProjectiles.remove(i);
+		    addAnimationProjectiles(i, controleur.listProjectiles().get(i).getNomImgReverse());
+		}
 		System.out.println("allo");
-	    } else if (listAnimationProjectiles.get(i).getCurrentFrame().getName() == "spiritesheetreverse.png"){
+	    } else if (listAnimationProjectiles.get(i).getCurrentFrame().getName() == "spiritesheetreverse.png") {
 		listAnimationProjectiles.remove(i);
 		addAnimationProjectiles(i, controleur.listProjectiles().get(i).getNomImg());
 	    }
@@ -306,8 +308,8 @@ public class EngineScreen extends BasicGameState {
 	projAnimation.getCurrentFrame().setName(nomImg);
 	listAnimationProjectiles.add(projAnimation);
     }
-    
-    public void addAnimationProjectiles(int i,String nomImg) throws SlickException {
+
+    public void addAnimationProjectiles(int i, String nomImg) throws SlickException {
 
 	projAnimation = new Animation(new SpriteSheet(nomImg, 80, 59), 60);
 	projAnimation.getCurrentFrame().setName(nomImg);
