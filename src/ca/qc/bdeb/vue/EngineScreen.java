@@ -193,7 +193,7 @@ public class EngineScreen extends BasicGameState {
                     //lorsque l'on relache, le projectiles fait feu
                     if (force != 0) {
                         angle = Math.toDegrees((Math.atan((double) posY / posX)));
-                        controleur.addProjectile((int) (200 * Math.acos(angle)) + 50, (int) (200 * Math.asin(angle)) - 50, force / 3, angle, 0.8);
+                        controleur.addProjectile((int) (170 * Math.cos(Math.toRadians(angle))),(int) (170 * Math.sin(Math.toRadians(angle))), force / 4, angle, 0.8);
                         force = 0;
                     }
                 }
@@ -233,7 +233,6 @@ public class EngineScreen extends BasicGameState {
 		    listAnimationProjectiles.remove(i);
 		    addAnimationProjectiles(i, controleur.listProjectiles().get(i).getNomImgReverse());
 		}
-
 	    } else if (listAnimationProjectiles.get(i).getCurrentFrame().getName() == "spiritesheetreverse.png") {
 		listAnimationProjectiles.remove(i);
 		addAnimationProjectiles(i, controleur.listProjectiles().get(i).getNomImg());

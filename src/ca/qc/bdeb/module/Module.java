@@ -22,8 +22,7 @@ public class Module {
     //variable de dimantion
     int width = 1200;
     int height = 675;
-    //constante de graviter
-    private double gravite = -9.8;
+    //controlller
     private Controleur controleur;
     
 

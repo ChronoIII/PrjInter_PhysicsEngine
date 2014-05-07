@@ -22,7 +22,7 @@ public class Projectiles implements Affichable {
     //controleur
     private Controleur controleur;
     //propriétées
-    private double gravity = 9.8;
+    private double gravity = 20;
     private double masse = 1;
     private double facRebond;
     private Vecteur bound;
