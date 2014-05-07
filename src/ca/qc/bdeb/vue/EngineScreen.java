@@ -94,6 +94,7 @@ public class EngineScreen extends BasicGameState {
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
 
+<<<<<<< HEAD
 	//Input pour les commende au clavier
 	Input Key = gc.getInput();
 
@@ -242,6 +243,189 @@ public class EngineScreen extends BasicGameState {
 
 
 	//reverse
+=======
+        //Input pour les commende au clavier
+        Input Key = gc.getInput();
+
+
+        //Loop musique
+        if (!musiqueJeuPlay.playing()) {
+
+            musiqueJeuPlay.loop();
+        }
+        //Position de la souris
+        int posX = Mouse.getX();
+        int posY = Mouse.getY();
+
+        //Pour vérifier si le curseur est sur la bar noir, changant l'état du jeu
+        if ((Mouse.getX() < 1200 && Mouse.getY() > 600 && Mouse.getY() < 675) || (Mouse.getX() < 1200 && Mouse.getY() > 0 && Mouse.getY() < 88)) {
+            focusMenu = true;
+        } else {
+            focusMenu = false;
+        }
+        //pause mode erase projectiles
+        if (!modePausePlay) {
+            for (int i = 0; i < controleur.listProjectiles().size() + i; i++) {
+                controleur.enleverProjectiles(controleur.listProjectiles().get(0));
+            }
+            force = 0;
+            canon.setRotation(-35);
+
+        }
+
+        //inventaire(Etat de jeu), lorsque l'on n'est pas dans l'inventaire 
+        if (!inventaire) {
+
+            if (!modePausePlay) {
+                //**Boutons
+                //inventaire 2, lors que l'inventaire est déployé
+                if ((posX > 10 && posX < 85) && (posY > 10 && posY < 75)) {
+                    if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                        buttonInventaire = new Image("inventory2.png");
+                        inventaire = true;
+
+                    } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+                        buttonInventaire = new Image("inventory.png");
+                    }
+                }
+            }
+
+            //exit
+            if ((posX > 1110 && posX < 1186) && (posY > 607 && posY < 670)) {
+                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                    System.out.println("got clicked buddy! lets go back!");
+
+                    for (int i = 0; i < controleur.listProjectiles().size() + i; i++) {
+                        controleur.enleverProjectiles(controleur.listProjectiles().get(0));
+                    }
+                    if (musiqueJeuPlay.playing()) {
+                        musiqueJeuPlay.stop();
+
+                    }
+                    sbg.enterState(0);
+                } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+                }
+            }
+
+            //play
+            if ((posX > 100 && posX < 175) && (posY > 10 && posY < 75)) {
+                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                    if (modePausePlay) {
+                        buttonPlay = new Image("pause.png");
+                        modePausePlay = false;
+
+                    } else {
+                        buttonPlay = new Image("play.png");
+                        modePausePlay = true;
+                    }
+
+
+                }
+            }
+            if (!modePausePlay) {
+                //save
+                if ((posX > 1020 && posX < 1100) && (posY > 10 && posY < 75)) {
+                    if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                        System.out.println("save button");
+
+                        controleur.sauvegarderFichier(controleur.listProjectiles().size());
+
+                    }
+                }
+
+                //load
+                if ((posX > 1109 && posX < 1190) && (posY > 10 && posY < 75)) {
+                    if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                        System.out.println("load button");
+                        controleur.chargerFichier();
+                    }
+                }
+            }
+
+            //**key input
+            //si le curseur n'est pas sur les bars noirs
+            if (!focusMenu) {
+<<<<<<< HEAD
+                if (modePausePlay) {
+                    //touche pour lancer
+                    if (Key.isKeyDown(Input.KEY_SPACE)) {
+                        if (force < -1 || force > 100) {
+                            coteDeLaForce *= -1;
+                        }
+                        force += 2 * coteDeLaForce;
+                    } else {
+                        //lorsque l'on relache, le projectiles fait feu
+                        if (force != 0) {
+                            angle = Math.toDegrees((Math.atan((double) posY / posX)));
+                            controleur.addProjectile((int) (200 * Math.acos(angle)) + 50, (int) (200 * Math.asin(angle)) - 50, force / 3, angle, 0.8);
+                            force = 0;
+                        }
+=======
+                if(modePausePlay){
+                //touche pour lancer
+                if (Key.isKeyDown(Input.KEY_SPACE)) {
+                    if (force < -1 || force > 100) {
+                        coteDeLaForce *= -1;
+                    }
+                    force += 2 * coteDeLaForce;
+                } else {
+                    //lorsque l'on relache, le projectiles fait feu
+                    if (force != 0) {
+                        angle = Math.toDegrees((Math.atan((double) posY / posX)));
+                        controleur.addProjectile((int) (170 * Math.cos(Math.toRadians(angle))),(int) (170 * Math.sin(Math.toRadians(angle))), force / 4, angle, 0.8);
+                        force = 0;
+                    }
+                }}}
+                //**
+
+                //Création de nouvelles images, regard s'il y a un objet affichable
+                if (controleur.getNouvelleItemAffichable() != null) {
+                    switch (controleur.getNouvelleItemAffichable().getNomImg()) {
+                        case "spiritesheet.png":
+                            addAnimationProjectiles(controleur.getNouvelleItemAffichable().getNomImg());
+                            break;
+                        case "Sans titre.png":
+                            addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
+                            break;
+>>>>>>> cdfa2782c132e1df745accc325d6e95bc6439a90
+                    }
+                }
+            }
+            //**
+
+            //Création de nouvelles images, regard s'il y a un objet affichable
+            if (controleur.getNouvelleItemAffichable() != null) {
+                switch (controleur.getNouvelleItemAffichable().getNomImg()) {
+                    case "spiritesheet.png":
+                        addAnimationProjectiles(controleur.getNouvelleItemAffichable().getNomImg());
+                        break;
+                    case "Sans titre.png":
+                        addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
+                        break;
+                }
+                controleur.setNouvelleItemAffichable(null);
+            }
+
+            //Canon rotation
+            if (!inventaire) {
+                if (!focusMenu) {
+                    if (modePausePlay) {
+                        canon.setRotation((float) Math.toDegrees((Math.atan((double) posX / posY))) + 270);
+                    }
+
+                }
+            }
+
+
+        }
+
+        //Mouvement
+        controleur.bougerProjectiles();
+        controleur.rebondProjectilesMur();
+
+<<<<<<< HEAD
+       //reverse
+>>>>>>> 3317ce738691da0d08983982b6cf7a8717aee562
 	for (int i = 0; i < listAnimationProjectiles.size(); i++) {
 	    if (controleur.listProjectiles().get(i).isReverse()) {
 		if (listAnimationProjectiles.get(i).getCurrentFrame().getName() == "spiritesheet.png") {
