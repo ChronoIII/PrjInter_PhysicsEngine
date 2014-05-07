@@ -52,6 +52,8 @@ public class Module {
 	    projectile.setReverse(!projectile.isReverse());
 	}
     }
+    
+    
 
     //setters and getters
     public int getWidth() {

@@ -237,7 +237,7 @@ public class EngineScreen extends BasicGameState {
 
 	//Mouvement
 	controleur.bougerProjectiles();
-	controleur.rebondProjectilesMur();
+	controleur.rebondProjectilesMurLoop();
 
         //reverse
         for (int i = 0; i < listAnimationProjectiles.size(); i++) {
