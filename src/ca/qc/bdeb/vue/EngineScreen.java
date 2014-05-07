@@ -118,10 +118,11 @@ public class EngineScreen extends BasicGameState {
             for (int i = 0; i < controleur.listProjectiles().size() + i; i++) {
                 controleur.enleverProjectiles(controleur.listProjectiles().get(0));
             }
-            force=0;
+            force = 0;
+            canon.setRotation(-35);
 
         }
-       
+
         //inventaire(Etat de jeu), lorsque l'on n'est pas dans l'inventaire 
         if (!inventaire) {
 
@@ -194,46 +195,49 @@ public class EngineScreen extends BasicGameState {
             //**key input
             //si le curseur n'est pas sur les bars noirs
             if (!focusMenu) {
-                if(modePausePlay){
-                //touche pour lancer
-                if (Key.isKeyDown(Input.KEY_SPACE)) {
-                    if (force < -1 || force > 100) {
-                        coteDeLaForce *= -1;
-                    }
-                    force += 2 * coteDeLaForce;
-                } else {
-                    //lorsque l'on relache, le projectiles fait feu
-                    if (force != 0) {
-                        angle = Math.toDegrees((Math.atan((double) posY / posX)));
-                        controleur.addProjectile((int) (200 * Math.acos(angle)) + 50, (int) (200 * Math.asin(angle)) - 50, force / 3, angle, 0.8);
-                        force = 0;
-                    }
-                }}}
-                //**
-
-                //Création de nouvelles images, regard s'il y a un objet affichable
-                if (controleur.getNouvelleItemAffichable() != null) {
-                    switch (controleur.getNouvelleItemAffichable().getNomImg()) {
-                        case "spiritesheet.png":
-                            addAnimationProjectiles(controleur.getNouvelleItemAffichable().getNomImg());
-                            break;
-                        case "Sans titre.png":
-                            addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
-                            break;
-                    }
-                    controleur.setNouvelleItemAffichable(null);
-                }
-
-                //Canon rotation
-                if (!inventaire) {
-                    if (!focusMenu) {
-                        if (modePausePlay){
-                        canon.setRotation((float) Math.toDegrees((Math.atan((double) posX / posY))) + 270);}
-
+                if (modePausePlay) {
+                    //touche pour lancer
+                    if (Key.isKeyDown(Input.KEY_SPACE)) {
+                        if (force < -1 || force > 100) {
+                            coteDeLaForce *= -1;
+                        }
+                        force += 2 * coteDeLaForce;
+                    } else {
+                        //lorsque l'on relache, le projectiles fait feu
+                        if (force != 0) {
+                            angle = Math.toDegrees((Math.atan((double) posY / posX)));
+                            controleur.addProjectile((int) (200 * Math.acos(angle)) + 50, (int) (200 * Math.asin(angle)) - 50, force / 3, angle, 0.8);
+                            force = 0;
+                        }
                     }
                 }
+            }
+            //**
 
-            
+            //Création de nouvelles images, regard s'il y a un objet affichable
+            if (controleur.getNouvelleItemAffichable() != null) {
+                switch (controleur.getNouvelleItemAffichable().getNomImg()) {
+                    case "spiritesheet.png":
+                        addAnimationProjectiles(controleur.getNouvelleItemAffichable().getNomImg());
+                        break;
+                    case "Sans titre.png":
+                        addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
+                        break;
+                }
+                controleur.setNouvelleItemAffichable(null);
+            }
+
+            //Canon rotation
+            if (!inventaire) {
+                if (!focusMenu) {
+                    if (modePausePlay) {
+                        canon.setRotation((float) Math.toDegrees((Math.atan((double) posX / posY))) + 270);
+                    }
+
+                }
+            }
+
+
         }
 
         //Mouvement
