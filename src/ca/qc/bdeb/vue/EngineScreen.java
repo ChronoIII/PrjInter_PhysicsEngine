@@ -43,7 +43,6 @@ public class EngineScreen extends BasicGameState {
     //Boutons
     private Image buttonInventaire;
     private Image buttonInventaire2;
-    private Image buttonSettings;
     private Image buttonSave;
     private Image buttonLoad;
     private Image buttonPlay;
@@ -58,6 +57,8 @@ public class EngineScreen extends BasicGameState {
     private Color colorAlpha = new Color(0.84f, 0.84f, 0.84f, 0.85f);
     //musique
     private Music musiqueJeuPlay;
+    //timer
+    private float timer = 0;
 
     public EngineScreen(int state, Controleur controleur) throws SlickException {
         this.state = state;
@@ -84,7 +85,6 @@ public class EngineScreen extends BasicGameState {
         //Initialisarion des images Boutons
         buttonInventaire = new Image("inventory.png");
         buttonInventaire2 = new Image("inventory2.png");
-        buttonSettings = new Image("settings2.png");
         buttonSave = new Image("save.png");
         buttonLoad = new Image("load.png");
         buttonPlay = new Image("pause.png");
@@ -100,6 +100,7 @@ public class EngineScreen extends BasicGameState {
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
+	timer += 1;
 
         //Input pour les commende au clavier
         Input Key = gc.getInput();
@@ -307,6 +308,15 @@ public class EngineScreen extends BasicGameState {
             }
         }
         
+	//détruir les projectiles (marche pas)
+	for(int i = 0; i < listAnimationProjectiles.size(); i++) {
+	    if(controleur.listProjectiles().get(i).getVitesse().getX() == 0){
+		if(controleur.listProjectiles().get(i).getTemps() - timer == 3){
+		    controleur.enleverProjectiles(controleur.listProjectiles().get(i));
+		}
+		
+	    }
+	}
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
