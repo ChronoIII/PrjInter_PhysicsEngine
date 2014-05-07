@@ -195,6 +195,7 @@ public class EngineScreen extends BasicGameState {
             //**key input
             //si le curseur n'est pas sur les bars noirs
             if (!focusMenu) {
+<<<<<<< HEAD
                 if (modePausePlay) {
                     //touche pour lancer
                     if (Key.isKeyDown(Input.KEY_SPACE)) {
@@ -209,6 +210,34 @@ public class EngineScreen extends BasicGameState {
                             controleur.addProjectile((int) (200 * Math.acos(angle)) + 50, (int) (200 * Math.asin(angle)) - 50, force / 3, angle, 0.8);
                             force = 0;
                         }
+=======
+                if(modePausePlay){
+                //touche pour lancer
+                if (Key.isKeyDown(Input.KEY_SPACE)) {
+                    if (force < -1 || force > 100) {
+                        coteDeLaForce *= -1;
+                    }
+                    force += 2 * coteDeLaForce;
+                } else {
+                    //lorsque l'on relache, le projectiles fait feu
+                    if (force != 0) {
+                        angle = Math.toDegrees((Math.atan((double) posY / posX)));
+                        controleur.addProjectile((int) (170 * Math.cos(Math.toRadians(angle))),(int) (170 * Math.sin(Math.toRadians(angle))), force / 4, angle, 0.8);
+                        force = 0;
+                    }
+                }}}
+                //**
+
+                //Création de nouvelles images, regard s'il y a un objet affichable
+                if (controleur.getNouvelleItemAffichable() != null) {
+                    switch (controleur.getNouvelleItemAffichable().getNomImg()) {
+                        case "spiritesheet.png":
+                            addAnimationProjectiles(controleur.getNouvelleItemAffichable().getNomImg());
+                            break;
+                        case "Sans titre.png":
+                            addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
+                            break;
+>>>>>>> cdfa2782c132e1df745accc325d6e95bc6439a90
                     }
                 }
             }
@@ -244,6 +273,20 @@ public class EngineScreen extends BasicGameState {
         controleur.bougerProjectiles();
         controleur.rebondProjectilesMur();
 
+<<<<<<< HEAD
+       //reverse
+	for (int i = 0; i < listAnimationProjectiles.size(); i++) {
+	    if (controleur.listProjectiles().get(i).isReverse()) {
+		if ( listAnimationProjectiles.get(i).getCurrentFrame().getName() == "spiritesheet.png") {
+		    listAnimationProjectiles.remove(i);
+		    addAnimationProjectiles(i, controleur.listProjectiles().get(i).getNomImgReverse());
+		}
+	    } else if (listAnimationProjectiles.get(i).getCurrentFrame().getName() == "spiritesheetreverse.png") {
+		listAnimationProjectiles.remove(i);
+		addAnimationProjectiles(i, controleur.listProjectiles().get(i).getNomImg());
+	    }
+	}
+=======
         //reverse
         for (int i = 0; i < listAnimationProjectiles.size(); i++) {
             if (controleur.listProjectiles().get(i).isReverse()) {
@@ -257,6 +300,7 @@ public class EngineScreen extends BasicGameState {
                 addAnimationProjectiles(i, controleur.listProjectiles().get(i).getNomImg());
             }
         }
+>>>>>>> a81b8f3c9cd7bb24b0cf5ef81a7a0313d3b15329
 
     }
 
