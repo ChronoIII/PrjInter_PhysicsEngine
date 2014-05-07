@@ -233,10 +233,7 @@ public class EngineScreen extends BasicGameState {
 		    listAnimationProjectiles.remove(i);
 		    addAnimationProjectiles(i, controleur.listProjectiles().get(i).getNomImgReverse());
 		}
-<<<<<<< HEAD
-		   System.out.println("allo");
-=======
->>>>>>> 1f5eebcbfa4e9357a244eb1fcb92b26fe62cf816
+
 	    } else if (listAnimationProjectiles.get(i).getCurrentFrame().getName() == "spiritesheetreverse.png") {
 		listAnimationProjectiles.remove(i);
 		addAnimationProjectiles(i, controleur.listProjectiles().get(i).getNomImg());
