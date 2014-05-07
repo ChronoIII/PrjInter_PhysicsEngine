@@ -13,7 +13,7 @@ import org.newdawn.slick.*;
  */
 public class Structures implements Affichable {
 //    comprendre SlickException....
-    private String nomImg = "inventory.png";
+    private String nomImg = "structure.png";
     private Controleur controleur;
     
     
