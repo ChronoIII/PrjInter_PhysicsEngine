@@ -47,7 +47,7 @@ public class EngineScreen extends BasicGameState {
     private Image inventaireExit;
     //**
     //État dans le jeux
-    private boolean modePausePlay;
+    private boolean modePausePlay; //play = trye, pause = false
     private boolean inventaire;
     private boolean focusMenu = false;
     //couleur de l'inventaire
@@ -97,6 +97,7 @@ public class EngineScreen extends BasicGameState {
         //Input pour les commende au clavier
         Input Key = gc.getInput();
 
+
         //Loop musique
         if (!musiqueJeuPlay.playing()) {
 
@@ -112,20 +113,29 @@ public class EngineScreen extends BasicGameState {
         } else {
             focusMenu = false;
         }
+        //pause mode erase projectiles
+        if (!modePausePlay) {
+            for (int i = 0; i < controleur.listProjectiles().size() + i; i++) {
+                controleur.enleverProjectiles(controleur.listProjectiles().get(0));
+            }
+            force=0;
 
-
+        }
+       
         //inventaire(Etat de jeu), lorsque l'on n'est pas dans l'inventaire 
         if (!inventaire) {
 
-            //**Boutons
-            //inventaire 2, lors que l'inventaire est déployé
-            if ((posX > 10 && posX < 85) && (posY > 10 && posY < 75)) {
-                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                    buttonInventaire = new Image("inventory2.png");
-                    inventaire = true;
+            if (!modePausePlay) {
+                //**Boutons
+                //inventaire 2, lors que l'inventaire est déployé
+                if ((posX > 10 && posX < 85) && (posY > 10 && posY < 75)) {
+                    if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                        buttonInventaire = new Image("inventory2.png");
+                        inventaire = true;
 
-                } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-                    buttonInventaire = new Image("inventory.png");
+                    } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+                        buttonInventaire = new Image("inventory.png");
+                    }
                 }
             }
 
@@ -161,28 +171,30 @@ public class EngineScreen extends BasicGameState {
 
                 }
             }
+            if (!modePausePlay) {
+                //save
+                if ((posX > 1020 && posX < 1100) && (posY > 10 && posY < 75)) {
+                    if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                        System.out.println("save button");
 
-            //save
-            if ((posX > 1020 && posX < 1100) && (posY > 10 && posY < 75)) {
-                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                    System.out.println("save button");
+                        controleur.sauvegarderFichier(controleur.listProjectiles().size());
 
-                    controleur.sauvegarderFichier(controleur.listProjectiles().size());
-
+                    }
                 }
-            }
 
-            //load
-            if ((posX > 1109 && posX < 1190) && (posY > 10 && posY < 75)) {
-                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                    System.out.println("load button");
-                    controleur.chargerFichier();
+                //load
+                if ((posX > 1109 && posX < 1190) && (posY > 10 && posY < 75)) {
+                    if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                        System.out.println("load button");
+                        controleur.chargerFichier();
+                    }
                 }
             }
 
             //**key input
             //si le curseur n'est pas sur les bars noirs
             if (!focusMenu) {
+                if(modePausePlay){
                 //touche pour lancer
                 if (Key.isKeyDown(Input.KEY_SPACE)) {
                     if (force < -1 || force > 100) {
@@ -196,7 +208,7 @@ public class EngineScreen extends BasicGameState {
                         controleur.addProjectile((int) (170 * Math.cos(Math.toRadians(angle))),(int) (170 * Math.sin(Math.toRadians(angle))), force / 4, angle, 0.8);
                         force = 0;
                     }
-                }
+                }}}
                 //**
 
                 //Création de nouvelles images, regard s'il y a un objet affichable
@@ -215,17 +227,20 @@ public class EngineScreen extends BasicGameState {
                 //Canon rotation
                 if (!inventaire) {
                     if (!focusMenu) {
-                        canon.setRotation((float) Math.toDegrees((Math.atan((double) posX / posY))) + 270);
+                        if (modePausePlay){
+                        canon.setRotation((float) Math.toDegrees((Math.atan((double) posX / posY))) + 270);}
 
                     }
                 }
-            }
+
+            
         }
 
         //Mouvement
         controleur.bougerProjectiles();
         controleur.rebondProjectilesMur();
 
+<<<<<<< HEAD
        //reverse
 	for (int i = 0; i < listAnimationProjectiles.size(); i++) {
 	    if (controleur.listProjectiles().get(i).isReverse()) {
@@ -238,6 +253,21 @@ public class EngineScreen extends BasicGameState {
 		addAnimationProjectiles(i, controleur.listProjectiles().get(i).getNomImg());
 	    }
 	}
+=======
+        //reverse
+        for (int i = 0; i < listAnimationProjectiles.size(); i++) {
+            if (controleur.listProjectiles().get(i).isReverse()) {
+                if (listAnimationProjectiles.get(i).getCurrentFrame().getName() == "spiritesheet.png") {
+                    listAnimationProjectiles.remove(i);
+                    addAnimationProjectiles(i, controleur.listProjectiles().get(i).getNomImgReverse());
+                }
+
+            } else if (listAnimationProjectiles.get(i).getCurrentFrame().getName() == "spiritesheetreverse.png") {
+                listAnimationProjectiles.remove(i);
+                addAnimationProjectiles(i, controleur.listProjectiles().get(i).getNomImg());
+            }
+        }
+>>>>>>> a81b8f3c9cd7bb24b0cf5ef81a7a0313d3b15329
 
     }
 
