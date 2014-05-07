@@ -25,6 +25,7 @@ public class Module {
     //constante de graviter
     private double gravite = -9.8;
     private Controleur controleur;
+    
 
     public Module(Controleur controleur) throws SlickException {
 
@@ -50,7 +51,6 @@ public class Module {
 	if (orientation == 'x') {
 	    projectile.getVitesse().setX(-projectile.getVitesse().getX());
 	    projectile.setReverse(!projectile.isReverse());
-	    System.out.println(""+projectile.isReverse());
 	}
     }
 
