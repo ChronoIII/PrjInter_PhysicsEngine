@@ -32,28 +32,25 @@ public class Main {
 
 	//Créé la fenètre
 	frame = new JFrame();
-	CanvasGameContainer app2 = new CanvasGameContainer(new Vue(title, controleur));
-	AppGameContainer app = new AppGameContainer(new Vue(title, controleur));
+	CanvasGameContainer app = new CanvasGameContainer(new Vue(title, controleur));
 	
+	//SetPropriétés
+	//frame
 	frame.setUndecorated(true);
 	frame.setVisible(true);
-	frame.add(app2);
+	frame.add(app);
 	frame.setSize(width, height);
 	frame.setLocation(50, 50);
 	
+	//State base game
+	app.getContainer().setShowFPS(showFPS);
+	app.getContainer().setTargetFrameRate(fpslimit);
+	app.getContainer().setIcon("icon.png");
 	
-	app2.getContainer().setShowFPS(showFPS);
-	app2.getContainer().setTargetFrameRate(fpslimit);
-	app2.getContainer().setIcon("icon.png");
-	
-	app.setDisplayMode(width, height, fullscreen);
-	app.setTargetFrameRate(fpslimit);
-	app.setShowFPS(showFPS);
-	app.setIcon("icon.png");
-	app2.start();
-	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	app.start();
     }
     
+    //exit le jeu et la fenetre
     public static void exit(){
 	frame.dispose();
 	System.exit(0);
