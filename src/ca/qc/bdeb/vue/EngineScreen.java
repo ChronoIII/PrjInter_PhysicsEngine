@@ -24,6 +24,7 @@ public class EngineScreen extends BasicGameState {
     //Listes
     private ArrayList<Image> listImagesStructures;
     private ArrayList<Animation> listAnimationProjectiles;
+    private ArrayList<Animation> listAnimationCibles;
     //Données temp commune
     double force = 0;
     double angle = 0;
@@ -78,6 +79,7 @@ public class EngineScreen extends BasicGameState {
         //Initialisarions des listes
         listAnimationProjectiles = new ArrayList<Animation>();
         listImagesStructures = new ArrayList<Image>();
+	listAnimationCibles = new ArrayList<Animation>();
 
         //Initialisarion background
         bg = new Image("background.jpg");
@@ -123,8 +125,8 @@ public class EngineScreen extends BasicGameState {
         }
         //pause mode erase projectiles
         if (!modePausePlay) {
-            for (int i = 0; i < controleur.listProjectiles().size() + i; i++) {
-                controleur.enleverProjectiles(controleur.listProjectiles().get(0));
+            for (int i = 0; i < controleur.getListProjectiles().size() + i; i++) {
+                controleur.enleverProjectiles(controleur.getListProjectiles().get(0));
             }
 //            for (int i = 0; i < controleur.listStructures().size() + i; i++) {
 //                controleur.enleverStructure(controleur.listStructures().get(0));
@@ -156,12 +158,12 @@ public class EngineScreen extends BasicGameState {
                 if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                     System.out.println("got clicked buddy! lets go back!");
 
-                    for (int i = 0; i < controleur.listProjectiles().size() + i; i++) {
-                        controleur.enleverProjectiles(controleur.listProjectiles().get(0));
+                    for (int i = 0; i < controleur.getListProjectiles().size() + i; i++) {
+                        controleur.enleverProjectiles(controleur.getListProjectiles().get(0));
 
                     }
-                    for (int i = 0; i < controleur.listStructures().size() + i; i++) {
-                        controleur.enleverStructure(controleur.listStructures().get(0));
+                    for (int i = 0; i < controleur.getListStructures().size() + i; i++) {
+                        controleur.enleverStructure(controleur.getListStructures().get(0));
                     }
                     if (musiqueJeuPlay.playing()) {
 
@@ -192,7 +194,7 @@ public class EngineScreen extends BasicGameState {
                     if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                         System.out.println("save button");
 
-                        controleur.sauvegarderFichier(controleur.listProjectiles().size());
+                        controleur.sauvegarderFichier(controleur.getListProjectiles().size());
 
                     }
                 }
@@ -297,22 +299,22 @@ public class EngineScreen extends BasicGameState {
 
         //reverse
         for (int i = 0; i < listAnimationProjectiles.size(); i++) {
-            if (controleur.listProjectiles().get(i).isReverse()) {
+            if (controleur.getListProjectiles().get(i).isReverse()) {
                 if ("spiritesheet.png".equals(listAnimationProjectiles.get(i).getCurrentFrame().getName())) {
                     listAnimationProjectiles.remove(i);
-                    addAnimationProjectiles(i, controleur.listProjectiles().get(i).getNomImgReverse());
+                    addAnimationProjectiles(i, controleur.getListProjectiles().get(i).getNomImgReverse());
                 }
             } else if ("spiritesheetreverse.png".equals(listAnimationProjectiles.get(i).getCurrentFrame().getName())) {
                 listAnimationProjectiles.remove(i);
-                addAnimationProjectiles(i, controleur.listProjectiles().get(i).getNomImg());
+                addAnimationProjectiles(i, controleur.getListProjectiles().get(i).getNomImg());
             }
         }
         
 	//détruir les projectiles (marche pas)
 	for(int i = 0; i < listAnimationProjectiles.size(); i++) {
-	    if(controleur.listProjectiles().get(i).getVitesse().getX() == 0){
-		if(controleur.listProjectiles().get(i).getTemps() - timer == 3){
-		    controleur.enleverProjectiles(controleur.listProjectiles().get(i));
+	    if(controleur.getListProjectiles().get(i).getVitesse().getX() == 0){
+		if(controleur.getListProjectiles().get(i).getTemps() - timer == 3){
+		    controleur.enleverProjectiles(controleur.getListProjectiles().get(i));
 		}
 		
 	    }
@@ -396,6 +398,13 @@ public class EngineScreen extends BasicGameState {
         img.setName(nomImg);
         listImagesStructures.add(img);
     }
+    
+    public void addAnimationCibles(String nomImg) throws SlickException {
+	
+        cibleAnimation = new Animation(new SpriteSheet(nomImg, 25, 40), 140);
+        cibleAnimation.getCurrentFrame().setName(nomImg);
+        listAnimationProjectiles.add(cibleAnimation);
+    }
 
     //getters and setters
     public ArrayList<Animation> getListAnimationProjectiles() {
@@ -412,5 +421,13 @@ public class EngineScreen extends BasicGameState {
 
     public void setListImagesStructures(ArrayList<Image> listImagesStructures) {
         this.listImagesStructures = listImagesStructures;
+    }
+
+    public ArrayList<Animation> getListAnimationCibles() {
+	return listAnimationCibles;
+    }
+
+    public void setListAnimationCibles(ArrayList<Animation> listAnimationCibles) {
+	this.listAnimationCibles = listAnimationCibles;
     }
 }

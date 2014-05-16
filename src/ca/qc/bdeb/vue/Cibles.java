@@ -5,32 +5,32 @@
 package ca.qc.bdeb.vue;
 
 import ca.qc.bdeb.controler.Controleur;
-import org.newdawn.slick.*;
+import org.newdawn.slick.SlickException;
 
 /**
  *
- * @author Kururin
+ * @author Samuel
  */
-public class Structures implements Affichable {
+public class Cibles implements Affichable {
 
-    //nom de l'image
-    private String nomImg = "structure.png";
-    //le controleur
+    //nnomde l'animation
+    private String nomImg = "spiritesheet.png";
+    //controleur
     private Controleur controleur;
     //propriétées
-    private Vecteur bound = new Vecteur(76, 63);
+    private Vecteur bound;
     private Vecteur position = new Vecteur();
-
-    public Structures(int posX, int posY, Controleur controleur) throws SlickException {
+    
+    public Cibles(int posX, int posY, Controleur controleur) throws SlickException {
 	position.setX(posX);
 	position.setY(posY);
 	this.controleur = controleur;
 
 	controleur.setNouvelleItemAffichable(this);
     }
-
+    
     public void detruir() {
-	controleur.enleverStructure(this);
+	controleur.enleverCible(this);
     }
 
     //getters and setters

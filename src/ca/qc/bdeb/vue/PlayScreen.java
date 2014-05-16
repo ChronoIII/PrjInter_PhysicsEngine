@@ -118,13 +118,13 @@ public class PlayScreen extends BasicGameState {
 
 	    if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 
-		for (int i = 0; i < controleur.listProjectiles().size() + i; i++) {
+		for (int i = 0; i < controleur.getListProjectiles().size() + i; i++) {
 
-		    controleur.enleverProjectiles(controleur.listProjectiles().get(0));
+		    controleur.enleverProjectiles(controleur.getListProjectiles().get(0));
 		}
-		for (int i = 0; i < controleur.listStructures().size() + i; i++) {
+		for (int i = 0; i < controleur.getListStructures().size() + i; i++) {
 
-		    controleur.enleverStructure(controleur.listStructures().get(0));
+		    controleur.enleverStructure(controleur.getListStructures().get(0));
 		}
 		if (musiqueJeuPlay.playing()) {
 
@@ -187,14 +187,14 @@ public class PlayScreen extends BasicGameState {
 
 	//reverse
 	for (int i = 0; i < listAnimationProjectiles.size(); i++) {
-	    if (controleur.listProjectiles().get(i).isReverse()) {
+	    if (controleur.getListProjectiles().get(i).isReverse()) {
 		if ("spiritesheet.png".equals(listAnimationProjectiles.get(i).getCurrentFrame().getName())) {
 		    listAnimationProjectiles.remove(i);
-		    addAnimationProjectiles(i, controleur.listProjectiles().get(i).getNomImgReverse());
+		    addAnimationProjectiles(i, controleur.getListProjectiles().get(i).getNomImgReverse());
 		}
 	    } else if ("spiritesheetreverse.png".equals(listAnimationProjectiles.get(i).getCurrentFrame().getName())) {
 		listAnimationProjectiles.remove(i);
-		addAnimationProjectiles(i, controleur.listProjectiles().get(i).getNomImg());
+		addAnimationProjectiles(i, controleur.getListProjectiles().get(i).getNomImg());
 	    }
 	}
 

@@ -5,6 +5,7 @@
 package ca.qc.bdeb.module;
 
 import ca.qc.bdeb.controler.Controleur;
+import ca.qc.bdeb.vue.Cibles;
 import ca.qc.bdeb.vue.Projectiles;
 import ca.qc.bdeb.vue.Structures;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class Module {
     //Listes
     private ArrayList<Projectiles> listProjectiles;
     private ArrayList<Structures> listStructures;
+    private ArrayList<Cibles> listCibles;
     //variable de dimantion
     int width = 1200;
     int height = 675;
@@ -33,6 +35,7 @@ public class Module {
 	//Initialiser les liste
 	listProjectiles = new ArrayList<Projectiles>();
 	listStructures = new ArrayList<Structures>();
+	listCibles = new ArrayList<Cibles>();
     }
 
     //se que fait le projectiles lorsqu'il touche un surface
@@ -53,7 +56,11 @@ public class Module {
 	}
     }
     
-    
+     public void sauvegarde(int nbreProjectiles) {
+    }
+
+    public void charger() {
+    }
 
     //setters and getters
     public int getWidth() {
@@ -88,9 +95,11 @@ public class Module {
 	this.listStructures = listStructures;
     }
 
-    public void sauvegarde(int nbreProjectiles) {
+    public ArrayList<Cibles> getListCibles() {
+	return listCibles;
     }
 
-    public void charger() {
+    public void setListCibles(ArrayList<Cibles> listCibles) {
+	this.listCibles = listCibles;
     }
 }

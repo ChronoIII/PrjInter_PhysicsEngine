@@ -5,10 +5,7 @@
 package ca.qc.bdeb.vue;
 
 import ca.qc.bdeb.controler.Controleur;
-import ca.qc.bdeb.module.Module;
-import org.newdawn.slick.Animation;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.SpriteSheet;
 
 /**
  *
@@ -23,7 +20,6 @@ public class Projectiles implements Affichable {
     private Controleur controleur;
     //propriétées
     private double gravity = 20;
-    private double masse = 1;
     private double facRebond;
     private Vecteur bound;
     private Vecteur vitesse = new Vecteur();
@@ -87,14 +83,6 @@ public class Projectiles implements Affichable {
 
     public void setGravity(double gravity) {
 	this.gravity = gravity;
-    }
-
-    public double getMasse() {
-	return masse;
-    }
-
-    public void setMasse(double masse) {
-	this.masse = masse;
     }
 
     public double getFacRebond() {
