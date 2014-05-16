@@ -6,6 +6,7 @@ import ca.qc.bdeb.vue.Cibles;
 import ca.qc.bdeb.vue.EngineScreen;
 import ca.qc.bdeb.vue.MainMenu;
 import ca.qc.bdeb.vue.Projectiles;
+import ca.qc.bdeb.vue.Screen;
 import ca.qc.bdeb.vue.Structures;
 import java.util.ArrayList;
 import org.newdawn.slick.SlickException;
@@ -172,6 +173,14 @@ public class Controleur {
 
     public ArrayList<Cibles> getListCibles() {
 	return module.getListCibles();
+    }
+    
+    //Créé le niveau
+    public void creeNiveau(Screen ecran)throws SlickException{
+	for(int i = 0; i < module.getListPosStructures().size(); i++){
+	    addStructure(Integer.parseInt(module.getListPosStructures().get(i)), 2);
+	    ecran.addImageStructures(null);
+	}
     }
     
     //Mettre un objet affichable dans la variable

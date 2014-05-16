@@ -23,7 +23,7 @@ import org.newdawn.slick.state.StateBasedGame;
  *
  * @author Samuel
  */
-public class PlayScreen extends BasicGameState {
+public class PlayScreen extends BasicGameState implements Screen{
 
     //Identifiant
     int state;
@@ -259,6 +259,13 @@ public class PlayScreen extends BasicGameState {
 	Image img = new Image(nomImg);
 	img.setName(nomImg);
 	listImagesStructures.add(img);
+    }
+
+    public void addAnimationCibles(String nomImg) throws SlickException {
+
+	cibleAnimation = new Animation(new SpriteSheet(nomImg, 25, 40), 140);
+	cibleAnimation.getCurrentFrame().setName(nomImg);
+	listAnimationProjectiles.add(cibleAnimation);
     }
 
     //getters and setters

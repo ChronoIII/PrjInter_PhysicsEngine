@@ -8,6 +8,8 @@ import ca.qc.bdeb.controler.Controleur;
 import ca.qc.bdeb.vue.Cibles;
 import ca.qc.bdeb.vue.Projectiles;
 import ca.qc.bdeb.vue.Structures;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 import org.newdawn.slick.SlickException;
 
@@ -21,6 +23,8 @@ public class Module {
     private ArrayList<Projectiles> listProjectiles;
     private ArrayList<Structures> listStructures;
     private ArrayList<Cibles> listCibles;
+    private ArrayList<String[]> listPosStructures;
+    private ArrayList<String[]> listPosCibles;
     //variable de dimantion
     int width = 1200;
     int height = 675;
@@ -61,6 +65,24 @@ public class Module {
 
     public void charger() {
     }
+    
+    public void lireNiveau(String nomTxt) throws Exception{
+	BufferedReader FichierEntree;
+	String sLine;
+	FichierEntree = new BufferedReader(new FileReader(nomTxt));
+	sLine = FichierEntree.readLine();
+	while(sLine != null){
+	    if(sLine.charAt(0) == 's'){
+		listPosStructures.add(sLine.substring(1).split(":"));
+	    }
+	    if(sLine.charAt(0) == 'c'){
+		listPosCibles.add(sLine.substring(1).split(":"));
+	    }
+	    sLine = FichierEntree.readLine();
+	}
+	FichierEntree.close();
+    }
+	    
 
     //setters and getters
     public int getWidth() {
@@ -101,5 +123,21 @@ public class Module {
 
     public void setListCibles(ArrayList<Cibles> listCibles) {
 	this.listCibles = listCibles;
+    }
+
+    public ArrayList<String[]> getListPosStructures() {
+	return listPosStructures;
+    }
+
+    public void setListPosStructures(ArrayList<String[]> listPosStructures) {
+	this.listPosStructures = listPosStructures;
+    }
+
+    public ArrayList<String[]> getListPosCibles() {
+	return listPosCibles;
+    }
+
+    public void setListPosCibles(ArrayList<String[]> listPosCibles) {
+	this.listPosCibles = listPosCibles;
     }
 }

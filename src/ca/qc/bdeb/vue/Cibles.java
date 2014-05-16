@@ -14,7 +14,7 @@ import org.newdawn.slick.SlickException;
 public class Cibles implements Affichable {
 
     //nnomde l'animation
-    private String nomImg = "spiritesheet.png";
+    private String nomImg = "heartsprite.png";
     //controleur
     private Controleur controleur;
     //propriétées
