@@ -177,9 +177,17 @@ public class Controleur {
     
     //Créé le niveau
     public void creeNiveau(Screen ecran)throws SlickException{
+	
 	for(int i = 0; i < module.getListPosStructures().size(); i++){
-	    addStructure(Integer.parseInt(module.getListPosStructures().get(i)), 2);
-	    ecran.addImageStructures(null);
+	    addStructure(Integer.parseInt(module.getListPosStructures().get(i)[0]), Integer.parseInt(module.getListPosStructures().get(i)[0]));
+	    ecran.addImageStructures("structure.png");
+	    setNouvelleItemAffichable(null);
+	}
+	
+	for(int i = 0; i < module.getListPosCibles().size(); i++){
+	    addCible(Integer.parseInt(module.getListPosCibles().get(i)[0]), Integer.parseInt(module.getListPosCibles().get(i)[0]));
+	    ecran.addImageStructures("heartsprite.png");
+	    setNouvelleItemAffichable(null);
 	}
     }
     
