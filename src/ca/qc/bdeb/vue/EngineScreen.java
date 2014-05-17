@@ -211,7 +211,7 @@ public class EngineScreen extends BasicGameState implements Screen{
                 if ((posX > 1109 && posX < 1190) && (posY > 10 && posY < 75)) {
                     if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                         System.out.println("load button");
-                        controleur.chargerFichier();
+//                        controleur.chargerFichier();
                     }
                 }
             }

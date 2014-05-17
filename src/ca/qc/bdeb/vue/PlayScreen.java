@@ -170,19 +170,20 @@ public class PlayScreen extends BasicGameState implements Screen {
 	//Canon rotation
 	canon.setRotation((float) Math.toDegrees((Math.atan((double) posX / posY))) + 270);
 
-	//affichable structure
-	if (controleur.getNouvelleItemAffichable() != null) {
-	    switch (controleur.getNouvelleItemAffichable().getNomImg()) {
-		case "structure.png":
-		    addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
-		    break;
-	    }
-	    controleur.setNouvelleItemAffichable(null);
-	}
+//	//affichable structure
+//	if (controleur.getNouvelleItemAffichable() != null) {
+//	    switch (controleur.getNouvelleItemAffichable().getNomImg()) {
+//		case "structure.png":
+//		    addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
+//		    break;
+//	    }
+//	    controleur.setNouvelleItemAffichable(null);
+//	}
 
 	//Mouvement
 	controleur.bougerProjectiles();
 	controleur.rebondProjectilesMurLoop();
+	controleur.rebondProjectilesStructuresLoop();
 
 	//reverse
 	for (int i = 0; i < listAnimationProjectiles.size(); i++) {

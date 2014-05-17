@@ -6,6 +6,8 @@ package ca.qc.bdeb.vue;
 
 import ca.qc.bdeb.controler.Controleur;
 import ca.qc.bdeb.inf204.Main;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
@@ -88,7 +90,12 @@ public class MainMenu extends BasicGameState {
 //                    detruire.play();
 		    sbg.enterState(2);
                     gc.sleep(2500);
-		    
+		    try {
+			controleur.chargerFichier("fichier.txt");
+		    } catch (Exception ex) {
+			Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+		    }
+		    controleur.creeNiveau(controleur.getPlayScreenMenu());
 		}
 	    }
 	    //create

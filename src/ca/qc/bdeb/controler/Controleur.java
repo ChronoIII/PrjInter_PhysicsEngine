@@ -211,9 +211,9 @@ public class Controleur {
 	module.sauvegarde(nbreProjectile);
     }
 
-    public void chargerFichier() {
+    public void chargerFichier(String nomTxt) throws Exception {
 
-	module.charger();
+	module.lireNiveau(nomTxt);
     }
 
     //getters and setters
