@@ -2,9 +2,11 @@ package ca.qc.bdeb.controler;
 
 import ca.qc.bdeb.module.Module;
 import ca.qc.bdeb.vue.Affichable;
+import ca.qc.bdeb.vue.Cibles;
 import ca.qc.bdeb.vue.EngineScreen;
 import ca.qc.bdeb.vue.MainMenu;
 import ca.qc.bdeb.vue.Projectiles;
+import ca.qc.bdeb.vue.Screen;
 import ca.qc.bdeb.vue.Structures;
 import ca.qc.bdeb.vue.Vecteur;
 import java.util.ArrayList;
@@ -46,35 +48,35 @@ public class Controleur {
 	return module.getListProjectiles().get(i).getPosition().getY();
     }
 
-    public ArrayList<Projectiles> listProjectiles() {
+    public ArrayList<Projectiles> getListProjectiles() {
 	return module.getListProjectiles();
     }
 
     public void rebondProjectilesMur(Projectiles proj) {
 
-	    if ((proj.getPosition().getX() + proj.getBound().getX()) > module.getWidth()) {
-		proj.getPosition().setX(module.getWidth() - proj.getBound().getX());
-		module.rebond(proj, 'x');
-	    }
+	if ((proj.getPosition().getX() + proj.getBound().getX()) > module.getWidth()) {
+	    proj.getPosition().setX(module.getWidth() - proj.getBound().getX());
+	    module.rebond(proj, 'x');
+	}
 
-	    if ((proj.getPosition().getY() + proj.getBound().getY()) > (module.getHeight() - 85)) {
-		proj.getPosition().setY((module.getHeight() - 85) - proj.getBound().getY());
-		module.rebond(proj, 'y');
-	    }
-	    if (proj.getPosition().getX() < 0) {
-		proj.getPosition().setX(0);
-		module.rebond(proj, 'x');
-	    }
+	if ((proj.getPosition().getY() + proj.getBound().getY()) > (module.getHeight() - 85)) {
+	    proj.getPosition().setY((module.getHeight() - 85) - proj.getBound().getY());
+	    module.rebond(proj, 'y');
+	}
+	if (proj.getPosition().getX() < 0) {
+	    proj.getPosition().setX(0);
+	    module.rebond(proj, 'x');
+	}
 
-	    if (proj.getPosition().getY() < 75) {
-		proj.getPosition().setY(75);
-		module.rebond(proj, 'y');
-	    }
+	if (proj.getPosition().getY() < 75) {
+	    proj.getPosition().setY(75);
+	    module.rebond(proj, 'y');
+	}
     }
 
     public void rebondProjectilesMurLoop() {
 	for (int i = 0; i < module.getListProjectiles().size(); i++) {
-	    
+
 	    rebondProjectilesMur(module.getListProjectiles().get(i));
 	}
     }
@@ -117,33 +119,33 @@ public class Controleur {
 	module.getListStructures().get(i).setPosition(v);
     }
 
-    public ArrayList<Structures> listStructures() {
+    public ArrayList<Structures> getListStructures() {
 	return module.getListStructures();
     }
 
     public void rebondProjectilesStructures(Projectiles proj, Structures struc) {
-	
-		if (proj.getPosition().getX() > struc.getPosition().getX() && proj.getPosition().getX() < (struc.getPosition().getX() + struc.getBound().getX()) && proj.getPosition().getY() < struc.getPosition().getY()) {
-		    if (proj.getVitesse().getX() < 0) {
-			if (Math.abs((struc.getPosition().getX() + struc.getBound().getX()) - proj.getPosition().getX()) > Math.abs(struc.getPosition().getY() - proj.getPosition().getY())) {
-			    proj.getPosition().setY(struc.getPosition().getY());
-			    module.rebond(proj, 'y');
 
-			} else {
-			    proj.getPosition().setX((struc.getPosition().getX() + struc.getBound().getX()));
-			    module.rebond(proj, 'x');
-			}
+	if (proj.getPosition().getX() > struc.getPosition().getX() && proj.getPosition().getX() < (struc.getPosition().getX() + struc.getBound().getX()) && proj.getPosition().getY() < struc.getPosition().getY()) {
+	    if (proj.getVitesse().getX() < 0) {
+		if (Math.abs((struc.getPosition().getX() + struc.getBound().getX()) - proj.getPosition().getX()) > Math.abs(struc.getPosition().getY() - proj.getPosition().getY())) {
+		    proj.getPosition().setY(struc.getPosition().getY());
+		    module.rebond(proj, 'y');
 
-		    } else {
-			if (Math.abs(struc.getPosition().getX() - proj.getPosition().getX()) > Math.abs(struc.getPosition().getY() - proj.getPosition().getY())) {
-			    proj.getPosition().setY(struc.getPosition().getY());
-			    module.rebond(proj, 'y');
-			} else {
-			    proj.getPosition().setX(struc.getPosition().getX());
-			    module.rebond(proj, 'x');
-			}
-		    }
+		} else {
+		    proj.getPosition().setX((struc.getPosition().getX() + struc.getBound().getX()));
+		    module.rebond(proj, 'x');
 		}
+
+	    } else {
+		if (Math.abs(struc.getPosition().getX() - proj.getPosition().getX()) > Math.abs(struc.getPosition().getY() - proj.getPosition().getY())) {
+		    proj.getPosition().setY(struc.getPosition().getY());
+		    module.rebond(proj, 'y');
+		} else {
+		    proj.getPosition().setX(struc.getPosition().getX());
+		    module.rebond(proj, 'x');
+		}
+	    }
+	}
     }
 
     public void rebondProjectilesStructuresLoop() {
@@ -155,6 +157,36 @@ public class Controleur {
 	}
     }
 
+    //Cibles
+    public void addCible(int x, int y) throws SlickException {
+	module.getListCibles().add(new Cibles(x, y, this));
+    }
+
+    public void enleverCible(Cibles cible) {
+	module.getListCibles().remove(cible);
+	engineScreenMenu.getListAnimationCibles().remove(0);
+    }
+
+    public double positionCiblesX(int i) {
+	return module.getListCibles().get(i).getPosition().getX();
+    }
+
+    public double positionCiblesY(int i) {
+	return module.getListStructures().get(i).getPosition().getY();
+    }
+
+    public ArrayList<Cibles> getListCibles() {
+	return module.getListCibles();
+    }
+    
+    //Créé le niveau
+    public void creeNiveau(Screen ecran)throws SlickException{
+	for(int i = 0; i < module.getListPosStructures().size(); i++){
+	    addStructure(Integer.parseInt(module.getListPosStructures().get(i)), 2);
+	    ecran.addImageStructures(null);
+	}
+    }
+    
     //Mettre un objet affichable dans la variable
     public void afficher(Affichable nouvelleItemAffichable) {
 	this.nouvelleItemAffichable = nouvelleItemAffichable;
