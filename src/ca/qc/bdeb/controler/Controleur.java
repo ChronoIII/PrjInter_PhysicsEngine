@@ -6,6 +6,7 @@ import ca.qc.bdeb.vue.EngineScreen;
 import ca.qc.bdeb.vue.MainMenu;
 import ca.qc.bdeb.vue.Projectiles;
 import ca.qc.bdeb.vue.Structures;
+import ca.qc.bdeb.vue.Vecteur;
 import java.util.ArrayList;
 import org.newdawn.slick.SlickException;
 
@@ -111,6 +112,9 @@ public class Controleur {
 
     public double positionStructureY(int i) {
 	return module.getListStructures().get(i).getPosition().getY();
+    } 
+    public void setpositionStructureY(int i, Vecteur v) {
+	module.getListStructures().get(i).setPosition(v);
     }
 
     public ArrayList<Structures> listStructures() {

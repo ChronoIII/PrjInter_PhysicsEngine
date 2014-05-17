@@ -93,8 +93,8 @@ public class MainMenu extends BasicGameState {
                     System.out.println("CREATE");
 
                     introMusic.stop();
-                    detruire.play();
-                    gc.sleep(2500);
+//                    detruire.play();
+//                    gc.sleep(2500);
                     sbg.enterState(1);
 
                 }
