@@ -39,11 +39,6 @@ public class Projectiles implements Affichable {
 	controleur.setNouvelleItemAffichable(this);
     }
 
-    public void detruir() {
-
-	controleur.enleverProjectiles(this);
-    }
-
     //getter and setter
     public float getTemps() {
 	return temps;

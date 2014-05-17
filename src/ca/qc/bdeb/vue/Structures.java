@@ -29,10 +29,6 @@ public class Structures implements Affichable {
 	controleur.setNouvelleItemAffichable(this);
     }
 
-    public void detruir() {
-	controleur.enleverStructure(this);
-    }
-
     //getters and setters
     public String getNomImg() {
 	return nomImg;

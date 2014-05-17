@@ -36,132 +36,138 @@ public class MainMenu extends BasicGameState {
     private Image exitGame;
 
     public MainMenu(int state, Controleur controleur) throws SlickException {
-        this.state = state;
-        this.controleur = controleur;
+	this.state = state;
+	this.controleur = controleur;
 
     }
 
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-        img = new Image("little_baby.jpg");
-        introPhoto = new Image("realbg.jpg");
-        buttonPlay = new Image("buttonPlay.jpg");
-        buttonCreate = new Image("buttonCreate.jpg");
-        buttonCredits = new Image("buttonCredits.jpg");
-        iris = new Image("eyeball.png");
-        introMusic = new Music("intro.wav");
+	img = new Image("little_baby.jpg");
+	introPhoto = new Image("realbg.jpg");
+	buttonPlay = new Image("buttonPlay.jpg");
+	buttonCreate = new Image("buttonCreate.jpg");
+	buttonCredits = new Image("buttonCredits.jpg");
+	iris = new Image("eyeball.png");
+	introMusic = new Music("intro.wav");
 
-        isClicked = true;
-        rire = new Sound("rire.wav");
-        jouons = new Sound("letsplay.wav");
-        detruire = new Sound("destroy.wav");
-        inventaireExit = new Image("exitinventaire.png");
-        exitGame = new Image("exit.png");
+	isClicked = true;
+	rire = new Sound("rire.wav");
+	jouons = new Sound("letsplay.wav");
+	detruire = new Sound("destroy.wav");
+	inventaireExit = new Image("exitinventaire.png");
+	exitGame = new Image("exit.png");
 
 
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-        Input a = gc.getInput();
-        introMusic.setVolume(0.25f);
+	Input a = gc.getInput();
+	introMusic.setVolume(0.25f);
 
-        if (!introMusic.playing()) {
+	if (!introMusic.playing()) {
 
-            introMusic.play();
-            introMusic.loop();
-        }
+	    introMusic.play();
+	    introMusic.loop();
+	}
 
-        int posX = Mouse.getX();
-        int posY = Mouse.getY();
-        if (isClicked) {
-            buttonPlay = new Image("buttonPlay.jpg");
-        } else {
-            buttonPlay = new Image("buttons - Copy.jpg");
-        }
-        if (!focusCredit) {
-            //boutons
-            //play
-            if ((posX > 795 && posX < 1168) && (posY > 182 && posY < 225)) {
-                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                    jouons.play();
-                }
-            }
-            //create
+	int posX = Mouse.getX();
+	int posY = Mouse.getY();
+	if (isClicked) {
+	    buttonPlay = new Image("buttonPlay.jpg");
+	} else {
+	    buttonPlay = new Image("buttons - Copy.jpg");
+	}
+	if (!focusCredit) {
+	    //boutons
+	    //play
+	    if ((posX > 795 && posX < 1168) && (posY > 182 && posY < 225)) {
+		if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+		    System.out.println("PLAY");
+		    jouons.play();
+//		    introMusic.stop();
+//                    detruire.play();
+		    sbg.enterState(2);
+                    gc.sleep(2500);
+		    
+		}
+	    }
+	    //create
 
-            if ((posX > 795 && posX < 1168) && (posY > 121 && posY < 166)) {
-                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+	    if ((posX > 795 && posX < 1168) && (posY > 121 && posY < 166)) {
+		if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 
-                    System.out.println("CREATE");
+		    System.out.println("CREATE");
 
-                    introMusic.stop();
+		    introMusic.stop();
 //                    detruire.play();
 //                    gc.sleep(2500);
-                    sbg.enterState(1);
+		    sbg.enterState(1);
 
-                }
-            }
-            //credits
-            if ((posX > 795 && posX < 1168) && (posY > 61 && posY < 105)) {
-                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+		}
+	    }
+	    //credits
+	    if ((posX > 795 && posX < 1168) && (posY > 61 && posY < 105)) {
+		if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 
-                    System.out.println("CREDITS");
+		    System.out.println("CREDITS");
 
-                    rire.play();
-                    focusCredit = true;
-                } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-                }
+		    rire.play();
+		    focusCredit = true;
+		} else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+		}
 
 
-            }
-            if ((posX > 1110 && posX < 1186) && (posY > 607 && posY < 670)) {
-                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                    introMusic.stop();
-                    rire.play();
-                    gc.sleep(1500);
-                    System.out.println("the end");
-                    Main.exit();
-                } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-                }
-            }
-        }
+	    }
+	    if ((posX > 1110 && posX < 1186) && (posY > 607 && posY < 670)) {
+		if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+		    introMusic.stop();
+		    rire.play();
+		    gc.sleep(1500);
+		    System.out.println("the end");
+		    Main.exit();
+		} else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+		}
+	    }
+	}
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
-        int posX = Mouse.getX();
-        int posY = Mouse.getY();
+	int posX = Mouse.getX();
+	int posY = Mouse.getY();
 
-        introPhoto.draw();
-        buttonPlay.draw(795, 450);
-        buttonCreate.draw(795, 510);
-        buttonCredits.draw(795, 570);
-        exitGame.draw(1110, 5);
-        iris.draw(297 + Mouse.getX() * 13 / 1200, 220 - Mouse.getY() * 8 / 675);
-        g.setColor(Color.pink);
-        g.drawString("" + Mouse.getX() + ", " + Mouse.getY(), 90, 80);
+	introPhoto.draw();
+	buttonPlay.draw(795, 450);
+	buttonCreate.draw(795, 510);
+	buttonCredits.draw(795, 570);
+	exitGame.draw(1110, 5);
+	iris.draw(297 + Mouse.getX() * 13 / 1200, 220 - Mouse.getY() * 8 / 675);
+	g.setColor(Color.pink);
+	g.drawString("" + Mouse.getX() + ", " + Mouse.getY(), 90, 80);
 
-        if (focusCredit) {
+	if (focusCredit) {
 
-            g.setColor(colorAlpha);
-            g.fillRoundRect(271, 75, 600, 570, 30);
-            inventaireExit.draw(435 + 271 + 125, 55);
-
-
-            if ((posX > 833 && posX < 880) && (posY > 573 && posY < 619)) {
-
-                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-
-                    System.out.println("credits X clicker pour fermer");
-                    focusCredit = false;
+	    g.setColor(colorAlpha);
+	    g.fillRoundRect(271, 75, 600, 570, 30);
+	    inventaireExit.draw(435 + 271 + 125, 55);
 
 
-                }
-            }
+	    if ((posX > 833 && posX < 880) && (posY > 573 && posY < 619)) {
 
-        }
+		if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+
+		    System.out.println("credits X clicker pour fermer");
+		    focusCredit = false;
+
+
+		}
+	    }
+
+	}
 
     }
 
     @Override
     public int getID() {
-        return state;
+	return state;
     }
 }

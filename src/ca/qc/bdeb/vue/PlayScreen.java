@@ -23,7 +23,7 @@ import org.newdawn.slick.state.StateBasedGame;
  *
  * @author Samuel
  */
-public class PlayScreen extends BasicGameState implements Screen{
+public class PlayScreen extends BasicGameState implements Screen {
 
     //Identifiant
     int state;
@@ -31,6 +31,7 @@ public class PlayScreen extends BasicGameState implements Screen{
     //Listes
     private ArrayList<Image> listImagesStructures;
     private ArrayList<Animation> listAnimationProjectiles;
+    private ArrayList<Animation> listAnimationCibles;
     //Données temp commune
     double force = 0;
     double angle = 0;
@@ -48,7 +49,6 @@ public class PlayScreen extends BasicGameState implements Screen{
     private Image roue;
     private Image canon;
     //Boutons
-    private Image buttonLoad;
     private Image buttonExit;
     //**
     //État dans le jeux
@@ -73,12 +73,12 @@ public class PlayScreen extends BasicGameState implements Screen{
 	//Initialisarions des listes
 	listAnimationProjectiles = new ArrayList<Animation>();
 	listImagesStructures = new ArrayList<Image>();
+	listAnimationCibles = new ArrayList<Animation>();
 
 	//Initialisarion background
 	bg = new Image("background.jpg");
 
 	//Initialisarion des images Boutons
-	buttonLoad = new Image("load.png");
 	buttonExit = new Image("back.png");
 
 	//Initialisarion des images canon
@@ -114,26 +114,25 @@ public class PlayScreen extends BasicGameState implements Screen{
 
 	//**Boutons
 	//exit
-	if ((posX > 1110 && posX < 1186) && (posY > 607 && posY < 670)) {
-
-	    if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-
-		for (int i = 0; i < controleur.getListProjectiles().size() + i; i++) {
-
-		    controleur.enleverProjectiles(controleur.getListProjectiles().get(0));
-		}
-		for (int i = 0; i < controleur.getListStructures().size() + i; i++) {
-
-		    controleur.enleverStructure(controleur.getListStructures().get(0));
-		}
-		if (musiqueJeuPlay.playing()) {
-
-		    musiqueJeuPlay.stop();
-		}
-		sbg.enterState(0);
-	    } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-	    }
-	}
+            if ((posX > 1110 && posX < 1186) && (posY > 607 && posY < 670)) {
+                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                    System.out.println("got clicked buddy! lets go back!");
+                    
+                    for (int i = 0; i < controleur.getListProjectiles().size() + i; i++) {
+                        controleur.enleverProjectiles(controleur.getListProjectiles().get(0), this);
+                        
+                    }
+                    for (int i = 0; i < controleur.getListStructures().size() + i; i++) {
+                        controleur.enleverStructure(controleur.getListStructures().get(0), this);
+                    }
+                    if (musiqueJeuPlay.playing()) {
+                        
+                        musiqueJeuPlay.stop();
+                    }
+                    sbg.enterState(0);
+                } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+                }
+            }
 
 	//**key input
 	//si le curseur n'est pas sur les bars noirs
@@ -226,7 +225,6 @@ public class PlayScreen extends BasicGameState implements Screen{
 
 	//boutons
 	buttonExit.draw(1110, 5);
-	buttonLoad.draw((1110), 600);
 
 	//canon
 	canon.draw(85 - 195, 500 + 7);
@@ -254,6 +252,7 @@ public class PlayScreen extends BasicGameState implements Screen{
 	listAnimationProjectiles.add(i, projAnimation);
     }
 
+    @Override
     public void addImageStructures(String nomImg) throws SlickException {
 
 	Image img = new Image(nomImg);
@@ -261,6 +260,7 @@ public class PlayScreen extends BasicGameState implements Screen{
 	listImagesStructures.add(img);
     }
 
+    @Override
     public void addAnimationCibles(String nomImg) throws SlickException {
 
 	cibleAnimation = new Animation(new SpriteSheet(nomImg, 25, 40), 140);
@@ -269,6 +269,7 @@ public class PlayScreen extends BasicGameState implements Screen{
     }
 
     //getters and setters
+    @Override
     public ArrayList<Animation> getListAnimationProjectiles() {
 	return listAnimationProjectiles;
     }
@@ -277,11 +278,20 @@ public class PlayScreen extends BasicGameState implements Screen{
 	this.listAnimationProjectiles = listAnimationProjectiles;
     }
 
+    @Override
     public ArrayList<Image> getListImagesStructures() {
 	return listImagesStructures;
     }
 
     public void setListImagesStructures(ArrayList<Image> listImagesStructures) {
 	this.listImagesStructures = listImagesStructures;
+    }
+    
+    public ArrayList<Animation> getListAnimationCibles() {
+	return listAnimationCibles;
+    }
+
+    public void setListAnimationCibles(ArrayList<Animation> listAnimationCibles) {
+	this.listAnimationCibles = listAnimationCibles;
     }
 }

@@ -5,6 +5,7 @@ import ca.qc.bdeb.vue.Affichable;
 import ca.qc.bdeb.vue.Cibles;
 import ca.qc.bdeb.vue.EngineScreen;
 import ca.qc.bdeb.vue.MainMenu;
+import ca.qc.bdeb.vue.PlayScreen;
 import ca.qc.bdeb.vue.Projectiles;
 import ca.qc.bdeb.vue.Screen;
 import ca.qc.bdeb.vue.Structures;
@@ -17,10 +18,13 @@ public class Controleur {
     //State
     private int menu = 0;
     private int engineScreen = 1;
+    private int playScreen = 2;
+    //module
     private Module module;
     //Screens
     private MainMenu mainMenu;
     private EngineScreen engineScreenMenu;
+    private PlayScreen playScreenMenu;
     private Affichable nouvelleItemAffichable = null;
 
     public Controleur() throws SlickException {
@@ -28,6 +32,7 @@ public class Controleur {
 
 	engineScreenMenu = new EngineScreen(engineScreen, this);
 	mainMenu = new MainMenu(menu, this);
+	playScreenMenu = new PlayScreen(playScreen, this);
     }
 
     //Projectiles
@@ -35,9 +40,9 @@ public class Controleur {
 	module.getListProjectiles().add(new Projectiles((x + 40), (500 - y), v, angle, facRebond, this));
     }
 
-    public void enleverProjectiles(Projectiles projectile) {
+    public void enleverProjectiles(Projectiles projectile, Screen ecran) {
 	module.getListProjectiles().remove(projectile);
-	engineScreenMenu.getListAnimationProjectiles().remove(0);
+	ecran.getListAnimationProjectiles().remove(0);
     }
 
     public double positionProjectileX(int i) {
@@ -103,9 +108,9 @@ public class Controleur {
 	module.getListStructures().add(new Structures(x, y, this));
     }
 
-    public void enleverStructure(Structures structure) {
+    public void enleverStructure(Structures structure, Screen ecran) {
 	module.getListStructures().remove(structure);
-	engineScreenMenu.getListImagesStructures().remove(0);
+	ecran.getListImagesStructures().remove(0);
     }
 
     public double positionStructureX(int i) {
@@ -223,6 +228,10 @@ public class Controleur {
     public MainMenu getMainMenu() {
 	return mainMenu;
     }
+    
+   public PlayScreen getPlayScreenMenu(){
+       return playScreenMenu;
+   }
 
     public int getMenu() {
 	return menu;
@@ -231,7 +240,10 @@ public class Controleur {
     public int getEngineScreen() {
 	return engineScreen;
     }
-
+    
+    public int getPlayScreen() {
+	return playScreen;
+    }
     public Affichable getNouvelleItemAffichable() {
 	return nouvelleItemAffichable;
     }

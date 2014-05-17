@@ -134,7 +134,7 @@ public class EngineScreen extends BasicGameState implements Screen{
         //pause mode erase projectiles
         if (!modePausePlay) {
             for (int i = 0; i < controleur.getListProjectiles().size() + i; i++) {
-                controleur.enleverProjectiles(controleur.getListProjectiles().get(0));
+                controleur.enleverProjectiles(controleur.getListProjectiles().get(0), this);
             }
 //            for (int i = 0; i < controleur.listStructures().size() + i; i++) {
 //                controleur.enleverStructure(controleur.listStructures().get(0));
@@ -167,11 +167,11 @@ public class EngineScreen extends BasicGameState implements Screen{
                     System.out.println("got clicked buddy! lets go back!");
                     
                     for (int i = 0; i < controleur.getListProjectiles().size() + i; i++) {
-                        controleur.enleverProjectiles(controleur.getListProjectiles().get(0));
+                        controleur.enleverProjectiles(controleur.getListProjectiles().get(0), this);
                         
                     }
                     for (int i = 0; i < controleur.getListStructures().size() + i; i++) {
-                        controleur.enleverStructure(controleur.getListStructures().get(0));
+                        controleur.enleverStructure(controleur.getListStructures().get(0), this);
                     }
                     if (musiqueJeuPlay.playing()) {
                         
@@ -325,7 +325,7 @@ public class EngineScreen extends BasicGameState implements Screen{
         for (int i = 0; i < listAnimationProjectiles.size(); i++) {
             if (controleur.getListProjectiles().get(i).getVitesse().getX() == 0) {
                 if (controleur.getListProjectiles().get(i).getTemps() - timer == 3) {
-                    controleur.enleverProjectiles(controleur.getListProjectiles().get(i));
+                    controleur.enleverProjectiles(controleur.getListProjectiles().get(i), this);
                 }
                 
             }
