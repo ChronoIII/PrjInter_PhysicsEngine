@@ -22,6 +22,7 @@ public class Module {
     //Listes
     private ArrayList<Projectiles> listProjectiles;
     private ArrayList<Structures> listStructures;
+    private ArrayList<Boolean> listStructuresPlacer;
     private ArrayList<Cibles> listCibles;
     private ArrayList<String[]> listPosStructures;
     private ArrayList<String[]> listPosCibles;
@@ -40,6 +41,7 @@ public class Module {
 	listProjectiles = new ArrayList<Projectiles>();
 	listStructures = new ArrayList<Structures>();
 	listCibles = new ArrayList<Cibles>();
+       
     }
 
     //se que fait le projectiles lorsqu'il touche un surface

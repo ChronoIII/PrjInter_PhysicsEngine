@@ -20,7 +20,10 @@ public class Structures implements Affichable {
     //propriétées
     private Vecteur bound = new Vecteur(76, 63);
     private Vecteur position = new Vecteur();
+    
+    private boolean estPlacer=false;
 
+  
     public Structures(int posX, int posY, Controleur controleur) throws SlickException {
 	position.setX(posX);
 	position.setY(posY);
@@ -28,6 +31,9 @@ public class Structures implements Affichable {
 
 	controleur.setNouvelleItemAffichable(this);
     }
+   
+
+   
 
     //getters and setters
     public String getNomImg() {
@@ -41,6 +47,12 @@ public class Structures implements Affichable {
     public void setBound(Vecteur bound) {
 	this.bound = bound;
     }
+     public void setEstPlacer(boolean estPlacer) {
+        this.estPlacer = estPlacer;
+    }
+      public boolean getEstPlacer() {
+        return estPlacer;
+    }
     
     public Vecteur getPosition() {
 	return position;
@@ -49,4 +61,7 @@ public class Structures implements Affichable {
     public void setPosition(Vecteur position) {
 	this.position = position;
     }
+    
+     
+
 }
