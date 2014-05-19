@@ -4,7 +4,10 @@ package ca.qc.bdeb.vue;
 import ca.qc.bdeb.controler.Controleur;
 import org.newdawn.slick.SlickException;
 
-
+/**
+ * 
+ * La méthode pour les petits oiseaux
+ */
 public class Projectiles implements Affichable {
 
     //nnomde l'animation
