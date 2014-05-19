@@ -52,7 +52,9 @@ public class PlayScreen extends BasicGameState implements Screen {
     private Image buttonExit;
     //**
     //État dans le jeux
-    private boolean focusMenu = false;
+    private boolean focusMenu;
+    private boolean finDeJeu;
+    private boolean debutDejeu;
     //couleur de l'inventaire
     private Color colorAlpha = new Color(0.84f, 0.84f, 0.84f, 0.85f);
     //musique
@@ -88,7 +90,11 @@ public class PlayScreen extends BasicGameState implements Screen {
 	//Initialisation animation cible
 	coeurSheet = new SpriteSheet("heartsprite.png", 25, 40);
 	cibleAnimation = new Animation(coeurSheet, 140);
-	
+
+	//Initialisation des états
+	focusMenu = false;
+	finDeJeu = false;
+	debutDejeu = false;
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
@@ -112,98 +118,102 @@ public class PlayScreen extends BasicGameState implements Screen {
 	} else {
 	    focusMenu = false;
 	}
+	
+	if (Key.isKeyDown(Input.KEY_ENTER)){
+	    debutDejeu = true;
+	    
+	}
 
 	//**Boutons
 	//exit
-            if ((posX > 1110 && posX < 1186) && (posY > 607 && posY < 670)) {
-                if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                    System.out.println("got clicked buddy! lets go back!");
-                    
-                    for (int i = 0; i < controleur.getListProjectiles().size() + i; i++) {
-                        controleur.enleverProjectiles(controleur.getListProjectiles().get(0), this);
-                        
-                    }
-                    for (int i = 0; i < controleur.getListStructures().size() + i; i++) {
-                        controleur.enleverStructure(controleur.getListStructures().get(0), this);
-                    }
-                    if (musiqueJeuPlay.playing()) {
-                        
-                        musiqueJeuPlay.stop();
-                    }
-                    sbg.enterState(0);
-                } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-                }
-            }
+	if (((posX > 1110 && posX < 1186) && (posY > 607 && posY < 670)) || finDeJeu) {
+	    if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+		System.out.println("got clicked buddy! lets go back!");
 
-	//**key input
-	//si le curseur n'est pas sur les bars noirs
-	if (!focusMenu) {
-	    //touche pour lancer
-	    if (Key.isKeyDown(Input.KEY_SPACE) || gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-		if (force < -1 || force > 100) {
-		    coteDeLaForce *= -1;
+		for (int i = 0; i < controleur.getListProjectiles().size() + i; i++) {
+		    controleur.enleverProjectiles(controleur.getListProjectiles().get(0), this);
+
 		}
-		force += 2 * coteDeLaForce;
-	    } else {
-		//lorsque l'on relache, le projectiles fait feu
-		if (force != 0) {
-		    angle = Math.toDegrees((Math.atan((double) posY / posX)));
-		    controleur.addProjectile((int) (170 * Math.cos(Math.toRadians(angle))), (int) (170 * Math.sin(Math.toRadians(angle))), force / 5, angle, 0.8);
-		    force = 0;
+		for (int i = 0; i < controleur.getListStructures().size() + i; i++) {
+		    controleur.enleverStructure(controleur.getListStructures().get(0), this);
 		}
+		if (musiqueJeuPlay.playing()) {
+
+		    musiqueJeuPlay.stop();
+		}
+		finDeJeu = false;
+		debutDejeu = false;
+		sbg.enterState(0);
+	    } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
 	    }
-	    
-	    if (Key.isKeyDown(Input.KEY_0)) {
-		controleur.addStructure(500, 550);
-	    }
-	    
 	}
-	//**
+	if (debutDejeu) {
+	    if (!finDeJeu) {
+		//**key input
+		//si le curseur n'est pas sur les bars noirs
+		if (!focusMenu) {
+		    //touche pour lancer
+		    if (Key.isKeyDown(Input.KEY_SPACE) || gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+			if (force < -1 || force > 100) {
+			    coteDeLaForce *= -1;
+			}
+			force += 2 * coteDeLaForce;
+		    } else {
+			//lorsque l'on relache, le projectiles fait feu
+			if (force != 0) {
+			    angle = Math.toDegrees((Math.atan((double) posY / posX)));
+			    controleur.addProjectile((int) (170 * Math.cos(Math.toRadians(angle))), (int) (170 * Math.sin(Math.toRadians(angle))), force / 5, angle, 0.8);
+			    force = 0;
+			}
+		    }
 
-	//Création de nouvelles images, regard s'il y a un objet affichable
-	if (controleur.getNouvelleItemAffichable() != null) {
-	    switch (controleur.getNouvelleItemAffichable().getNomImg()) {
-		case "spiritesheet.png":
-		    addAnimationProjectiles(controleur.getNouvelleItemAffichable().getNomImg());
-		    break;
-		case "structure.png":
-		    addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
-		    break;
-	    }
-	    controleur.setNouvelleItemAffichable(null);
-	}
+		    if (Key.isKeyDown(Input.KEY_0)) {
+			controleur.addStructure(500, 550);
+		    }
 
-	//Canon rotation
-	canon.setRotation((float) Math.toDegrees((Math.atan((double) posX / posY))) + 270);
-
-//	//affichable structure
-//	if (controleur.getNouvelleItemAffichable() != null) {
-//	    switch (controleur.getNouvelleItemAffichable().getNomImg()) {
-//		case "structure.png":
-//		    addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
-//		    break;
-//	    }
-//	    controleur.setNouvelleItemAffichable(null);
-//	}
-
-	//Mouvement
-	controleur.bougerProjectiles();
-	controleur.rebondProjectilesMurLoop();
-	controleur.rebondProjectilesStructuresLoop();
-
-	//reverse
-	for (int i = 0; i < listAnimationProjectiles.size(); i++) {
-	    if (controleur.getListProjectiles().get(i).isReverse()) {
-		if ("spiritesheet.png".equals(listAnimationProjectiles.get(i).getCurrentFrame().getName())) {
-		    listAnimationProjectiles.remove(i);
-		    addAnimationProjectiles(i, controleur.getListProjectiles().get(i).getNomImgReverse());
 		}
-	    } else if ("spiritesheetreverse.png".equals(listAnimationProjectiles.get(i).getCurrentFrame().getName())) {
-		listAnimationProjectiles.remove(i);
-		addAnimationProjectiles(i, controleur.getListProjectiles().get(i).getNomImg());
+		//**
+
+		//Création de nouvelles images, regard s'il y a un objet affichable
+		if (controleur.getNouvelleItemAffichable() != null) {
+		    switch (controleur.getNouvelleItemAffichable().getNomImg()) {
+			case "spiritesheet.png":
+			    addAnimationProjectiles(controleur.getNouvelleItemAffichable().getNomImg());
+			    break;
+			case "structure.png":
+			    addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
+			    break;
+		    }
+		    controleur.setNouvelleItemAffichable(null);
+		}
+
+		//Canon rotation
+		canon.setRotation((float) Math.toDegrees((Math.atan((double) posX / posY))) + 270);
+
+		//Mouvement
+		controleur.bougerProjectiles();
+		controleur.rebondProjectilesMurLoop();
+		controleur.rebondProjectilesStructuresLoop();
+
+		//reverse
+		for (int i = 0; i < listAnimationProjectiles.size(); i++) {
+		    if (controleur.getListProjectiles().get(i).isReverse()) {
+			if ("spiritesheet.png".equals(listAnimationProjectiles.get(i).getCurrentFrame().getName())) {
+			    listAnimationProjectiles.remove(i);
+			    addAnimationProjectiles(i, controleur.getListProjectiles().get(i).getNomImgReverse());
+			}
+		    } else if ("spiritesheetreverse.png".equals(listAnimationProjectiles.get(i).getCurrentFrame().getName())) {
+			listAnimationProjectiles.remove(i);
+			addAnimationProjectiles(i, controleur.getListProjectiles().get(i).getNomImg());
+		    }
+		}
 	    }
 	}
 
+	//fin de jeu
+	if (controleur.getListCibles().size() <= -2 || controleur.getListProjectiles().size() >= 4) {
+	    finDeJeu = true;
+	}
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
@@ -229,6 +239,14 @@ public class PlayScreen extends BasicGameState implements Screen {
 	g.drawString("force: " + force, 300, 100);
 	g.drawString("angle: " + Math.toDegrees((Math.atan((double) posY / posX))), 300, 150);
 	g.drawString("" + Mouse.getX() + ", " + Mouse.getY(), 300, 200);
+
+	if (finDeJeu) {
+	    g.drawString("fin", 500, 300);
+	}
+	
+	if(!debutDejeu){
+	    g.drawString("click entrer pour commencer", 500, 300);
+	}
 
 	//boutons
 	buttonExit.draw(1110, 5);
@@ -293,7 +311,7 @@ public class PlayScreen extends BasicGameState implements Screen {
     public void setListImagesStructures(ArrayList<Image> listImagesStructures) {
 	this.listImagesStructures = listImagesStructures;
     }
-    
+
     public ArrayList<Animation> getListAnimationCibles() {
 	return listAnimationCibles;
     }
