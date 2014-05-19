@@ -357,7 +357,7 @@ public class EngineScreen extends BasicGameState implements Screen {
         }
         // drag &drop
         for (int i = 0; i < listImagesStructures.size(); i++) {
-            if (Mouse.getY() > 580 && Mouse.getY() < 600 && Mouse.getX() < 1200 - 50) {
+            if (Mouse.getY() > 135 && Mouse.getY() < 600 && Mouse.getX() < 1200 - 50) {
 
                 if (gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
 
