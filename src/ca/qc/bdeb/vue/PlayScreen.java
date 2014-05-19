@@ -168,7 +168,7 @@ public class PlayScreen extends BasicGameState implements Screen {
 		    }
 
 		    if (Key.isKeyDown(Input.KEY_0)) {
-			controleur.addStructure(500, 550);
+			controleur.addStructure(500, 450);
 		    }
 
 		}
@@ -211,7 +211,8 @@ public class PlayScreen extends BasicGameState implements Screen {
 	}
 
 	//fin de jeu
-	if (controleur.getListCibles().size() <= -2 || controleur.getListProjectiles().size() >= 4) {
+	if (controleur.getListCibles().size() <= -2 || controleur.getListProjectiles().size() >= 6) {
+	    controleur.enleverProjectiles(controleur.getListProjectiles().get(controleur.getListProjectiles().size() - 1), this);
 	    finDeJeu = true;
 	}
     }
