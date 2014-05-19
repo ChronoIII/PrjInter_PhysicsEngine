@@ -54,7 +54,7 @@ public class EngineScreen extends BasicGameState implements Screen {
     private boolean modePausePlay; //play = true, pause = false
     private boolean inventaire;
     private boolean focusMenu = false;
-    private boolean lockInventaire;//true = ne peut pas etre clicker, false = pas lock
+    private boolean lockInventaire;//true = ne peut pas etre clicker, false = pas lock, mode placement
     private boolean ombrage;
     //couleur de l'inventaire
     private Color colorAlpha = new Color(0.84f, 0.84f, 0.84f, 0.85f);
@@ -64,6 +64,9 @@ public class EngineScreen extends BasicGameState implements Screen {
     private float timer = 0;
     //vecteur?
     private Vecteur vect;
+    //tableau0
+    private int tableauPlacement[][];
+    private Structures tableauPlacementStr[][];
 
     public EngineScreen(int state, Controleur controleur) throws SlickException {
         this.state = state;
@@ -80,8 +83,20 @@ public class EngineScreen extends BasicGameState implements Screen {
         modePausePlay = true;
         inventaire = false;
 
-        //structure
+        //structure&son tableau
         structure = new Image("structure.png");
+        tableauPlacement = new int[10][15];
+        tableauPlacementStr = new Structures[10][15];
+        System.out.println(tableauPlacement[0].length);
+        //tableau 0 (0 = vide, 1= placement)
+        for (int i = 0; i < tableauPlacement.length; i++) {
+
+            for (int j = 0; j < tableauPlacement[0].length; j++) {
+
+                tableauPlacement[i][j] = 0;
+
+            }
+        }
 
         //Initialisarions des listes
         listAnimationProjectiles = new ArrayList<Animation>();
@@ -116,8 +131,6 @@ public class EngineScreen extends BasicGameState implements Screen {
 
         //Input pour les commende au clavier
         Input Key = gc.getInput();
-
-
 
         //Loop musique
         if (!musiqueJeuPlay.playing()) {
@@ -295,6 +308,8 @@ public class EngineScreen extends BasicGameState implements Screen {
                 if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                     System.out.println("struc pris");
                     controleur.addStructure(0, 0);
+                    inventaire = false;
+                    lockInventaire = true;
                 }
             }
 
@@ -355,42 +370,76 @@ public class EngineScreen extends BasicGameState implements Screen {
 
             }
         }
+
+
         // drag &drop
-        for (int i = 0; i < listImagesStructures.size(); i++) {
-            if (Mouse.getY() > 580 && Mouse.getY() < 600 && Mouse.getX() < 1200 - 50) {
+//        for (int i = 0; i < listImagesStructures.size(); i++) {
+//            if (Mouse.getY() > 85+50 && Mouse.getY() < 600 && Mouse.getX() < 1200 - 50) {
+//
+//                if (gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+//
+//                    if (controleur.getListStructures().get(i).getEstPlacer() == false) {
+//                        vect.setX(Mouse.getX());
+//                        vect.setY(gc.getHeight() - Mouse.getY());
+//                        controleur.setpositionStructureY(i, vect);
+//                        inventaire = false;
+//                        lockInventaire = true;
+//                        ombrage = true;
+//                    }
+//
+//                }
+//
+//            }//drop quand ENTER
+//            if (Key.isKeyDown(Input.KEY_ENTER)) {
+//                vect.setY(gc.getHeight() - (89 + 50));
+//                controleur.setpositionStructureY(i, vect);
+//                lockInventaire = false;
+//                ombrage = false;
+//
+//                System.out.println(i);
+//                if (i > 0) {
+//                    System.out.println("lol " + controleur.getListStructures().get(i - 1).getEstPlacer());
+//                }
+//                controleur.getListStructures().get(i).setEstPlacer(true);
+//            }
+//        }
 
-                if (gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
+        //placement des 1
+int compteur;
+        if (lockInventaire) {
 
-                    if (controleur.getListStructures().get(i).getEstPlacer() == false) {
-                        vect.setX(Mouse.getX());
-                        vect.setY(gc.getHeight() - Mouse.getY());
-                        controleur.setpositionStructureY(i, vect);
-                        inventaire = false;
-                        lockInventaire = true;
-                        ombrage = true;
+
+            if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                compteur = 1;
+                System.out.println("lel");
+                System.out.println(Mouse.getX());
+                for (int j = 0; j < tableauPlacement[0].length; j++) {
+                    if (Mouse.getX() - 50 * (j + 1) >= 400 && Mouse.getX() - 50 * (j + 1) <= 450) {
+                     
+                        
+                        for (int i = tableauPlacement.length-1; i > 0; i--) {
+                            if (compteur ==1){
+                            if (tableauPlacement[i][j] == 0) {
+                                   System.out.println("je suis en " + i+","+j);
+                                tableauPlacement[i][j] = 1;
+                                compteur = 0;
+                            }
+                        }
+
                     }
-
+                    }
                 }
-
-            }//drop quand ENTER
-            if (Key.isKeyDown(Input.KEY_ENTER)) {
-                vect.setY(gc.getHeight() - (89 + 50));
-                controleur.setpositionStructureY(i, vect);
-                lockInventaire = false;
-                ombrage = false;
-
-                System.out.println(i);
-                if (i > 0) {
-                    System.out.println("lol " + controleur.getListStructures().get(i - 1).getEstPlacer());
-                }
-                controleur.getListStructures().get(i).setEstPlacer(true);
             }
-            System.out.println(i);
+
         }
 
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
+
+        //to erase
+
+
 
         //Position de la souris
         int posX = Mouse.getX();
@@ -405,6 +454,17 @@ public class EngineScreen extends BasicGameState implements Screen {
             listAnimationProjectiles.get(i).draw((int) (controleur.positionProjectileX(i)), (int) (controleur.positionProjectileY(i)));
 //	    listAnimationProjectiles.get(i).getCurrentFrame().setRotation((float) (controleur.orientationProjectil(controleur.listProjectiles().get(i))));
         }
+
+//        for (int i = 0; i < tableauPlacement.length; i++) {
+//
+//            for (int j = 0; j < tableauPlacement[0].length; j++) {
+//                
+//                if(tableauPlacement[i][j]==1){
+//                
+//                tableauPlacementStr[i][j].
+//                }
+//            }
+//        }
 
         //hold
 //        for (int i = 0; i < listImagesStructures.size(); i++) {
