@@ -103,7 +103,7 @@ public class EngineScreen extends BasicGameState implements Screen {
         listAnimationCibles = new ArrayList<Animation>();
 
         //Initialisarion background
-        bg = new Image("bg2.jpg");
+        bg = new Image("background.jpg");
 
         //Initialisarion des images Boutons
         buttonInventaire = new Image("inventory.png");
@@ -413,7 +413,7 @@ public class EngineScreen extends BasicGameState implements Screen {
         for (int i = 0; i < tableauPlacement.length; i++) {
             for (int j = 0; j < tableauPlacement[0].length; j++) {
                 if (tableauPlacement[i][j] == 1) {
-                    controleur.addStructure(0, (j * 100) + 500);
+                    controleur.addStructure(90 + 100 * i - 3, (j * 100) + 500);
                 }
             }
 
