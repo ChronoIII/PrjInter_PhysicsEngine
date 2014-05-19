@@ -197,10 +197,7 @@ public class PlayScreen extends BasicGameState implements Screen {
 		controleur.bougerProjectiles();
 		controleur.rebondProjectilesMurLoop();
 		controleur.rebondProjectilesStructuresLoop();
-<<<<<<< HEAD
-//		controleur.collisionCibleProjectilesloop(this);
-=======
->>>>>>> 57fc8631be307cc194489de7cbff2182a9674f11
+
 
 		//reverse
 		for (int i = 0; i < listAnimationProjectiles.size(); i++) {
