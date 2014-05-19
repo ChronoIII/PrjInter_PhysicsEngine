@@ -214,10 +214,10 @@ public class PlayScreen extends BasicGameState implements Screen {
 	}
 
 	//fin de jeu // inutiliser
-//	if (controleur.getListCibles().size() <= -2 || controleur.getListProjectiles().size() >= 6) {
-//	    controleur.enleverProjectiles(controleur.getListProjectiles().get(controleur.getListProjectiles().size() - 1), this);
-//	    finDeJeu = true;
-//	}
+	if (controleur.getListCibles().size() <= -2 || controleur.getListProjectiles().size() >= 6) {
+	    controleur.enleverProjectiles(controleur.getListProjectiles().get(controleur.getListProjectiles().size() - 1), this);
+	    finDeJeu = true;
+	}
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
@@ -226,10 +226,10 @@ public class PlayScreen extends BasicGameState implements Screen {
 	int posX = Mouse.getX();
 	int posY = Mouse.getY();
 
-
 	//background
 	bg.draw();
 
+	g.setColor(Color.black);
 	//positions et mouvements des projectiles
 	for (int i = 0; i < listAnimationProjectiles.size(); i++) {
 	    listAnimationProjectiles.get(i).draw((int) (controleur.positionProjectileX(i)), (int) (controleur.positionProjectileY(i)));
@@ -243,9 +243,9 @@ public class PlayScreen extends BasicGameState implements Screen {
 	    listAnimationCibles.get(i).draw((int) (controleur.positionCiblesX(i)), (int) (controleur.positionCiblesY(i)));
 	}
 	
-//	if (finDeJeu) {//inutiliser
-//	    g.drawString("fin", 500, 300);
-//	}
+	if (finDeJeu) {//inutiliser
+	    g.drawString("fin", 500, 300);
+	}
 
 	if (!debutDejeu) {
 	    g.drawString("click entrer pour commencer", 500, 300);
