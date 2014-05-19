@@ -136,9 +136,9 @@ public class PlayScreen extends BasicGameState implements Screen {
 		    controleur.enleverProjectiles(controleur.getListProjectiles().get(0), this);
 
 		}
-		for (int i = 0; i < controleur.getListStructures().size() + i; i++) {
-		    controleur.enleverStructure(controleur.getListStructures().get(0), this);
-		}
+//		for (int i = 0; i < controleur.getListStructures().size() + i; i++) {
+//		    controleur.enleverStructure(controleur.getListStructures().get(0), this);
+//		}
 		if (musiqueJeuPlay.playing()) {
 
 		    musiqueJeuPlay.stop();
@@ -198,6 +198,7 @@ public class PlayScreen extends BasicGameState implements Screen {
 		controleur.rebondProjectilesMurLoop();
 		controleur.rebondProjectilesStructuresLoop();
 <<<<<<< HEAD
+<<<<<<< HEAD
 //		controleur.collisionCibleProjectilesloop(this);
 =======
 <<<<<<< HEAD
@@ -205,6 +206,9 @@ public class PlayScreen extends BasicGameState implements Screen {
 =======
 >>>>>>> 57fc8631be307cc194489de7cbff2182a9674f11
 >>>>>>> e71e297e0208144b3526c9c11616f7edfdd6d589
+=======
+
+>>>>>>> 59d78d59a58e8e9c1094db96af257822cc4130a3
 
 		//reverse
 		for (int i = 0; i < listAnimationProjectiles.size(); i++) {
