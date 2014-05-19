@@ -142,21 +142,19 @@ public class MainMenu extends BasicGameState {
 	buttonCredits.draw(795, 570);
 	exitGame.draw(1110, 5);
 	iris.draw(297 + Mouse.getX() * 13 / 1200, 220 - Mouse.getY() * 8 / 675);
-	g.setColor(Color.pink);
-	g.drawString("" + Mouse.getX() + ", " + Mouse.getY(), 90, 80);
 
 	if (focusCredit) {
 
 	    g.setColor(colorAlpha);
 	    g.fillRoundRect(271, 75, 600, 570, 30);
 	    inventaireExit.draw(435 + 271 + 125, 55);
+	    g.setColor(Color.black);
+	    g.drawString(" Fait par\n Samuel Laroche \n Amélie Nguyen\n et Zi Long Li\n nous vous présentons un version\n simplifier d'un moteur physique.\n vous avez réussir à atteindre\n la cible avec les chauve-souris", 400, 200);
 
-
+	    //bouton pour fermer la fenêtre
 	    if ((posX > 833 && posX < 880) && (posY > 573 && posY < 619)) {
 
 		if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-
-		    System.out.println("credits X clicker pour fermer");
 		    focusCredit = false;
 
 
