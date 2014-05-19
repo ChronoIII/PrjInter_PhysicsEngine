@@ -118,11 +118,13 @@ public class PlayScreen extends BasicGameState implements Screen {
 	} else {
 	    focusMenu = false;
 	}
-	
+
 	//commence le jeu et fait apparaètre tous les paramètres
-	if (Key.isKeyDown(Input.KEY_ENTER)){
+	if (Key.isKeyDown(Input.KEY_ENTER)) {
 	    debutDejeu = true;
-	    
+	    controleur.addCible(700, 300);
+//	    addAnimationCibles(controleur.getNouvelleItemAffichable().getNomImg());
+	    controleur.setNouvelleItemAffichable(null);
 	}
 
 	//**Boutons
@@ -148,7 +150,7 @@ public class PlayScreen extends BasicGameState implements Screen {
 	    } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
 	    }
 	}
-	
+
 	if (debutDejeu) {
 	    //continue de jouer 
 	    if (!finDeJeu) {
@@ -186,6 +188,10 @@ public class PlayScreen extends BasicGameState implements Screen {
 			case "structure.png":
 			    addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
 			    break;
+			case "heartsprite.png":
+			    System.out.println("qllo");
+			    addAnimationCibles(controleur.getNouvelleItemAffichable().getNomImg());
+			    break;
 		    }
 		    controleur.setNouvelleItemAffichable(null);
 		}
@@ -197,7 +203,7 @@ public class PlayScreen extends BasicGameState implements Screen {
 		controleur.bougerProjectiles();
 		controleur.rebondProjectilesMurLoop();
 		controleur.rebondProjectilesStructuresLoop();
-		controleur.collisionCibleProjectilesloop(this);
+//		controleur.collisionCibleProjectilesloop(this);
 
 		//reverse
 		for (int i = 0; i < listAnimationProjectiles.size(); i++) {
@@ -239,6 +245,10 @@ public class PlayScreen extends BasicGameState implements Screen {
 	for (int i = 0; i < listImagesStructures.size(); i++) {
 	    listImagesStructures.get(i).draw((int) (controleur.positionStructureX(i)), (int) (controleur.positionStructureY(i)));
 	}
+	//positions et mouvements des cibles
+	for (int i = 0; i < listAnimationCibles.size(); i++) {
+	    listAnimationCibles.get(i).draw((int) (controleur.positionCiblesX(i)), (int) (controleur.positionCiblesY(i)));
+	}
 	//Stats sur force, angle et les positions du curseur
 	g.setColor(Color.black);
 	g.drawString("force: " + force, 300, 100);
@@ -248,8 +258,8 @@ public class PlayScreen extends BasicGameState implements Screen {
 	if (finDeJeu) {
 	    g.drawString("fin", 500, 300);
 	}
-	
-	if(!debutDejeu){
+
+	if (!debutDejeu) {
 	    g.drawString("click entrer pour commencer", 500, 300);
 	}
 

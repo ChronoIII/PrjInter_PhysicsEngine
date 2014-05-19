@@ -36,19 +36,23 @@ public class Controleur {
     }
 
     //Projectiles
+    //ajoute dans la liste
     public void addProjectile(int x, int y, double v, double angle, double facRebond) throws SlickException {
 	module.getListProjectiles().add(new Projectiles((x + 40), (500 - y), v, angle, facRebond, this));
     }
 
+    //enlève  dans la liste
     public void enleverProjectiles(Projectiles projectile, Screen ecran) {
 	module.getListProjectiles().remove(projectile);
 	ecran.getListAnimationProjectiles().remove(0);
     }
 
+    //retourne la position  en x
     public double positionProjectileX(int i) {
 	return module.getListProjectiles().get(i).getPosition().getX();
     }
 
+    //retourne la position en x
     public double positionProjectileY(int i) {
 	return module.getListProjectiles().get(i).getPosition().getY();
     }
@@ -57,6 +61,7 @@ public class Controleur {
 	return module.getListProjectiles();
     }
 
+    //détecte les colliton avce le mur
     public void rebondProjectilesMur(Projectiles proj) {
 
 	if ((proj.getPosition().getX() + proj.getBound().getX()) > module.getWidth()) {
@@ -92,15 +97,6 @@ public class Controleur {
 	    module.getListProjectiles().get(i).getPosition().setY(module.getListProjectiles().get(i).getPosition().getY() - module.getListProjectiles().get(i).getVitesse().getY());
 	    module.getListProjectiles().get(i).getVitesse().setY(module.getListProjectiles().get(i).getVitesse().getY() - (module.getListProjectiles().get(i).getGravity() / 100));
 	}
-    }
-
-    public double orientationProjectil(Projectiles proj) {
-	double angle;
-	angle = Math.atan(proj.getVitesse().getX() / proj.getVitesse().getY());
-	if (proj.getVitesse().getY() < 0) {
-	    angle = angle + Math.PI;
-	}
-	return Math.toDegrees(angle);
     }
 
     //Structures
@@ -187,12 +183,24 @@ public class Controleur {
 	return module.getListCibles();
     }
     
-    public void collisionCoeur(Cibles c, Projectiles proj){
-        if (proj.getPosition().getX() + proj.getBound().getX() > c.getPosition().getX() && proj.getPosition().getX() < (c.getPosition().getX() + c.getBound().getX()) && proj.getPosition().getY() + proj.getBound().getY() > c.getPosition().getY())
+    public void collisionCibleProjectiles(Projectiles proj, Cibles c,  Screen ecran){
+        if (proj.getPosition().getX() + proj.getBound().getX() > c.getPosition().getX() && proj.getPosition().getX() < (c.getPosition().getX() + c.getBound().getX()) && proj.getPosition().getY() + proj.getBound().getY() > c.getPosition().getY() && proj.getPosition().getY() < c.getPosition().getY()+c.getBound().getY())
           {
             //détruire coeur, détruire cible, nouvelle cible
+	      enleverCible(c);
+	      enleverProjectiles(proj, ecran);
         }
     }
+    
+    public void collisionCibleProjectilesloop (Screen ecran) {
+	for (int j = 0; j < module.getListCibles().size(); j++) {
+	    for (int i = 0; i < module.getListProjectiles().size(); i++) {
+
+		collisionCibleProjectiles(module.getListProjectiles().get(i), module.getListCibles().get(j), ecran);
+	    }
+	}
+    }
+    
     
     //Mettre un objet affichable dans la variable
     public void afficher(Affichable nouvelleItemAffichable) {
