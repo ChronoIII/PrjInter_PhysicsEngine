@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
-
+/**
+ * 
+ * 
+ */
 
 public interface Screen {
     

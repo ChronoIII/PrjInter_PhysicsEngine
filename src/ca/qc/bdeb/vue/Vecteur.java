@@ -1,6 +1,11 @@
 
 package ca.qc.bdeb.vue;
 
+/**
+ * 
+ * Base de tous les éléments physiques du jeu.
+ * contient un x et un y
+ */
 
 public class Vecteur {
 

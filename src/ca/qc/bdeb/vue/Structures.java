@@ -3,7 +3,10 @@ package ca.qc.bdeb.vue;
 
 import ca.qc.bdeb.controler.Controleur;
 import org.newdawn.slick.*;
-
+/**
+ * 
+ * La structure qui permet de faire rebondir les projectiles qui frappent dessus
+ */
 
 public class Structures implements Affichable {
 
