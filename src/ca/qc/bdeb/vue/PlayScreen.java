@@ -122,9 +122,8 @@ public class PlayScreen extends BasicGameState implements Screen {
 	//commence le jeu et fait apparaètre tous les paramètres
 	if (Key.isKeyDown(Input.KEY_ENTER)) {
 	    debutDejeu = true;
-	    controleur.addCible(700, 300);
-//	    addAnimationCibles(controleur.getNouvelleItemAffichable().getNomImg());
-	    controleur.setNouvelleItemAffichable(null);
+	   controleur.addStructure(500, 450);
+	   controleur.addStructure(700, 450);
 	}
 
 	//**Boutons
@@ -172,10 +171,6 @@ public class PlayScreen extends BasicGameState implements Screen {
 			}
 		    }
 
-		    if (Key.isKeyDown(Input.KEY_0)) {
-			controleur.addStructure(500, 450);
-		    }
-
 		}
 		//**
 
@@ -189,7 +184,6 @@ public class PlayScreen extends BasicGameState implements Screen {
 			    addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
 			    break;
 			case "heartsprite.png":
-			    System.out.println("qllo");
 			    addAnimationCibles(controleur.getNouvelleItemAffichable().getNomImg());
 			    break;
 		    }
@@ -203,7 +197,6 @@ public class PlayScreen extends BasicGameState implements Screen {
 		controleur.bougerProjectiles();
 		controleur.rebondProjectilesMurLoop();
 		controleur.rebondProjectilesStructuresLoop();
-//		controleur.collisionCibleProjectilesloop(this);
 
 		//reverse
 		for (int i = 0; i < listAnimationProjectiles.size(); i++) {
