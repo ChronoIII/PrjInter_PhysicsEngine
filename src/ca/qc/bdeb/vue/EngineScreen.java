@@ -67,19 +67,19 @@ public class EngineScreen extends BasicGameState implements Screen {
     private Structures tableauPlacementStr[][];
 
     public EngineScreen(int state, Controleur controleur) throws SlickException {
-	this.state = state;
-	this.controleur = controleur;
+        this.state = state;
+        this.controleur = controleur;
     }
 
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
 
-	//Initialisation musique
-	musiqueJeuPlay = new Music("music.wav");
-	musiqueJeuPlay.setVolume(0.10f);
+        //Initialisation musique
+        musiqueJeuPlay = new Music("music.wav");
+        musiqueJeuPlay.setVolume(0.10f);
 
-	//Initialisarions des états
-	modePausePlay = true;
-	inventaire = false;
+        //Initialisarions des états
+        modePausePlay = true;
+        inventaire = false;
 
 
         //structure&son tableau
@@ -97,30 +97,30 @@ public class EngineScreen extends BasicGameState implements Screen {
             }
         }
 
-	//Initialisarions des listes
-	listAnimationProjectiles = new ArrayList<Animation>();
-	listImagesStructures = new ArrayList<Image>();
-	listAnimationCibles = new ArrayList<Animation>();
+        //Initialisarions des listes
+        listAnimationProjectiles = new ArrayList<Animation>();
+        listImagesStructures = new ArrayList<Image>();
+        listAnimationCibles = new ArrayList<Animation>();
 
-	//Initialisarion background
-	bg = new Image("background.jpg");
+        //Initialisarion background
+        bg = new Image("background.jpg");
 
-	//Initialisarion des images Boutons
-	buttonInventaire = new Image("inventory.png");
-	buttonInventaire2 = new Image("inventory2.png");
-	buttonPlay = new Image("pause.png");
-	buttonExit = new Image("back.png");
-	inventaireExit = new Image("exitinventaire.png");
+        //Initialisarion des images Boutons
+        buttonInventaire = new Image("inventory.png");
+        buttonInventaire2 = new Image("inventory2.png");
+        buttonPlay = new Image("pause.png");
+        buttonExit = new Image("back.png");
+        inventaireExit = new Image("exitinventaire.png");
 
-	//Initialisarion des images canon
-	roue = new Image("wheel.png");
-	canon = new Image("canon.png");
+        //Initialisarion des images canon
+        roue = new Image("wheel.png");
+        canon = new Image("canon.png");
 
-	//Initialisation animation cible
-	coeurSheet = new SpriteSheet("heartsprite.png", 25, 40);
-	cibleAnimation = new Animation(coeurSheet, 140);
+        //Initialisation animation cible
+        coeurSheet = new SpriteSheet("heartsprite2.png", 34, 54);
+        cibleAnimation = new Animation(coeurSheet, 140);
 
-	vect = new Vecteur();
+        vect = new Vecteur();
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
@@ -383,54 +383,62 @@ public class EngineScreen extends BasicGameState implements Screen {
 //            }
 //        }
 
-        //placement des 1
-int compteur;
+        //placement des 1 dans le tableau de numero
+        int compteur;
         if (lockInventaire) {
-
 
             if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                 compteur = 1;
-                System.out.println("lel");
-                System.out.println(Mouse.getX());
+
                 for (int j = 0; j < tableauPlacement[0].length; j++) {
                     if (Mouse.getX() - 50 * (j + 1) >= 400 && Mouse.getX() - 50 * (j + 1) <= 450) {
-                     
-                        
-                        for (int i = tableauPlacement.length-1; i >= 0; i--) {
-                            if (compteur ==1){
-                            if (tableauPlacement[i][j] == 0) {
-                                   System.out.println("je suis en " + i+","+j);
-                                tableauPlacement[i][j] = 1;
-                                compteur = 0;
-                            }
-                        }
 
-                    }
+                        for (int i = tableauPlacement.length - 1; i >= 0; i--) {
+                            if (compteur == 1) {
+                                if (tableauPlacement[i][j] == 0) {
+                                    System.out.println("je suis en " + i + "," + j);
+                                    tableauPlacement[i][j] = 1;
+                                    compteur = 0;
+                                }
+                            }
+
+                        }
                     }
                 }
             }
 
         }
 
+        for (int i = 0; i < tableauPlacement.length; i++) {
+
+            for (int j = 0; j < tableauPlacement[0].length; j++) {
+
+                if (tableauPlacement[i][j] == 1) {
+                    
+//                    tableauPlacementStr[i][j]=new Structures();
+                }
+            }
+
+        }
 
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 
 
-	//Position de la souris
-	int posX = Mouse.getX();
-	int posY = Mouse.getY();
+        //Position de la souris
+        int posX = Mouse.getX();
+        int posY = Mouse.getY();
 
 
-	//background
-	bg.draw();
+        //background
+        bg.draw();
 
-	//positions et mouvements des projectiles
-	for (int i = 0; i < listAnimationProjectiles.size(); i++) {
-	    listAnimationProjectiles.get(i).draw((int) (controleur.positionProjectileX(i)), (int) (controleur.positionProjectileY(i)));
+        //positions et mouvements des projectiles
+        for (int i = 0; i < listAnimationProjectiles.size(); i++) {
+            listAnimationProjectiles.get(i).draw((int) (controleur.positionProjectileX(i)), (int) (controleur.positionProjectileY(i)));
 //	    listAnimationProjectiles.get(i).getCurrentFrame().setRotation((float) (controleur.orientationProjectil(controleur.listProjectiles().get(i))));
-	}
+        }
 
 //        for (int i = 0; i < tableauPlacement.length; i++) {
 //
@@ -455,103 +463,103 @@ int compteur;
 //            }
 //        }
 
-	//ombrage en bas de structure
+        //ombrage en bas de structure
 
-	if (ombrage) {
-	    g.setColor(Color.gray);
-	    g.drawRect(Mouse.getX(), 675 - Mouse.getY(), 50, 508);
-	}
+        if (ombrage) {
+            g.setColor(Color.gray);
+            g.drawRect(Mouse.getX(), 675 - Mouse.getY(), 50, 508);
+        }
 
-	//positions et mouvements des structures
-	for (int i = 0; i < listImagesStructures.size(); i++) {
-	    listImagesStructures.get(i).draw((int) (controleur.positionStructureX(i)), (int) (controleur.positionStructureY(i)));
-	}
-	//Stats sur force, angle et les positions du curseur
-	g.setColor(Color.black);
-	g.drawString("force: " + force, 300, 100);
-	g.drawString("angle: " + Math.toDegrees((Math.atan((double) posY / posX))), 300, 150);
-	g.drawString("" + Mouse.getX() + ", " + Mouse.getY(), 300, 200);
+        //positions et mouvements des structures
+        for (int i = 0; i < listImagesStructures.size(); i++) {
+            listImagesStructures.get(i).draw((int) (controleur.positionStructureX(i)), (int) (controleur.positionStructureY(i)));
+        }
+        //Stats sur force, angle et les positions du curseur
+        g.setColor(Color.black);
+        g.drawString("force: " + force, 300, 100);
+        g.drawString("angle: " + Math.toDegrees((Math.atan((double) posY / posX))), 300, 150);
+        g.drawString("" + Mouse.getX() + ", " + Mouse.getY(), 300, 200);
 
-	//boutons
-	buttonInventaire.draw(10, 600);
-	buttonPlay.draw(100, 600);
-	buttonExit.draw(1110, 5);
+        //boutons
+        buttonInventaire.draw(10, 600);
+        buttonPlay.draw(100, 600);
+        buttonExit.draw(1110, 5);
 
-	//canon
-	canon.draw(85 - 195, 500 + 7);
-	roue.draw(35, 506 + 7);
+        //canon
+        canon.draw(85 - 195, 500 + 7);
+        roue.draw(35, 506 + 7);
 
-	//barre de force
-	g.fillRect(100, 250, (int) force, 20);
+        //barre de force
+        g.fillRect(100, 250, (int) force, 20);
 
-	//lorsque l'inventaire est ouvert (fin mouvement structure)
-	if (inventaire) {
-	    //dessiner le menu de l'inventaire et le bouton exit
-	    g.setColor(colorAlpha);
-	    g.fillRoundRect(0, 80, 475, 505, 30);
-	    inventaireExit.draw(435, 55);
-	    cibleAnimation.draw(35, 105);
-	    structure.draw(35, 165);
+        //lorsque l'inventaire est ouvert (fin mouvement structure)
+        if (inventaire) {
+            //dessiner le menu de l'inventaire et le bouton exit
+            g.setColor(colorAlpha);
+            g.fillRoundRect(0, 80, 475, 505, 30);
+            inventaireExit.draw(435, 55);
+            cibleAnimation.draw(35, 105);
+            structure.draw(35, 165);
 
-	}
-	// FIN INVENTAIRE
+        }
+        // FIN INVENTAIRE
     }
 
     public int getID() {
-	return state;
+        return state;
     }
 
     //ajouer un objet affichable
     public void addAnimationProjectiles(String nomImg) throws SlickException {
 
-	projAnimation = new Animation(new SpriteSheet(nomImg, 80, 59), 60);
-	projAnimation.getCurrentFrame().setName(nomImg);
-	listAnimationProjectiles.add(projAnimation);
+        projAnimation = new Animation(new SpriteSheet(nomImg, 80, 59), 60);
+        projAnimation.getCurrentFrame().setName(nomImg);
+        listAnimationProjectiles.add(projAnimation);
     }
 
     public void addAnimationProjectiles(int i, String nomImg) throws SlickException {
 
-	projAnimation = new Animation(new SpriteSheet(nomImg, 80, 59), 60);
-	projAnimation.getCurrentFrame().setName(nomImg);
-	listAnimationProjectiles.add(i, projAnimation);
+        projAnimation = new Animation(new SpriteSheet(nomImg, 80, 59), 60);
+        projAnimation.getCurrentFrame().setName(nomImg);
+        listAnimationProjectiles.add(i, projAnimation);
     }
 
     public void addImageStructures(String nomImg) throws SlickException {
 
-	Image img = new Image(nomImg);
-	img.setName(nomImg);
-	listImagesStructures.add(img);
+        Image img = new Image(nomImg);
+        img.setName(nomImg);
+        listImagesStructures.add(img);
     }
 
     public void addAnimationCibles(String nomImg) throws SlickException {
 
-	cibleAnimation = new Animation(new SpriteSheet(nomImg, 25, 40), 140);
-	cibleAnimation.getCurrentFrame().setName(nomImg);
-	listAnimationProjectiles.add(cibleAnimation);
+        cibleAnimation = new Animation(new SpriteSheet(nomImg, 25, 40), 140);
+        cibleAnimation.getCurrentFrame().setName(nomImg);
+        listAnimationProjectiles.add(cibleAnimation);
     }
 
     //getters and setters
     public ArrayList<Animation> getListAnimationProjectiles() {
-	return listAnimationProjectiles;
+        return listAnimationProjectiles;
     }
 
     public void setListAnimationProjectiles(ArrayList<Animation> listAnimationProjectiles) {
-	this.listAnimationProjectiles = listAnimationProjectiles;
+        this.listAnimationProjectiles = listAnimationProjectiles;
     }
 
     public ArrayList<Image> getListImagesStructures() {
-	return listImagesStructures;
+        return listImagesStructures;
     }
 
     public void setListImagesStructures(ArrayList<Image> listImagesStructures) {
-	this.listImagesStructures = listImagesStructures;
+        this.listImagesStructures = listImagesStructures;
     }
 
     public ArrayList<Animation> getListAnimationCibles() {
-	return listAnimationCibles;
+        return listAnimationCibles;
     }
 
     public void setListAnimationCibles(ArrayList<Animation> listAnimationCibles) {
-	this.listAnimationCibles = listAnimationCibles;
+        this.listAnimationCibles = listAnimationCibles;
     }
 }

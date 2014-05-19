@@ -142,8 +142,6 @@ public class MainMenu extends BasicGameState {
 	buttonCredits.draw(795, 570);
 	exitGame.draw(1110, 5);
 	iris.draw(297 + Mouse.getX() * 13 / 1200, 220 - Mouse.getY() * 8 / 675);
-	g.setColor(Color.pink);
-	g.drawString("" + Mouse.getX() + ", " + Mouse.getY(), 90, 80);
 
 	if (focusCredit) {
 
