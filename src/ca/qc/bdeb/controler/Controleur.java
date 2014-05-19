@@ -186,36 +186,13 @@ public class Controleur {
 	return module.getListCibles();
     }
     
-    //Créé le niveau
-    public void creeNiveau(Screen ecran)throws SlickException{
+    public void collisionProjectilesCible(Projectiles proj, Cibles cible){
 	
-	for(int i = 0; i < module.getListPosStructures().size(); i++){
-	    addStructure(Integer.parseInt(module.getListPosStructures().get(i)[0]), Integer.parseInt(module.getListPosStructures().get(i)[0]));
-	    ecran.addImageStructures("structure.png");
-	    setNouvelleItemAffichable(null);
-	}
-	
-	for(int i = 0; i < module.getListPosCibles().size(); i++){
-	    addCible(Integer.parseInt(module.getListPosCibles().get(i)[0]), Integer.parseInt(module.getListPosCibles().get(i)[0]));
-	    ecran.addImageStructures("heartsprite.png");
-	    setNouvelleItemAffichable(null);
-	}
     }
     
     //Mettre un objet affichable dans la variable
     public void afficher(Affichable nouvelleItemAffichable) {
 	this.nouvelleItemAffichable = nouvelleItemAffichable;
-    }
-
-    //Sauvegarde
-    public void sauvegarderFichier(int nbreProjectile) {
-
-	module.sauvegarde(nbreProjectile);
-    }
-
-    public void chargerFichier(String nomTxt) throws Exception {
-
-	module.lireNiveau(nomTxt);
     }
 
     //getters and setters
