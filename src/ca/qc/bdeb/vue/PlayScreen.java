@@ -119,6 +119,7 @@ public class PlayScreen extends BasicGameState implements Screen {
 	    focusMenu = false;
 	}
 	
+	//commence le jeu et fait apparaètre tous les paramètres
 	if (Key.isKeyDown(Input.KEY_ENTER)){
 	    debutDejeu = true;
 	    
@@ -147,7 +148,9 @@ public class PlayScreen extends BasicGameState implements Screen {
 	    } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
 	    }
 	}
+	
 	if (debutDejeu) {
+	    //continue de jouer 
 	    if (!finDeJeu) {
 		//**key input
 		//si le curseur n'est pas sur les bars noirs
@@ -194,6 +197,7 @@ public class PlayScreen extends BasicGameState implements Screen {
 		controleur.bougerProjectiles();
 		controleur.rebondProjectilesMurLoop();
 		controleur.rebondProjectilesStructuresLoop();
+		controleur.collisionCibleProjectilesloop(this);
 
 		//reverse
 		for (int i = 0; i < listAnimationProjectiles.size(); i++) {
