@@ -136,9 +136,9 @@ public class PlayScreen extends BasicGameState implements Screen {
 		    controleur.enleverProjectiles(controleur.getListProjectiles().get(0), this);
 
 		}
-		for (int i = 0; i < controleur.getListStructures().size() + i; i++) {
-		    controleur.enleverStructure(controleur.getListStructures().get(0), this);
-		}
+//		for (int i = 0; i < controleur.getListStructures().size() + i; i++) {
+//		    controleur.enleverStructure(controleur.getListStructures().get(0), this);
+//		}
 		if (musiqueJeuPlay.playing()) {
 
 		    musiqueJeuPlay.stop();
