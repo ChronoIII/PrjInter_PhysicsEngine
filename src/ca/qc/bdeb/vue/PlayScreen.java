@@ -93,7 +93,7 @@ public class PlayScreen extends BasicGameState implements Screen {
 
 	//Initialisation des états
 	focusMenu = false;
-	finDeJeu = false;
+	finDeJeu = false;//inutilisre
 	debutDejeu = false;
     }
 
@@ -152,7 +152,7 @@ public class PlayScreen extends BasicGameState implements Screen {
 
 	if (debutDejeu) {
 	    //continue de jouer 
-	    if (!finDeJeu) {
+	    if (!finDeJeu) {//inutiliser
 		//**key input
 		//si le curseur n'est pas sur les bars noirs
 		if (!focusMenu) {
@@ -183,7 +183,7 @@ public class PlayScreen extends BasicGameState implements Screen {
 			case "structure.png":
 			    addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
 			    break;
-			case "heartsprite.png":
+			case "heartsprite.png"://inutiliser
 			    addAnimationCibles(controleur.getNouvelleItemAffichable().getNomImg());
 			    break;
 		    }
@@ -213,11 +213,11 @@ public class PlayScreen extends BasicGameState implements Screen {
 	    }
 	}
 
-	//fin de jeu
-	if (controleur.getListCibles().size() <= -2 || controleur.getListProjectiles().size() >= 6) {
-	    controleur.enleverProjectiles(controleur.getListProjectiles().get(controleur.getListProjectiles().size() - 1), this);
-	    finDeJeu = true;
-	}
+	//fin de jeu // inutiliser
+//	if (controleur.getListCibles().size() <= -2 || controleur.getListProjectiles().size() >= 6) {
+//	    controleur.enleverProjectiles(controleur.getListProjectiles().get(controleur.getListProjectiles().size() - 1), this);
+//	    finDeJeu = true;
+//	}
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
@@ -242,15 +242,10 @@ public class PlayScreen extends BasicGameState implements Screen {
 	for (int i = 0; i < listAnimationCibles.size(); i++) {
 	    listAnimationCibles.get(i).draw((int) (controleur.positionCiblesX(i)), (int) (controleur.positionCiblesY(i)));
 	}
-	//Stats sur force, angle et les positions du curseur
-	g.setColor(Color.black);
-	g.drawString("force: " + force, 300, 100);
-	g.drawString("angle: " + Math.toDegrees((Math.atan((double) posY / posX))), 300, 150);
-	g.drawString("" + Mouse.getX() + ", " + Mouse.getY(), 300, 200);
-
-	if (finDeJeu) {
-	    g.drawString("fin", 500, 300);
-	}
+	
+//	if (finDeJeu) {//inutiliser
+//	    g.drawString("fin", 500, 300);
+//	}
 
 	if (!debutDejeu) {
 	    g.drawString("click entrer pour commencer", 500, 300);
