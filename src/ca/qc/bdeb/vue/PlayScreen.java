@@ -88,6 +88,7 @@ public class PlayScreen extends BasicGameState implements Screen {
 	//Initialisation animation cible
 	coeurSheet = new SpriteSheet("heartsprite.png", 25, 40);
 	cibleAnimation = new Animation(coeurSheet, 140);
+	
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
@@ -151,6 +152,11 @@ public class PlayScreen extends BasicGameState implements Screen {
 		    force = 0;
 		}
 	    }
+	    
+	    if (Key.isKeyDown(Input.KEY_0)) {
+		controleur.addStructure(500, 550);
+	    }
+	    
 	}
 	//**
 

@@ -135,19 +135,25 @@ public class Controleur {
 		if (Math.abs((struc.getPosition().getX() + struc.getBound().getX()) - proj.getPosition().getX()) > Math.abs(struc.getPosition().getY() - proj.getPosition().getY())) {
 		    proj.getPosition().setY(struc.getPosition().getY());
 		    module.rebond(proj, 'y');
+		    System.out.println("21");
 
 		} else {
 		    proj.getPosition().setX((struc.getPosition().getX() + struc.getBound().getX()));
 		    module.rebond(proj, 'x');
+		    System.out.println("23");
 		}
 
 	    } else {
+		System.out.println("25"+ struc.getPosition().getX());
 		if (Math.abs(struc.getPosition().getX() - proj.getPosition().getX()) > Math.abs(struc.getPosition().getY() - proj.getPosition().getY())) {
 		    proj.getPosition().setY(struc.getPosition().getY());
 		    module.rebond(proj, 'y');
+		    System.out.println("24");
+		    
 		} else {
 		    proj.getPosition().setX(struc.getPosition().getX());
 		    module.rebond(proj, 'x');
+		    
 		}
 	    }
 	}

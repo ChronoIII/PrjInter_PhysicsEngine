@@ -18,7 +18,7 @@ public class Structures implements Affichable {
     //le controleur
     private Controleur controleur;
     //propriétées
-    private Vecteur bound = new Vecteur(76, 63);
+    private Vecteur bound = new Vecteur(50, 50);
     private Vecteur position = new Vecteur();
     
     private boolean estPlacer=false;
@@ -31,9 +31,7 @@ public class Structures implements Affichable {
 
 	controleur.setNouvelleItemAffichable(this);
     }
-   
 
-   
 
     //getters and setters
     public String getNomImg() {
