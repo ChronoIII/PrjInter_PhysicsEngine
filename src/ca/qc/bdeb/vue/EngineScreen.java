@@ -12,10 +12,7 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 import org.newdawn.slick.gui.TextField;
 
-/**
- *
- * @author Samuel
- */
+
 public class EngineScreen extends BasicGameState implements Screen {
 
     //Identifiant

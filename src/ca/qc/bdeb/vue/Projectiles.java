@@ -1,16 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ca.qc.bdeb.vue;
 
 import ca.qc.bdeb.controler.Controleur;
 import org.newdawn.slick.SlickException;
 
-/**
- *
- * @author Kururin
- */
+
 public class Projectiles implements Affichable {
 
     //nnomde l'animation

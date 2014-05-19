@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ca.qc.bdeb.module;
 
 import ca.qc.bdeb.controler.Controleur;
@@ -13,10 +10,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import org.newdawn.slick.SlickException;
 
-/**
- *
- * @author Samuel
- */
+
 public class Module {
 
     //Listes

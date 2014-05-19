@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ca.qc.bdeb.vue;
 
 import ca.qc.bdeb.controler.Controleur;
@@ -12,11 +9,7 @@ import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
-/**
- *
- * @author Samuel
- */
-//C'est la que tu dois faire de test d'affichage Amé ^^
+
 public class MainMenu extends BasicGameState {
 
     private int state;
