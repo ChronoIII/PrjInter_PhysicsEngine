@@ -18,7 +18,7 @@ public class Structures implements Affichable {
     //le controleur
     private Controleur controleur;
     //propriétées
-    private Vecteur bound = new Vecteur(50, 50);
+    private Vecteur bound = new Vecteur(100, 100);
     private Vecteur position = new Vecteur();
     
     private boolean estPlacer=false;

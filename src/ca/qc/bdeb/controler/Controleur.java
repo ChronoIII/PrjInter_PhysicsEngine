@@ -130,7 +130,7 @@ public class Controleur {
 
     public void rebondProjectilesStructures(Projectiles proj, Structures struc) {
 
-	if (proj.getPosition().getX() > struc.getPosition().getX() && proj.getPosition().getX() < (struc.getPosition().getX() + struc.getBound().getX()) && proj.getPosition().getY() < struc.getPosition().getY()) {
+	if (proj.getPosition().getX() + proj.getBound().getX() > struc.getPosition().getX() && proj.getPosition().getX() < (struc.getPosition().getX() + struc.getBound().getX()) && proj.getPosition().getY() + proj.getBound().getY() > struc.getPosition().getY()) {
 	    if (proj.getVitesse().getX() < 0) {
 		if (Math.abs((struc.getPosition().getX() + struc.getBound().getX()) - proj.getPosition().getX()) > Math.abs(struc.getPosition().getY() - proj.getPosition().getY())) {
 		    proj.getPosition().setY(struc.getPosition().getY());
@@ -141,13 +141,14 @@ public class Controleur {
 		    module.rebond(proj, 'x');
 		}
 
-	    } else {
-		if (Math.abs(struc.getPosition().getX() - proj.getPosition().getX()) > Math.abs(struc.getPosition().getY() - proj.getPosition().getY())) {
-		    proj.getPosition().setY(struc.getPosition().getY());
+	    } 
+                    else {
+		if (Math.abs(struc.getPosition().getX() - proj.getPosition().getX()- proj.getBound().getX()) > Math.abs(struc.getPosition().getY() - (proj.getPosition().getY() + proj.getBound().getY() ) )) {
+		    proj.getPosition().setY(struc.getPosition().getY()-proj.getBound().getY()-1);
 		    module.rebond(proj, 'y');
 		    
 		} else {
-		    proj.getPosition().setX(struc.getPosition().getX());
+		    proj.getPosition().setX(struc.getPosition().getX()-1-proj.getBound().getX());
 		    module.rebond(proj, 'x');
 		    
 		}
