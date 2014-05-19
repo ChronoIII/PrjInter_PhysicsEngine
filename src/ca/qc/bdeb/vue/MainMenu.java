@@ -37,7 +37,6 @@ public class MainMenu extends BasicGameState {
     }
 
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-	img = new Image("little_baby.jpg");
 	introPhoto = new Image("realbg.jpg");
 	buttonPlay = new Image("buttonPlay.jpg");
 	buttonCreate = new Image("buttonCreate.jpg");
@@ -79,8 +78,7 @@ public class MainMenu extends BasicGameState {
 		if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
 		    System.out.println("PLAY");
 		    jouons.play();
-//		    introMusic.stop();
-//                    detruire.play();
+		    introMusic.stop();
 		    sbg.enterState(2);
                     gc.sleep(2500);
 		}
@@ -93,8 +91,8 @@ public class MainMenu extends BasicGameState {
 		    System.out.println("CREATE");
 
 		    introMusic.stop();
-//                    detruire.play();
-//                    gc.sleep(2500);
+                    detruire.play();
+                    gc.sleep(2500);
 		    sbg.enterState(1);
 
 		}
