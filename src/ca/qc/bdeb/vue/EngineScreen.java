@@ -312,19 +312,10 @@ public class EngineScreen extends BasicGameState implements Screen {
 
         }
 
-        //affichable structure
-        if (controleur.getNouvelleItemAffichable() != null) {
-            switch (controleur.getNouvelleItemAffichable().getNomImg()) {
-                case "structure.png":
-                    addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
-                    break;
-            }
-            controleur.setNouvelleItemAffichable(null);
-        }
-
         //Mouvement
         controleur.bougerProjectiles();
         controleur.rebondProjectilesMurLoop();
+	controleur.collisionCibleProjectilesloop(this);
 
 
         //reverse
