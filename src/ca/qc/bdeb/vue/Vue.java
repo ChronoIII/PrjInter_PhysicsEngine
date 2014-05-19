@@ -5,7 +5,10 @@ import ca.qc.bdeb.controler.Controleur;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
-
+/**
+ * 
+ * La vue qui est en contact avec le contrôleur pour recevoir des informations
+ */
 public class Vue extends StateBasedGame {
 
     private Controleur controleur;
