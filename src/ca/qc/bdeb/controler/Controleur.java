@@ -13,6 +13,11 @@ import ca.qc.bdeb.vue.Vecteur;
 import java.util.ArrayList;
 import org.newdawn.slick.SlickException;
 
+/**
+ * Le contrôleur qui permet de faire des 
+ * 
+ */
+
 public class Controleur {
 
     //State
@@ -35,12 +40,25 @@ public class Controleur {
 	playScreenMenu = new PlayScreen(playScreen, this);
     }
 
-    //Projectiles
-    //ajoute dans la liste
+   
+    /**
+   
+    ajouter des projectiles dans la liste
+     * @param x
+     * @param y
+     * @param v
+     * @param angle
+     * @param facRebond
+     * @throws SlickException 
+     */
     public void addProjectile(int x, int y, double v, double angle, double facRebond) throws SlickException {
 	module.getListProjectiles().add(new Projectiles((x + 40), (500 - y), v, angle, facRebond, this));
     }
-
+/**
+ * enlève les projectiles de l'écran et la liste
+ * @param projectile
+ * @param ecran 
+ */
     //enlève  dans la liste
     public void enleverProjectiles(Projectiles projectile, Screen ecran) {
 	module.getListProjectiles().remove(projectile);
@@ -60,7 +78,10 @@ public class Controleur {
     public ArrayList<Projectiles> getListProjectiles() {
 	return module.getListProjectiles();
     }
-
+/**
+ * Faire rebondir les projectiles sur les murs avec des conditions
+ * @param proj 
+ */
     //détecte les colliton avce le mur
     public void rebondProjectilesMur(Projectiles proj) {
 
@@ -83,14 +104,18 @@ public class Controleur {
 	    module.rebond(proj, 'y');
 	}
     }
-
+/** 
+ * Boucle qui permet de tester chaque projectiles par rapport au mur
+ */
     public void rebondProjectilesMurLoop() {
 	for (int i = 0; i < module.getListProjectiles().size(); i++) {
 
 	    rebondProjectilesMur(module.getListProjectiles().get(i));
 	}
     }
-
+/**
+ * Bouger chaque projectiles individuellement
+ */
     public void bougerProjectiles() {
 	for (int i = 0; i < module.getListProjectiles().size(); i++) {
 	    module.getListProjectiles().get(i).getPosition().setX(module.getListProjectiles().get(i).getPosition().getX() + module.getListProjectiles().get(i).getVitesse().getX());
@@ -99,11 +124,20 @@ public class Controleur {
 	}
     }
 
-    //Structures
+    /** 
+     * ajouter des structures dans la liste
+     * @param x
+     * @param y
+     * @throws SlickException 
+     */
     public void addStructure(int x, int y) throws SlickException {
 	module.getListStructures().add(new Structures(x, y, this));
     }
-
+/**
+ * permet d'Enlever les structures
+ * @param structure
+ * @param ecran 
+ */
     public void enleverStructure(Structures structure, Screen ecran) {
 	module.getListStructures().remove(structure);
 	ecran.getListImagesStructures().remove(0);
@@ -123,7 +157,11 @@ public class Controleur {
     public ArrayList<Structures> getListStructures() {
 	return module.getListStructures();
     }
-
+/**
+ * Gérer les collisions et les rebonds des projectiles sur les structures.
+ * @param proj
+ * @param struc 
+ */
     public void rebondProjectilesStructures(Projectiles proj, Structures struc) {
 
 	if (proj.getPosition().getX() + proj.getBound().getX() > struc.getPosition().getX() && proj.getPosition().getX() < (struc.getPosition().getX() + struc.getBound().getX()) && proj.getPosition().getY() + proj.getBound().getY() > struc.getPosition().getY()) {
@@ -151,7 +189,9 @@ public class Controleur {
 	    }
 	}
     }
-
+/**
+ * Permettent à plusieurs balles de collisionner 
+ */
     public void rebondProjectilesStructuresLoop() {
 	for (int j = 0; j < module.getListStructures().size(); j++) {
 	    for (int i = 0; i < module.getListProjectiles().size(); i++) {
