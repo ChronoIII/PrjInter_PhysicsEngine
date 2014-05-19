@@ -84,8 +84,8 @@ public class EngineScreen extends BasicGameState implements Screen {
 
         //structure&son tableau
         structure = new Image("structure.png");
-        tableauPlacement = new int[10][15];
-        tableauPlacementStr = new Structures[10][15];
+        tableauPlacement = new int[5][7];
+//        tableauPlacementStr = new Structures[10][15];
         System.out.println(tableauPlacement[0].length);
         //tableau 0 (0 = vide, 1= placement)
         for (int i = 0; i < tableauPlacement.length; i++) {
@@ -103,7 +103,7 @@ public class EngineScreen extends BasicGameState implements Screen {
         listAnimationCibles = new ArrayList<Animation>();
 
         //Initialisarion background
-        bg = new Image("background.jpg");
+        bg = new Image("bg2.jpg");
 
         //Initialisarion des images Boutons
         buttonInventaire = new Image("inventory.png");
@@ -286,7 +286,7 @@ public class EngineScreen extends BasicGameState implements Screen {
             if ((posX > 35 && posX < 85) && (posY > 460 && posY < 510)) {
                 if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                     System.out.println("struc pris");
-                    controleur.addStructure(0, 0);
+//                    controleur.addStructure(0, 0);
                     inventaire = false;
                     lockInventaire = true;
                 }
@@ -391,7 +391,7 @@ public class EngineScreen extends BasicGameState implements Screen {
                 compteur = 1;
 
                 for (int j = 0; j < tableauPlacement[0].length; j++) {
-                    if (Mouse.getX() - 50 * (j + 1) >= 400 && Mouse.getX() - 50 * (j + 1) <= 450) {
+                    if (Mouse.getX() - 100 * (j + 1) >= 450 && Mouse.getX() - 100 * (j + 1) <= 500) {
 
                         for (int i = tableauPlacement.length - 1; i >= 0; i--) {
                             if (compteur == 1) {
@@ -399,6 +399,7 @@ public class EngineScreen extends BasicGameState implements Screen {
                                     System.out.println("je suis en " + i + "," + j);
                                     tableauPlacement[i][j] = 1;
                                     compteur = 0;
+                                     lockInventaire = false;
                                 }
                             }
 
@@ -406,16 +407,13 @@ public class EngineScreen extends BasicGameState implements Screen {
                     }
                 }
             }
-
+           
         }
 
         for (int i = 0; i < tableauPlacement.length; i++) {
-
             for (int j = 0; j < tableauPlacement[0].length; j++) {
-
                 if (tableauPlacement[i][j] == 1) {
-                    
-//                    tableauPlacementStr[i][j]=new Structures();
+                    controleur.addStructure(0, (j * 100) + 500);
                 }
             }
 
@@ -462,13 +460,13 @@ public class EngineScreen extends BasicGameState implements Screen {
 //
 //            }
 //        }
-
-        //ombrage en bas de structure
-
-        if (ombrage) {
-            g.setColor(Color.gray);
-            g.drawRect(Mouse.getX(), 675 - Mouse.getY(), 50, 508);
-        }
+//
+//        //ombrage en bas de structure
+//
+//        if (ombrage) {
+//            g.setColor(Color.gray);
+//            g.drawRect(Mouse.getX(), 675 - Mouse.getY(), 50, 508);
+//        }
 
         //positions et mouvements des structures
         for (int i = 0; i < listImagesStructures.size(); i++) {
