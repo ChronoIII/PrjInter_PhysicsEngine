@@ -214,10 +214,10 @@ public class PlayScreen extends BasicGameState implements Screen {
 	}
 
 	//fin de jeu // inutiliser
-	if (controleur.getListCibles().size() <= -2 || controleur.getListProjectiles().size() >= 6) {
-	    controleur.enleverProjectiles(controleur.getListProjectiles().get(controleur.getListProjectiles().size() - 1), this);
-	    finDeJeu = true;
-	}
+//	if (controleur.getListCibles().size() <= 0 || controleur.getListProjectiles().size() >= 6) {
+//	    controleur.enleverProjectiles(controleur.getListProjectiles().get(controleur.getListProjectiles().size() - 1), this);
+//	    finDeJeu = true;
+//	}
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
@@ -226,10 +226,6 @@ public class PlayScreen extends BasicGameState implements Screen {
 	int posX = Mouse.getX();
 	int posY = Mouse.getY();
 
-<<<<<<< HEAD
-        
-=======
->>>>>>> 5cf328c90918c8b1c3bf9397db0dcbef4546cdfd
 	//background
 	bg.draw();
 
