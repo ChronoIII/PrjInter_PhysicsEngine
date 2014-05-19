@@ -187,8 +187,11 @@ public class Controleur {
 	return module.getListCibles();
     }
     
-    public void collisionProjectilesCible(Projectiles proj, Cibles cible){
-	
+    public void collisionCoeur(Cibles c, Projectiles proj){
+        if (proj.getPosition().getX() + proj.getBound().getX() > c.getPosition().getX() && proj.getPosition().getX() < (c.getPosition().getX() + c.getBound().getX()) && proj.getPosition().getY() + proj.getBound().getY() > c.getPosition().getY())
+          {
+            //détruire coeur, détruire cible, nouvelle cible
+        }
     }
     
     //Mettre un objet affichable dans la variable
