@@ -5,7 +5,7 @@
 package ca.qc.bdeb.vue;
 
 /**
- * 
+ * Obliger les éléments affichables d'avoir certaines caratéristiques
  * 
  */
 public interface Affichable {

@@ -55,10 +55,6 @@ public class EngineScreen extends BasicGameState implements Screen {
     private Color colorAlpha = new Color(0.84f, 0.84f, 0.84f, 0.85f);
     //musique
     private Music musiqueJeuPlay;
-    //timer
-    private float timer = 0;
-    //vecteur?
-    private Vecteur vect;
     //tableau0
     private int tableauPlacement[][];
     private Structures tableauPlacementStr[][];
@@ -82,9 +78,7 @@ public class EngineScreen extends BasicGameState implements Screen {
         //structure&son tableau
         structure = new Image("structure.png");
         tableauPlacement = new int[5][7];
-//        tableauPlacementStr = new Structures[10][15];
-        System.out.println(tableauPlacement[0].length);
-        //tableau 0 (0 = vide, 1= placement)
+
         for (int i = 0; i < tableauPlacement.length; i++) {
 
             for (int j = 0; j < tableauPlacement[0].length; j++) {
@@ -116,14 +110,10 @@ public class EngineScreen extends BasicGameState implements Screen {
         //Initialisation animation cible
         coeurSheet = new SpriteSheet("heartsprite2.png", 34, 54);
         cibleAnimation = new Animation(coeurSheet, 140);
-
-        vect = new Vecteur();
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-
-        timer += 1;
-
+	
         //Input pour les commende au clavier
         Input Key = gc.getInput();
 
@@ -261,7 +251,7 @@ public class EngineScreen extends BasicGameState implements Screen {
                     case "structure.png":
                         addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
                         break;
-                    case "heartsprite.png":
+                    case "heartsprite.png"://n'est pas utiliser
                         addAnimationCibles(controleur.getNouvelleItemAffichable().getNomImg());
                         break;
                 }
@@ -328,48 +318,7 @@ public class EngineScreen extends BasicGameState implements Screen {
             }
         }
 
-        //détruir les projectiles (marche pas)
-        for (int i = 0; i < listAnimationProjectiles.size(); i++) {
-            if (controleur.getListProjectiles().get(i).getVitesse().getX() == 0) {
-                if (controleur.getListProjectiles().get(i).getTemps() - timer == 3) {
-                    controleur.enleverProjectiles(controleur.getListProjectiles().get(i), this);
-                }
 
-            }
-        }
-
-
-        // drag &drop
-//        for (int i = 0; i < listImagesStructures.size(); i++) {
-//            if (Mouse.getY() > 85+50 && Mouse.getY() < 600 && Mouse.getX() < 1200 - 50) {
-//
-//                if (gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-//
-//                    if (controleur.getListStructures().get(i).getEstPlacer() == false) {
-//                        vect.setX(Mouse.getX());
-//                        vect.setY(gc.getHeight() - Mouse.getY());
-//                        controleur.setpositionStructureY(i, vect);
-//                        inventaire = false;
-//                        lockInventaire = true;
-//                        ombrage = true;
-//                    }
-//
-//                }
-//
-//            }//drop quand ENTER
-//            if (Key.isKeyDown(Input.KEY_ENTER)) {
-//                vect.setY(gc.getHeight() - (89 + 50));
-//                controleur.setpositionStructureY(i, vect);
-//                lockInventaire = false;
-//                ombrage = false;
-//
-//                System.out.println(i);
-//                if (i > 0) {
-//                    System.out.println("lol " + controleur.getListStructures().get(i - 1).getEstPlacer());
-//                }
-//                controleur.getListStructures().get(i).setEstPlacer(true);
-//            }
-//        }
 
         //placement des 1 dans le tableau de numero
         int compteur;
@@ -425,36 +374,6 @@ public class EngineScreen extends BasicGameState implements Screen {
             listAnimationProjectiles.get(i).draw((int) (controleur.positionProjectileX(i)), (int) (controleur.positionProjectileY(i)));
 //	    listAnimationProjectiles.get(i).getCurrentFrame().setRotation((float) (controleur.orientationProjectil(controleur.listProjectiles().get(i))));
         }
-
-//        for (int i = 0; i < tableauPlacement.length; i++) {
-//
-//            for (int j = 0; j < tableauPlacement[0].length; j++) {
-//                
-//                if(tableauPlacement[i][j]==1){
-//                
-//                tableauPlacementStr[i][j].
-//                }
-//            }
-//        }
-
-        //hold
-
-//        for (int i = 0; i < listImagesStructures.size(); i++) {
-//            if (Mouse.getX() > 0 && Mouse.getX() < listImagesStructures.get(i).getWidth()) {
-//                if (gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-//                   
-//                    listImagesStructures.get(i).draw(Mouse.getX(), gc.getHeight() - Mouse.getY());
-//                }
-//
-//            }
-//        }
-//
-//        //ombrage en bas de structure
-//
-//        if (ombrage) {
-//            g.setColor(Color.gray);
-//            g.drawRect(Mouse.getX(), 675 - Mouse.getY(), 50, 508);
-//        }
 
         //positions et mouvements des structures
         for (int i = 0; i < listImagesStructures.size(); i++) {
@@ -517,6 +436,7 @@ public class EngineScreen extends BasicGameState implements Screen {
         listImagesStructures.add(img);
     }
 
+    //méthode inutiliser
     public void addAnimationCibles(String nomImg) throws SlickException {
 
         cibleAnimation = new Animation(new SpriteSheet(nomImg, 25, 40), 140);

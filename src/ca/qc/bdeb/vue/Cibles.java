@@ -7,7 +7,7 @@ package ca.qc.bdeb.vue;
 import ca.qc.bdeb.controler.Controleur;
 import org.newdawn.slick.SlickException;
 /**
- * 
+ * Cette classe n'est pas utiliser
  * Méthode qui contient les paramètres des cibles
  */
 
