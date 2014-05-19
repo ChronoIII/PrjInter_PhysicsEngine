@@ -226,7 +226,7 @@ public class PlayScreen extends BasicGameState implements Screen {
 	int posX = Mouse.getX();
 	int posY = Mouse.getY();
 
-
+        
 	//background
 	bg.draw();
 
