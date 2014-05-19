@@ -6,11 +6,11 @@ package ca.qc.bdeb.vue;
 
 import ca.qc.bdeb.controler.Controleur;
 import org.newdawn.slick.SlickException;
-
 /**
- *
- * @author Samuel
+ * 
+ * Méthode qui contient les paramètres des cibles
  */
+
 public class Cibles implements Affichable {
 
     //nnomde l'animation

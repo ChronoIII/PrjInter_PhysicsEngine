@@ -1,7 +1,4 @@
-/*
- * Samuel
- * 2014-02-19
- */
+
 package ca.qc.bdeb.inf204;
 
 import ca.qc.bdeb.vue.Vue;

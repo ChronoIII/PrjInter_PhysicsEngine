@@ -5,8 +5,8 @@
 package ca.qc.bdeb.vue;
 
 /**
- *
- * @author Samuel
+ * 
+ * 
  */
 public interface Affichable {
     
