@@ -81,7 +81,7 @@ public class EngineScreen extends BasicGameState implements Screen {
 	modePausePlay = true;
 	inventaire = false;
 
-<<<<<<< HEAD
+
         //structure&son tableau
         structure = new Image("structure.png");
         tableauPlacement = new int[10][15];
@@ -96,10 +96,6 @@ public class EngineScreen extends BasicGameState implements Screen {
 
             }
         }
-=======
-	//structure
-	structure = new Image("structure.png");
->>>>>>> 5b948c4e3eac0e316c48bcee6505201d8ca58b2f
 
 	//Initialisarions des listes
 	listAnimationProjectiles = new ArrayList<Animation>();
@@ -128,7 +124,7 @@ public class EngineScreen extends BasicGameState implements Screen {
     }
 
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws SlickException {
-<<<<<<< HEAD
+
         timer += 1;
 
         //Input pour les commende au clavier
@@ -233,25 +229,6 @@ public class EngineScreen extends BasicGameState implements Screen {
                         buttonPlay = new Image("pause.png");
 
                         modePausePlay = true;
-                    }
-                }
-            }
-            if (!modePausePlay) {
-                //save
-                if ((posX > 1020 && posX < 1100) && (posY > 10 && posY < 75)) {
-                    if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                        System.out.println("save button");
-
-                        controleur.sauvegarderFichier(controleur.getListProjectiles().size());
-
-                    }
-                }
-
-                //load
-                if ((posX > 1109 && posX < 1190) && (posY > 10 && posY < 75)) {
-                    if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                        System.out.println("load button");
-//                        controleur.chargerFichier();
                     }
                 }
             }
@@ -419,7 +396,7 @@ int compteur;
                     if (Mouse.getX() - 50 * (j + 1) >= 400 && Mouse.getX() - 50 * (j + 1) <= 450) {
                      
                         
-                        for (int i = tableauPlacement.length-1; i > 0; i--) {
+                        for (int i = tableauPlacement.length-1; i >= 0; i--) {
                             if (compteur ==1){
                             if (tableauPlacement[i][j] == 0) {
                                    System.out.println("je suis en " + i+","+j);
@@ -435,284 +412,15 @@ int compteur;
 
         }
 
-=======
-	timer += 1;
 
-	//Input pour les commende au clavier
-	Input Key = gc.getInput();
-
-
-
-	//Loop musique
-	if (!musiqueJeuPlay.playing()) {
-
-	    musiqueJeuPlay.loop();
-	}
-	//Position de la souris
-	int posX = Mouse.getX();
-	int posY = Mouse.getY();
-
-	//Lock
-	if (lockInventaire) {
-	    if ((posX > 10 && posX < 85) && (posY > 10 && posY < 75)) {
-		if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-		} else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-		}
-	    }
-
-	} else {//Lock
-	    if (lockInventaire) {
-		if ((posX > 10 && posX < 85) && (posY > 10 && posY < 75)) {
-		    if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-			buttonInventaire = new Image("inventory2.png");
-			inventaire = true;
-
-		    } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-			buttonInventaire = new Image("inventory.png");
-		    }
-		}
-
-	    }
-	}
-	//Pour vérifier si le curseur est sur la bar noir, changant l'état du jeu
-	if ((Mouse.getX() < 1200 && Mouse.getY() > 600 && Mouse.getY() < 675) || (Mouse.getX() < 1200 && Mouse.getY() > 0 && Mouse.getY() < 88)) {
-	    focusMenu = true;
-	} else {
-	    focusMenu = false;
-	}
-	//pause mode erase projectiles
-	if (!modePausePlay) {
-	    for (int i = 0; i < controleur.getListProjectiles().size() + i; i++) {
-		controleur.enleverProjectiles(controleur.getListProjectiles().get(0), this);
-	    }
-//            for (int i = 0; i < controleur.listStructures().size() + i; i++) {
-//                controleur.enleverStructure(controleur.listStructures().get(0));
-//            }
-	    force = 0;
-	    canon.setRotation(-35);
-
-	}
-
-	//inventaire(Etat de jeu), lorsque l'on n'est pas dans l'inventaire 
-	if (!inventaire) {
-
-	    if (!modePausePlay) {
-		//**Boutons
-		//inventaire 2, lors que l'inventaire est déployé
-		if ((posX > 10 && posX < 85) && (posY > 10 && posY < 75)) {
-		    if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-			buttonInventaire = new Image("inventory2.png");
-			inventaire = true;
-
-		    } else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-			buttonInventaire = new Image("inventory.png");
-		    }
-		}
-	    }
-
-	    //exit
-	    if ((posX > 1110 && posX < 1186) && (posY > 607 && posY < 670)) {
-		if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-		    System.out.println("got clicked buddy! lets go back!");
-
-		    for (int i = 0; i < controleur.getListProjectiles().size() + i; i++) {
-			controleur.enleverProjectiles(controleur.getListProjectiles().get(0), this);
-
-		    }
-		    for (int i = 0; i < controleur.getListStructures().size() + i; i++) {
-			controleur.enleverStructure(controleur.getListStructures().get(0), this);
-		    }
-		    if (musiqueJeuPlay.playing()) {
-
-			musiqueJeuPlay.stop();
-		    }
-		    sbg.enterState(0);
-		} else if (!gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-		}
-	    }
-
-	    //play
-	    if ((posX > 100 && posX < 175) && (posY > 10 && posY < 75)) {
-		if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-		    if (modePausePlay) {
-
-			buttonPlay = new Image("play.png");
-			modePausePlay = false;
-		    } else {
-			buttonPlay = new Image("pause.png");
-
-			modePausePlay = true;
-		    }
-		}
-	    }
-	    if (!modePausePlay) {
-
-		//**key input
-		//si le curseur n'est pas sur les bars noirs
-		if (!focusMenu) {
-		    if (modePausePlay) {
-			//touche pour lancer
-			if (Key.isKeyDown(Input.KEY_SPACE) || gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-			    if (force < -1 || force > 100) {
-				coteDeLaForce *= -1;
-			    }
-			    force += 2 * coteDeLaForce;
-			} else {
-			    //lorsque l'on relache, le projectiles fait feu
-			    if (force != 0) {
-				angle = Math.toDegrees((Math.atan((double) posY / posX)));
-				controleur.addProjectile((int) (170 * Math.cos(Math.toRadians(angle))), (int) (170 * Math.sin(Math.toRadians(angle))), force / 5, angle, 0.8);
-				force = 0;
-			    }
-			}
-		    }
-		}
-		//**
-
-		//Création de nouvelles images, regard s'il y a un objet affichable
-		if (controleur.getNouvelleItemAffichable() != null) {
-		    switch (controleur.getNouvelleItemAffichable().getNomImg()) {
-			case "spiritesheet.png":
-			    addAnimationProjectiles(controleur.getNouvelleItemAffichable().getNomImg());
-			    break;
-			case "structure.png":
-			    addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
-			    break;
-			case "heartsprite.png":
-			    addAnimationCibles(controleur.getNouvelleItemAffichable().getNomImg());
-			    break;
-		    }
-		    controleur.setNouvelleItemAffichable(null);
-		}
-
-		//Canon rotation
-
-
-		if (modePausePlay && !inventaire && !focusMenu) {
-		    canon.setRotation((float) Math.toDegrees((Math.atan((double) posX / posY))) + 270);
-		}
-
-
-
-	    } else { //quand je suis dans inventaire
-		//dans Inventaire, click structure et cible et exit
-		//clique sur structure
-		if ((posX > 35 && posX < 85) && (posY > 460 && posY < 510)) {
-		    if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-			System.out.println("struc pris");
-			controleur.addStructure(0, 0);
-		    }
-		}
-
-		//exit inventaire des 2 manières
-		if ((posX > 438 && posX < 483) && (posY > 573 && posY < 619)) {
-
-		    if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-
-			buttonInventaire = new Image("inventory.png");
-			inventaire = false;
-		    }
-		}
-		if ((posX > 10 && posX < 85) && (posY > 10 && posY < 75)) {
-
-		    if (gc.getInput().isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-
-			buttonInventaire = new Image("inventory.png");
-			inventaire = false;
-		    }
-		}
-
-	    }
-
-	    //affichable structure
-	    if (controleur.getNouvelleItemAffichable() != null) {
-		switch (controleur.getNouvelleItemAffichable().getNomImg()) {
-		    case "structure.png":
-			addImageStructures(controleur.getNouvelleItemAffichable().getNomImg());
-			break;
-		}
-		controleur.setNouvelleItemAffichable(null);
-	    }
-
-	    //Mouvement
-	    controleur.bougerProjectiles();
-	    controleur.rebondProjectilesMurLoop();
-
-
-	    //reverse
-	    for (int i = 0; i < listAnimationProjectiles.size(); i++) {
-		if (controleur.getListProjectiles().get(i).isReverse()) {
-		    if ("spiritesheet.png".equals(listAnimationProjectiles.get(i).getCurrentFrame().getName())) {
-			listAnimationProjectiles.remove(i);
-			addAnimationProjectiles(i, controleur.getListProjectiles().get(i).getNomImgReverse());
-		    }
-		} else if ("spiritesheetreverse.png".equals(listAnimationProjectiles.get(i).getCurrentFrame().getName())) {
-		    listAnimationProjectiles.remove(i);
-		    addAnimationProjectiles(i, controleur.getListProjectiles().get(i).getNomImg());
-		}
-	    }
-
-	    //détruir les projectiles (marche pas)
-	    for (int i = 0; i < listAnimationProjectiles.size(); i++) {
-		if (controleur.getListProjectiles().get(i).getVitesse().getX() == 0) {
-		    if (controleur.getListProjectiles().get(i).getTemps() - timer == 3) {
-			controleur.enleverProjectiles(controleur.getListProjectiles().get(i), this);
-		    }
-
-		}
-	    }
-	    // drag &drop
-	    for (int i = 0; i < listImagesStructures.size(); i++) {
-		if (Mouse.getY() > 135 && Mouse.getY() < 600 && Mouse.getX() < 1200 - 50) {
-
-		    if (gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
-
-			if (controleur.getListStructures().get(i).getEstPlacer() == false) {
-			    vect.setX(Mouse.getX());
-			    vect.setY(gc.getHeight() - Mouse.getY());
-			    controleur.setpositionStructureY(i, vect);
-			    inventaire = false;
-			    lockInventaire = true;
-			    ombrage = true;
-			}
-
-		    }
-
-		}//drop quand ENTER
-		if (Key.isKeyDown(Input.KEY_ENTER)) {
-		    vect.setY(gc.getHeight() - (89 + 50));
-		    controleur.setpositionStructureY(i, vect);
-		    lockInventaire = false;
-		    ombrage = false;
-
-		    System.out.println(i);
-		    if (i > 0) {
-			System.out.println("lol " + controleur.getListStructures().get(i - 1).getEstPlacer());
-		    }
-		    controleur.getListStructures().get(i).setEstPlacer(true);
-		}
-		System.out.println(i);
-	    }
-
-	}
->>>>>>> 5b948c4e3eac0e316c48bcee6505201d8ca58b2f
     }
 
     public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 
-<<<<<<< HEAD
-        //to erase
 
-
-
-        //Position de la souris
-        int posX = Mouse.getX();
-        int posY = Mouse.getY();
-=======
 	//Position de la souris
 	int posX = Mouse.getX();
 	int posY = Mouse.getY();
->>>>>>> 5b948c4e3eac0e316c48bcee6505201d8ca58b2f
 
 
 	//background
@@ -724,7 +432,6 @@ int compteur;
 //	    listAnimationProjectiles.get(i).getCurrentFrame().setRotation((float) (controleur.orientationProjectil(controleur.listProjectiles().get(i))));
 	}
 
-<<<<<<< HEAD
 //        for (int i = 0; i < tableauPlacement.length; i++) {
 //
 //            for (int j = 0; j < tableauPlacement[0].length; j++) {
@@ -737,9 +444,7 @@ int compteur;
 //        }
 
         //hold
-=======
-	//hold
->>>>>>> 5b948c4e3eac0e316c48bcee6505201d8ca58b2f
+
 //        for (int i = 0; i < listImagesStructures.size(); i++) {
 //            if (Mouse.getX() > 0 && Mouse.getX() < listImagesStructures.get(i).getWidth()) {
 //                if (gc.getInput().isMouseButtonDown(Input.MOUSE_LEFT_BUTTON)) {
